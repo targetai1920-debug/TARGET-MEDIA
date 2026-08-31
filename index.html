@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070712" />
+  <meta name="description" content="Target Media turns physical marketing into measurable intelligence with AI-powered anonymous audience metrics." />
+  <title>Target Media — Physical marketing, measured.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#070712;
+      --bg2:#0b0b18;
+      --card:#101023cc;
+      --card-solid:#111126;
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(134,113,255,.26);
+      --text:#f8f8ff;
+      --muted:#aaaabd;
+      --muted2:#74748a;
+      --violet:#775cff;
+      --violet2:#a897ff;
+      --blue:#314ee8;
+      --good:#75f4c4;
+      --warn:#ffd27a;
+      --danger:#ff8eaa;
+      --radius:28px;
+      --shadow:0 30px 80px rgba(0,0,0,.38);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:92px}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;line-height:1.5}
+    body.lock{overflow:hidden}
+    ::selection{background:#6f5cff;color:white}
+    a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit}
+    button{color:inherit}
+    img,svg{display:block;max-width:100%}
+    .container{width:min(1180px,calc(100% - 40px));margin:auto}
+    .section{position:relative;padding:112px 0}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:#d9d6ff;background:rgba(255,255,255,.035);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;backdrop-filter:blur(12px)}
+    .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--violet2);box-shadow:0 0 20px var(--violet2);animation:pulse 2s ease-in-out infinite}
+    .section-title{font-family:Manrope,sans-serif;font-size:clamp(36px,5vw,68px);line-height:1.02;letter-spacing:-.045em;margin:22px 0 18px;max-width:900px;overflow-wrap:anywhere}
+    .section-lead{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:730px;margin:0;line-height:1.7}
+    .gradient-text{background:linear-gradient(100deg,#fff 5%,#b7aeff 45%,#7259ff 76%,#86a7ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:180% auto;animation:gradientShift 7s ease-in-out infinite}
+    .btn{border:1px solid var(--line);border-radius:14px;padding:13px 18px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.05);transition:.28s ease;position:relative;overflow:hidden;min-height:48px;white-space:nowrap}
+    .btn::before{content:"";position:absolute;inset:-1px;background:radial-gradient(180px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.18),transparent 55%);opacity:0;transition:.25s}
+    .btn:hover::before{opacity:1}.btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.22)}
+    .btn-primary{background:linear-gradient(135deg,#765cff,#4d40d9);border-color:#8f7cff;box-shadow:0 14px 40px rgba(100,75,255,.28)}
+    .btn-primary:hover{box-shadow:0 18px 50px rgba(100,75,255,.42)}
+    .btn svg{width:16px;height:16px;flex:0 0 auto}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+    .reveal.visible{opacity:1;transform:none}
+    .delay-1{transition-delay:.08s}.delay-2{transition-delay:.16s}.delay-3{transition-delay:.24s}
+
+    /* background */
+    .ambient{position:fixed;inset:0;pointer-events:none;z-index:-2;overflow:hidden;background:
+      radial-gradient(900px 520px at 83% 2%,rgba(90,65,255,.18),transparent 68%),
+      radial-gradient(700px 500px at 13% 34%,rgba(42,69,220,.13),transparent 70%),
+      linear-gradient(180deg,#070712 0%,#090916 50%,#070712 100%)}
+    .ambient::after{content:"";position:absolute;inset:0;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E")}
+    .orb{position:absolute;border-radius:50%;filter:blur(8px);opacity:.6;animation:floatOrb 16s ease-in-out infinite alternate}
+    .orb.o1{width:420px;height:420px;right:-180px;top:230px;background:radial-gradient(circle,rgba(101,71,255,.22),transparent 70%)}
+    .orb.o2{width:380px;height:380px;left:-170px;top:68%;background:radial-gradient(circle,rgba(49,78,232,.15),transparent 70%);animation-delay:-7s}
+    .cursor-glow{position:fixed;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(108,82,255,.10),transparent 68%);pointer-events:none;z-index:-1;transform:translate(-50%,-50%);transition:opacity .3s}
+
+    /* nav */
+    .nav-wrap{position:fixed;z-index:50;top:16px;left:0;width:100%;padding:0 20px}
+    .nav{width:min(1180px,100%);margin:auto;height:68px;border:1px solid rgba(255,255,255,.09);border-radius:20px;background:rgba(8,8,19,.68);backdrop-filter:blur(20px) saturate(160%);display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 18px;box-shadow:0 12px 40px rgba(0,0,0,.2);transition:.3s}
+    .nav.scrolled{background:rgba(8,8,19,.88);border-color:rgba(255,255,255,.14)}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-mark{width:54px;height:30px;color:#a89cff;filter:drop-shadow(0 0 14px rgba(119,92,255,.38));flex:0 0 auto}
+    .brand-mark svg{width:100%;height:100%}
+    .brand-name{font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.03em;font-size:17px;white-space:nowrap}
+    .nav-links{display:flex;align-items:center;gap:6px}
+    .nav-links a{padding:10px 12px;color:#c2c2d3;font-size:14px;font-weight:600;border-radius:10px;transition:.2s}
+    .nav-links a:hover{background:rgba(255,255,255,.055);color:white}
+    .nav-actions{display:flex;align-items:center;gap:8px}
+    .menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);align-items:center;justify-content:center;cursor:pointer}
+    .menu-btn span,.menu-btn span::before,.menu-btn span::after{width:18px;height:2px;background:#fff;border-radius:3px;display:block;position:relative;transition:.25s}
+    .menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0}.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+    .menu-btn.open span{background:transparent}.menu-btn.open span::before{top:0;transform:rotate(45deg)}.menu-btn.open span::after{top:0;transform:rotate(-45deg)}
+
+    /* hero */
+    .hero{min-height:100vh;padding:150px 0 80px;display:flex;align-items:center;position:relative}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:68px;align-items:center}
+    .hero h1{font-family:Manrope,sans-serif;font-size:clamp(50px,6.7vw,92px);line-height:.94;letter-spacing:-.062em;margin:22px 0 26px;max-width:780px;overflow-wrap:anywhere}
+    .hero-copy p{font-size:clamp(17px,1.7vw,21px);line-height:1.72;color:var(--muted);max-width:660px;margin:0 0 34px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .micro-proof{display:flex;align-items:center;gap:11px;margin-top:28px;color:var(--muted2);font-size:13px}
+    .privacy-dots{display:flex}.privacy-dots span{width:26px;height:26px;border-radius:50%;background:linear-gradient(145deg,#26263e,#11111f);border:2px solid #090914;margin-left:-7px}.privacy-dots span:first-child{margin-left:0}.privacy-dots span:nth-child(2){background:linear-gradient(145deg,#5848bd,#171628)}.privacy-dots span:nth-child(3){background:linear-gradient(145deg,#243b7d,#171628)}
+
+    .visual-shell{position:relative;perspective:1100px;min-width:0}
+    .visual-shell::before{content:"";position:absolute;width:85%;height:70%;left:8%;top:14%;background:radial-gradient(circle,rgba(101,77,255,.35),transparent 72%);filter:blur(45px);z-index:-1}
+    .dashboard{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:16px;background:linear-gradient(145deg,rgba(18,18,40,.98),rgba(10,10,24,.95));box-shadow:var(--shadow),0 0 0 1px rgba(119,92,255,.07) inset;transform-style:preserve-3d;transition:transform .18s ease-out;overflow:hidden}
+    .dashboard::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.05) 42%,transparent 62%);transform:translateX(-120%);animation:sheen 7s ease-in-out infinite}
+    .dash-top{display:flex;align-items:center;justify-content:space-between;padding:9px 6px 15px;gap:12px}
+    .dash-title{display:flex;align-items:center;gap:9px;font-weight:700;font-size:13px}.live-dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 14px var(--good);animation:pulse 1.8s infinite}
+    .dash-date{color:var(--muted2);font-size:11px;white-space:nowrap}
+    .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .metric{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:18px;padding:16px;min-width:0;position:relative;overflow:hidden}
+    .metric:after{content:"";position:absolute;width:80px;height:80px;border-radius:50%;right:-35px;bottom:-35px;background:rgba(119,92,255,.08)}
+    .metric small{color:var(--muted2);display:block;font-size:10px;margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.metric strong{font-family:Manrope,sans-serif;font-size:clamp(20px,2.4vw,31px);letter-spacing:-.04em}.up{font-size:10px;color:var(--good);margin-left:5px;font-weight:700}
+    .chart-card{margin-top:10px;border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:20px;padding:17px;position:relative;overflow:hidden}
+    .chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.chart-head b{font-size:13px}.chart-head span{color:var(--muted2);font-size:10px;text-align:right}
+    .chart{height:160px;margin-top:12px;position:relative;background-image:linear-gradient(to right,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.04) 1px,transparent 1px);background-size:25% 100%,100% 25%;border-radius:12px;overflow:hidden}
+    .chart svg{width:100%;height:100%}.chart .area{opacity:.55}.chart .line{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.4s .5s ease forwards}.chart-point{filter:drop-shadow(0 0 7px #8f7cff)}
+    .comparison{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.compare-card{border:1px solid var(--line);border-radius:18px;padding:14px;background:rgba(255,255,255,.026)}.compare-card span{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:.07em;font-weight:700}.compare-value{display:flex;align-items:end;gap:8px;margin-top:7px}.compare-value strong{font-family:Manrope;font-size:24px}.bar{height:5px;background:#24243a;border-radius:99px;overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#745cff,#ad9fff);animation:barGrow 1.6s 1s cubic-bezier(.2,.8,.2,1) both;transform-origin:left}
+    .float-chip{position:absolute;border:1px solid rgba(255,255,255,.14);background:rgba(16,16,34,.78);backdrop-filter:blur(14px);border-radius:15px;padding:10px 13px;font-size:11px;box-shadow:0 18px 35px rgba(0,0,0,.27);animation:float 5s ease-in-out infinite}.float-chip b{display:block;font-size:13px;margin-top:2px}.fc1{right:-30px;top:18%;animation-delay:-1s}.fc2{left:-34px;bottom:15%;animation-delay:-3s}
+
+    /* ticker */
+    .ticker-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.018)}
+    .ticker{display:flex;width:max-content;animation:marquee 28s linear infinite;padding:17px 0}.ticker-item{display:flex;align-items:center;gap:12px;color:#b7b7ca;font-size:13px;font-weight:600;padding:0 34px}.ticker-item i{width:5px;height:5px;border-radius:50%;background:#806cff;box-shadow:0 0 12px #806cff}
+
+    /* feature cards */
+    .three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:54px}
+    .feature-card{position:relative;min-height:330px;border:1px solid var(--line);border-radius:26px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));overflow:hidden;transition:.35s cubic-bezier(.2,.8,.2,1)}
+    .feature-card:hover{transform:translateY(-7px);border-color:rgba(135,112,255,.35);box-shadow:0 26px 60px rgba(0,0,0,.24)}
+    .feature-card::before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-80px;top:-70px;background:radial-gradient(circle,rgba(119,92,255,.18),transparent 70%)}
+    .step-no{width:42px;height:42px;border-radius:13px;border:1px solid var(--line2);display:grid;place-items:center;font-weight:800;color:#c3baff;background:rgba(119,92,255,.08);margin-bottom:52px}
+    .feature-card h3{font-family:Manrope;font-size:24px;letter-spacing:-.03em;margin:0 0 11px}.feature-card p{color:var(--muted);font-size:14px;line-height:1.7;margin:0}.mini-line{height:1px;background:linear-gradient(90deg,var(--line2),transparent);margin:22px 0 15px}.mini-label{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+
+    /* intelligence */
+    .intel-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:70px;align-items:center;margin-top:34px}
+    .intel-list{display:grid;gap:12px;margin-top:32px}.intel-item{display:grid;grid-template-columns:40px 1fr;gap:13px;align-items:start;border-top:1px solid var(--line);padding-top:18px}.intel-icon{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.035);display:grid;place-items:center;color:#a99cff}.intel-icon svg{width:18px}.intel-item b{font-size:14px}.intel-item p{margin:5px 0 0;color:var(--muted2);font-size:13px;line-height:1.6}
+    .network-card{border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,rgba(17,17,39,.92),rgba(9,9,22,.96));padding:25px;box-shadow:var(--shadow);position:relative;overflow:hidden;min-height:510px}
+    .network-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(119,92,255,.14),transparent 48%)}
+    .network-head{position:relative;z-index:2;display:flex;justify-content:space-between;gap:10px}.network-head b{font-size:14px}.network-head span{color:var(--muted2);font-size:11px}
+    .network{position:relative;height:335px;margin-top:22px}.network svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.net-line{stroke:rgba(135,115,255,.28);stroke-width:1;stroke-dasharray:6 9;animation:dash 18s linear infinite}.node{position:absolute;width:54px;height:54px;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:#14142b;display:grid;place-items:center;font-size:10px;color:#c8c8d7;font-weight:800;box-shadow:0 12px 28px rgba(0,0,0,.25);z-index:2}.node::after{content:"";position:absolute;inset:-6px;border-radius:22px;border:1px solid rgba(119,92,255,.18);animation:nodePulse 2.8s ease-out infinite}.node.main{width:74px;height:74px;border-radius:23px;background:linear-gradient(145deg,#6f58ef,#39309b);font-size:11px;color:white;left:50%;top:47%;transform:translate(-50%,-50%);box-shadow:0 0 50px rgba(109,84,255,.3)}.n1{left:8%;top:12%}.n2{right:8%;top:10%}.n3{left:12%;bottom:10%}.n4{right:12%;bottom:8%}.n5{right:1%;top:47%}.n6{left:0;top:50%}
+    .network-summary{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.ns{border:1px solid var(--line);border-radius:15px;padding:13px;background:rgba(255,255,255,.03)}.ns small{display:block;color:var(--muted2);font-size:9px;text-transform:uppercase;letter-spacing:.08em}.ns strong{display:block;font-family:Manrope;font-size:20px;margin-top:5px}.good{color:var(--good)}.danger{color:var(--danger)}
+
+    /* metric showcase */
+    .metric-showcase{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:54px}.big-card,.side-card{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.018));padding:28px;overflow:hidden}.big-card{min-height:430px;position:relative}.big-card h3,.side-card h3{font-family:Manrope;font-size:24px;margin:0;letter-spacing:-.03em}.card-muted{color:var(--muted2);font-size:13px;margin-top:8px}.funnel{display:flex;align-items:end;gap:8px;height:245px;margin-top:26px}.funnel-col{flex:1;display:flex;flex-direction:column;justify-content:end;min-width:0}.funnel-bar{border-radius:13px 13px 5px 5px;background:linear-gradient(180deg,rgba(126,103,255,.95),rgba(57,48,154,.32));border:1px solid rgba(154,137,255,.25);position:relative;transform:scaleY(0);transform-origin:bottom;transition:transform 1s cubic-bezier(.2,.8,.2,1)}.visible .funnel-bar{transform:scaleY(1)}.funnel-col:nth-child(2) .funnel-bar{transition-delay:.12s}.funnel-col:nth-child(3) .funnel-bar{transition-delay:.24s}.funnel-col:nth-child(4) .funnel-bar{transition-delay:.36s}.funnel-col b{font-size:11px;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.funnel-col small{font-size:10px;color:var(--muted2)}
+    .side-stack{display:grid;gap:16px}.ring-wrap{display:grid;grid-template-columns:142px 1fr;gap:20px;align-items:center;margin-top:24px}.ring{width:138px;height:138px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--violet) 0 0,var(--line) 0);position:relative;transition:background 1.6s ease}.visible .ring{background:conic-gradient(var(--violet) 0 67%,#28283b 67% 100%)}.ring:before{content:"";position:absolute;inset:12px;border-radius:50%;background:#101022}.ring-center{position:relative;z-index:1;text-align:center}.ring-center strong{font-family:Manrope;font-size:28px}.ring-center small{display:block;color:var(--muted2);font-size:9px;text-transform:uppercase}.ring-copy b{display:block;font-size:13px}.ring-copy p{font-size:12px;color:var(--muted2);line-height:1.6;margin:6px 0 0}.heat{height:100px;margin-top:20px;border-radius:16px;background:radial-gradient(circle at 23% 60%,rgba(255,133,174,.72),transparent 16%),radial-gradient(circle at 58% 45%,rgba(119,92,255,.75),transparent 19%),radial-gradient(circle at 82% 72%,rgba(49,78,232,.55),transparent 15%),linear-gradient(90deg,#0e0e20,#15152c);position:relative;overflow:hidden}.heat:after{content:"";position:absolute;inset:0;background-size:25px 25px;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px)}
+
+    /* pricing */
+    .pricing-head{display:flex;justify-content:space-between;align-items:end;gap:30px}.pricing-note{max-width:400px;color:var(--muted2);font-size:13px;line-height:1.7}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:54px;align-items:stretch}.price-card{border:1px solid var(--line);border-radius:28px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.043),rgba(255,255,255,.018));position:relative;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:.32s cubic-bezier(.2,.8,.2,1)}.price-card:hover{transform:translateY(-7px);border-color:rgba(145,127,255,.32);box-shadow:0 24px 65px rgba(0,0,0,.25)}.price-card.popular{border-color:rgba(130,104,255,.55);background:linear-gradient(180deg,rgba(105,81,255,.13),rgba(255,255,255,.02));box-shadow:0 30px 70px rgba(68,47,180,.15)}.popular-badge{position:absolute;top:18px;right:18px;padding:7px 10px;border-radius:999px;background:rgba(119,92,255,.15);border:1px solid rgba(143,124,255,.3);font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:#cfc8ff;font-weight:800}.plan-name{font-family:Manrope;font-size:21px;font-weight:800;letter-spacing:-.03em}.plan-sub{color:var(--muted2);font-size:12px;margin-top:7px;min-height:38px}.price{font-family:Manrope;font-size:50px;font-weight:800;letter-spacing:-.055em;margin:30px 0 2px;white-space:nowrap}.price sup{font-size:18px;vertical-align:top;margin-right:2px}.price span{font-size:12px;color:var(--muted2);font-family:Inter;font-weight:600;letter-spacing:0}.setup{color:var(--muted2);font-size:11px;margin-bottom:26px}.features{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:11px}.features li{font-size:12px;color:#c6c6d5;display:grid;grid-template-columns:18px 1fr;gap:8px;align-items:start}.check{width:17px;height:17px;border-radius:50%;background:rgba(117,244,196,.08);border:1px solid rgba(117,244,196,.2);display:grid;place-items:center;color:var(--good);font-size:10px;margin-top:1px}.price-card .btn{margin-top:auto;width:100%}.custom-price{font-family:Manrope;font-size:43px;font-weight:800;letter-spacing:-.05em;margin:31px 0 1px}.custom-price span{display:block;font-size:12px;color:var(--muted2);letter-spacing:0;font-family:Inter;margin-top:6px;font-weight:600}
+
+    /* privacy + faq */
+    .privacy-banner{border:1px solid var(--line);border-radius:30px;padding:38px;background:linear-gradient(120deg,rgba(119,92,255,.08),rgba(255,255,255,.02));display:grid;grid-template-columns:1fr .8fr;gap:60px;align-items:center}.privacy-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}.privacy-point{border:1px solid var(--line);border-radius:17px;padding:16px;background:rgba(255,255,255,.025)}.privacy-point b{display:block;font-size:12px}.privacy-point span{display:block;color:var(--muted2);font-size:11px;margin-top:5px;line-height:1.55}
+    .faq{margin-top:48px;border-top:1px solid var(--line)}.faq-item{border-bottom:1px solid var(--line)}.faq-q{width:100%;border:0;background:none;text-align:left;padding:23px 2px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-weight:700;cursor:pointer}.faq-q span:first-child{overflow-wrap:anywhere}.faq-plus{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;flex:0 0 auto;transition:.3s}.faq-item.open .faq-plus{transform:rotate(45deg);background:rgba(119,92,255,.1)}.faq-a{max-height:0;overflow:hidden;transition:max-height .38s ease}.faq-a p{color:var(--muted);font-size:13px;line-height:1.75;margin:0;padding:0 48px 23px 2px;max-width:800px}
+
+    /* final CTA */
+    .final-card{position:relative;border:1px solid rgba(143,124,255,.28);border-radius:34px;min-height:410px;display:grid;place-items:center;text-align:center;padding:55px 28px;overflow:hidden;background:linear-gradient(150deg,rgba(106,81,255,.16),rgba(12,12,28,.88) 60%)}.final-card:before{content:"";position:absolute;width:660px;height:660px;border-radius:50%;top:-420px;background:radial-gradient(circle,rgba(130,106,255,.35),transparent 65%);animation:floatOrb 10s ease-in-out infinite alternate}.final-card h2{position:relative;font-family:Manrope;font-size:clamp(38px,5vw,70px);line-height:1;letter-spacing:-.05em;max-width:850px;margin:0 auto 18px}.final-card p{position:relative;color:var(--muted);max-width:620px;margin:0 auto 28px;font-size:15px;line-height:1.7}.final-card .hero-actions{position:relative;justify-content:center}
+    footer{padding:34px 0 46px;color:var(--muted2);font-size:11px}.footer-grid{display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:1px solid var(--line);padding-top:24px}.footer-brand{display:flex;align-items:center;gap:10px;color:#c8c5dd;font-weight:700}.footer-brand .brand-mark{width:40px;height:24px}.footer-links{display:flex;gap:20px;flex-wrap:wrap}.footer-links a:hover{color:white}
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(3,3,9,.72);backdrop-filter:blur(12px);z-index:100;display:none;place-items:center;padding:20px}.modal-backdrop.open{display:grid;animation:fade .25s ease}.modal{width:min(620px,100%);max-height:min(780px,calc(100vh - 40px));overflow:auto;border:1px solid rgba(255,255,255,.14);border-radius:28px;background:#0e0e20;padding:25px;box-shadow:0 40px 100px rgba(0,0,0,.6);animation:modalIn .35s cubic-bezier(.2,.8,.2,1)}.modal-top{display:flex;justify-content:space-between;align-items:start;gap:20px}.modal h3{font-family:Manrope;font-size:27px;letter-spacing:-.04em;margin:0}.modal p{color:var(--muted);font-size:13px;line-height:1.65}.close{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer;font-size:20px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;font-weight:800}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:12px;background:#15152a;color:white;padding:12px 13px;outline:none}.field input:focus,.field select:focus{border-color:#7660e8;box-shadow:0 0 0 3px rgba(119,92,255,.11)}.brief{border:1px solid var(--line);border-radius:16px;padding:15px;background:rgba(255,255,255,.025);color:#c9c9d7;font-size:12px;line-height:1.7;white-space:pre-line;margin-top:16px;display:none}.brief.show{display:block}.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.toast{position:fixed;right:20px;bottom:20px;z-index:150;padding:12px 16px;border:1px solid rgba(117,244,196,.25);background:#101d1b;color:#aaf8db;border-radius:13px;font-size:12px;font-weight:700;transform:translateY(25px);opacity:0;pointer-events:none;transition:.3s}.toast.show{transform:none;opacity:1}
+
+    @keyframes pulse{50%{opacity:.45;transform:scale(.86)}}
+    @keyframes gradientShift{50%{background-position:100% 50%}}
+    @keyframes floatOrb{to{transform:translate3d(35px,45px,0) scale(1.08)}}
+    @keyframes sheen{0%,55%{transform:translateX(-130%)}75%,100%{transform:translateX(140%)}}
+    @keyframes draw{to{stroke-dashoffset:0}}
+    @keyframes barGrow{from{transform:scaleX(.05)}}
+    @keyframes float{50%{transform:translateY(-10px)}}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+    @keyframes dash{to{stroke-dashoffset:-300}}
+    @keyframes nodePulse{0%{opacity:.65;transform:scale(.92)}70%,100%{opacity:0;transform:scale(1.18)}}
+    @keyframes fade{from{opacity:0}}
+    @keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.97)}}
+
+    @media(max-width:980px){
+      .hero{padding-top:132px}.hero-grid,.intel-grid{grid-template-columns:1fr;gap:46px}.hero-grid{max-width:780px}.visual-shell{width:min(690px,100%);margin:auto}.fc1{right:8px}.fc2{left:8px}.three-grid,.pricing-grid{grid-template-columns:1fr 1fr}.three-grid .feature-card:last-child,.pricing-grid .price-card:last-child{grid-column:1/-1}.metric-showcase{grid-template-columns:1fr}.privacy-banner{grid-template-columns:1fr;gap:30px}.nav-links{display:none}.nav-actions .btn{display:none}.menu-btn{display:flex}.nav-links.mobile{position:absolute;display:grid;top:78px;left:0;width:100%;padding:12px;background:#0d0d1f;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.nav-links.mobile a{padding:13px}.pricing-head{display:block}.pricing-note{margin-top:18px}}
+    @media(max-width:650px){
+      .container{width:min(100% - 26px,1180px)}.section{padding:82px 0}.nav-wrap{top:10px;padding:0 10px}.nav{height:60px;border-radius:17px}.brand-mark{width:45px}.brand-name{font-size:15px}.hero{padding-top:112px;min-height:auto}.hero h1{font-size:clamp(43px,14vw,67px)}.hero-copy p{font-size:16px}.hero-actions{display:grid;grid-template-columns:1fr;width:100%}.hero-actions .btn{width:100%}.dashboard{padding:11px;border-radius:23px}.metric-grid{grid-template-columns:1fr 1fr}.metric-grid .metric:last-child{grid-column:1/-1}.comparison{grid-template-columns:1fr}.float-chip{display:none}.three-grid,.pricing-grid{grid-template-columns:1fr}.three-grid .feature-card:last-child,.pricing-grid .price-card:last-child{grid-column:auto}.feature-card{min-height:auto}.step-no{margin-bottom:40px}.intel-grid{gap:36px}.network-card{padding:17px;min-height:450px}.network{height:300px}.node{width:45px;height:45px;border-radius:14px}.node.main{width:64px;height:64px}.network-summary{grid-template-columns:1fr 1fr}.network-summary .ns:last-child{grid-column:1/-1}.big-card,.side-card{padding:20px}.funnel{height:200px}.ring-wrap{grid-template-columns:110px 1fr}.ring{width:106px;height:106px}.ring:before{inset:10px}.privacy-banner{padding:25px}.privacy-points{grid-template-columns:1fr}.pricing-head .section-title{font-size:43px}.footer-grid{display:grid}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:20px;border-radius:22px}.price{font-size:45px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.cursor-glow{display:none}}
+  </style>
+</head>
+<body>
+  <div class="ambient"><div class="orb o1"></div><div class="orb o2"></div></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <div class="nav-wrap">
+    <nav class="nav" id="nav">
+      <a class="brand" href="#top" aria-label="Target Media home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 416.44"><path d="M 783.56,268.45 L 781.26,262.72 L 773.23,258.13 L 711.28,258.13 L 686.04,263.86 L 656.21,281.07 L 604.59,329.25 L 571.32,355.64 L 528.87,379.73 L 504.78,387.76 L 464.63,393.50 L 434.80,392.35 L 392.35,384.32 L 368.26,375.14 L 385.47,386.62 L 407.27,396.94 L 448.57,408.41 L 468.07,410.71 L 499.04,410.71 L 527.72,406.12 L 557.55,395.79 L 595.41,374.00 L 624.09,351.05 L 663.10,314.34 L 690.63,294.84 L 713.58,285.66 L 729.64,282.22 L 772.08,282.22 L 782.41,275.33 Z M 252.39,243.21 L 269.60,276.48 L 294.84,307.46 L 314.34,317.78 L 330.40,317.78 L 349.90,307.46 L 414.15,239.77 L 426.77,232.89 L 521.99,229.45 L 527.72,221.41 L 527.72,190.44 L 533.46,184.70 L 653.92,184.70 L 658.51,190.44 L 658.51,222.56 L 666.54,230.59 L 994.65,230.59 L 1006.12,238.62 L 1185.09,238.62 L 1196.56,231.74 L 1198.85,215.68 L 1183.94,203.06 L 1007.27,203.06 L 995.79,209.94 L 684.89,211.09 L 676.86,203.06 L 676.86,172.08 L 667.69,164.05 L 518.55,164.05 L 508.22,173.23 L 508.22,204.21 L 501.34,211.09 L 279.92,211.09 L 261.57,221.41 Z M 536.90,123.90 L 463.48,87.19 L 455.45,61.95 L 441.68,39.01 L 425.62,22.94 L 400.38,8.03 L 375.14,1.15 L 352.20,0.00 L 330.40,3.44 L 305.16,13.77 L 276.48,37.86 L 263.86,56.21 L 253.54,89.48 L 253.54,136.52 L 217.97,180.11 L 181.26,181.26 L 128.49,197.32 L 76.86,229.45 L 39.01,269.60 L 22.94,293.69 L 4.59,336.14 L 0.00,365.97 L 4.59,402.68 L 20.65,415.30 L 36.71,410.71 L 74.57,309.75 L 99.81,271.89 L 135.37,236.33 L 157.17,221.41 L 193.88,206.50 L 220.27,205.35 L 238.62,215.68 L 234.03,193.88 L 263.86,158.32 L 277.63,158.32 L 283.37,152.58 L 283.37,103.25 L 291.40,91.78 L 309.75,88.34 L 325.81,92.93 L 418.74,146.85 L 445.12,157.17 L 463.48,158.32 L 487.57,152.58 Z" fill="currentColor" fill-rule="evenodd"/></svg>
+        </span>
+        <span class="brand-name">Target Media</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#product">Product</a><a href="#intelligence">Intelligence</a><a href="#metrics">Metrics</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="#pricing">Compare plans
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span></button>
+      </div>
+    </nav>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow reveal"><i></i> AI measurement for physical marketing</span>
+          <h1 class="reveal delay-1">Know what people <span class="gradient-text">actually notice.</span></h1>
+          <p class="reveal delay-2">Target Media measures passers-by, attention and stopping behavior around your storefront so physical marketing becomes measurable — not guesswork.</p>
+          <div class="hero-actions reveal delay-3">
+            <a class="btn btn-primary magnetic" href="#pricing">Compare plans
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn magnetic" href="#intelligence">See local intelligence</a>
+          </div>
+          <div class="micro-proof reveal delay-3"><div class="privacy-dots"><span></span><span></span><span></span></div><span>Anonymous, aggregated business intelligence.</span></div>
+        </div>
+
+        <div class="visual-shell reveal delay-2" id="visualShell">
+          <div class="dashboard" id="dashboard">
+            <div class="dash-top"><div class="dash-title"><i class="live-dot"></i> Storefront performance</div><div class="dash-date">LIVE • ROTTERDAM</div></div>
+            <div class="metric-grid">
+              <div class="metric"><small>Passers-by</small><strong class="counter" data-target="18420">0</strong><span class="up">+8.2%</span></div>
+              <div class="metric"><small>Attention</small><strong class="counter" data-target="3826">0</strong><span class="up">+5.4%</span></div>
+              <div class="metric"><small>Stopped</small><strong class="counter" data-target="914">0</strong><span class="up">+11.8%</span></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-head"><b>Attention over time</b><span>Last 7 days<br>vs previous period</span></div>
+              <div class="chart">
+                <svg viewBox="0 0 520 160" preserveAspectRatio="none" aria-hidden="true">
+                  <defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#806cff" stop-opacity=".5"/><stop offset="1" stop-color="#806cff" stop-opacity="0"/></linearGradient></defs>
+                  <path class="area" d="M0 125 C45 112 57 82 99 92 S155 115 196 75 S265 52 304 69 S363 86 400 47 S464 30 520 38 L520 160 L0 160Z" fill="url(#area)"/>
+                  <path class="line" d="M0 125 C45 112 57 82 99 92 S155 115 196 75 S265 52 304 69 S363 86 400 47 S464 30 520 38" fill="none" stroke="#9b88ff" stroke-width="3" stroke-linecap="round"/>
+                  <circle class="chart-point" cx="520" cy="38" r="5" fill="#c7bfff"/>
+                </svg>
+              </div>
+            </div>
+            <div class="comparison">
+              <div class="compare-card"><span>Your attention rate</span><div class="compare-value"><strong>20.8%</strong><small class="good">+2.1 pts</small></div><div class="bar"><i style="width:69%"></i></div></div>
+              <div class="compare-card"><span>Area benchmark</span><div class="compare-value"><strong>18.7%</strong><small>local median</small></div><div class="bar"><i style="width:61%;animation-delay:1.2s"></i></div></div>
+            </div>
+          </div>
+          <div class="float-chip fc1">This week<b class="good">Traffic +8.2%</b></div>
+          <div class="float-chip fc2">Local signal<b>Area stable</b></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker-wrap" aria-hidden="true"><div class="ticker">
+      <div class="ticker-item"><i></i>PASSERS-BY</div><div class="ticker-item"><i></i>ATTENTION RATE</div><div class="ticker-item"><i></i>STOP RATE</div><div class="ticker-item"><i></i>DWELL TIME</div><div class="ticker-item"><i></i>HOURLY TRENDS</div><div class="ticker-item"><i></i>LOCAL BENCHMARKS</div>
+      <div class="ticker-item"><i></i>PASSERS-BY</div><div class="ticker-item"><i></i>ATTENTION RATE</div><div class="ticker-item"><i></i>STOP RATE</div><div class="ticker-item"><i></i>DWELL TIME</div><div class="ticker-item"><i></i>HOURLY TRENDS</div><div class="ticker-item"><i></i>LOCAL BENCHMARKS</div>
+    </div></div>
+
+    <section class="section" id="product">
+      <div class="container">
+        <span class="eyebrow reveal"><i></i> From camera to decision</span>
+        <h2 class="section-title reveal delay-1">A simple sensor. <span class="gradient-text">A much clearer business.</span></h2>
+        <p class="section-lead reveal delay-2">The camera observes anonymous movement around your storefront. Target Media turns it into understandable metrics your business can use every week.</p>
+        <div class="three-grid">
+          <article class="feature-card reveal"><div class="step-no">01</div><h3>Measure</h3><p>See how many people pass, notice your storefront and stop. Understand the real exposure your physical marketing generates.</p><div class="mini-line"></div><div class="mini-label">Traffic → attention → stop</div></article>
+          <article class="feature-card reveal delay-1"><div class="step-no">02</div><h3>Understand</h3><p>Track changes by hour, day and week. Know whether a drop is isolated to your location or happening across the surrounding area.</p><div class="mini-line"></div><div class="mini-label">Your store → your area</div></article>
+          <article class="feature-card reveal delay-2"><div class="step-no">03</div><h3>Act</h3><p>On Growth Partner, the data becomes a diagnosis. We investigate what is underperforming and define a custom improvement plan for the location.</p><div class="mini-line"></div><div class="mini-label">Signal → diagnosis → action</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="intelligence">
+      <div class="container intel-grid">
+        <div>
+          <span class="eyebrow reveal"><i></i> Local intelligence</span>
+          <h2 class="section-title reveal delay-1">Your numbers mean more <span class="gradient-text">with context.</span></h2>
+          <p class="section-lead reveal delay-2">A single camera tells you what happened. A local network helps explain why. Intelligence combines your location with anonymous, aggregated patterns from nearby coverage.</p>
+          <div class="intel-list reveal delay-2">
+            <div class="intel-item"><div class="intel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V8m6 11V4m6 15v-7m4 7H2"/></svg></div><div><b>Separate store problems from area problems</b><p>If your traffic drops 18% while the area drops only 3%, something specific to your location deserves attention.</p></div></div>
+            <div class="intel-item"><div class="intel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M3 12h3m12 0h3M12 3v3m0 12v3"/></svg></div><div><b>Benchmark without exposing another business</b><p>Clients see aggregated references and trends — not another store's private dashboard or individual raw metrics.</p></div></div>
+            <div class="intel-item"><div class="intel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m4 15 4-4 4 3 6-7"/><path d="M14 7h4v4"/></svg></div><div><b>Get stronger as the network gets denser</b><p>More nearby coverage creates a more useful local baseline, making the service harder to replace with a one-off measurement.</p></div></div>
+          </div>
+        </div>
+        <div class="network-card reveal delay-1">
+          <div class="network-head"><b>Neighborhood signal</b><span>Anonymous aggregate • demo</span></div>
+          <div class="network">
+            <svg viewBox="0 0 500 335" preserveAspectRatio="none"><path class="net-line" d="M250 158 L62 52 M250 158 L435 50 M250 158 L82 278 M250 158 L420 284 M250 158 L488 161 M250 158 L12 172" fill="none"/></svg>
+            <div class="node main">YOU</div><div class="node n1">A</div><div class="node n2">B</div><div class="node n3">C</div><div class="node n4">D</div><div class="node n5">E</div><div class="node n6">F</div>
+          </div>
+          <div class="network-summary">
+            <div class="ns"><small>Your traffic</small><strong class="danger">−14%</strong></div>
+            <div class="ns"><small>Area traffic</small><strong>−2%</strong></div>
+            <div class="ns"><small>Signal</small><strong class="danger">Local gap</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metrics">
+      <div class="container">
+        <span class="eyebrow reveal"><i></i> What you can measure</span>
+        <h2 class="section-title reveal delay-1">Turn a storefront into a <span class="gradient-text">measurable funnel.</span></h2>
+        <p class="section-lead reveal delay-2">Instead of judging physical marketing by feeling, follow the journey from people passing the location to people actively paying attention.</p>
+        <div class="metric-showcase">
+          <div class="big-card reveal">
+            <h3>Physical attention funnel</h3><div class="card-muted">Example day • illustrative dashboard</div>
+            <div class="funnel">
+              <div class="funnel-col"><div class="funnel-bar" style="height:100%"></div><b>Passers-by</b><small>4,280</small></div>
+              <div class="funnel-col"><div class="funnel-bar" style="height:69%"></div><b>Visible</b><small>2,954</small></div>
+              <div class="funnel-col"><div class="funnel-bar" style="height:42%"></div><b>Looked</b><small>1,798</small></div>
+              <div class="funnel-col"><div class="funnel-bar" style="height:18%"></div><b>Stopped</b><small>771</small></div>
+            </div>
+          </div>
+          <div class="side-stack">
+            <div class="side-card reveal delay-1"><h3>Attention rate</h3><div class="ring-wrap"><div class="ring"><div class="ring-center"><strong>67%</strong><small>of visible</small></div></div><div class="ring-copy"><b>Know if the storefront earns attention.</b><p>Track the share of observable traffic that actually engages with the display or message.</p></div></div></div>
+            <div class="side-card reveal delay-2"><h3>Attention by time</h3><div class="card-muted">Find the strongest and weakest hours.</div><div class="heat"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="pricing-head">
+          <div><span class="eyebrow reveal"><i></i> Plans</span><h2 class="section-title reveal delay-1">Start with measurement. <span class="gradient-text">Add context when it matters.</span></h2></div>
+          <p class="pricing-note reveal delay-2">Monthly prices are per location. Growth Partner has no fixed price because the scope depends on the business, location and work required.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <div class="plan-name">Monitor</div><div class="plan-sub">For businesses that want clear, continuous storefront metrics.</div>
+            <div class="price"><sup>€</sup>89 <span>/ month</span></div><div class="setup">+ €249 one-time installation</div>
+            <ul class="features"><li><i class="check">✓</i><span>Passers-by and traffic trends</span></li><li><i class="check">✓</i><span>Attention / look rate</span></li><li><i class="check">✓</i><span>Stopping behavior</span></li><li><i class="check">✓</i><span>Hourly, daily and weekly views</span></li><li><i class="check">✓</i><span>Historical comparison</span></li></ul>
+            <button class="btn plan-btn" data-plan="Monitor">Select Monitor</button>
+          </article>
+          <article class="price-card popular reveal delay-1">
+            <span class="popular-badge">Recommended</span><div class="plan-name">Intelligence</div><div class="plan-sub">For businesses that want to understand whether the problem is the store or the market around it.</div>
+            <div class="price"><sup>€</sup>199 <span>/ month</span></div><div class="setup">+ €249 one-time installation</div>
+            <ul class="features"><li><i class="check">✓</i><span>Everything in Monitor</span></li><li><i class="check">✓</i><span>Local area traffic context</span></li><li><i class="check">✓</i><span>Aggregated comparable benchmarks</span></li><li><i class="check">✓</i><span>Store-vs-area performance gap</span></li><li><i class="check">✓</i><span>Important change alerts</span></li></ul>
+            <button class="btn btn-primary plan-btn" data-plan="Intelligence">Select Intelligence</button>
+          </article>
+          <article class="price-card reveal delay-2">
+            <div class="plan-name">Growth Partner</div><div class="plan-sub">For locations that want deeper diagnosis and hands-on improvement work.</div>
+            <div class="custom-price">Custom <span>Price depends on the location and scope.</span></div><div class="setup">Defined after an initial assessment</div>
+            <ul class="features"><li><i class="check">✓</i><span>Everything in Intelligence</span></li><li><i class="check">✓</i><span>Deeper performance diagnosis</span></li><li><i class="check">✓</i><span>Custom improvement priorities</span></li><li><i class="check">✓</i><span>Hands-on review cadence</span></li><li><i class="check">✓</i><span>Scope tailored to the business</span></li></ul>
+            <button class="btn plan-btn" data-plan="Growth Partner">Discuss scope</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="privacy-banner reveal">
+          <div><span class="eyebrow"><i></i> Privacy-first design</span><h2 class="section-title" style="font-size:clamp(34px,4vw,55px)">Measure behavior, <span class="gradient-text">not identities.</span></h2><p class="section-lead" style="font-size:15px">Target Media is designed around anonymous, aggregated business metrics rather than identifying individual people.</p></div>
+          <div class="privacy-points"><div class="privacy-point"><b>Aggregate metrics</b><span>Dashboards focus on counts, rates and trends.</span></div><div class="privacy-point"><b>No customer profiles</b><span>The product is not built to create named shopper profiles.</span></div><div class="privacy-point"><b>Local context</b><span>Benchmarks are shown as aggregated references.</span></div><div class="privacy-point"><b>Business purpose</b><span>Designed to evaluate physical marketing performance.</span></div></div>
+        </div>
+        <div class="faq reveal">
+          <div class="faq-item"><button class="faq-q"><span>What does the camera measure?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>Depending on the plan and installation, Target Media can measure traffic in front of the location, attention toward the storefront, stopping behavior and time-based patterns.</p></div></div>
+          <div class="faq-item"><button class="faq-q"><span>What is different about Intelligence?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>Monitor tells you what happened at your location. Intelligence adds local context so you can better understand whether a movement is specific to your store or part of a wider area trend.</p></div></div>
+          <div class="faq-item"><button class="faq-q"><span>Can I see another business's private data?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>No. The value comes from aggregated references and trends, not from exposing another client's private dashboard or store-level raw metrics.</p></div></div>
+          <div class="faq-item"><button class="faq-q"><span>Why is Growth Partner not a fixed monthly price?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>Because the work depends on the type of business, location, problem and depth of analysis required. The scope is defined after an initial assessment.</p></div></div>
+          <div class="faq-item"><button class="faq-q"><span>Do I need a screen to use Target Media?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>The product is especially useful for locations with storefront displays, signage or physical promotions, but the core traffic and attention measurement can also support other storefront use cases.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:60px">
+      <div class="container">
+        <div class="final-card reveal"><div><h2>Make physical marketing <span class="gradient-text">measurable.</span></h2><p>Start with the plan that matches the question you need answered today — then grow into deeper local intelligence as the network expands.</p><div class="hero-actions"><a class="btn btn-primary magnetic" href="#pricing">Choose a plan</a><a class="btn magnetic" href="#product">See how it works</a></div></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-grid"><div class="footer-brand"><span class="brand-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 416.44"><path d="M 783.56,268.45 L 781.26,262.72 L 773.23,258.13 L 711.28,258.13 L 686.04,263.86 L 656.21,281.07 L 604.59,329.25 L 571.32,355.64 L 528.87,379.73 L 504.78,387.76 L 464.63,393.50 L 434.80,392.35 L 392.35,384.32 L 368.26,375.14 L 385.47,386.62 L 407.27,396.94 L 448.57,408.41 L 468.07,410.71 L 499.04,410.71 L 527.72,406.12 L 557.55,395.79 L 595.41,374.00 L 624.09,351.05 L 663.10,314.34 L 690.63,294.84 L 713.58,285.66 L 729.64,282.22 L 772.08,282.22 L 782.41,275.33 Z M 252.39,243.21 L 269.60,276.48 L 294.84,307.46 L 314.34,317.78 L 330.40,317.78 L 349.90,307.46 L 414.15,239.77 L 426.77,232.89 L 521.99,229.45 L 527.72,221.41 L 527.72,190.44 L 533.46,184.70 L 653.92,184.70 L 658.51,190.44 L 658.51,222.56 L 666.54,230.59 L 994.65,230.59 L 1006.12,238.62 L 1185.09,238.62 L 1196.56,231.74 L 1198.85,215.68 L 1183.94,203.06 L 1007.27,203.06 L 995.79,209.94 L 684.89,211.09 L 676.86,203.06 L 676.86,172.08 L 667.69,164.05 L 518.55,164.05 L 508.22,173.23 L 508.22,204.21 L 501.34,211.09 L 279.92,211.09 L 261.57,221.41 Z M 536.90,123.90 L 463.48,87.19 L 455.45,61.95 L 441.68,39.01 L 425.62,22.94 L 400.38,8.03 L 375.14,1.15 L 352.20,0.00 L 330.40,3.44 L 305.16,13.77 L 276.48,37.86 L 263.86,56.21 L 253.54,89.48 L 253.54,136.52 L 217.97,180.11 L 181.26,181.26 L 128.49,197.32 L 76.86,229.45 L 39.01,269.60 L 22.94,293.69 L 4.59,336.14 L 0.00,365.97 L 4.59,402.68 L 20.65,415.30 L 36.71,410.71 L 74.57,309.75 L 99.81,271.89 L 135.37,236.33 L 157.17,221.41 L 193.88,206.50 L 220.27,205.35 L 238.62,215.68 L 234.03,193.88 L 263.86,158.32 L 277.63,158.32 L 283.37,152.58 L 283.37,103.25 L 291.40,91.78 L 309.75,88.34 L 325.81,92.93 L 418.74,146.85 L 445.12,157.17 L 463.48,158.32 L 487.57,152.58 Z" fill="currentColor" fill-rule="evenodd"/></svg></span>Target Media</div><div>© <span id="year"></span> Target Media</div><div class="footer-links"><a href="#product">Product</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div></div></footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-top"><div><h3 id="modalTitle">Build a pilot brief</h3><p>Selecting a plan creates a simple pilot brief you can copy and use with your team. No data is sent anywhere from this prototype.</p></div><button class="close" id="closeModal" aria-label="Close">×</button></div>
+      <div class="form-grid">
+        <div class="field full"><label>Selected plan</label><select id="planSelect"><option>Monitor</option><option>Intelligence</option><option>Growth Partner</option></select></div>
+        <div class="field"><label>Business type</label><input id="businessType" placeholder="e.g. Barber shop" /></div>
+        <div class="field"><label>City</label><input id="city" placeholder="e.g. Rotterdam" /></div>
+        <div class="field full"><label>Number of locations</label><input id="locations" type="number" min="1" value="1" /></div>
+      </div>
+      <div class="brief" id="brief"></div>
+      <div class="modal-actions"><button class="btn btn-primary" id="generateBrief">Generate brief</button><button class="btn" id="copyBrief" style="display:none">Copy brief</button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast">Copied to clipboard</div>
+
+  <script>
+    const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+    $('#year').textContent=new Date().getFullYear();
+
+    // Navigation
+    const nav=$('#nav'), menuBtn=$('#menuBtn'), navLinks=$('#navLinks');
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30),{passive:true});
+    menuBtn.addEventListener('click',()=>{menuBtn.classList.toggle('open');navLinks.classList.toggle('mobile')});
+    $$('#navLinks a').forEach(a=>a.addEventListener('click',()=>{menuBtn.classList.remove('open');navLinks.classList.remove('mobile')}));
+
+    // Reveal animations
+    const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.14});
+    $$('.reveal').forEach(el=>io.observe(el));
+
+    // Animated numbers
+    const counters=$$('.counter'); let counted=false;
+    const countObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!counted){counted=true;counters.forEach(el=>{const target=+el.dataset.target,start=performance.now(),duration=1500;const tick=t=>{const p=Math.min((t-start)/duration,1),ease=1-Math.pow(1-p,4);el.textContent=Math.floor(target*ease).toLocaleString('en-US');if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)})}})},{threshold:.4});
+    if($('#dashboard'))countObserver.observe($('#dashboard'));
+
+    // Dashboard tilt
+    const shell=$('#visualShell'),dash=$('#dashboard');
+    shell.addEventListener('mousemove',e=>{if(innerWidth<800)return;const r=shell.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;dash.style.transform=`rotateY(${x*8}deg) rotateX(${-y*7}deg) translateZ(0)`});
+    shell.addEventListener('mouseleave',()=>dash.style.transform='rotateY(0) rotateX(0)');
+
+    // Cursor glow + interactive button lighting
+    const glow=$('#cursorGlow');
+    window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'}, {passive:true});
+    $$('.btn').forEach(btn=>btn.addEventListener('pointermove',e=>{const r=btn.getBoundingClientRect();btn.style.setProperty('--mx',(e.clientX-r.left)+'px');btn.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+
+    // Subtle magnetic buttons on desktop
+    $$('.magnetic').forEach(btn=>{btn.addEventListener('mousemove',e=>{if(innerWidth<800)return;const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.08}px,${(e.clientY-r.top-r.height/2)*.08}px)`});btn.addEventListener('mouseleave',()=>btn.style.transform='')});
+
+    // FAQ
+    $$('.faq-q').forEach(q=>q.addEventListener('click',()=>{const item=q.closest('.faq-item'),ans=$('.faq-a',item),open=item.classList.contains('open');$$('.faq-item.open').forEach(x=>{x.classList.remove('open');$('.faq-a',x).style.maxHeight=null});if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px'}}));
+
+    // Plan modal / pilot brief builder
+    const modal=$('#modalBackdrop'), planSelect=$('#planSelect'), brief=$('#brief'), copy=$('#copyBrief');
+    function openModal(plan){planSelect.value=plan;modal.classList.add('open');document.body.classList.add('lock');setTimeout(()=>$('#businessType').focus(),120)}
+    function closeModal(){modal.classList.remove('open');document.body.classList.remove('lock')}
+    $$('.plan-btn').forEach(btn=>btn.addEventListener('click',()=>openModal(btn.dataset.plan)));
+    $('#closeModal').addEventListener('click',closeModal); modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+    $('#generateBrief').addEventListener('click',()=>{
+      const plan=planSelect.value,business=$('#businessType').value.trim()||'[business type]',city=$('#city').value.trim()||'[city]',locations=Math.max(1,+$('#locations').value||1);
+      const pricing=plan==='Monitor'?'€89/month per location + €249 installation':plan==='Intelligence'?'€199/month per location + €249 installation':'Custom pricing after assessment';
+      brief.textContent=`TARGET MEDIA — PILOT BRIEF\nPlan: ${plan}\nBusiness: ${business}\nCity: ${city}\nLocations: ${locations}\nPricing: ${pricing}\n\nGoal: measure physical storefront performance and establish a useful baseline before scaling.`;
+      brief.classList.add('show');copy.style.display='inline-flex';
+    });
+    $('#copyBrief').addEventListener('click',async()=>{await navigator.clipboard.writeText(brief.textContent);const t=$('#toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)});
+  </script>
+</body>
+</html>
