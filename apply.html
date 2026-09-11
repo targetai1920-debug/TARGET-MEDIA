@@ -3,46 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#070712">
+  <meta name="theme-color" content="#0a0a0d">
   <meta name="description" content="Apply for Target Media Monitor so we can review whether your location is a suitable fit.">
   <title>Apply for Monitor — Target Media</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
-    :root{--bg:#070712;--card:#111126;--line:rgba(255,255,255,.16);--text:#fafaff;--muted:#c7c7d5;--sub:#a8a8bb;--violet:#8e78ff;--violet2:#b9adff;--good:#8cf5cf;--warn:#ffd27a;--danger:#ff8eaa;--shadow:0 28px 80px rgba(0,0,0,.38)}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(900px 520px at 90% 0,rgba(100,74,255,.18),transparent 68%),linear-gradient(180deg,#070712,#0a0a18 50%,#070712);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
-    a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}
-    a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #d7d0ff;outline-offset:3px}
-    .skip-link{position:fixed;left:16px;top:-80px;z-index:50;background:#fff;color:#090912;padding:12px 16px;border-radius:10px;font-weight:800}.skip-link:focus{top:12px}
-    .wrap{width:min(1040px,calc(100% - 32px));margin:auto}
-    .topbar{padding:18px 0;position:sticky;top:0;z-index:20;background:rgba(7,7,18,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
-    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:900;letter-spacing:-.03em}.back{font-size:13px;color:#d3d3df}.back:hover{color:#fff}
-    .hero{padding:74px 0 34px}.eyebrow{display:inline-flex;padding:7px 11px;border:1px solid rgba(142,120,255,.3);border-radius:999px;color:#e4dfff;background:rgba(119,92,255,.08);font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
-    h1{font-size:clamp(42px,7vw,72px);line-height:.98;letter-spacing:-.06em;margin:18px 0 16px;max-width:850px}.gradient{background:linear-gradient(100deg,#fff 5%,#c6bdff 45%,#8e78ff 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .lead{color:var(--muted);font-size:17px;line-height:1.72;max-width:770px;margin:0}.price-note{margin-top:18px;display:flex;gap:10px;align-items:flex-start;color:#dad7e8;font-size:13px}.price-dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good);margin-top:6px;flex:0 0 auto}
-    .application-card{margin:34px 0 70px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));overflow:hidden;box-shadow:var(--shadow)}
-    .form-section{padding:30px;border-bottom:1px solid var(--line)}.form-section:last-child{border-bottom:0}
-    .form-section-head{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;margin-bottom:24px}.form-section-head>span{width:42px;height:42px;border-radius:13px;border:1px solid rgba(142,120,255,.34);display:grid;place-items:center;color:#d9d2ff;background:rgba(119,92,255,.09);font-weight:850}.form-section-head h2{font-size:22px;margin:0 0 5px;letter-spacing:-.03em}.form-section-head p{margin:0;color:var(--muted);font-size:13px}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label,.choice-fieldset legend,.approval-label{font-size:11px;color:#d0d0dc;text-transform:uppercase;letter-spacing:.07em;font-weight:800}.field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#15152a;color:#fff;padding:12px 13px}.field textarea{resize:vertical;min-height:110px}.field input::placeholder,.field textarea::placeholder{color:#8f8fa2}.optional{color:#9c9cad;font-weight:600;text-transform:none;letter-spacing:0}.textarea-field{margin-top:18px}
-    .choice-fieldset{border:0;padding:0;margin:0}.choice-fieldset legend{margin-bottom:10px}.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.choice{display:flex;align-items:center;gap:10px;min-height:50px;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);cursor:pointer}.choice:has(input:checked){border-color:rgba(142,120,255,.58);background:rgba(119,92,255,.10)}.choice input{width:18px;height:18px;accent-color:#8e78ff}.choice span{font-size:12px;color:#e5e5eb}
-    .ack{display:flex;gap:10px;align-items:flex-start;margin:10px 0;color:#d5d5df;font-size:12px}.ack input{margin-top:3px;width:18px;height:18px;accent-color:#8e78ff}.ack a{text-decoration:underline;text-underline-offset:3px}
-    .submission-note{margin:16px 0;padding:13px 14px;border:1px solid rgba(255,210,122,.24);border-radius:13px;background:rgba(255,210,122,.06);color:#e7d6b0;font-size:11px;line-height:1.6}.submission-note.warning{border-color:rgba(255,142,170,.3);background:rgba(255,142,170,.06);color:#ffd0dc}
-    .btn{border:1px solid var(--line);border-radius:14px;padding:13px 18px;display:inline-flex;align-items:center;justify-content:center;font-weight:850;cursor:pointer;background:rgba(255,255,255,.06);min-height:48px}.btn-primary{background:linear-gradient(135deg,#765cff,#4c3fd5);border-color:#a190ff;box-shadow:0 14px 40px rgba(100,75,255,.22)}.submit-application{width:100%}.btn:disabled{opacity:.55;cursor:not-allowed}
-    .application-success{margin:34px 0 70px;border:1px solid rgba(140,245,207,.3);border-radius:30px;padding:42px;text-align:center;background:rgba(140,245,207,.055)}.success-mark{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:rgba(140,245,207,.12);border:1px solid rgba(140,245,207,.3);color:var(--good);font-size:24px}.application-success h2{font-size:30px;margin:0 0 8px}.application-success p{max-width:620px;margin:auto;color:var(--muted);line-height:1.7}
-    footer{padding:30px 0 46px;border-top:1px solid rgba(255,255,255,.08);color:#aaaabd;font-size:11px}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer-links a{text-decoration:underline;text-underline-offset:3px}
-    @media(max-width:800px){.choice-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
-    @media(max-width:560px){.hero{padding-top:52px}.form-section{padding:22px}.choice-grid{grid-template-columns:1fr}.topbar-inner{align-items:flex-start}.back{font-size:12px}}
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+    /* page-specific: apply.html */
+    .hero{padding:126px 0 34px}
+    h1{font-size:clamp(38px,6vw,64px);line-height:1.02;letter-spacing:-.03em;margin:18px 0 16px;max-width:780px}
+    .lead{color:var(--muted);font-size:16px;line-height:1.72;max-width:720px;margin:0}
+    .price-note{margin-top:18px;display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:13px}
+    .price-dot{width:6px;height:6px;border-radius:50%;background:var(--good);margin-top:7px;flex:0 0 auto}
+    .application-card{margin:30px 0 70px}
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to application</a>
-  <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="index.html">Target Media</a><a class="back" href="index.html">← Back to website</a></div></header>
+
+  <header class="nav-wrap">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="index.html" aria-label="Target Media home">
+        <span class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 416.44"><path d="M783.56 268.45l-2.3-5.73-8.03-4.59h-61.95l-25.24 5.73-29.83 17.21-51.62 48.18-33.27 26.39-42.45 24.09-24.09 8.03-40.15 5.74-29.83-1.15-42.45-8.03-24.09-9.18 17.21 11.48 21.8 10.32 41.3 11.47 19.5 2.3h30.97l28.68-4.59 29.83-10.33 37.86-21.79 28.68-22.95 39.01-36.71 27.53-19.5 22.95-9.18 16.06-3.44h42.44l10.33-6.89zM252.39 243.21l17.21 33.27 25.24 30.98 19.5 10.32h16.06l19.5-10.32 64.25-67.69 12.62-6.88 95.22-3.44 5.73-8.04v-30.97l5.74-5.74h120.46l4.59 5.74v32.12l8.03 8.03h328.11l11.47 8.03h178.97l11.47-6.88 2.29-16.06-14.91-12.62h-176.67l-11.48 6.88-310.9 1.15-8.03-8.03v-30.98l-9.17-8.03H518.55l-10.33 9.18v30.98l-6.88 6.88H279.92l-18.35 10.32-9.18 21.8zM536.9 123.9l-73.42-36.71-8.03-25.24-13.77-22.94-16.06-16.07-25.24-14.91-25.24-6.88L352.2 0l-21.8 3.44-25.24 10.33-28.68 24.09-12.62 18.35-10.32 33.27v47.04l-35.57 43.59-36.71 1.15-52.77 16.06-51.63 32.13-37.85 40.15-16.07 24.09-18.35 42.45L0 365.97l4.59 36.71 16.06 12.62 16.06-4.59 37.86-100.96 25.24-37.86 35.56-35.56 21.8-14.92 36.71-14.91 26.39-1.15 18.35 10.33-4.59-21.8 29.83-35.56h13.77l5.74-5.74v-49.33l8.03-11.47 18.35-3.44 16.06 4.59 92.93 53.92 26.38 10.32 18.36 1.15 24.09-5.74z" fill="currentColor"/></svg></span>
+        <span class="brand-name">Target Media</span>
+      </a>
+      <a class="btn btn-ghost nav-back" href="index.html">← Back to website</a>
+    </nav>
+  </header>
 
   <main id="main" class="wrap">
     <section class="hero">
-      <span class="eyebrow">Monitor application</span>
-      <h1>Apply for <span class="gradient">Monitor.</span></h1>
+      <span class="kicker">Monitor application</span>
+      <h1>Apply for <span class="gradient-text">Monitor.</span></h1>
       <p class="lead">Tell us about your business and location. We review every application before payment so we can confirm that the location is a sensible fit. If approved, you will receive a validation code and can continue to payment.</p>
       <div class="price-note"><span class="price-dot" aria-hidden="true"></span><span><strong>€299 per quarter per location.</strong> Standard installation and initial configuration are included.</span></div>
     </section>
@@ -108,7 +99,7 @@
     </section>
   </main>
 
-  <footer><div class="wrap footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="refund-policy.html">Refund Policy</a><a href="accessibility.html">Accessibility</a></div></footer>
+  <footer><div class="wrap footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="refund-policy.html">Refund Policy</a><a href="accessibility.html">Accessibility</a></div></footer>
 
   <script>
     const q=(s,r=document)=>r.querySelector(s);

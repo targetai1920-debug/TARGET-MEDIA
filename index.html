@@ -3,35 +3,229 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#070712" />
+  <meta name="theme-color" content="#0a0a0d" />
   <meta name="description" content="Target Media provides aggregated storefront traffic and attention analytics for business operators, with transparent quarterly pricing and close human support." />
   <title>Target Media — Physical storefront analytics</title>
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    :root{--bg:#070712;--bg2:#0b0b18;--card:#111126;--line:rgba(255,255,255,.16);--text:#fafaff;--muted:#c7c7d5;--sub:#a8a8bb;--violet:#8e78ff;--violet2:#b9adff;--good:#8cf5cf;--shadow:0 28px 80px rgba(0,0,0,.38)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:96px}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;overflow-x:hidden}body.lock{overflow:hidden}a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{color:inherit}.container{width:min(1180px,calc(100% - 40px));margin:auto}.section{position:relative;padding:104px 0}.skip-link{position:fixed;left:16px;top:-80px;z-index:200;background:#fff;color:#090912;padding:12px 16px;border-radius:10px;font-weight:800}.skip-link:focus{top:12px}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #d7d0ff;outline-offset:3px}.ambient{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(850px 520px at 86% 2%,rgba(100,74,255,.19),transparent 68%),radial-gradient(700px 500px at 10% 50%,rgba(49,78,232,.12),transparent 70%),linear-gradient(180deg,#070712,#0a0a18 52%,#070712)}.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:#e7e3ff;background:rgba(255,255,255,.04);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--violet2);box-shadow:0 0 18px var(--violet2)}.section-title{font-size:clamp(36px,5vw,68px);line-height:1.02;letter-spacing:-.048em;margin:22px 0 18px;max-width:940px}.section-lead{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:780px;margin:0;line-height:1.72}.gradient-text{background:linear-gradient(100deg,#fff 6%,#c9c1ff 46%,#8e78ff 80%);-webkit-background-clip:text;background-clip:text;color:transparent}.btn{border:1px solid var(--line);border-radius:14px;padding:13px 18px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;cursor:pointer;background:rgba(255,255,255,.06);transition:.2s ease;min-height:48px}.btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35)}.btn-primary{background:linear-gradient(135deg,#765cff,#4c3fd5);border-color:#a190ff;box-shadow:0 14px 40px rgba(100,75,255,.28)}.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:none}.delay-1{transition-delay:.08s}.delay-2{transition-delay:.16s}
-    .nav-wrap{position:fixed;z-index:50;top:16px;left:0;width:100%;padding:0 20px}.nav{width:min(1180px,100%);margin:auto;height:68px;border:1px solid rgba(255,255,255,.13);border-radius:20px;background:rgba(8,8,19,.86);backdrop-filter:blur(20px) saturate(150%);display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 18px;box-shadow:0 12px 40px rgba(0,0,0,.2)}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:54px;height:30px;color:#b3a8ff;filter:drop-shadow(0 0 14px rgba(119,92,255,.35));flex:0 0 auto}.brand-mark svg{width:100%;height:100%;display:block}.brand-name{font-weight:850;letter-spacing:-.03em;font-size:17px;white-space:nowrap}.nav-links{display:flex;align-items:center;gap:4px}.nav-links a{padding:10px 11px;color:#d0d0dc;font-size:14px;font-weight:700;border-radius:10px}.nav-links a:hover{background:rgba(255,255,255,.07);color:white}.nav-actions{display:flex;align-items:center;gap:8px}.nav-apply{position:relative;isolation:isolate;overflow:visible;background:linear-gradient(135deg,#8f78ff,#654df0 55%,#4b3bc9);border-color:#b8aaff;box-shadow:0 0 0 1px rgba(170,156,255,.18) inset,0 10px 30px rgba(103,78,255,.34);animation:navAttention 2.6s ease-in-out infinite}.nav-apply:before{content:"";position:absolute;inset:-7px;border-radius:19px;border:1px solid rgba(157,139,255,.42);opacity:0;z-index:-1;animation:navHalo 2.6s ease-out infinite}.nav-apply:hover{transform:translateY(-1px) scale(1.015);box-shadow:0 0 0 1px rgba(190,179,255,.28) inset,0 14px 36px rgba(103,78,255,.48)}.nav-apply .attention-dot{width:8px;height:8px;border-radius:50%;background:#d8d1ff;box-shadow:0 0 12px #c2b6ff;flex:0 0 auto;animation:dotPulse 1.3s ease-in-out infinite}.nav-validation{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.14);color:#d8d8e3;box-shadow:none}.nav-validation:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.24)}.mobile-label{display:none}.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);align-items:center;justify-content:center;cursor:pointer}.menu-btn span,.menu-btn span:before,.menu-btn span:after{width:18px;height:2px;background:#fff;border-radius:3px;display:block;position:relative}.menu-btn span:before,.menu-btn span:after{content:"";position:absolute;left:0}.menu-btn span:before{top:-6px}.menu-btn span:after{top:6px}.menu-btn.open span{background:transparent}.menu-btn.open span:before{top:0;transform:rotate(45deg)}.menu-btn.open span:after{top:0;transform:rotate(-45deg)}
-    .hero{min-height:100vh;padding:150px 0 80px;display:flex;align-items:center}.hero-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(420px,.96fr);gap:64px;align-items:center}.hero h1{font-size:clamp(50px,6.6vw,92px);line-height:.94;letter-spacing:-.065em;margin:22px 0 26px;max-width:800px}.hero-copy p{font-size:clamp(17px,1.7vw,21px);line-height:1.72;color:var(--muted);max-width:700px;margin:0 0 32px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.micro-proof{margin-top:27px;display:flex;gap:10px;align-items:flex-start;color:var(--sub);font-size:13px;max-width:650px}.proof-dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 13px var(--good);margin-top:6px;flex:0 0 auto}.dashboard{position:relative;border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:16px;background:linear-gradient(145deg,rgba(18,18,40,.98),rgba(10,10,24,.96));box-shadow:var(--shadow);overflow:hidden}.demo-label{display:inline-flex;align-items:center;padding:5px 8px;border:1px solid rgba(255,255,255,.16);border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#e4e0ff;background:rgba(119,92,255,.12)}.dash-top{display:flex;align-items:center;justify-content:space-between;padding:7px 6px 15px;gap:12px}.dash-title{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800}.live-dot{width:8px;height:8px;border-radius:50%;background:var(--good)}.dash-date{font-size:11px;color:var(--sub)}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:18px;padding:16px}.metric small{display:block;color:#b5b5c6;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.metric strong{display:block;font-size:clamp(22px,2.4vw,31px);margin-top:7px;letter-spacing:-.04em}.up{font-size:10px;color:var(--good);margin-left:5px}.chart-card{margin-top:10px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.03);padding:17px}.chart-head{display:flex;justify-content:space-between;gap:12px}.chart-head b{font-size:13px}.chart-head span{font-size:10px;color:#b7b7c6}.chart{height:165px;margin-top:14px;border-radius:13px;background-image:linear-gradient(to right,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.06) 1px,transparent 1px);background-size:25% 100%,100% 25%;overflow:hidden}.chart svg{width:100%;height:100%}.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.compare{border:1px solid var(--line);border-radius:16px;padding:13px;background:rgba(255,255,255,.03)}.compare small{color:#b5b5c6;font-size:9px;text-transform:uppercase;letter-spacing:.08em}.compare b{display:block;font-size:20px;margin-top:5px}
-    .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.02)}.ticker-track{display:flex;width:max-content;gap:44px;padding:16px 0;animation:marquee 34s linear infinite}.ticker-track span{font-size:11px;text-transform:uppercase;letter-spacing:.11em;color:#b1b1c0;font-weight:800;white-space:nowrap}.ticker-track i{color:#8e78ff;font-style:normal}
-    .three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}.feature-card{border:1px solid var(--line);border-radius:26px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));transition:.25s ease;min-height:305px}.feature-card:hover{transform:translateY(-5px);border-color:rgba(167,148,255,.45)}.step-no{width:42px;height:42px;border-radius:13px;border:1px solid rgba(134,113,255,.38);display:grid;place-items:center;font-weight:800;color:#d4ccff;background:rgba(119,92,255,.1);margin-bottom:50px}.feature-card h3{font-size:24px;letter-spacing:-.03em;margin:0 0 11px}.feature-card p{color:var(--muted);font-size:14px;line-height:1.72;margin:0}.mini-label{font-size:11px;color:#b2b2c3;text-transform:uppercase;letter-spacing:.09em;font-weight:800;margin-top:24px;padding-top:15px;border-top:1px solid var(--line)}
-    .split{display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;align-items:center;margin-top:34px}.intel-list{display:grid;gap:12px;margin-top:30px}.intel-item{border-top:1px solid var(--line);padding-top:17px;display:grid;grid-template-columns:38px 1fr;gap:13px}.intel-icon{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);display:grid;place-items:center;color:#c7bcff;font-weight:800}.intel-item b{font-size:14px}.intel-item p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.6}.network-card{border:1px solid var(--line);border-radius:30px;padding:26px;background:linear-gradient(145deg,rgba(17,17,39,.95),rgba(9,9,22,.96));box-shadow:var(--shadow);min-height:470px;position:relative;overflow:hidden}.network-head{position:relative;z-index:2;display:flex;justify-content:space-between;gap:12px}.network-head b{font-size:14px}.network-head span{color:#b5b5c5;font-size:11px}.network{position:relative;height:320px;margin-top:18px}.node{position:absolute;width:58px;height:58px;border-radius:18px;border:1px solid rgba(255,255,255,.18);background:#15152b;display:grid;place-items:center;font-size:10px;color:#d4d4df;font-weight:800;box-shadow:0 12px 28px rgba(0,0,0,.25)}.node.main{width:82px;height:82px;border-radius:24px;background:linear-gradient(145deg,#6f58ef,#39309b);color:white;left:50%;top:48%;transform:translate(-50%,-50%)}.n1{left:7%;top:11%}.n2{right:7%;top:9%}.n3{left:10%;bottom:11%}.n4{right:11%;bottom:9%}.n5{right:0;top:48%}.n6{left:0;top:49%}.network svg{position:absolute;inset:0;width:100%;height:100%}.net-line{stroke:rgba(165,148,255,.4);stroke-width:1.2;stroke-dasharray:6 9}
-    .metrics-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:52px}.metric-card,.statbox{border:1px solid var(--line);border-radius:27px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}.metric-card{padding:27px;min-height:460px}.metric-card h3{font-size:24px;margin:0;letter-spacing:-.03em}.card-muted{font-size:13px;color:#b6b6c7;margin-top:8px}.funnel-chart{position:relative;height:315px;margin-top:28px;padding:16px 10px 0 50px;border-radius:18px;background:linear-gradient(to top,rgba(255,255,255,.06) 1px,transparent 1px);background-size:100% 25%}.funnel-chart:before{content:"100%\A 75%\A 50%\A 25%\A 0%";white-space:pre;position:absolute;left:0;top:4px;height:282px;display:flex;font-size:10px;line-height:68px;color:#b8b8c7}.bars{height:250px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:end}.bar-col{height:100%;display:flex;flex-direction:column;justify-content:flex-end;min-width:0}.bar-shell{height:100%;display:flex;align-items:flex-end;border-radius:12px 12px 5px 5px;overflow:hidden;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08)}.bar-fill{width:100%;min-height:8px;border-radius:11px 11px 4px 4px;background:linear-gradient(180deg,#9f8dff,#5040ba);border-top:1px solid rgba(255,255,255,.35)}.bar-col b{font-size:11px;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bar-col small{font-size:10px;color:#c1c1ce}.stack{display:grid;gap:16px}.statbox{padding:27px;min-height:143px}.statbox small{color:#b8b8c7;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.statbox strong{display:block;font-size:clamp(28px,3vw,40px);letter-spacing:-.045em;margin-top:10px}.statbox p{color:var(--muted);font-size:13px;line-height:1.6;margin:8px 0 0}.simulation-note{margin-top:18px;padding:14px 16px;border:1px solid rgba(255,210,122,.35);border-radius:14px;background:rgba(255,210,122,.06);color:#f4e6c6;font-size:12px;line-height:1.6}
-    .trust-wrap{margin-top:52px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(135deg,rgba(119,92,255,.09),rgba(255,255,255,.02));overflow:hidden}.trust-top{padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:35px;border-bottom:1px solid var(--line)}.trust-top h3{font-size:27px;letter-spacing:-.035em;margin:0}.trust-top p{color:var(--muted);font-size:14px;margin:0}.trust-grid{display:grid;grid-template-columns:repeat(3,1fr)}.trust-card{padding:28px;border-right:1px solid var(--line)}.trust-card:last-child{border-right:0}.trust-card h4{font-size:17px;margin:14px 0 7px}.trust-card p{font-size:13px;color:var(--muted);margin:0;line-height:1.65}.trust-icon{width:38px;height:38px;border:1px solid rgba(134,113,255,.38);border-radius:12px;display:grid;place-items:center;color:#d5cdff;background:rgba(119,92,255,.1)}.friend-line{display:grid;grid-template-columns:.65fr 1.35fr;gap:30px;padding:24px 30px;border-top:1px solid var(--line);background:rgba(255,255,255,.02)}.friend-line span{color:var(--muted);font-size:13px}.compliance-note{margin-top:18px;font-size:12px;color:#d5d5df;line-height:1.65;border-left:3px solid #8e78ff;padding-left:14px}
-    .pricing-head{display:flex;justify-content:space-between;align-items:end;gap:30px}.pricing-note{max-width:430px;color:var(--muted);font-size:13px;line-height:1.7}.quarter-pill{display:inline-flex;margin-bottom:10px;padding:6px 10px;border:1px solid rgba(140,245,207,.25);background:rgba(140,245,207,.07);color:#b8f7df;border-radius:999px;font-weight:800;font-size:10px;letter-spacing:.08em;text-transform:uppercase}.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:52px}.price-card{border:1px solid var(--line);border-radius:28px;padding:27px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));display:flex;flex-direction:column;position:relative}.price-card.popular{border-color:rgba(154,133,255,.6);background:linear-gradient(180deg,rgba(105,81,255,.14),rgba(255,255,255,.025))}.popular-badge{position:absolute;top:18px;right:18px;padding:7px 10px;border-radius:999px;background:rgba(119,92,255,.16);border:1px solid rgba(143,124,255,.38);font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:#e2ddff;font-weight:800}.plan-name{font-size:22px;font-weight:850;letter-spacing:-.03em}.plan-sub{color:var(--muted);font-size:12px;margin-top:7px;min-height:42px;padding-right:88px}.price{font-size:50px;font-weight:850;letter-spacing:-.055em;margin:28px 0 2px;white-space:nowrap}.price sup{font-size:18px;vertical-align:top;margin-right:2px}.price span{font-size:12px;color:#b9b9c7;font-weight:700;letter-spacing:0}.setup{color:#bcbcca;font-size:11px;margin-bottom:16px}.plan-tagline{font-size:13px;color:#f0eeff;line-height:1.55;padding:14px;border:1px solid rgba(154,133,255,.25);border-radius:14px;background:rgba(119,92,255,.06);margin-bottom:22px}.features,.growth-features{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:10px}.features li,.growth-features li{font-size:12px;color:#dedee7;display:grid;grid-template-columns:18px 1fr;gap:8px}.check{width:17px;height:17px;border-radius:50%;background:rgba(140,245,207,.08);border:1px solid rgba(140,245,207,.25);display:grid;place-items:center;color:var(--good);font-size:10px;font-style:normal}.price-card .btn{margin-top:auto;width:100%}.growth-card{grid-column:1/-1;display:grid;grid-template-columns:.85fr 1.15fr;gap:40px}.growth-price{font-size:40px;font-weight:850;letter-spacing:-.05em;margin:24px 0}.growth-price span{display:block;font-size:12px;color:var(--muted);letter-spacing:0;font-weight:600;margin-top:5px}.growth-actions{display:flex;gap:10px}.growth-features{grid-template-columns:1fr 1fr;margin:0;align-content:center}
-    .privacy-banner{border:1px solid var(--line);border-radius:30px;padding:36px;background:linear-gradient(120deg,rgba(119,92,255,.09),rgba(255,255,255,.02));display:grid;grid-template-columns:1fr .9fr;gap:50px;align-items:center}.privacy-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}.privacy-point{border:1px solid var(--line);border-radius:17px;padding:16px;background:rgba(255,255,255,.03)}.privacy-point b{display:block;font-size:12px}.privacy-point span{display:block;color:var(--muted);font-size:11px;margin-top:5px;line-height:1.55}.faq{margin-top:46px;border-top:1px solid var(--line)}.faq-item{border-bottom:1px solid var(--line)}.faq-q{width:100%;border:0;background:none;text-align:left;padding:23px 2px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-weight:800;cursor:pointer}.faq-plus{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;flex:0 0 auto}.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}.faq-a p{color:var(--muted);font-size:13px;line-height:1.75;margin:0;padding:0 48px 23px 2px;max-width:860px}
-    .final-card{position:relative;border:1px solid rgba(143,124,255,.34);border-radius:34px;min-height:360px;display:grid;place-items:center;text-align:center;padding:52px 28px;overflow:hidden;background:linear-gradient(150deg,rgba(106,81,255,.16),rgba(12,12,28,.9) 60%)}.final-card h2{font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.05em;max-width:850px;margin:0 auto 18px}.final-card p{color:var(--muted);max-width:650px;margin:0 auto 28px;font-size:15px;line-height:1.7}.final-card .hero-actions{justify-content:center}footer{padding:34px 0 46px;color:#b5b5c5;font-size:11px}.footer-grid{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;border-top:1px solid var(--line);padding-top:24px}.footer-brand{display:flex;align-items:center;gap:10px;color:#e0deeb;font-weight:800}.footer-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}.footer-links a{text-decoration:underline;text-decoration-color:rgba(255,255,255,.25);text-underline-offset:4px}.legal-status{font-size:10px;color:#b7b7c6;text-align:right;max-width:250px}
-    .modal-backdrop{position:fixed;inset:0;background:rgba(3,3,9,.78);backdrop-filter:blur(12px);z-index:100;display:none;place-items:center;padding:20px}.modal-backdrop.open{display:grid}.modal{width:min(620px,100%);max-height:min(780px,calc(100vh - 40px));overflow:auto;border:1px solid rgba(255,255,255,.18);border-radius:28px;background:#0e0e20;padding:25px;box-shadow:0 40px 100px rgba(0,0,0,.6)}.modal-top{display:flex;justify-content:space-between;align-items:start;gap:20px}.modal h3{font-size:27px;letter-spacing:-.04em;margin:0}.modal p{color:var(--muted);font-size:13px;line-height:1.65}.close{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);cursor:pointer;font-size:22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:11px;color:#c6c6d2;text-transform:uppercase;letter-spacing:.07em;font-weight:800}.field input,.field select{width:100%;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#15152a;color:white;padding:12px 13px}.field-help{font-size:11px;color:#b6b6c5;line-height:1.5}.ack{display:flex;gap:10px;align-items:flex-start;margin-top:14px;color:#d5d5df;font-size:12px}.ack input{margin-top:3px;width:18px;height:18px}.brief{border:1px solid var(--line);border-radius:16px;padding:15px;background:rgba(255,255,255,.03);color:#e0e0e8;font-size:12px;line-height:1.7;white-space:pre-line;margin-top:16px;display:none}.brief.show{display:block}.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.toast{position:fixed;right:20px;bottom:20px;z-index:150;padding:12px 16px;border:1px solid rgba(140,245,207,.3);background:#101d1b;color:#baf8e1;border-radius:13px;font-size:12px;font-weight:800;transform:translateY(25px);opacity:0;pointer-events:none;transition:.3s}.toast.show{transform:none;opacity:1}
-    .monitor-only-grid{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr)}.future-stack{display:grid;gap:16px}.monitor-card{border-color:rgba(154,133,255,.62);background:linear-gradient(180deg,rgba(105,81,255,.14),rgba(255,255,255,.025))}.disabled-plan{opacity:.56;filter:saturate(.5);background:rgba(255,255,255,.025)}.disabled-plan:hover{transform:none;border-color:var(--line)}.disabled-plan .btn:disabled{cursor:not-allowed;opacity:.7;transform:none}.coming-badge{display:inline-flex;width:max-content;margin-bottom:18px;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:#d0d0da;font-weight:800}.locked-copy{margin:24px 0;color:#d4d4df;font-size:13px;padding:14px;border:1px dashed rgba(255,255,255,.16);border-radius:14px}
-    .application-section{padding-top:88px}.application-card{margin-top:50px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));overflow:hidden;box-shadow:var(--shadow)}.form-section{padding:30px;border-bottom:1px solid var(--line)}.form-section:last-child{border-bottom:0}.form-section-head{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;margin-bottom:24px}.form-section-head>span{width:42px;height:42px;border-radius:13px;border:1px solid rgba(142,120,255,.34);display:grid;place-items:center;color:#d9d2ff;background:rgba(119,92,255,.09);font-weight:850}.form-section-head h3{font-size:22px;margin:0 0 5px;letter-spacing:-.03em}.form-section-head p{margin:0;color:var(--muted);font-size:13px}.application-grid{margin-top:0}.field textarea,.field input,.field select{width:100%;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#15152a;color:#fff;padding:12px 13px}.field textarea{resize:vertical;min-height:110px}.field input::placeholder,.field textarea::placeholder{color:#8f8fa2}.optional{color:#9c9cad;font-weight:600;text-transform:none;letter-spacing:0}.textarea-field{margin-top:18px}.choice-fieldset{border:0;padding:0;margin:0}.choice-fieldset legend{font-size:11px;color:#c6c6d2;text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-bottom:10px}.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.choice{display:flex;align-items:center;gap:10px;min-height:50px;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);cursor:pointer}.choice:has(input:checked){border-color:rgba(142,120,255,.58);background:rgba(119,92,255,.10)}.choice input{width:18px;height:18px;accent-color:#8e78ff}.choice span{font-size:12px;color:#e5e5eb}
-    .schedule-shell{display:grid;grid-template-columns:minmax(360px,.95fr) 1.05fr;gap:18px}.calendar-panel,.time-panel{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.026);padding:20px}.calendar-top{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;gap:8px;margin-bottom:16px}.calendar-top strong{text-align:center;font-size:15px}.calendar-nav{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#fff;cursor:pointer}.calendar-nav:disabled{opacity:.3;cursor:not-allowed}.weekday-row,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.weekday-row{margin-bottom:7px}.weekday-row span{text-align:center;color:#aaaabd;font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:800}.calendar-day,.calendar-blank{aspect-ratio:1;min-width:0}.calendar-day{border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04);color:#eeeef5;cursor:pointer;font-weight:750}.calendar-day:hover:not(:disabled){border-color:rgba(142,120,255,.65);background:rgba(119,92,255,.10)}.calendar-day.is-unavailable{opacity:.23;background:rgba(255,255,255,.015);cursor:not-allowed}.calendar-day.is-selected{border-color:#a796ff;background:rgba(119,92,255,.26);box-shadow:0 0 0 1px rgba(167,150,255,.28) inset}.calendar-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;color:#aaaabd;font-size:10px}.calendar-legend span{display:flex;align-items:center;gap:6px}.legend-dot{width:9px;height:9px;border-radius:3px;border:1px solid var(--line);display:inline-block}.legend-dot.available{background:rgba(255,255,255,.08)}.legend-dot.unavailable{opacity:.35;background:#454552}.legend-dot.selected{background:#8e78ff;border-color:#a99aff}.selected-date-label{font-size:10px;color:#aaaabd;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.time-panel>strong{display:block;font-size:20px;margin:5px 0 8px;letter-spacing:-.025em}.time-help{font-size:12px;color:var(--muted);margin:0 0 16px}.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.time-slot{min-height:42px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04);color:#eeeef5;font-weight:750;cursor:pointer}.time-slot:hover:not(:disabled){border-color:rgba(142,120,255,.6);background:rgba(119,92,255,.10)}.time-slot.is-unavailable{opacity:.25;cursor:not-allowed}.time-slot.is-selected{border-color:#a796ff;background:rgba(119,92,255,.26)}.schedule-message{min-height:20px;color:#c5c5d2;font-size:11px;margin-top:13px}.final-form-section{background:rgba(119,92,255,.035)}.final-form-section .ack a{text-decoration:underline;text-underline-offset:3px}.submission-note{margin:16px 0;padding:13px 14px;border:1px solid rgba(255,210,122,.24);border-radius:13px;background:rgba(255,210,122,.06);color:#e7d6b0;font-size:11px;line-height:1.6}.submission-note.warning{border-color:rgba(255,142,170,.3);background:rgba(255,142,170,.06);color:#ffd0dc}.submit-application{width:100%;margin-top:2px}.application-success{margin-top:42px;border:1px solid rgba(140,245,207,.3);border-radius:30px;padding:42px;text-align:center;background:rgba(140,245,207,.055)}.application-success .success-mark{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:rgba(140,245,207,.12);border:1px solid rgba(140,245,207,.3);color:var(--good);font-size:24px}.application-success h3{font-size:30px;margin:0 0 8px}.application-success p{max-width:620px;margin:auto;color:var(--muted);line-height:1.7}
-    .approved-card{display:grid;grid-template-columns:1.1fr .9fr;gap:42px;border:1px solid rgba(142,120,255,.36);border-radius:32px;padding:38px;background:linear-gradient(145deg,rgba(106,81,255,.12),rgba(255,255,255,.018));align-items:center}.approved-copy h2{font-size:clamp(34px,4.5vw,58px);line-height:1.03;letter-spacing:-.05em;margin:20px 0 16px}.approved-copy p{color:var(--muted);max-width:670px;line-height:1.7}.process-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:22px;font-size:11px;font-weight:800;color:#d7d3e8}.process-row span{padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035)}.process-row i{font-style:normal;color:#766be0}.approval-box{border:1px solid var(--line);border-radius:22px;padding:22px;background:rgba(7,7,18,.45)}.approval-box>label{display:block;font-size:11px;color:#c6c6d2;text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-bottom:8px}.approval-input-row{display:grid;grid-template-columns:1fr auto;gap:9px}.approval-input-row input{min-width:0;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#15152a;color:#fff;padding:12px 13px;text-transform:uppercase;letter-spacing:.08em}.approval-status{min-height:22px;margin-top:13px;color:#d3d3df;font-size:12px;line-height:1.55}.payment-unlock{width:100%;margin-top:8px}
-    @keyframes navAttention{0%,100%{box-shadow:0 0 0 1px rgba(170,156,255,.18) inset,0 10px 30px rgba(103,78,255,.30),0 0 0 rgba(142,120,255,0)}50%{box-shadow:0 0 0 1px rgba(190,179,255,.28) inset,0 12px 36px rgba(103,78,255,.46),0 0 28px rgba(142,120,255,.24)}}@keyframes navHalo{0%{opacity:.72;transform:scale(.96)}70%,100%{opacity:0;transform:scale(1.14)}}@keyframes dotPulse{0%,100%{opacity:.65;transform:scale(.82)}50%{opacity:1;transform:scale(1.18)}}@keyframes marquee{to{transform:translateX(-50%)}}@media(max-width:980px){.hero-grid,.split{grid-template-columns:1fr;gap:44px}.monitor-only-grid,.schedule-shell,.approved-card{grid-template-columns:1fr}.hero-grid{max-width:780px}.three-grid{grid-template-columns:1fr 1fr}.three-grid .feature-card:last-child{grid-column:1/-1}.metrics-grid{grid-template-columns:1fr}.privacy-banner{grid-template-columns:1fr}.nav-links{display:none}.menu-btn{display:flex}.nav-actions .btn{display:inline-flex;padding:10px 13px;font-size:12px;min-height:42px}.nav-links.mobile{position:absolute;display:grid;top:78px;left:0;width:100%;padding:12px;background:#0d0d1f;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.nav-links.mobile a{padding:13px}.pricing-head{display:block}.pricing-note{margin-top:18px}.footer-grid{grid-template-columns:1fr;text-align:left}.footer-links{justify-content:flex-start}.legal-status{text-align:left;max-width:none}}@media(max-width:680px){.container{width:min(100% - 26px,1180px)}.nav-actions{gap:6px}.nav-actions .btn{padding:9px 11px;font-size:11px;min-height:40px}.desktop-label{display:none}.mobile-label{display:inline}.nav-apply .attention-dot{width:7px;height:7px}.section{padding:80px 0}.nav-wrap{top:10px;padding:0 10px}.nav{height:60px;border-radius:17px}.brand-mark{width:45px}.brand-name{font-size:15px}.hero{padding-top:112px;min-height:auto}.hero h1{font-size:clamp(43px,14vw,67px)}.hero-copy p{font-size:16px}.hero-actions{display:grid;grid-template-columns:1fr;width:100%}.hero-actions .btn{width:100%}.metric-grid{grid-template-columns:1fr 1fr}.metric-grid .metric:last-child{grid-column:1/-1}.compare-row{grid-template-columns:1fr}.three-grid,.pricing-grid,.trust-grid,.choice-grid{grid-template-columns:1fr}.three-grid .feature-card:last-child{grid-column:auto}.trust-top,.friend-line,.growth-card{grid-template-columns:1fr}.trust-card{border-right:0;border-bottom:1px solid var(--line)}.trust-card:last-child{border-bottom:0}.growth-card{grid-column:auto}.growth-features{grid-template-columns:1fr}.privacy-points{grid-template-columns:1fr}.funnel-chart{padding-left:42px}.bars{gap:7px}.bar-col b{font-size:9px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:20px;border-radius:22px}.price{font-size:44px}.plan-sub{padding-right:0}.popular-badge{position:static;width:max-content;margin-bottom:12px}.footer-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form-section{padding:22px}.schedule-shell{grid-template-columns:1fr}.time-grid{grid-template-columns:repeat(2,1fr)}.approved-card{padding:24px}.approval-input-row{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}}
-    @media(max-width:480px){.brand-name{display:none}.brand-mark{width:40px}.nav{padding-left:12px;padding-right:9px}.nav-actions .btn{padding:8px 9px}.nav-validation{font-size:10px}.nav-apply{font-size:10px}.menu-btn{width:40px;height:40px}}
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.nav-apply{box-shadow:0 0 0 1px rgba(190,179,255,.28) inset,0 12px 34px rgba(103,78,255,.42)}.nav-apply:before{display:none}}
+    /* ---------- page-specific styles: index.html only ---------- */
+
+    /* hero */
+    .hero{min-height:100vh;padding:150px 0 72px;display:flex;align-items:center}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:60px;align-items:center}
+    .hero h1{font-size:clamp(46px,6.2vw,84px);line-height:.98;letter-spacing:-.04em;margin:20px 0 24px;max-width:780px}
+    .hero-copy p{font-size:clamp(16px,1.6vw,19px);line-height:1.72;color:var(--muted);max-width:680px;margin:0 0 30px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .micro-proof{margin-top:26px;display:flex;gap:10px;align-items:flex-start;color:var(--sub);font-size:13px;max-width:620px}
+    .proof-dot{width:6px;height:6px;border-radius:50%;background:var(--good);margin-top:7px;flex:0 0 auto}
+
+    /* instrument panel (hero visual) */
+    .instrument{position:relative;border:1px solid var(--line-strong);border-radius:var(--radius-lg);padding:18px;background:var(--surface);box-shadow:var(--shadow)}
+    .instrument-top{display:flex;align-items:center;justify-content:space-between;padding:4px 4px 14px;gap:12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+    .instrument-title{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700}
+    .instrument-title i{width:6px;height:6px;border-radius:50%;background:var(--good)}
+    .diagram-frame{border:1px solid var(--line);border-radius:var(--radius-md);background:rgba(255,255,255,.015);padding:10px 6px 4px}
+    .diagram-frame svg{width:100%;height:auto;display:block}
+    .diagram-caption{margin-top:8px;color:var(--sub);font-size:10.5px;font-family:var(--mono);text-align:center}
+    .readout-row{display:grid;grid-template-columns:repeat(3,1fr);margin-top:14px;border-top:1px solid var(--line)}
+    .readout{padding:14px 14px 2px;border-right:1px solid var(--line)}
+    .readout:last-child{border-right:0}
+    .readout small{display:block;color:var(--sub);font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:700}
+    .readout strong{display:block;font-family:var(--mono);font-size:clamp(19px,2.1vw,25px);margin-top:7px;letter-spacing:-.01em}
+    .readout .delta{font-family:var(--mono);font-size:10.5px;color:var(--good);margin-left:5px}
+    .trend-block{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+    .trend-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+    .trend-head b{font-size:12.5px;font-weight:700}
+    .trend-head span{font-size:10.5px;color:var(--sub);font-family:var(--mono)}
+    .trend-chart{height:100px;margin-top:10px}
+    .trend-chart svg{width:100%;height:100%}
+    .compare-row{display:grid;grid-template-columns:1fr 1fr;margin-top:4px;border-top:1px solid var(--line)}
+    .compare{padding:14px 14px 16px;border-right:1px solid var(--line)}
+    .compare:last-child{border-right:0}
+    .compare small{color:var(--sub);font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-family:var(--mono)}
+    .compare b{display:block;font-family:var(--mono);font-size:16px;margin-top:6px;font-weight:600}
+
+    /* section heading (no eyebrow, no gradient — plain strong heading, used through most sections) */
+    .plain-title{font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-.025em;margin:0 0 16px;max-width:760px}
+
+    /* process strip (Measure / Understand / Act) — connected timeline, not 3 cards */
+    .process-strip{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:52px}
+    .process-strip:before{content:"";position:absolute;top:19px;left:0;right:0;height:1px;background:var(--line)}
+    .process-step{position:relative}
+    .process-index{width:38px;height:38px;border-radius:50%;background:var(--bg);border:1px solid var(--line-strong);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--accent-2);font-family:var(--mono);position:relative;z-index:1;margin-bottom:18px}
+    .process-step h3{font-size:20px;letter-spacing:-.02em;margin:0 0 9px}
+    .process-step p{color:var(--muted);font-size:14px;line-height:1.7;margin:0}
+    .process-tag{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+    .compliance-note{margin-top:28px;font-size:12.5px;color:#c9c9d2;line-height:1.7;border-left:2px solid var(--accent-line);padding-left:14px;max-width:900px}
+
+    /* split (Intelligence roadmap) */
+    .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:center;margin-top:30px}
+    .intel-list{display:grid;gap:12px;margin-top:26px}
+    .intel-item{border-top:1px solid var(--line);padding-top:16px;display:grid;grid-template-columns:34px 1fr;gap:13px}
+    .intel-icon{font-family:var(--mono);font-size:12px;color:var(--sub)}
+    .intel-item b{font-size:14px}
+    .intel-item p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
+    .network-card{border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;background:var(--surface);min-height:420px;position:relative;overflow:hidden}
+    .network-head{position:relative;z-index:2;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .network-head b{font-size:13px}
+    .network-head span{color:var(--sub);font-size:11px}
+    .network{position:relative;height:300px;margin-top:18px}
+    .node{position:absolute;width:52px;height:52px;border-radius:14px;border:1px solid var(--line-strong);background:var(--surface-2);display:grid;place-items:center;font-size:9.5px;color:#d0d0d8;font-weight:700;font-family:var(--mono)}
+    .node.main{width:74px;height:74px;border-radius:18px;background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-2);left:50%;top:48%;transform:translate(-50%,-50%)}
+    .n1{left:6%;top:10%}.n2{right:6%;top:8%}.n3{left:9%;bottom:10%}.n4{right:10%;bottom:8%}.n5{right:0;top:48%}.n6{left:0;top:49%}
+    .network svg{position:absolute;inset:0;width:100%;height:100%}
+    .net-line{stroke:var(--line-strong);stroke-width:1.2;stroke-dasharray:5 8}
+
+    /* metrics / funnel */
+    .metrics-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:48px}
+    .metric-card,.statbox{border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
+    .metric-card{padding:26px;min-height:420px}
+    .metric-card h3{font-size:20px;margin:0;letter-spacing:-.02em}
+    .card-muted{font-size:12.5px;color:var(--sub);margin-top:8px;font-family:var(--mono)}
+    .funnel-chart{position:relative;height:280px;margin-top:26px;padding:14px 8px 0 44px;border-radius:var(--radius-sm);background:linear-gradient(to top,rgba(255,255,255,.05) 1px,transparent 1px);background-size:100% 25%}
+    .funnel-chart:before{content:"100%\A 75%\A 50%\A 25%\A 0%";white-space:pre;position:absolute;left:0;top:2px;height:252px;display:flex;font-size:9.5px;font-family:var(--mono);line-height:61px;color:var(--sub)}
+    .bars{height:224px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:end}
+    .bar-col{height:100%;display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
+    .bar-shell{height:100%;display:flex;align-items:flex-end;border-radius:8px 8px 3px 3px;overflow:hidden;background:rgba(255,255,255,.02);border:1px solid var(--line)}
+    .bar-fill{width:100%;min-height:8px;border-radius:7px 7px 2px 2px;background:var(--accent);opacity:.85}
+    .bar-col b{font-size:11px;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .bar-col small{font-size:10px;color:var(--sub);font-family:var(--mono)}
+    .stack{display:grid;gap:16px}
+    .statbox{padding:24px;min-height:132px}
+    .statbox small{color:var(--sub);font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:700}
+    .statbox strong{display:block;font-family:var(--mono);font-size:clamp(24px,2.6vw,32px);letter-spacing:-.01em;margin-top:9px}
+    .statbox p{color:var(--muted);font-size:13px;line-height:1.6;margin:8px 0 0}
+    .simulation-note{margin-top:18px;padding:13px 15px;border:1px solid rgba(232,183,104,.28);border-radius:var(--radius-sm);background:rgba(232,183,104,.05);color:#e7d6b0;font-size:11.5px;line-height:1.6}
+
+    /* trust / approach */
+    .trust-wrap{margin-top:48px;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);overflow:hidden}
+    .trust-top{padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;border-bottom:1px solid var(--line)}
+    .trust-top h3{font-size:22px;letter-spacing:-.02em;margin:0}
+    .trust-top p{color:var(--muted);font-size:13.5px;margin:0}
+    .trust-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+    .trust-card{padding:26px;border-right:1px solid var(--line)}
+    .trust-card:last-child{border-right:0}
+    .trust-card h4{font-size:15.5px;margin:12px 0 7px}
+    .trust-card p{font-size:13px;color:var(--muted);margin:0;line-height:1.65}
+    .trust-icon{width:34px;height:34px;border:1px solid var(--line-strong);border-radius:var(--radius-sm);display:grid;place-items:center;color:var(--accent-2);background:var(--accent-soft);font-family:var(--mono);font-size:13px}
+    .friend-line{display:grid;grid-template-columns:.65fr 1.35fr;gap:28px;padding:22px 26px;border-top:1px solid var(--line);background:rgba(255,255,255,.015)}
+    .friend-line b{font-size:14px}
+    .friend-line span{color:var(--muted);font-size:13px}
+
+    /* pricing */
+    .pricing-head{display:flex;justify-content:space-between;align-items:end;gap:30px}
+    .pricing-note{max-width:420px;color:var(--muted);font-size:13px;line-height:1.7}
+    .monitor-panel{margin-top:44px;border:1px solid var(--accent-line);border-radius:var(--radius-lg);background:linear-gradient(160deg,var(--accent-soft),transparent 55%),var(--surface);padding:34px;display:grid;grid-template-columns:.95fr 1.05fr;gap:44px}
+    .monitor-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+    .plan-name{font-size:24px;font-weight:800;letter-spacing:-.02em}
+    .plan-sub{color:var(--muted);font-size:13px;margin-top:10px;max-width:400px;line-height:1.6}
+    .price{font-family:var(--mono);font-size:46px;font-weight:600;letter-spacing:-.02em;margin:26px 0 2px;white-space:nowrap}
+    .price sup{font-size:17px;vertical-align:top;margin-right:2px;font-weight:600}
+    .price span{font-size:12px;color:var(--sub);font-weight:500;letter-spacing:0;font-family:var(--sans)}
+    .setup{color:var(--sub);font-size:11.5px;margin-bottom:18px}
+    .plan-tagline{font-size:13px;color:#f0eeff;line-height:1.55;padding:14px;border:1px solid var(--accent-line);border-radius:var(--radius-sm);background:var(--accent-soft);margin-bottom:22px}
+    .monitor-panel .btn{width:100%;margin-top:4px}
+    .features{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    .features li{font-size:12.5px;color:#dcdce4;display:grid;grid-template-columns:16px 1fr;gap:8px;align-items:start}
+    .check{width:16px;height:16px;border-radius:50%;background:rgba(127,227,189,.08);border:1px solid rgba(127,227,189,.28);display:grid;place-items:center;color:var(--good);font-size:9px;font-style:normal;margin-top:1px}
+    .roadmap-strip{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .roadmap-item{border:1px solid var(--line);border-radius:var(--radius-md);padding:20px;background:rgba(255,255,255,.015)}
+    .roadmap-item .status-pill{margin-bottom:14px}
+    .roadmap-item .plan-name{font-size:16px}
+    .roadmap-item .plan-sub{font-size:12.5px;margin-top:8px}
+
+    /* approved / validation */
+    .approved-card{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;border:1px solid var(--line);border-radius:var(--radius-lg);padding:36px;background:var(--surface);align-items:center}
+    .approved-copy h2{font-size:clamp(30px,4vw,46px);line-height:1.06;letter-spacing:-.025em;margin:18px 0 16px}
+    .approved-copy p{color:var(--muted);max-width:640px;line-height:1.7}
+    .process-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;font-size:11px;font-weight:700;color:var(--muted);font-family:var(--mono)}
+    .process-row span{padding:7px 11px;border:1px solid var(--line);border-radius:var(--radius-pill);background:rgba(255,255,255,.03)}
+    .process-row i{font-style:normal;color:var(--accent-2)}
+    .approval-box{border:1px solid var(--accent-line);border-radius:var(--radius-lg);padding:22px;background:linear-gradient(160deg,var(--accent-soft),transparent 60%),rgba(5,5,9,.5)}
+    .approval-box>label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-bottom:8px}
+    .approval-input-row{display:grid;grid-template-columns:1fr auto;gap:9px}
+    .approval-input-row input{min-width:0;border:1px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--surface-2);color:#fff;padding:12px 13px;text-transform:uppercase;letter-spacing:.08em;font-family:var(--mono)}
+    .approval-status{min-height:22px;margin-top:13px;color:var(--muted);font-size:12px;line-height:1.55}
+    .payment-unlock{width:100%;margin-top:8px}
+
+    /* privacy + faq */
+    .privacy-banner{border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px;background:var(--surface);display:grid;grid-template-columns:1fr .9fr;gap:46px;align-items:center}
+    .privacy-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .privacy-point{border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;background:rgba(255,255,255,.015)}
+    .privacy-point b{display:block;font-size:12px}
+    .privacy-point span{display:block;color:var(--muted);font-size:11px;margin-top:5px;line-height:1.55}
+    .faq{margin-top:44px;border-top:1px solid var(--line)}
+    .faq-item{border-bottom:1px solid var(--line)}
+    .faq-q{width:100%;border:0;background:none;text-align:left;padding:22px 2px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-weight:700;color:var(--text)}
+    .faq-plus{width:28px;height:28px;border-radius:8px;border:1px solid var(--line-strong);display:grid;place-items:center;flex:0 0 auto;transition:transform .2s var(--ease)}
+    .faq-item.open .faq-plus{transform:rotate(45deg)}
+    /* max-height:none!important neutralizes the JS's inline max-height (kept
+       untouched for zero script risk) so grid-template-rows is the only thing
+       actually animating the reveal — an instant inline max-height jump would
+       otherwise clip the close transition before it can animate */
+    .faq-a{display:grid;grid-template-rows:0fr;max-height:none!important;transition:grid-template-rows .3s var(--ease)}
+    .faq-item.open .faq-a{grid-template-rows:1fr}
+    /* the padded <p> can never render shorter than its own padding, so the
+       actual grid item must be this unpadded wrapper — overflow:hidden here
+       is what lets the grid row genuinely collapse to 0 */
+    .faq-a-inner{overflow:hidden;min-height:0}
+    .faq-a p{color:var(--muted);font-size:13px;line-height:1.75;margin:0;padding:0 46px 22px 2px;max-width:840px}
+
+    /* final */
+    .final-card{position:relative;border:1px solid var(--accent-line);border-radius:var(--radius-lg);min-height:320px;display:grid;place-items:center;text-align:center;padding:48px 26px;overflow:hidden;background:linear-gradient(160deg,var(--accent-soft),transparent 60%),var(--surface)}
+    .final-card h2{font-size:clamp(32px,4.4vw,54px);line-height:1.04;letter-spacing:-.03em;max-width:800px;margin:0 auto 16px}
+    .final-card p{color:var(--muted);max-width:620px;margin:0 auto 26px;font-size:15px;line-height:1.7}
+    .final-card .hero-actions{justify-content:center}
+
+    .footer-grid{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:26px;border-top:1px solid var(--line);padding-top:22px}
+    .footer-brand{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:700}
+    .footer-links{justify-content:center}
+    .legal-status{font-size:10px;color:var(--sub);text-align:right;max-width:250px;font-family:var(--mono)}
+
+    /* monitor-only monitor card is now full-width; disabled-plan styling kept for roadmap items */
+    .disabled-plan{opacity:.85}
+
+    @media(max-width:980px){
+      .hero-grid,.split{grid-template-columns:1fr;gap:40px}
+      .metrics-grid{grid-template-columns:1fr}
+      .monitor-panel{grid-template-columns:1fr}
+      .roadmap-strip{grid-template-columns:1fr}
+      .approved-card{grid-template-columns:1fr}
+      .privacy-banner{grid-template-columns:1fr}
+      .process-strip{grid-template-columns:1fr;gap:26px}
+      .process-strip:before{display:none}
+      .pricing-head{display:block}
+      .pricing-note{margin-top:16px}
+      .footer-grid{grid-template-columns:1fr;text-align:left}
+      .footer-links{justify-content:flex-start}
+      .legal-status{text-align:left;max-width:none}
+    }
+    @media(max-width:680px){
+      .hero{padding-top:104px;min-height:auto}
+      .hero-actions{display:grid;grid-template-columns:1fr;width:100%}
+      .hero-actions .btn{width:100%}
+      .readout-row{grid-template-columns:1fr 1fr}
+      .readout:nth-child(2){border-right:0}
+      .readout:last-child{grid-column:1/-1;border-top:1px solid var(--line);padding-top:14px}
+      .compare-row{grid-template-columns:1fr}
+      .compare{border-right:0;border-bottom:1px solid var(--line)}
+      .compare:last-child{border-bottom:0}
+      .trust-top,.friend-line{grid-template-columns:1fr}
+      .trust-card{border-right:0;border-bottom:1px solid var(--line)}
+      .trust-card:last-child{border-bottom:0}
+      .trust-grid{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr}
+      .privacy-points{grid-template-columns:1fr}
+      .funnel-chart{padding-left:38px}
+      .price{font-size:38px}
+      .approval-input-row{grid-template-columns:1fr}
+      .monitor-panel{padding:24px}
+    }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
-  <div class="ambient" aria-hidden="true"></div>
+
   <header class="nav-wrap">
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Target Media home">
@@ -39,99 +233,195 @@
         <span class="brand-name">Target Media</span>
       </a>
       <div class="nav-links" id="navLinks"><a href="#product">Product</a><a href="#pricing">Monitor</a><a href="apply.html">Apply</a><a href="#approved">Approved?</a><a href="#faq">FAQ</a></div>
-      <div class="nav-actions"><a class="btn nav-validation" href="#approved" aria-label="Enter your validation code"><span class="desktop-label">Enter validation code</span><span class="mobile-label">Enter code</span></a><a class="btn nav-apply" href="apply.html"><span class="attention-dot" aria-hidden="true"></span><span class="desktop-label">Apply for Monitor</span><span class="mobile-label">Apply</span></a><button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu" aria-controls="navLinks" aria-expanded="false"><span aria-hidden="true"></span></button></div>
+      <div class="nav-actions"><a class="btn btn-ghost" href="#approved" aria-label="Enter your validation code"><span class="desktop-label">Enter validation code</span><span class="mobile-label">Enter code</span></a><a class="btn btn-primary" href="apply.html"><span class="desktop-label">Apply for Monitor</span><span class="mobile-label">Apply</span></a><button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu" aria-controls="navLinks" aria-expanded="false"><span aria-hidden="true"></span></button></div>
     </nav>
   </header>
 
   <main id="main">
     <section class="hero" id="top"><div class="container hero-grid">
-      <div class="hero-copy"><span class="eyebrow"><i></i> Storefront intelligence</span><h1>See what happens <span class="gradient-text">before the door opens.</span></h1><p>Target Media helps local businesses understand storefront traffic, attention and stopping patterns through aggregated metrics, quarterly reporting and close human support.</p><div class="hero-actions"><a class="btn btn-primary" href="apply.html">Apply for Monitor</a><a class="btn" href="#product">How it works</a></div><div class="micro-proof"><span class="proof-dot" aria-hidden="true"></span><span><strong>Transparency note:</strong> all interface numbers shown on this page are illustrative sample data, not customer results or performance guarantees.</span></div></div>
-      <div class="dashboard" aria-label="Illustrative Target Media dashboard using sample data"><div class="dash-top"><div class="dash-title"><span class="live-dot" aria-hidden="true"></span>Storefront overview</div><span class="demo-label">Sample data</span></div><div class="metric-grid"><div class="metric"><small>Passers-by</small><strong>2,184</strong></div><div class="metric"><small>Look rate</small><strong>31.8% <span class="up">+3.1 pp</span></strong></div><div class="metric"><small>Stop rate</small><strong>8.6% <span class="up">+1.2 pp</span></strong></div></div><div class="chart-card"><div class="chart-head"><b>Attention trend</b><span>Illustrative dashboard</span></div><div class="chart" role="img" aria-label="Sample attention trend rising over time; illustrative only"><svg viewBox="0 0 520 165" preserveAspectRatio="none"><defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#8e78ff" stop-opacity=".3"/><stop offset="100%" stop-color="#8e78ff" stop-opacity="0"/></linearGradient></defs><path d="M0 142 C55 138 74 111 118 118 C161 125 181 72 226 88 C268 103 295 48 337 63 C379 79 404 34 447 49 C480 60 499 30 520 26 L520 165 L0 165Z" fill="url(#g)"/><path d="M0 142 C55 138 74 111 118 118 C161 125 181 72 226 88 C268 103 295 48 337 63 C379 79 404 34 447 49 C480 60 499 30 520 26" fill="none" stroke="#b6a9ff" stroke-width="3"/></svg></div></div><div class="compare-row"><div class="compare"><small>Sample strongest window</small><b>17:00–19:00</b></div><div class="compare"><small>Sample store vs area</small><b>+6.4%</b></div></div></div>
-    </div></section>
+      <div class="hero-copy"><span class="kicker"><i class="proof-dot" aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:var(--accent-2);display:inline-block"></i> Storefront intelligence</span><h1>See what happens <span class="gradient-text">before the door opens.</span></h1><p>Target Media helps local businesses understand storefront traffic, attention and stopping patterns through aggregated metrics, quarterly reporting and close human support.</p><div class="hero-actions"><a class="btn btn-primary" href="apply.html">Apply for Monitor</a><a class="btn" href="#product">How it works</a></div><div class="micro-proof"><span class="proof-dot" aria-hidden="true"></span><span><strong>Transparency note:</strong> all interface numbers shown on this page are illustrative sample data, not customer results or performance guarantees.</span></div></div>
 
-    <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Aggregated metrics <i>•</i></span><span>Attention <i>•</i></span><span>Stopping behavior <i>•</i></span><span>Hourly patterns <i>•</i></span><span>Area context <i>•</i></span><span>Quarterly insights <i>•</i></span><span>Aggregated metrics <i>•</i></span><span>Attention <i>•</i></span><span>Stopping behavior <i>•</i></span><span>Hourly patterns <i>•</i></span><span>Area context <i>•</i></span><span>Quarterly insights <i>•</i></span></div></div>
+      <div class="instrument">
+        <div class="instrument-top"><div class="instrument-title"><i aria-hidden="true"></i>Storefront overview</div><span class="status-pill status-pill--sample">Sample data</span></div>
 
-    <section class="section" id="product"><div class="container"><span class="eyebrow reveal"><i></i> How it works</span><h2 class="section-title reveal delay-1">Measure the storefront. <span class="gradient-text">Interpret the signal.</span></h2><p class="section-lead reveal delay-2">The standard offer focuses on aggregated business metrics rather than identifying individuals. Actual deployments must be configured and documented for the specific location.</p><div class="three-grid"><article class="feature-card reveal"><div class="step-no">1</div><h3>Measure</h3><p>Estimate how many people pass, orient toward the storefront and stop, subject to camera placement, occlusion, lighting and model limitations.</p><div class="mini-label">Traffic → attention → stop</div></article><article class="feature-card reveal delay-1"><div class="step-no">2</div><h3>Understand</h3><p>Track changes by hour, day and week, compare periods and add surrounding-area context where a lawful and technically valid benchmark exists.</p><div class="mini-label">Store → period → context</div></article><article class="feature-card reveal delay-2"><div class="step-no">3</div><h3>Act</h3><p>Use quarterly summaries, alerts and data-backed recommendations as decision support. Metrics are estimates, not guaranteed causal explanations.</p><div class="mini-label">Signal → diagnosis → action</div></article></div><p class="compliance-note reveal"><strong>Deployment privacy:</strong> camera analytics can involve personal-data processing even when the final dashboard is aggregated. We do not market facial recognition, identity tracking, emotion recognition or demographic profiling in the standard plans. Before activation, the parties must document roles, lawful basis, necessity, signage, retention and whether a DPIA is required for the location.</p></div></section>
+        <div class="diagram-frame">
+          <svg viewBox="0 0 520 232" role="img" aria-label="Illustrative measurement diagram: a storefront facade with an entrance zone, an attention zone fanning onto the sidewalk, and sample pedestrian flow lines. Two of five sample paths curve into the entrance zone; this represents aggregated, illustrative flow patterns, not identification or tracking of individuals.">
+            <!-- attention zone (field of measurement, fans from window to sidewalk) -->
+            <polygon points="32,105 92,105 250,200 10,200" fill="var(--accent)" opacity=".05" />
+            <polygon points="32,105 92,105 250,200 10,200" fill="none" stroke="var(--accent-line)" stroke-width="1" stroke-dasharray="3 6" />
 
-    <section class="section" id="intelligence"><div class="container"><span class="eyebrow reveal"><i></i> Future intelligence layer · not available yet</span><div class="split"><div><h2 class="section-title reveal delay-1">Your store does not operate <span class="gradient-text">in a vacuum.</span></h2><p class="section-lead reveal delay-2">This is the direction we want to build toward once the network has enough real locations and history. It is shown as product roadmap only and is not currently offered for sale.</p><div class="intel-list"><div class="intel-item reveal"><div class="intel-icon">01</div><div><b>Store vs. area</b><p>Compare the location with relevant surrounding patterns.</p></div></div><div class="intel-item reveal delay-1"><div class="intel-icon">02</div><div><b>Detect meaningful gaps</b><p>Surface unusual shifts where the location diverges from the comparison context.</p></div></div><div class="intel-item reveal delay-2"><div class="intel-icon">03</div><div><b>Investigate possible causes</b><p>Use the data to generate hypotheses about internal versus external factors; validate them before acting.</p></div></div></div></div><div class="network-card reveal delay-2" aria-label="Illustrative local comparison network"><div class="network-head"><b>Future local context network</b><span>Roadmap illustration — not currently available</span></div><div class="network"><svg viewBox="0 0 500 320" preserveAspectRatio="none" aria-hidden="true"><line class="net-line" x1="250" y1="150" x2="55" y2="48"/><line class="net-line" x1="250" y1="150" x2="445" y2="46"/><line class="net-line" x1="250" y1="150" x2="70" y2="270"/><line class="net-line" x1="250" y1="150" x2="425" y2="270"/><line class="net-line" x1="250" y1="150" x2="492" y2="160"/><line class="net-line" x1="250" y1="150" x2="8" y2="163"/></svg><div class="node main">Your store</div><div class="node n1">Area A</div><div class="node n2">Area B</div><div class="node n3">Area C</div><div class="node n4">Area D</div><div class="node n5">Flow</div><div class="node n6">Flow</div></div></div></div></div></section>
+            <!-- storefront facade -->
+            <rect x="20" y="70" width="140" height="130" fill="rgba(255,255,255,.025)" stroke="var(--line-strong)" stroke-width="1.2" />
+            <rect x="32" y="105" width="60" height="85" fill="rgba(255,255,255,.03)" stroke="var(--line-strong)" stroke-width="1" />
+            <path d="M112 200 L112 105 L150 105 L150 200" fill="none" stroke="var(--line-strong)" stroke-width="1.2" />
 
-    <section class="section" id="metrics"><div class="container"><span class="eyebrow reveal"><i></i> What you can see</span><h2 class="section-title reveal delay-1">Turn foot traffic into <span class="gradient-text">a decision system.</span></h2><p class="section-lead reveal delay-2">The chart below is deliberately visible and labelled as a simulation. It demonstrates the type of funnel the dashboard can display; the values are not measured customer data.</p><div class="metrics-grid"><div class="metric-card reveal"><h3>From passer-by to attention</h3><div class="card-muted">Illustrative conversion funnel — sample data</div><div class="funnel-chart" role="img" aria-label="Illustrative conversion funnel: passers-by 100 percent, visible 71 percent, looked 32 percent, stopped 9 percent. Sample data only."><div class="bars"><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:100%"></div></div><b>Passers-by</b><small>100%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:71%"></div></div><b>Visible</b><small>71%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:32%"></div></div><b>Looked</b><small>32%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:9%"></div></div><b>Stopped</b><small>9%</small></div></div></div><div class="simulation-note"><strong>Simulation disclosure:</strong> 100%, 71%, 32% and 9% are example values used to demonstrate the interface. They are not testimonials, benchmark claims or evidence of expected performance.</div></div><div class="stack"><div class="statbox reveal delay-1"><small>Timing</small><strong>Hour → week</strong><p>Identify strong and weak hours, daily patterns and weekly changes.</p></div><div class="statbox reveal delay-2"><small>Comparison</small><strong>Now → history</strong><p>Compare periods so movement is visible in context, not as an isolated number.</p></div><div class="statbox reveal delay-2"><small>Privacy</small><strong>Aggregated output</strong><p>Dashboard outputs are designed around counts, rates and trends rather than individual identity profiles.</p></div></div></div></div></section>
+            <!-- entrance zone -->
+            <rect x="100" y="180" width="65" height="20" fill="var(--accent-soft)" stroke="var(--accent-2)" stroke-width="1" stroke-dasharray="4 4" />
 
-    <section class="section" id="approach"><div class="container"><span class="eyebrow reveal"><i></i> The Target Media way</span><h2 class="section-title reveal delay-1">Transparent by design. <span class="gradient-text">Close by choice.</span></h2><p class="section-lead reveal delay-2">Our differentiator is not a promise of perfect data. It is the combination of useful measurement, clear limitations, transparent economics and a close working relationship.</p><div class="trust-wrap reveal delay-2"><div class="trust-top"><h3>Know what you are buying — and what the data cannot prove.</h3><p>Quarterly pricing is visible, standard Monitor installation and initial configuration are included, interface simulations are labelled, and recommendations are presented as decision support rather than guarantees.</p></div><div class="trust-grid"><div class="trust-card"><div class="trust-icon">✓</div><h4>Clear economics</h4><p>Monitor is €299 per location per quarter. Standard installation and initial configuration are included — there is no separate installation fee.</p></div><div class="trust-card"><div class="trust-icon">↔</div><h4>No black box</h4><p>We explain assumptions, limitations and measurement logic instead of presenting estimates as ground truth.</p></div><div class="trust-card"><div class="trust-icon">●</div><h4>Human support</h4><p>We aim for direct, context-aware communication with the people responsible for your location.</p></div></div><div class="friend-line"><b>Client on paper. Partner in practice.</b><span>Close support does not mean overselling certainty. If the data is weak, noisy or inconclusive, we should say so.</span></div></div></div></section>
+            <!-- pedestrian flow: muted pass-by paths -->
+            <path d="M500 188 C 380 184, 220 190, 20 186" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.3" stroke-dasharray="2 5" />
+            <path d="M500 203 C 380 206, 220 200, 15 202" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.3" stroke-dasharray="2 5" />
+            <path d="M500 212 C 380 214, 260 210, 40 214" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.3" stroke-dasharray="2 5" />
 
-    <section class="section" id="pricing"><div class="container">
-      <div class="pricing-head">
-        <div><span class="eyebrow reveal"><i></i> Available now</span><h2 class="section-title reveal delay-1">One plan. <span class="gradient-text">Do it properly first.</span></h2></div>
-        <div class="pricing-note reveal delay-2"><span class="quarter-pill">Monitor only</span><br>Monitor is the only plan currently available. It costs €299 per location per quarter. <strong>Standard installation and initial configuration are included.</strong> Intelligence and Growth Partner stay visible as roadmap products, but cannot be purchased yet.</div>
-      </div>
-      <div class="pricing-grid monitor-only-grid">
-        <article class="price-card monitor-card reveal">
-          <span class="popular-badge">Available now</span>
-          <div class="plan-name">Monitor</div>
-          <div class="plan-sub">For businesses that want continuous visibility into storefront performance before we add more advanced intelligence layers.</div>
-          <div class="price"><sup>€</sup>299 <span>/ quarter</span></div>
-          <div class="setup">Per location · installation & initial configuration included</div>
-          <div class="plan-tagline">Understand what is happening in front of your business.</div>
-          <ul class="features">
-            <li><i class="check">✓</i><span>Traffic in front of the location</span></li>
-            <li><i class="check">✓</i><span>Passer-by count</span></li>
-            <li><i class="check">✓</i><span>Attention / look rate</span></li>
-            <li><i class="check">✓</i><span>Stopping behavior</span></li>
-            <li><i class="check">✓</i><span>Hourly, daily and weekly trends</span></li>
-            <li><i class="check">✓</i><span>Historical comparison</span></li>
-            <li><i class="check">✓</i><span>Strong and weak hours</span></li>
-            <li><i class="check">✓</i><span>Quarterly performance summary</span></li>
-            <li><i class="check">✓</i><span>Aggregated output metrics</span></li>
-            <li><i class="check">✓</i><span>Dashboard access</span></li>
-            <li><i class="check">✓</i><span>Basic support</span></li>
-          </ul>
-          <a class="btn btn-primary" href="apply.html">Apply for Monitor</a>
-        </article>
-        <div class="future-stack">
-          <article class="price-card disabled-plan reveal delay-1" aria-disabled="true">
-            <span class="coming-badge">Coming later</span>
-            <div class="plan-name">Intelligence</div>
-            <div class="plan-sub">Area context, comparable benchmarks and deeper diagnosis once our network has enough density and real historical data.</div>
-            <div class="locked-copy">Not available for purchase yet.</div>
-            <button class="btn" type="button" disabled>Not available yet</button>
-          </article>
-          <article class="price-card disabled-plan reveal delay-2" aria-disabled="true">
-            <span class="coming-badge">Coming later</span>
-            <div class="plan-name">Growth Partner</div>
-            <div class="plan-sub">Hands-on optimisation work after we have enough operating experience and evidence to support it responsibly.</div>
-            <div class="locked-copy">Not available for purchase yet.</div>
-            <button class="btn" type="button" disabled>Not available yet</button>
-          </article>
+            <!-- pedestrian flow: sample "stopped" paths curving into the entrance zone -->
+            <path d="M500 195 C 360 198, 260 196, 150 190 C 140 188, 133 186, 130 182" fill="none" stroke="var(--accent-2)" stroke-width="1.6" />
+            <circle cx="130" cy="182" r="2.6" fill="var(--accent-2)" />
+            <path d="M470 207 C 340 209, 240 202, 148 192 C 142 189, 136 187, 132 184" fill="none" stroke="var(--accent-2)" stroke-width="1.6" opacity=".7" />
+            <circle cx="132" cy="184" r="2.2" fill="var(--accent-2)" opacity=".7" />
+
+            <!-- ground / measurement baseline with tick marks -->
+            <line x1="10" y1="216" x2="510" y2="216" stroke="var(--line)" stroke-width="1" />
+            <g stroke="var(--line-strong)" stroke-width="1">
+              <line x1="10" y1="212" x2="10" y2="220" /><line x1="110" y1="212" x2="110" y2="220" /><line x1="210" y1="212" x2="210" y2="220" />
+              <line x1="310" y1="212" x2="310" y2="220" /><line x1="410" y1="212" x2="410" y2="220" /><line x1="510" y1="212" x2="510" y2="220" />
+            </g>
+            <g fill="var(--sub)" font-size="9" font-family="ui-monospace,Menlo,Consolas,monospace">
+              <text x="10" y="230">0m</text><text x="104" y="230">2m</text><text x="204" y="230">4m</text>
+              <text x="304" y="230">6m</text><text x="404" y="230">8m</text><text x="494" y="230">10m</text>
+            </g>
+          </svg>
+        </div>
+        <div class="diagram-caption">Illustrative flow geometry — aggregated sample paths, not individual tracking</div>
+
+        <div class="readout-row">
+          <div class="readout"><small>Passers-by</small><strong class="mono">2,184</strong></div>
+          <div class="readout"><small>Look rate</small><strong class="mono">31.8%<span class="delta">+3.1pp</span></strong></div>
+          <div class="readout"><small>Stop rate</small><strong class="mono">8.6%<span class="delta">+1.2pp</span></strong></div>
+        </div>
+
+        <div class="trend-block">
+          <div class="trend-head"><b>Attention trend</b><span>Illustrative dashboard</span></div>
+          <div class="trend-chart" role="img" aria-label="Sample attention trend rising over time; illustrative only">
+            <svg viewBox="0 0 520 100" preserveAspectRatio="none">
+              <line x1="0" y1="25" x2="520" y2="25" stroke="var(--line)" stroke-width="1" />
+              <line x1="0" y1="50" x2="520" y2="50" stroke="var(--line)" stroke-width="1" />
+              <line x1="0" y1="75" x2="520" y2="75" stroke="var(--line)" stroke-width="1" />
+              <path d="M0 78 C55 75 74 60 118 65 C161 70 181 40 226 49 C268 58 295 27 337 36 C379 45 404 20 447 28 C480 34 499 17 520 15" fill="none" stroke="var(--accent-2)" stroke-width="2" />
+              <circle cx="520" cy="15" r="3" fill="var(--accent-2)" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="compare-row">
+          <div class="compare"><small>Sample strongest window</small><b>17:00–19:00</b></div>
+          <div class="compare"><small>Sample store vs area</small><b>+6.4%</b></div>
         </div>
       </div>
     </div></section>
 
+    <section class="section" id="product"><div class="container">
+      <h2 class="plain-title">Measure the storefront. Interpret the signal.</h2>
+      <p class="section-lead">The standard offer focuses on aggregated business metrics rather than identifying individuals. Actual deployments must be configured and documented for the specific location.</p>
+      <div class="process-strip">
+        <article class="process-step"><div class="process-index">01</div><h3>Measure</h3><p>Estimate how many people pass, orient toward the storefront and stop, subject to camera placement, occlusion, lighting and model limitations.</p><div class="process-tag">Traffic → attention → stop</div></article>
+        <article class="process-step"><div class="process-index">02</div><h3>Understand</h3><p>Track changes by hour, day and week, compare periods and add surrounding-area context where a lawful and technically valid benchmark exists.</p><div class="process-tag">Store → period → context</div></article>
+        <article class="process-step"><div class="process-index">03</div><h3>Act</h3><p>Use quarterly summaries, alerts and data-backed recommendations as decision support. Metrics are estimates, not guaranteed causal explanations.</p><div class="process-tag">Signal → diagnosis → action</div></article>
+      </div>
+      <p class="compliance-note"><strong>Deployment privacy:</strong> camera analytics can involve personal-data processing even when the final dashboard is aggregated. We do not market facial recognition, identity tracking, emotion recognition or demographic profiling in the standard plans. Before activation, the parties must document roles, lawful basis, necessity, signage, retention and whether a DPIA is required for the location.</p>
+    </div></section>
+
+    <section class="section" id="intelligence"><div class="container"><div class="split"><div>
+      <span class="status-pill status-pill--roadmap">Future intelligence layer · not available yet</span>
+      <h2 class="plain-title" style="margin-top:16px">Your store does not operate in a vacuum.</h2>
+      <p class="section-lead">This is the direction we want to build toward once the network has enough real locations and history. It is shown as product roadmap only and is not currently offered for sale.</p>
+      <div class="intel-list">
+        <div class="intel-item"><div class="intel-icon">01</div><div><b>Store vs. area</b><p>Compare the location with relevant surrounding patterns.</p></div></div>
+        <div class="intel-item"><div class="intel-icon">02</div><div><b>Detect meaningful gaps</b><p>Surface unusual shifts where the location diverges from the comparison context.</p></div></div>
+        <div class="intel-item"><div class="intel-icon">03</div><div><b>Investigate possible causes</b><p>Use the data to generate hypotheses about internal versus external factors; validate them before acting.</p></div></div>
+      </div>
+      </div><div class="network-card" aria-label="Illustrative local comparison network"><div class="network-head"><b>Future local context network</b><span>Roadmap illustration — not currently available</span></div><div class="network"><svg viewBox="0 0 500 320" preserveAspectRatio="none" aria-hidden="true"><line class="net-line" x1="250" y1="150" x2="55" y2="48"/><line class="net-line" x1="250" y1="150" x2="445" y2="46"/><line class="net-line" x1="250" y1="150" x2="70" y2="270"/><line class="net-line" x1="250" y1="150" x2="425" y2="270"/><line class="net-line" x1="250" y1="150" x2="492" y2="160"/><line class="net-line" x1="250" y1="150" x2="8" y2="163"/></svg><div class="node main">Your store</div><div class="node n1">Area A</div><div class="node n2">Area B</div><div class="node n3">Area C</div><div class="node n4">Area D</div><div class="node n5">Flow</div><div class="node n6">Flow</div></div></div>
+    </div></div></section>
+
+    <section class="section" id="metrics"><div class="container">
+      <h2 class="plain-title">Turn foot traffic into a decision system.</h2>
+      <p class="section-lead">The chart below is deliberately visible and labelled as a simulation. It demonstrates the type of funnel the dashboard can display; the values are not measured customer data.</p>
+      <div class="metrics-grid">
+        <div class="metric-card"><h3>From passer-by to attention</h3><div class="card-muted">Illustrative conversion funnel — sample data</div><div class="funnel-chart" role="img" aria-label="Illustrative conversion funnel: passers-by 100 percent, visible 71 percent, looked 32 percent, stopped 9 percent. Sample data only."><div class="bars"><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:100%"></div></div><b>Passers-by</b><small>100%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:71%"></div></div><b>Visible</b><small>71%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:32%"></div></div><b>Looked</b><small>32%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:9%"></div></div><b>Stopped</b><small>9%</small></div></div></div><div class="simulation-note"><strong>Simulation disclosure:</strong> 100%, 71%, 32% and 9% are example values used to demonstrate the interface. They are not testimonials, benchmark claims or evidence of expected performance.</div></div>
+        <div class="stack">
+          <div class="statbox"><small>Timing</small><strong>Hour → week</strong><p>Identify strong and weak hours, daily patterns and weekly changes.</p></div>
+          <div class="statbox"><small>Comparison</small><strong>Now → history</strong><p>Compare periods so movement is visible in context, not as an isolated number.</p></div>
+          <div class="statbox"><small>Privacy</small><strong>Aggregated output</strong><p>Dashboard outputs are designed around counts, rates and trends rather than individual identity profiles.</p></div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="section" id="approach"><div class="container">
+      <h2 class="plain-title">Transparent by design. Close by choice.</h2>
+      <p class="section-lead">Our differentiator is not a promise of perfect data. It is the combination of useful measurement, clear limitations, transparent economics and a close working relationship.</p>
+      <div class="trust-wrap"><div class="trust-top"><h3>Know what you are buying — and what the data cannot prove.</h3><p>Quarterly pricing is visible, standard Monitor installation and initial configuration are included, interface simulations are labelled, and recommendations are presented as decision support rather than guarantees.</p></div><div class="trust-grid"><div class="trust-card"><div class="trust-icon">✓</div><h4>Clear economics</h4><p>Monitor is €299 per location per quarter. Standard installation and initial configuration are included — there is no separate installation fee.</p></div><div class="trust-card"><div class="trust-icon">↔</div><h4>No black box</h4><p>We explain assumptions, limitations and measurement logic instead of presenting estimates as ground truth.</p></div><div class="trust-card"><div class="trust-icon">●</div><h4>Human support</h4><p>We aim for direct, context-aware communication with the people responsible for your location.</p></div></div><div class="friend-line"><b>Client on paper. Partner in practice.</b><span>Close support does not mean overselling certainty. If the data is weak, noisy or inconclusive, we should say so.</span></div></div>
+    </div></section>
+
+    <section class="section" id="pricing"><div class="container">
+      <div class="pricing-head">
+        <div><span class="status-pill status-pill--available">Available now</span><h2 class="plain-title" style="margin-top:16px">One plan. Do it properly first.</h2></div>
+        <div class="pricing-note">Monitor is the only plan currently available. It costs €299 per location per quarter. <strong>Standard installation and initial configuration are included.</strong> Intelligence and Growth Partner stay visible as roadmap products, but cannot be purchased yet.</div>
+      </div>
+
+      <div class="monitor-panel">
+        <div>
+          <div class="monitor-head"><span class="status-pill status-pill--available">Available now</span></div>
+          <div class="plan-name">Monitor</div>
+          <div class="plan-sub">For businesses that want continuous visibility into storefront performance before we add more advanced intelligence layers.</div>
+          <div class="price"><sup>€</sup>299<span> / quarter</span></div>
+          <div class="setup">Per location · installation &amp; initial configuration included</div>
+          <div class="plan-tagline">Understand what is happening in front of your business.</div>
+          <a class="btn btn-primary" href="apply.html">Apply for Monitor</a>
+        </div>
+        <ul class="features">
+          <li><i class="check">✓</i><span>Traffic in front of the location</span></li>
+          <li><i class="check">✓</i><span>Passer-by count</span></li>
+          <li><i class="check">✓</i><span>Attention / look rate</span></li>
+          <li><i class="check">✓</i><span>Stopping behavior</span></li>
+          <li><i class="check">✓</i><span>Hourly, daily and weekly trends</span></li>
+          <li><i class="check">✓</i><span>Historical comparison</span></li>
+          <li><i class="check">✓</i><span>Strong and weak hours</span></li>
+          <li><i class="check">✓</i><span>Quarterly performance summary</span></li>
+          <li><i class="check">✓</i><span>Aggregated output metrics</span></li>
+          <li><i class="check">✓</i><span>Dashboard access</span></li>
+          <li><i class="check">✓</i><span>Basic support</span></li>
+        </ul>
+      </div>
+
+      <div class="roadmap-strip">
+        <article class="roadmap-item disabled-plan" aria-disabled="true">
+          <span class="status-pill status-pill--roadmap">Coming later</span>
+          <div class="plan-name">Intelligence</div>
+          <div class="plan-sub">Area context, comparable benchmarks and deeper diagnosis once our network has enough density and real historical data. Not available for purchase yet.</div>
+        </article>
+        <article class="roadmap-item disabled-plan" aria-disabled="true">
+          <span class="status-pill status-pill--roadmap">Coming later</span>
+          <div class="plan-name">Growth Partner</div>
+          <div class="plan-sub">Hands-on optimisation work after we have enough operating experience and evidence to support it responsibly. Not available for purchase yet.</div>
+        </article>
+      </div>
+    </div></section>
+
     <section class="section approved-section" id="approved"><div class="container">
-      <div class="approved-card reveal">
+      <div class="approved-card">
         <div class="approved-copy">
-          <span class="eyebrow"><i></i> Already approved?</span>
-          <h2>Ready to get your intelligent system <span class="gradient-text">into your location?</span></h2>
+          <span class="kicker">Already approved?</span>
+          <h2>Ready to get your intelligent system <span class="accent-text">into your location?</span></h2>
           <p>After we approve your application, we send you a unique approval code. Enter it here to unlock payment. Once payment is confirmed, you will be taken to the installation calendar to choose your date and time. There is no separate installation fee.</p>
           <div class="process-row" aria-label="Approved customer process"><span>1. Approved</span><i>→</i><span>2. Pay</span><i>→</i><span>3. Schedule</span><i>→</i><span>4. Install</span></div>
         </div>
         <form class="approval-box" id="approvalForm">
           <label for="approvalCode">Approval code</label>
           <div class="approval-input-row"><input id="approvalCode" name="approvalCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="e.g. TM-AB12-CD34" required><button class="btn btn-primary" type="submit">Verify code</button></div>
-          <p class="field-help">Codes are generated only after we approve an application. They will be checked securely before any payment link is shown.</p>
+          <p class="field-help" style="font-size:11px;color:var(--sub);line-height:1.5;margin:10px 0 0">Codes are generated only after we approve an application. They will be checked securely before any payment link is shown.</p>
           <div class="approval-status" id="approvalStatus" role="status" aria-live="polite"></div>
           <a class="btn btn-primary payment-unlock" id="paymentUnlock" href="#" hidden rel="noopener">Proceed to secure payment</a>
         </form>
       </div>
     </div></section>
 
-    <section class="section" id="faq"><div class="container"><div class="privacy-banner reveal"><div><span class="eyebrow"><i></i> Privacy & website hygiene</span><h2 class="section-title" style="font-size:clamp(32px,4vw,54px)">Less tracking on the website. More clarity in the product.</h2><p class="section-lead" style="font-size:15px">This build contains no analytics scripts, ad pixels, external fonts or third-party embeds. It sets no cookies in its own code. The Monitor application form is prepared for a Google Sheets / Calendar connection, but it does not transmit applications until that connection is activated.</p></div><div class="privacy-points"><div class="privacy-point"><b>No website analytics</b><span>No Google Analytics, Meta Pixel or equivalent tracking is loaded by this codebase.</span></div><div class="privacy-point"><b>No third-party embeds</b><span>No YouTube, maps, chat widgets, external font files or review widgets load automatically.</span></div><div class="privacy-point"><b>Data minimisation</b><span>The initial application asks only for business contact, location and technical-fit information. Installation date and time are chosen only after approval and payment.</span></div><div class="privacy-point"><b>Legal pages</b><span>Privacy, cookies, terms, refunds and accessibility are linked in the footer.</span></div></div></div><div class="faq reveal"><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What can I buy right now?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Monitor only. It is €299 per quarter per location, with standard installation and initial configuration included. Intelligence and Growth Partner are roadmap products and are not available for purchase yet.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Are the dashboard figures real customer results?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>No. All numerical examples on this public landing page are explicitly illustrative sample data used to demonstrate the interface. Actual results depend on the location, setup, environment and measurement quality.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Does “aggregated” mean cameras are automatically outside the GDPR?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>No. Image processing can be personal-data processing before an aggregated output is produced. Each deployment needs a documented privacy assessment, lawful basis, minimisation, signage and appropriate retention; a DPIA may be required in higher-risk monitoring scenarios.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Does this website use tracking cookies?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>The current site code sets no cookies and loads no analytics or advertising trackers. If optional tracking is added later, it must not load before any legally required consent is obtained.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Why can’t I buy Intelligence yet?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Because comparable area intelligence only becomes credible when there is enough network density, historical data and operating experience. We would rather disable the plan than sell a capability before we can support it properly.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What do you mean by a close relationship?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Direct communication, context-aware support and honest conversations about what the data does and does not justify. The goal is to work like a trusted partner, not treat you like a ticket number.</p></div></div></div></div></section>
+    <section class="section" id="faq"><div class="container"><div class="privacy-banner"><div><h2 class="plain-title" style="font-size:clamp(28px,3.4vw,42px)">Less tracking on the website. More clarity in the product.</h2><p class="section-lead" style="font-size:14.5px">This build contains no analytics scripts, ad pixels, external fonts or third-party embeds. It sets no cookies in its own code. The Monitor application form is prepared for a Google Sheets / Calendar connection, but it does not transmit applications until that connection is activated.</p></div><div class="privacy-points"><div class="privacy-point"><b>No website analytics</b><span>No Google Analytics, Meta Pixel or equivalent tracking is loaded by this codebase.</span></div><div class="privacy-point"><b>No third-party embeds</b><span>No YouTube, maps, chat widgets, external font files or review widgets load automatically.</span></div><div class="privacy-point"><b>Data minimisation</b><span>The initial application asks only for business contact, location and technical-fit information. Installation date and time are chosen only after approval and payment.</span></div><div class="privacy-point"><b>Legal pages</b><span>Privacy, cookies, terms, refunds and accessibility are linked in the footer.</span></div></div></div><div class="faq"><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What can I buy right now?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Monitor only. It is €299 per quarter per location, with standard installation and initial configuration included. Intelligence and Growth Partner are roadmap products and are not available for purchase yet.</p></div></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Are the dashboard figures real customer results?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>No. All numerical examples on this public landing page are explicitly illustrative sample data used to demonstrate the interface. Actual results depend on the location, setup, environment and measurement quality.</p></div></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Does “aggregated” mean cameras are automatically outside the GDPR?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>No. Image processing can be personal-data processing before an aggregated output is produced. Each deployment needs a documented privacy assessment, lawful basis, minimisation, signage and appropriate retention; a DPIA may be required in higher-risk monitoring scenarios.</p></div></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Does this website use tracking cookies?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>The current site code sets no cookies and loads no analytics or advertising trackers. If optional tracking is added later, it must not load before any legally required consent is obtained.</p></div></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Why can’t I buy Intelligence yet?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Because comparable area intelligence only becomes credible when there is enough network density, historical data and operating experience. We would rather disable the plan than sell a capability before we can support it properly.</p></div></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What do you mean by a close relationship?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Direct communication, context-aware support and honest conversations about what the data does and does not justify. The goal is to work like a trusted partner, not treat you like a ticket number.</p></div></div></div></div></section>
 
-    <section class="section"><div class="container"><div class="final-card reveal"><div><h2>Start with Monitor. <span class="gradient-text">Earn the next layer later.</span></h2><p>Apply first, let us check the location, then pay only after approval. Standard installation is included in the €299 quarterly price.</p><div class="hero-actions"><a class="btn btn-primary" href="apply.html">Apply for Monitor</a><a class="btn" href="#approved">Already approved?</a></div></div></div></div></section>
+    <section class="section"><div class="container"><div class="final-card"><div><h2>Start with Monitor. <span class="gradient-text">Earn the next layer later.</span></h2><p>Apply first, let us check the location, then pay only after approval. Standard installation is included in the €299 quarterly price.</p><div class="hero-actions"><a class="btn btn-primary" href="apply.html">Apply for Monitor</a><a class="btn" href="#approved">Already approved?</a></div></div></div></div></section>
   </main>
 
-  <footer><div class="container footer-grid"><div class="footer-brand">Target Media</div><nav class="footer-links" aria-label="Legal and footer navigation"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="refund-policy.html">Refund Policy</a><a href="accessibility.html">Accessibility</a></nav><div class="legal-status">© 2026 Target Media · B2B · Monitor applications only</div></div></footer>
+  <footer><div class="container footer-grid"><div class="footer-brand">Target Media</div><nav class="footer-links" aria-label="Legal and footer navigation"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="refund-policy.html">Refund Policy</a><a href="accessibility.html">Accessibility</a></nav><div class="legal-status">© 2026 Target Media · B2B · Monitor applications only</div></div></footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
   <script>
     const q=(s,r=document)=>r.querySelector(s);
