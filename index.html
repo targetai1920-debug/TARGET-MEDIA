@@ -220,23 +220,35 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const $=(s,r=document)=>r.querySelector(s), $=(s,r=document)=>[...r.querySelectorAll(s)];
+    const q=(s,r=document)=>r.querySelector(s);
+    const qa=(s,r=document)=>Array.from(r.querySelectorAll(s));
 
     if('IntersectionObserver' in window){
       const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
-      $('.reveal').forEach(el=>observer.observe(el));
-    }else{$('.reveal').forEach(el=>el.classList.add('visible'));}
+      qa('.reveal').forEach(el=>observer.observe(el));
+    }else{qa('.reveal').forEach(el=>el.classList.add('visible'));}
 
-    const menuBtn=$('#menuBtn'),navLinks=$('#navLinks');
-    menuBtn.addEventListener('click',()=>{const open=menuBtn.classList.toggle('open');navLinks.classList.toggle('mobile',open);menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');});
-    $('#navLinks a').forEach(a=>a.addEventListener('click',()=>{menuBtn.classList.remove('open');navLinks.classList.remove('mobile');menuBtn.setAttribute('aria-expanded','false');menuBtn.setAttribute('aria-label','Open navigation menu');}));
-    $('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.closest('.faq-item'),answer=item.querySelector('.faq-a'),open=btn.getAttribute('aria-expanded')!=='true';btn.setAttribute('aria-expanded',String(open));item.classList.toggle('open',open);answer.style.maxHeight=open?answer.scrollHeight+'px':'0px';}));
+    const menuBtn=q('#menuBtn'),navLinks=q('#navLinks');
+    menuBtn.addEventListener('click',()=>{
+      const open=menuBtn.classList.toggle('open');
+      navLinks.classList.toggle('mobile',open);
+      menuBtn.setAttribute('aria-expanded',String(open));
+      menuBtn.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');
+    });
+    qa('#navLinks a').forEach(a=>a.addEventListener('click',()=>{
+      menuBtn.classList.remove('open');
+      navLinks.classList.remove('mobile');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuBtn.setAttribute('aria-label','Open navigation menu');
+    }));
+    qa('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{
+      const item=btn.closest('.faq-item'),answer=item.querySelector('.faq-a');
+      const open=btn.getAttribute('aria-expanded')!=='true';
+      btn.setAttribute('aria-expanded',String(open));
+      item.classList.toggle('open',open);
+      answer.style.maxHeight=open?answer.scrollHeight+'px':'0px';
+    }));
 
-    /*
-      CONNECTION POINTS FOR THE NEXT STEP.
-      Keep these empty until the Google Apps Script endpoints are connected.
-      Approval codes must NEVER be hard-coded into this public page.
-    */
     const APPLICATION_ENDPOINT='';
     const AVAILABILITY_ENDPOINT='';
     const APPROVAL_ENDPOINT='';
@@ -250,24 +262,27 @@
     };
 
     const pad=n=>String(n).padStart(2,'0');
-    const isoDate=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const isoDate=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
     const todayStart=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
-    let viewDate=new Date();viewDate.setDate(1);viewDate.setHours(0,0,0,0);
+    let viewDate=new Date();
+    viewDate.setDate(1);
+    viewDate.setHours(0,0,0,0);
     let selectedDate='',selectedTime='';
 
     function slotsForDate(dateStr){
       const slots=[];
       for(let minutes=schedulingConfig.openHour*60;minutes<schedulingConfig.closeHour*60;minutes+=schedulingConfig.slotMinutes){
         const h=Math.floor(minutes/60),m=minutes%60;
-        slots.push(`${pad(h)}:${pad(m)}`);
+        slots.push(pad(h)+':'+pad(m));
       }
       const blocked=new Set(schedulingConfig.blockedSlots[dateStr]||[]);
       const now=new Date(),isToday=dateStr===isoDate(now);
       return slots.map(time=>{
         let disabled=blocked.has(time);
         if(isToday){
-          const [h,m]=time.split(':').map(Number);
-          const t=new Date(now);t.setHours(h,m,0,0);
+          const parts=time.split(':').map(Number);
+          const t=new Date(now);
+          t.setHours(parts[0],parts[1],0,0);
           if(t<=now)disabled=true;
         }
         return {time,disabled};
@@ -277,11 +292,11 @@
     function dateFullyBlocked(dateStr){
       if(schedulingConfig.blockedDates.includes(dateStr))return true;
       const slots=slotsForDate(dateStr);
-      return slots.length>0 && slots.every(s=>s.disabled);
+      return slots.length>0&&slots.every(s=>s.disabled);
     }
 
     function renderCalendar(){
-      const grid=$('#calendarGrid'),monthLabel=$('#calendarMonth');
+      const grid=q('#calendarGrid'),monthLabel=q('#calendarMonth');
       if(!grid||!monthLabel)return;
       grid.innerHTML='';
       monthLabel.textContent=viewDate.toLocaleDateString(undefined,{month:'long',year:'numeric'});
@@ -289,54 +304,99 @@
       const first=new Date(year,month,1);
       const offset=(first.getDay()+6)%7;
       const days=new Date(year,month+1,0).getDate();
-      for(let i=0;i<offset;i++){const blank=document.createElement('span');blank.className='calendar-blank';grid.appendChild(blank);}
+
+      for(let i=0;i<offset;i++){
+        const blank=document.createElement('span');
+        blank.className='calendar-blank';
+        grid.appendChild(blank);
+      }
+
       for(let day=1;day<=days;day++){
-        const d=new Date(year,month,day);d.setHours(0,0,0,0);
+        const d=new Date(year,month,day);
+        d.setHours(0,0,0,0);
         const dateStr=isoDate(d),past=d<todayStart(),blocked=!past&&dateFullyBlocked(dateStr);
         const b=document.createElement('button');
-        b.type='button';b.className='calendar-day';b.textContent=String(day);
-        b.dataset.date=dateStr;b.setAttribute('role','gridcell');
+        b.type='button';
+        b.className='calendar-day';
+        b.textContent=String(day);
+        b.dataset.date=dateStr;
+        b.setAttribute('role','gridcell');
         b.setAttribute('aria-label',d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'}));
-        if(past||blocked){b.disabled=true;b.classList.add('is-unavailable');b.setAttribute('aria-disabled','true');}
-        if(selectedDate===dateStr){b.classList.add('is-selected');b.setAttribute('aria-pressed','true');}
-        else b.setAttribute('aria-pressed','false');
+        if(past||blocked){
+          b.disabled=true;
+          b.classList.add('is-unavailable');
+          b.setAttribute('aria-disabled','true');
+        }
+        if(selectedDate===dateStr){
+          b.classList.add('is-selected');
+          b.setAttribute('aria-pressed','true');
+        }else{
+          b.setAttribute('aria-pressed','false');
+        }
         b.addEventListener('click',()=>selectDate(dateStr));
         grid.appendChild(b);
       }
-      const now=new Date(),isCurrentMonth=year===now.getFullYear()&&month===now.getMonth();
-      $('#prevMonth').disabled=isCurrentMonth;
+
+      const now=new Date();
+      const isCurrentMonth=year===now.getFullYear()&&month===now.getMonth();
+      q('#prevMonth').disabled=isCurrentMonth;
     }
 
     function selectDate(dateStr){
-      selectedDate=dateStr;selectedTime='';
-      $('#appointmentDate').value=dateStr;$('#appointmentTime').value='';
+      selectedDate=dateStr;
+      selectedTime='';
+      q('#appointmentDate').value=dateStr;
+      q('#appointmentTime').value='';
       const d=new Date(dateStr+'T12:00:00');
-      $('#selectedDateText').textContent=d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-      renderCalendar();renderTimes();
+      q('#selectedDateText').textContent=d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+      renderCalendar();
+      renderTimes();
     }
 
     function renderTimes(){
-      const grid=$('#timeGrid'),msg=$('#scheduleMessage');grid.innerHTML='';
-      if(!selectedDate){msg.textContent='Choose an available date first.';return;}
+      const grid=q('#timeGrid'),msg=q('#scheduleMessage');
+      grid.innerHTML='';
+      if(!selectedDate){
+        msg.textContent='Choose an available date first.';
+        return;
+      }
       const slots=slotsForDate(selectedDate);
       slots.forEach(({time,disabled})=>{
         const b=document.createElement('button');
-        b.type='button';b.className='time-slot';b.textContent=time;b.disabled=disabled;
+        b.type='button';
+        b.className='time-slot';
+        b.textContent=time;
+        b.disabled=disabled;
         if(disabled)b.classList.add('is-unavailable');
         if(selectedTime===time)b.classList.add('is-selected');
         b.setAttribute('aria-pressed',selectedTime===time?'true':'false');
-        b.addEventListener('click',()=>{selectedTime=time;$('#appointmentTime').value=time;renderTimes();});
+        b.addEventListener('click',()=>{
+          selectedTime=time;
+          q('#appointmentTime').value=time;
+          renderTimes();
+        });
         grid.appendChild(b);
       });
-      const available=slots.some(s=>!s.disabled);
-      msg.textContent=available?'Choose your preferred start time.':'No appointment times are available on this date.';
+      msg.textContent=slots.some(s=>!s.disabled)?'Choose your preferred start time.':'No appointment times are available on this date.';
     }
 
-    $('#prevMonth').addEventListener('click',()=>{const now=new Date();const candidate=new Date(viewDate.getFullYear(),viewDate.getMonth()-1,1);const current=new Date(now.getFullYear(),now.getMonth(),1);if(candidate>=current){viewDate=candidate;renderCalendar();}});
-    $('#nextMonth').addEventListener('click',()=>{viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()+1,1);renderCalendar();});
+    q('#prevMonth').addEventListener('click',()=>{
+      const now=new Date();
+      const candidate=new Date(viewDate.getFullYear(),viewDate.getMonth()-1,1);
+      const current=new Date(now.getFullYear(),now.getMonth(),1);
+      if(candidate>=current){viewDate=candidate;renderCalendar();}
+    });
+    q('#nextMonth').addEventListener('click',()=>{
+      viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()+1,1);
+      renderCalendar();
+    });
 
     async function loadAvailability(){
-      if(!AVAILABILITY_ENDPOINT){renderCalendar();renderTimes();return;}
+      if(!AVAILABILITY_ENDPOINT){
+        renderCalendar();
+        renderTimes();
+        return;
+      }
       try{
         const response=await fetch(AVAILABILITY_ENDPOINT,{method:'GET',cache:'no-store'});
         if(!response.ok)throw new Error('availability');
@@ -344,18 +404,24 @@
         schedulingConfig.blockedDates=Array.isArray(data.blockedDates)?data.blockedDates:[];
         schedulingConfig.blockedSlots=data.blockedSlots&&typeof data.blockedSlots==='object'?data.blockedSlots:{};
       }catch(e){
-        $('#scheduleMessage').textContent='Live calendar availability could not be loaded. Please try again later.';
+        q('#scheduleMessage').textContent='Live calendar availability could not be loaded. Please try again later.';
       }
-      renderCalendar();renderTimes();
+      renderCalendar();
+      renderTimes();
     }
     loadAvailability();
 
-    const appForm=$('#monitorApplication'),appSuccess=$('#applicationSuccess'),submissionNote=$('#submissionNote');
+    const appForm=q('#monitorApplication'),appSuccess=q('#applicationSuccess'),submissionNote=q('#submissionNote');
     appForm.addEventListener('submit',async e=>{
       e.preventDefault();
       if(!appForm.reportValidity())return;
-      if(!selectedDate||!selectedTime){$('#scheduleMessage').textContent='Please choose both a date and a time.';$('#calendarGrid').focus?.();return;}
-      const objectives=$('input[name="objectives"]:checked',appForm).map(x=>x.value);
+      if(!selectedDate||!selectedTime){
+        q('#scheduleMessage').textContent='Please choose both a date and a time.';
+        q('#calendarGrid').scrollIntoView({behavior:'smooth',block:'center'});
+        return;
+      }
+
+      const objectives=qa('input[name="objectives"]:checked',appForm).map(x=>x.value);
       const fd=new FormData(appForm);
       const payload=Object.fromEntries(fd.entries());
       payload.objectives=objectives;
@@ -371,42 +437,61 @@
         return;
       }
 
-      const submitBtn=$('.submit-application',appForm);
-      submitBtn.disabled=true;submitBtn.textContent='Submitting…';
+      const submitBtn=q('.submit-application',appForm);
+      submitBtn.disabled=true;
+      submitBtn.textContent='Submitting…';
       try{
-        const response=await fetch(APPLICATION_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        const response=await fetch(APPLICATION_ENDPOINT,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify(payload)
+        });
         if(!response.ok)throw new Error('submit');
-        appForm.hidden=true;appSuccess.hidden=false;appSuccess.focus();
+        appForm.hidden=true;
+        appSuccess.hidden=false;
+        appSuccess.focus();
       }catch(err){
         submissionNote.textContent='We could not submit the application. Please try again or contact us directly.';
         submissionNote.classList.add('warning');
       }finally{
-        submitBtn.disabled=false;submitBtn.textContent='Submit Monitor application';
+        submitBtn.disabled=false;
+        submitBtn.textContent='Submit Monitor application';
       }
     });
 
-    const approvalForm=$('#approvalForm'),approvalStatus=$('#approvalStatus'),paymentUnlock=$('#paymentUnlock');
+    const approvalForm=q('#approvalForm'),approvalStatus=q('#approvalStatus'),paymentUnlock=q('#paymentUnlock');
     approvalForm.addEventListener('submit',async e=>{
       e.preventDefault();
-      const code=$('#approvalCode').value.trim().toUpperCase();
-      paymentUnlock.hidden=true;paymentUnlock.removeAttribute('href');
-      if(!code){approvalStatus.textContent='Enter the approval code we sent you.';return;}
+      const code=q('#approvalCode').value.trim().toUpperCase();
+      paymentUnlock.hidden=true;
+      paymentUnlock.removeAttribute('href');
+      if(!code){
+        approvalStatus.textContent='Enter the approval code we sent you.';
+        return;
+      }
       if(!APPROVAL_ENDPOINT){
         approvalStatus.textContent='Secure approval-code verification will be activated when the Google Sheets / Apps Script workflow is connected. No codes are stored in this public page.';
         return;
       }
       approvalStatus.textContent='Checking code…';
       try{
-        const response=await fetch(APPROVAL_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'verifyApprovalCode',code})});
+        const response=await fetch(APPROVAL_ENDPOINT,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({action:'verifyApprovalCode',code})
+        });
         if(!response.ok)throw new Error('verify');
         const data=await response.json();
         if(data.valid===true&&data.paymentUrl){
           approvalStatus.textContent='Code approved. You can continue to secure payment.';
-          paymentUnlock.href=data.paymentUrl;paymentUnlock.hidden=false;
+          paymentUnlock.href=data.paymentUrl;
+          paymentUnlock.hidden=false;
         }else{
           approvalStatus.textContent='That code is not valid or is no longer active. Check the code and try again.';
         }
-      }catch(err){approvalStatus.textContent='We could not verify the code right now. Please try again later.';}
+      }catch(err){
+        approvalStatus.textContent='We could not verify the code right now. Please try again later.';
+      }
     });
   </script>
 </body>
