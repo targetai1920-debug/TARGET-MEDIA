@@ -12,18 +12,20 @@ Static animated landing page for Target Media.
 
 ## Current application flow
 
-1. Visitor clicks **Apply for Monitor** on the landing page and is taken to the dedicated `apply.html` application page.
-2. Visitor provides only the business/contact/location details needed for qualification.
-3. Visitor chooses a preferred appointment date and time.
-4. Service hours are Monday–Sunday, 09:00–18:00.
-5. Calendar UI supports unavailable dates and unavailable time slots.
-6. Google Sheets / Google Calendar connection is the next implementation step.
-7. Target Media reviews the application.
-8. Approved customers receive a unique approval code.
-9. Approval code must be verified server-side before a payment link is revealed.
-10. After payment, Target Media arranges installation.
+1. Visitor clicks **Apply for Monitor** and goes to `apply.html`.
+2. Visitor submits business, contact, location and technical-fit information only.
+3. No appointment date or time is requested during the application.
+4. Target Media reviews whether the location is suitable.
+5. Approved customers receive a unique approval code.
+6. The approval code is verified server-side before a payment link is revealed.
+7. The customer completes payment.
+8. After payment is confirmed, the customer is redirected to `schedule.html`.
+9. The installation calendar then becomes available.
+10. Service hours are Monday–Sunday, 09:00–18:00, with unavailable dates/times supplied by the connected calendar.
+11. The customer chooses an installation date and time.
+12. After booking confirmation, Target Media proceeds with installation.
 
-Important: approval codes must never be hard-coded into `index.html`. The current page intentionally leaves the application, availability and approval endpoints blank until Apps Script is connected.
+Important: approval codes and payment status must never be trusted from public frontend code. Render/server-side logic must verify both before payment or scheduling is unlocked.
 
 ## Privacy / compliance posture of current website build
 
@@ -35,7 +37,7 @@ Important: approval codes must never be hard-coded into `index.html`. The curren
 - Public dashboard metrics and charts are explicitly labelled as illustrative sample data.
 - No customer reviews/testimonials are shown.
 - Legal pages included: Privacy Policy, Terms & Conditions, Cookie Policy, Refund Policy, Accessibility Statement.
-- Main page includes keyboard focus styles, skip link, accessible FAQ states, labelled form controls, and keyboard-friendly date/time controls.
+- Main page and application page include keyboard focus styles and labelled controls. The post-payment scheduling page includes keyboard-friendly date/time controls.
 - Application data is not transmitted until the Google Apps Script endpoint is connected.
 
 ## IMPORTANT pre-launch blockers
