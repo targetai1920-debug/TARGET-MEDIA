@@ -1,0 +1,356 @@
+/*
+  Target Media — shared design tokens & components.
+  Loaded by index.html, apply.html and schedule.html.
+  Plain CSS, no build step, no external fonts.
+*/
+
+:root{
+  /* surfaces */
+  --bg:#0a0a0d;
+  --bg-raise:#111114;
+  --surface:#141417;
+  --surface-2:#1b1b20;
+  --line:rgba(255,255,255,.10);
+  --line-strong:rgba(255,255,255,.18);
+
+  /* text */
+  --text:#f5f5f7;
+  --muted:#a6a6b0;
+  --sub:#86869a;
+
+  /* violet accent — used only for primary CTA, active/selected states,
+     and small signal elements. Not a decorative wash. */
+  --accent:#7c6cf0;
+  --accent-2:#a99cff;
+  --accent-strong:#5d4bd9;
+  /* darker than --accent specifically so white button labels keep AA
+     contrast (4.5:1) across the whole gradient, not just the dark end */
+  --accent-btn:#6a58e6;
+  --accent-soft:rgba(124,108,240,.12);
+  --accent-line:rgba(124,108,240,.40);
+
+  /* status */
+  --good:#7fe3bd;
+  --warn:#e8b768;
+  --danger:#ff92ac;
+
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+
+  /* one radius scale, applied consistently:
+     sm = inputs/small controls, md = buttons/standard cards,
+     lg = large feature panels, pill = tags/status labels only */
+  --radius-sm:8px;
+  --radius-md:14px;
+  --radius-lg:20px;
+  --radius-pill:999px;
+
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55;overflow-x:hidden;position:relative}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+
+/* ==================================================================
+   ATMOSPHERE — layered ambient light + grain. Present on every page
+   so the brand feels like one continuous environment, not a flat
+   void. Slow, low-amplitude drift only; killed under reduced-motion
+   (see the media query at the bottom) and never touches interactive
+   elements, so it never competes with content or reads as "urgency."
+   ================================================================== */
+.atmosphere{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.glow-wrap{position:absolute;inset:0}
+.atmosphere i{position:absolute;display:block;border-radius:50%;filter:blur(70px)}
+.atmosphere .glow-a{width:56vw;height:56vw;max-width:820px;max-height:820px;left:-14vw;top:-18vw;background:radial-gradient(circle,rgba(124,108,240,.42),transparent 70%);animation:driftA 36s ease-in-out infinite}
+.atmosphere .glow-b{width:46vw;height:46vw;max-width:680px;max-height:680px;right:-12vw;top:6vh;background:radial-gradient(circle,rgba(93,75,217,.30),transparent 70%);animation:driftB 44s ease-in-out infinite}
+.atmosphere .glow-c{width:40vw;height:40vw;max-width:600px;max-height:600px;left:18vw;bottom:-16vh;background:radial-gradient(circle,rgba(169,156,255,.22),transparent 70%);animation:driftC 40s ease-in-out infinite}
+@keyframes driftA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5%,4%) scale(1.06)}}
+@keyframes driftB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-4%,6%) scale(1.04)}}
+@keyframes driftC{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4%,-5%) scale(1.05)}}
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------- signal rail: a thin scroll-progress line + travelling dot,
+   the same visual language (accent dot on a measurement line) as the
+   hero/flow diagrams — carries that one motif down the whole page ---------- */
+.signal-rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);height:38vh;width:1px;z-index:40;pointer-events:none}
+.signal-rail-track{position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--line-strong) 15%,var(--line-strong) 85%,transparent)}
+.signal-rail-progress{position:absolute;left:0;top:15%;width:1px;height:0;background:linear-gradient(180deg,var(--accent-2),rgba(169,156,255,.35));box-shadow:0 0 12px rgba(169,156,255,.28)}
+.signal-rail-dot{position:absolute;left:50%;top:0;width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px rgba(169,156,255,.7);transform:translate(-50%,-50%)}
+.signal-rail-label{position:absolute;right:10px;top:0;transform:translateY(-50%);font:8px var(--mono);letter-spacing:.1em;color:rgba(210,204,255,.65)}
+@media(max-width:980px){.signal-rail{display:none}}
+
+/* subtle top-edge light catch on elevated surfaces — a cheap way to make
+   flat cards read as physical, lit material instead of vector rectangles */
+.surface-edge{position:relative}
+.surface-edge::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(175deg,rgba(255,255,255,.16),rgba(255,255,255,0) 42%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+
+.skip-link{position:fixed;left:16px;top:12px;z-index:200;background:#fff;color:#090912;padding:12px 16px;border-radius:10px;font-weight:800;transform:translateY(-96px);transition:transform .2s var(--ease)}
+.skip-link:focus{transform:translateY(0)}
+
+/* elements with the `hidden` attribute must actually be hidden — without this,
+   author rules like .btn{display:inline-flex} silently override the UA default */
+[hidden]{display:none!important}
+
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--accent-2);outline-offset:3px;border-radius:6px;
+}
+
+.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.wrap{width:min(1040px,calc(100% - 32px));margin:auto}
+.section{position:relative;padding:96px 0}
+
+/* ---------- typography helpers ---------- */
+.section-title{font-size:clamp(32px,4.4vw,56px);line-height:1.05;letter-spacing:-.03em;margin:16px 0 18px;max-width:820px}
+.section-lead{font-size:clamp(16px,1.6vw,18px);color:var(--muted);max-width:700px;margin:0;line-height:1.7}
+.accent-text{color:var(--accent-2)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* the gradient-text treatment is intentionally rationed to one or two
+   brand moments (hero + closing CTA) — not applied to every headline. */
+.gradient-text{background:linear-gradient(100deg,#fff 10%,var(--accent-2) 60%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* one small-caps "kicker" label, used sparingly (roughly one per three sections) */
+.kicker{display:inline-flex;align-items:center;gap:8px;color:var(--sub);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+/* ---------- status pill: single component for every "state" label
+   (sample data / available / roadmap / live) instead of five bespoke badges ---------- */
+.status-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:var(--radius-pill);border:1px solid var(--line-strong);background:rgba(255,255,255,.04);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.status-pill i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:0 0 auto}
+.status-pill--sample{color:var(--sub);border-color:var(--line)}
+.status-pill--available{color:var(--accent-2);border-color:var(--accent-line);background:var(--accent-soft)}
+.status-pill--roadmap{color:var(--sub);border-color:var(--line);background:transparent}
+.status-pill--live{color:var(--good);border-color:rgba(127,227,189,.28);background:rgba(127,227,189,.06)}
+
+/* ---------- buttons ---------- */
+.btn{
+  border:1px solid var(--line-strong);border-radius:var(--radius-md);padding:13px 18px;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-weight:700;background:rgba(255,255,255,.05);min-height:48px;
+  transition:transform .15s var(--ease),border-color .15s var(--ease),background .15s var(--ease),box-shadow .15s var(--ease);
+}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* violet reserved for the one primary action — the sheen is a hover-only
+   light sweep (never autoplaying), giving the CTA presence without
+   repeating the old "infinite pulse" mistake */
+.btn-primary{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(135deg,var(--accent-btn),var(--accent-strong));border-color:var(--accent-line);color:#fff;box-shadow:0 14px 34px rgba(93,75,217,.32),0 0 0 1px rgba(169,156,255,.08) inset}
+.btn-primary::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.32) 48%,transparent 64%);transform:translateX(-130%);transition:transform .6s var(--ease)}
+.btn-primary>*{position:relative;z-index:2}
+.btn-primary:active{transform:scale(.97)}
+
+.btn-ghost{background:rgba(255,255,255,.03)}
+
+/* ---------- spotlight surface: cursor-tracked glow, used for the
+   Monitor pricing panel so the one real product visually leads ---------- */
+.spotlight{position:relative}
+.spotlight::before{content:"";position:absolute;inset:-1px;border-radius:inherit;z-index:0;pointer-events:none;opacity:0;
+  background:radial-gradient(460px circle at var(--mx,50%) var(--my,0%),rgba(169,156,255,.20),transparent 62%);
+  transition:opacity .35s var(--ease)}
+.spotlight.is-active::before{opacity:1}
+.spotlight>*{position:relative;z-index:1}
+
+/* ---------- simplified scroll-reveal: one fade per section, no per-child stagger ---------- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+
+/* ---------- shared nav (index / apply / schedule) ---------- */
+.nav-wrap{position:fixed;z-index:50;top:16px;left:0;width:100%;padding:0 20px}
+.nav{width:min(1180px,100%);margin:auto;min-height:64px;border:1px solid var(--line-strong);border-radius:16px;background:rgba(10,10,13,.86);backdrop-filter:blur(20px) saturate(140%);display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 16px;box-shadow:0 10px 30px rgba(0,0,0,.24)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-mark{width:30px;height:30px;color:var(--accent-2);flex:0 0 auto}
+.brand-mark svg{width:100%;height:100%;display:block}
+.brand-name{font-weight:800;letter-spacing:-.02em;font-size:16px;white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{padding:9px 11px;color:var(--muted);font-size:14px;font-weight:600;border-radius:8px;transition:background .15s var(--ease),color .15s var(--ease)}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.nav-back{font-size:13px;color:var(--muted);font-weight:600;padding:8px 4px}
+.mobile-label{display:none}
+.menu-btn{display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--line-strong);background:rgba(255,255,255,.05);align-items:center;justify-content:center}
+.menu-btn span,.menu-btn span:before,.menu-btn span:after{width:16px;height:2px;background:#fff;border-radius:2px;display:block;position:relative}
+.menu-btn span:before,.menu-btn span:after{content:"";position:absolute;left:0}
+.menu-btn span:before{top:-5px}
+.menu-btn span:after{top:5px}
+.menu-btn.open span{background:transparent}
+.menu-btn.open span:before{top:0;transform:rotate(45deg)}
+.menu-btn.open span:after{top:0;transform:rotate(-45deg)}
+
+/* ---------- forms (apply / approval / schedule share these) ---------- */
+.field{display:grid;gap:7px}
+.field.full{grid-column:1/-1}
+.field label,.choice-fieldset legend,.approval-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700}
+.field input,.field select,.field textarea{
+  width:100%;border:1px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--surface-2);color:var(--text);padding:12px 13px;
+  transition:border-color .15s var(--ease),background .15s var(--ease);
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent-line);background:#1e1e26}
+.field textarea{resize:vertical;min-height:110px}
+.field input::placeholder,.field textarea::placeholder{color:#83838f}
+.optional{color:var(--sub);font-weight:600;text-transform:none;letter-spacing:0}
+
+.choice-fieldset{border:0;padding:0;margin:0}
+.choice-fieldset legend{margin-bottom:10px}
+.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.choice{display:flex;align-items:center;gap:10px;min-height:50px;padding:12px 13px;border:1px solid var(--line);border-radius:var(--radius-sm);background:rgba(255,255,255,.02);cursor:pointer;transition:border-color .15s var(--ease),background .15s var(--ease),transform .1s var(--ease)}
+.choice:has(input:checked){border-color:var(--accent-line);background:var(--accent-soft)}
+.choice:active{transform:scale(.98)}
+.choice input{width:18px;height:18px;accent-color:var(--accent)}
+.choice span{font-size:12px;color:#e2e2ea}
+
+.ack{display:flex;gap:10px;align-items:flex-start;margin:10px 0;color:var(--muted);font-size:12px}
+.ack input{margin-top:3px;width:18px;height:18px;accent-color:var(--accent)}
+.ack a{text-decoration:underline;text-underline-offset:3px}
+
+.submission-note{margin:16px 0;padding:13px 14px;border:1px solid rgba(232,183,104,.28);border-radius:var(--radius-sm);background:rgba(232,183,104,.06);color:#e7d6b0;font-size:11px;line-height:1.6}
+.submission-note.warning{border-color:rgba(255,146,172,.3);background:rgba(255,146,172,.06);color:#ffd0dc}
+
+/* ---------- application-style card shell (apply.html + index.html #approved) ---------- */
+.application-card{border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);overflow:hidden;box-shadow:var(--shadow)}
+.form-section{padding:28px 30px;border-bottom:1px solid var(--line)}
+.form-section:last-child{border-bottom:0}
+.form-section-head{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;margin-bottom:22px}
+.form-section-head>span{width:40px;height:40px;border-radius:var(--radius-sm);border:1px solid var(--line-strong);display:grid;place-items:center;color:var(--accent-2);background:var(--accent-soft);font-weight:700;font-family:var(--mono)}
+.form-section-head h2,.form-section-head h3{font-size:20px;margin:0 0 5px;letter-spacing:-.02em}
+.form-section-head p{margin:0;color:var(--muted);font-size:13px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.textarea-field{margin-top:18px}
+
+.application-success{border:1px solid rgba(127,227,189,.28);border-radius:var(--radius-lg);padding:42px;text-align:center;background:rgba(127,227,189,.05)}
+.success-mark{display:grid;place-items:center;width:48px;height:48px;margin:0 auto 16px;border-radius:50%;background:rgba(127,227,189,.12);border:1px solid rgba(127,227,189,.28);color:var(--good);font-size:22px}
+.application-success h2,.application-success h3{font-size:26px;margin:0 0 8px}
+.application-success p{max-width:600px;margin:auto;color:var(--muted);line-height:1.7}
+
+/* ---------- footer ---------- */
+footer{padding:30px 0 46px;color:var(--sub);font-size:11px}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{text-decoration:underline;text-decoration-color:rgba(255,255,255,.22);text-underline-offset:4px;color:var(--muted)}
+
+/* hover-only feedback gated behind (hover:hover) — touch devices fire
+   hover on tap, which would otherwise leave a "stuck" tint until the
+   next tap elsewhere */
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.08)}
+  .btn-primary:hover{border-color:var(--accent-2);box-shadow:0 16px 40px rgba(93,75,217,.4),0 0 0 1px rgba(169,156,255,.14) inset}
+  .btn-primary:hover::after{transform:translateX(130%)}
+  .nav-links a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+  .nav-back:hover{color:var(--text)}
+  .footer-links a:hover{color:var(--text)}
+}
+
+/* nav gains presence once the page has scrolled past the hero */
+.nav.is-scrolled{background:rgba(10,10,13,.94);box-shadow:0 14px 40px rgba(0,0,0,.34)}
+
+@media(max-width:980px){
+  .nav-links{position:absolute;top:74px;left:0;width:100%;padding:10px;background:var(--surface);border:1px solid var(--line-strong);border-radius:14px;box-shadow:var(--shadow);display:grid;
+    opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none;transition:opacity .22s var(--ease),transform .22s var(--ease)}
+  .nav-links a{padding:12px}
+  .menu-btn{display:flex}
+  .nav-links.mobile{opacity:1;transform:none;pointer-events:auto}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .choice-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .container{width:min(100% - 26px,1180px)}
+  .section{padding:72px 0}
+  .nav-wrap{top:10px;padding:0 10px}
+  .nav{min-height:56px;border-radius:13px}
+  .brand-mark{width:26px;height:26px}
+  .brand-name{font-size:14px}
+  .choice-grid{grid-template-columns:1fr}
+  .form-section{padding:20px}
+  .desktop-label{display:none}
+  .mobile-label{display:inline}
+  .nav-actions{gap:6px}
+  .nav-actions .btn{padding:9px 11px;font-size:12px;min-height:40px}
+}
+@media(max-width:480px){
+  .brand-name{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  /* reduced motion means fewer/gentler animations, not zero: drop
+     transform-based movement, but keep color/opacity feedback that
+     aids comprehension (hover/focus tints, the faq +/x rotation is
+     tiny and stays for state-indication) */
+  html{scroll-behavior:auto!important}
+  *{animation:none!important}
+  .btn,.btn-primary,.btn-primary::after,.choice,.calendar-day,.time-slot,.skip-link,.reveal,.faq-a,.faq-plus,.nav-links,.spotlight::before,.wipe-text{transition:none!important}
+  .btn:active,.btn-primary:active,.choice:active,.calendar-day:active,.time-slot:active{transform:none!important}
+  .reveal{opacity:1;transform:none}
+  .atmosphere i,.glow-wrap{display:none}
+  .signal-rail{display:none}
+  [data-reveal]{opacity:1!important;transform:none!important;filter:none!important}
+  [data-draw]{stroke-dashoffset:0!important}
+  .wipe-text{clip-path:inset(0 0 0 0)!important}
+}
+
+/* ==================================================================
+   REVEAL / MOTION HOOKS — driven by motion.js. Base hidden state lives
+   here so content is still fully present (readable, indexable) with
+   JS disabled; motion.js only ever moves things INTO their final,
+   already-correct layout position. */
+.js-ready [data-reveal]{opacity:0;transition:opacity .8s var(--ease),transform .8s var(--ease),filter .8s var(--ease)}
+.js-ready [data-reveal="up"]{transform:translateY(28px)}
+.js-ready [data-reveal="scale"]{transform:scale(.94);filter:blur(6px)}
+.js-ready [data-reveal="side"]{transform:translateX(-24px)}
+.js-ready [data-reveal].is-revealed{opacity:1;transform:none;filter:blur(0)}
+
+/* gradient-text wipe: the accent phrase in the hero draws in from the
+   left after the rest of the line has already appeared — typography
+   that responds to load state instead of just fading */
+.wipe-text{display:inline-block}
+.js-ready .wipe-text{clip-path:inset(0 100% 0 0);transition:clip-path 1s var(--ease)}
+.js-ready .wipe-text.is-revealed{clip-path:inset(0 0 0 0)}
+
+/* only hidden once .js-ready confirms motion.js is actually running the
+   draw-in (mirrors the [data-reveal] pattern) — a no-JS visitor sees the
+   complete diagram immediately instead of a permanently invisible line */
+.js-ready [data-draw]{stroke-dasharray:1px;stroke-dashoffset:1px}
+
+/* ---------- sticky story section (How it works) ---------- */
+.story-shell{display:grid;grid-template-columns:.92fr 1.08fr;gap:52px;margin-top:48px;align-items:start}
+.story-visual{position:sticky;top:110px;border:1px solid var(--line-strong);border-radius:var(--radius-lg);background:var(--surface);padding:22px;box-shadow:var(--shadow)}
+.story-visual svg{width:100%;height:auto;display:block}
+.story-layer{opacity:.14;transition:opacity .5s var(--ease)}
+.story-visual[data-active="1"] .story-layer--measure,
+.story-visual[data-active="2"] .story-layer--understand,
+.story-visual[data-active="3"] .story-layer--act{opacity:1}
+.story-visual[data-active="2"] .story-layer--measure,
+.story-visual[data-active="3"] .story-layer--measure,
+.story-visual[data-active="3"] .story-layer--understand{opacity:.55}
+.story-steps{display:grid;gap:32vh;padding:8px 0 4px}
+.story-step{position:relative;opacity:.4;transition:opacity .4s var(--ease)}
+.story-step.is-active{opacity:1}
+.story-step .process-index{transition:border-color .3s var(--ease),color .3s var(--ease),background .3s var(--ease)}
+.story-step.is-active .process-index{border-color:var(--accent-line);background:var(--accent-soft)}
+
+/* ---------- comparison: raw movement vs actionable insight ---------- */
+.compare-visual{display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:center;margin-top:48px}
+.compare-panel{border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);padding:24px;min-height:300px;display:flex;flex-direction:column}
+.compare-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--sub)}
+.compare-panel--insight .compare-label{color:var(--accent-2)}
+.scatter-canvas{width:100%;height:200px;margin-top:14px;display:block;border-radius:var(--radius-sm)}
+.compare-caption{margin:14px 0 0;color:var(--sub);font-size:12px;font-family:var(--mono)}
+.compare-arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;color:var(--accent-2);font-size:16px;background:var(--surface-2)}
+.insight-stat{margin-top:14px;display:flex;align-items:baseline;gap:10px}
+.insight-stat strong{font-family:var(--mono);font-size:clamp(36px,4vw,52px);letter-spacing:-.02em}
+.insight-stat span{color:var(--muted);font-size:12.5px}
+.insight-bar{margin-top:18px;height:10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);overflow:hidden}
+.insight-bar-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,var(--accent-btn),var(--accent-2))}
+
+@media(max-width:980px){
+  .story-shell{grid-template-columns:1fr}
+  .story-visual{position:static;top:auto}
+  .story-steps{gap:36px}
+  .compare-visual{grid-template-columns:1fr}
+  .compare-arrow{transform:rotate(90deg);margin:auto}
+}
