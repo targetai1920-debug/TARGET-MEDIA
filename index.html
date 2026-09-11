@@ -20,7 +20,11 @@
     .privacy-banner{border:1px solid var(--line);border-radius:30px;padding:36px;background:linear-gradient(120deg,rgba(119,92,255,.09),rgba(255,255,255,.02));display:grid;grid-template-columns:1fr .9fr;gap:50px;align-items:center}.privacy-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}.privacy-point{border:1px solid var(--line);border-radius:17px;padding:16px;background:rgba(255,255,255,.03)}.privacy-point b{display:block;font-size:12px}.privacy-point span{display:block;color:var(--muted);font-size:11px;margin-top:5px;line-height:1.55}.faq{margin-top:46px;border-top:1px solid var(--line)}.faq-item{border-bottom:1px solid var(--line)}.faq-q{width:100%;border:0;background:none;text-align:left;padding:23px 2px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-weight:800;cursor:pointer}.faq-plus{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;flex:0 0 auto}.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}.faq-a p{color:var(--muted);font-size:13px;line-height:1.75;margin:0;padding:0 48px 23px 2px;max-width:860px}
     .final-card{position:relative;border:1px solid rgba(143,124,255,.34);border-radius:34px;min-height:360px;display:grid;place-items:center;text-align:center;padding:52px 28px;overflow:hidden;background:linear-gradient(150deg,rgba(106,81,255,.16),rgba(12,12,28,.9) 60%)}.final-card h2{font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.05em;max-width:850px;margin:0 auto 18px}.final-card p{color:var(--muted);max-width:650px;margin:0 auto 28px;font-size:15px;line-height:1.7}.final-card .hero-actions{justify-content:center}footer{padding:34px 0 46px;color:#b5b5c5;font-size:11px}.footer-grid{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;border-top:1px solid var(--line);padding-top:24px}.footer-brand{display:flex;align-items:center;gap:10px;color:#e0deeb;font-weight:800}.footer-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}.footer-links a{text-decoration:underline;text-decoration-color:rgba(255,255,255,.25);text-underline-offset:4px}.legal-status{font-size:10px;color:#b7b7c6;text-align:right;max-width:250px}
     .modal-backdrop{position:fixed;inset:0;background:rgba(3,3,9,.78);backdrop-filter:blur(12px);z-index:100;display:none;place-items:center;padding:20px}.modal-backdrop.open{display:grid}.modal{width:min(620px,100%);max-height:min(780px,calc(100vh - 40px));overflow:auto;border:1px solid rgba(255,255,255,.18);border-radius:28px;background:#0e0e20;padding:25px;box-shadow:0 40px 100px rgba(0,0,0,.6)}.modal-top{display:flex;justify-content:space-between;align-items:start;gap:20px}.modal h3{font-size:27px;letter-spacing:-.04em;margin:0}.modal p{color:var(--muted);font-size:13px;line-height:1.65}.close{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);cursor:pointer;font-size:22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:11px;color:#c6c6d2;text-transform:uppercase;letter-spacing:.07em;font-weight:800}.field input,.field select{width:100%;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#15152a;color:white;padding:12px 13px}.field-help{font-size:11px;color:#b6b6c5;line-height:1.5}.ack{display:flex;gap:10px;align-items:flex-start;margin-top:14px;color:#d5d5df;font-size:12px}.ack input{margin-top:3px;width:18px;height:18px}.brief{border:1px solid var(--line);border-radius:16px;padding:15px;background:rgba(255,255,255,.03);color:#e0e0e8;font-size:12px;line-height:1.7;white-space:pre-line;margin-top:16px;display:none}.brief.show{display:block}.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.toast{position:fixed;right:20px;bottom:20px;z-index:150;padding:12px 16px;border:1px solid rgba(140,245,207,.3);background:#101d1b;color:#baf8e1;border-radius:13px;font-size:12px;font-weight:800;transform:translateY(25px);opacity:0;pointer-events:none;transition:.3s}.toast.show{transform:none;opacity:1}
-    @keyframes marquee{to{transform:translateX(-50%)}}@media(max-width:980px){.hero-grid,.split{grid-template-columns:1fr;gap:44px}.hero-grid{max-width:780px}.three-grid{grid-template-columns:1fr 1fr}.three-grid .feature-card:last-child{grid-column:1/-1}.metrics-grid{grid-template-columns:1fr}.privacy-banner{grid-template-columns:1fr}.nav-links{display:none}.nav-actions .btn{display:none}.menu-btn{display:flex}.nav-links.mobile{position:absolute;display:grid;top:78px;left:0;width:100%;padding:12px;background:#0d0d1f;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.nav-links.mobile a{padding:13px}.pricing-head{display:block}.pricing-note{margin-top:18px}.footer-grid{grid-template-columns:1fr;text-align:left}.footer-links{justify-content:flex-start}.legal-status{text-align:left;max-width:none}}@media(max-width:680px){.container{width:min(100% - 26px,1180px)}.section{padding:80px 0}.nav-wrap{top:10px;padding:0 10px}.nav{height:60px;border-radius:17px}.brand-mark{width:45px}.brand-name{font-size:15px}.hero{padding-top:112px;min-height:auto}.hero h1{font-size:clamp(43px,14vw,67px)}.hero-copy p{font-size:16px}.hero-actions{display:grid;grid-template-columns:1fr;width:100%}.hero-actions .btn{width:100%}.metric-grid{grid-template-columns:1fr 1fr}.metric-grid .metric:last-child{grid-column:1/-1}.compare-row{grid-template-columns:1fr}.three-grid,.pricing-grid,.trust-grid{grid-template-columns:1fr}.three-grid .feature-card:last-child{grid-column:auto}.trust-top,.friend-line,.growth-card{grid-template-columns:1fr}.trust-card{border-right:0;border-bottom:1px solid var(--line)}.trust-card:last-child{border-bottom:0}.growth-card{grid-column:auto}.growth-features{grid-template-columns:1fr}.privacy-points{grid-template-columns:1fr}.funnel-chart{padding-left:42px}.bars{gap:7px}.bar-col b{font-size:9px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:20px;border-radius:22px}.price{font-size:44px}.plan-sub{padding-right:0}.popular-badge{position:static;width:max-content;margin-bottom:12px}.footer-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}}
+    .monitor-only-grid{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr)}.future-stack{display:grid;gap:16px}.monitor-card{border-color:rgba(154,133,255,.62);background:linear-gradient(180deg,rgba(105,81,255,.14),rgba(255,255,255,.025))}.disabled-plan{opacity:.56;filter:saturate(.5);background:rgba(255,255,255,.025)}.disabled-plan:hover{transform:none;border-color:var(--line)}.disabled-plan .btn:disabled{cursor:not-allowed;opacity:.7;transform:none}.coming-badge{display:inline-flex;width:max-content;margin-bottom:18px;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:#d0d0da;font-weight:800}.locked-copy{margin:24px 0;color:#d4d4df;font-size:13px;padding:14px;border:1px dashed rgba(255,255,255,.16);border-radius:14px}
+    .application-section{padding-top:88px}.application-card{margin-top:50px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));overflow:hidden;box-shadow:var(--shadow)}.form-section{padding:30px;border-bottom:1px solid var(--line)}.form-section:last-child{border-bottom:0}.form-section-head{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;margin-bottom:24px}.form-section-head>span{width:42px;height:42px;border-radius:13px;border:1px solid rgba(142,120,255,.34);display:grid;place-items:center;color:#d9d2ff;background:rgba(119,92,255,.09);font-weight:850}.form-section-head h3{font-size:22px;margin:0 0 5px;letter-spacing:-.03em}.form-section-head p{margin:0;color:var(--muted);font-size:13px}.application-grid{margin-top:0}.field textarea,.field input,.field select{width:100%;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#15152a;color:#fff;padding:12px 13px}.field textarea{resize:vertical;min-height:110px}.field input::placeholder,.field textarea::placeholder{color:#8f8fa2}.optional{color:#9c9cad;font-weight:600;text-transform:none;letter-spacing:0}.textarea-field{margin-top:18px}.choice-fieldset{border:0;padding:0;margin:0}.choice-fieldset legend{font-size:11px;color:#c6c6d2;text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-bottom:10px}.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.choice{display:flex;align-items:center;gap:10px;min-height:50px;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);cursor:pointer}.choice:has(input:checked){border-color:rgba(142,120,255,.58);background:rgba(119,92,255,.10)}.choice input{width:18px;height:18px;accent-color:#8e78ff}.choice span{font-size:12px;color:#e5e5eb}
+    .schedule-shell{display:grid;grid-template-columns:minmax(360px,.95fr) 1.05fr;gap:18px}.calendar-panel,.time-panel{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.026);padding:20px}.calendar-top{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;gap:8px;margin-bottom:16px}.calendar-top strong{text-align:center;font-size:15px}.calendar-nav{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#fff;cursor:pointer}.calendar-nav:disabled{opacity:.3;cursor:not-allowed}.weekday-row,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.weekday-row{margin-bottom:7px}.weekday-row span{text-align:center;color:#aaaabd;font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:800}.calendar-day,.calendar-blank{aspect-ratio:1;min-width:0}.calendar-day{border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04);color:#eeeef5;cursor:pointer;font-weight:750}.calendar-day:hover:not(:disabled){border-color:rgba(142,120,255,.65);background:rgba(119,92,255,.10)}.calendar-day.is-unavailable{opacity:.23;background:rgba(255,255,255,.015);cursor:not-allowed}.calendar-day.is-selected{border-color:#a796ff;background:rgba(119,92,255,.26);box-shadow:0 0 0 1px rgba(167,150,255,.28) inset}.calendar-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;color:#aaaabd;font-size:10px}.calendar-legend span{display:flex;align-items:center;gap:6px}.legend-dot{width:9px;height:9px;border-radius:3px;border:1px solid var(--line);display:inline-block}.legend-dot.available{background:rgba(255,255,255,.08)}.legend-dot.unavailable{opacity:.35;background:#454552}.legend-dot.selected{background:#8e78ff;border-color:#a99aff}.selected-date-label{font-size:10px;color:#aaaabd;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.time-panel>strong{display:block;font-size:20px;margin:5px 0 8px;letter-spacing:-.025em}.time-help{font-size:12px;color:var(--muted);margin:0 0 16px}.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.time-slot{min-height:42px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04);color:#eeeef5;font-weight:750;cursor:pointer}.time-slot:hover:not(:disabled){border-color:rgba(142,120,255,.6);background:rgba(119,92,255,.10)}.time-slot.is-unavailable{opacity:.25;cursor:not-allowed}.time-slot.is-selected{border-color:#a796ff;background:rgba(119,92,255,.26)}.schedule-message{min-height:20px;color:#c5c5d2;font-size:11px;margin-top:13px}.final-form-section{background:rgba(119,92,255,.035)}.final-form-section .ack a{text-decoration:underline;text-underline-offset:3px}.submission-note{margin:16px 0;padding:13px 14px;border:1px solid rgba(255,210,122,.24);border-radius:13px;background:rgba(255,210,122,.06);color:#e7d6b0;font-size:11px;line-height:1.6}.submission-note.warning{border-color:rgba(255,142,170,.3);background:rgba(255,142,170,.06);color:#ffd0dc}.submit-application{width:100%;margin-top:2px}.application-success{margin-top:42px;border:1px solid rgba(140,245,207,.3);border-radius:30px;padding:42px;text-align:center;background:rgba(140,245,207,.055)}.application-success .success-mark{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:rgba(140,245,207,.12);border:1px solid rgba(140,245,207,.3);color:var(--good);font-size:24px}.application-success h3{font-size:30px;margin:0 0 8px}.application-success p{max-width:620px;margin:auto;color:var(--muted);line-height:1.7}
+    .approved-card{display:grid;grid-template-columns:1.1fr .9fr;gap:42px;border:1px solid rgba(142,120,255,.36);border-radius:32px;padding:38px;background:linear-gradient(145deg,rgba(106,81,255,.12),rgba(255,255,255,.018));align-items:center}.approved-copy h2{font-size:clamp(34px,4.5vw,58px);line-height:1.03;letter-spacing:-.05em;margin:20px 0 16px}.approved-copy p{color:var(--muted);max-width:670px;line-height:1.7}.process-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:22px;font-size:11px;font-weight:800;color:#d7d3e8}.process-row span{padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035)}.process-row i{font-style:normal;color:#766be0}.approval-box{border:1px solid var(--line);border-radius:22px;padding:22px;background:rgba(7,7,18,.45)}.approval-box>label{display:block;font-size:11px;color:#c6c6d2;text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-bottom:8px}.approval-input-row{display:grid;grid-template-columns:1fr auto;gap:9px}.approval-input-row input{min-width:0;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#15152a;color:#fff;padding:12px 13px;text-transform:uppercase;letter-spacing:.08em}.approval-status{min-height:22px;margin-top:13px;color:#d3d3df;font-size:12px;line-height:1.55}.payment-unlock{width:100%;margin-top:8px}
+    @keyframes marquee{to{transform:translateX(-50%)}}@media(max-width:980px){.hero-grid,.split{grid-template-columns:1fr;gap:44px}.monitor-only-grid,.schedule-shell,.approved-card{grid-template-columns:1fr}.hero-grid{max-width:780px}.three-grid{grid-template-columns:1fr 1fr}.three-grid .feature-card:last-child{grid-column:1/-1}.metrics-grid{grid-template-columns:1fr}.privacy-banner{grid-template-columns:1fr}.nav-links{display:none}.nav-actions .btn{display:none}.menu-btn{display:flex}.nav-links.mobile{position:absolute;display:grid;top:78px;left:0;width:100%;padding:12px;background:#0d0d1f;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.nav-links.mobile a{padding:13px}.pricing-head{display:block}.pricing-note{margin-top:18px}.footer-grid{grid-template-columns:1fr;text-align:left}.footer-links{justify-content:flex-start}.legal-status{text-align:left;max-width:none}}@media(max-width:680px){.container{width:min(100% - 26px,1180px)}.section{padding:80px 0}.nav-wrap{top:10px;padding:0 10px}.nav{height:60px;border-radius:17px}.brand-mark{width:45px}.brand-name{font-size:15px}.hero{padding-top:112px;min-height:auto}.hero h1{font-size:clamp(43px,14vw,67px)}.hero-copy p{font-size:16px}.hero-actions{display:grid;grid-template-columns:1fr;width:100%}.hero-actions .btn{width:100%}.metric-grid{grid-template-columns:1fr 1fr}.metric-grid .metric:last-child{grid-column:1/-1}.compare-row{grid-template-columns:1fr}.three-grid,.pricing-grid,.trust-grid,.choice-grid{grid-template-columns:1fr}.three-grid .feature-card:last-child{grid-column:auto}.trust-top,.friend-line,.growth-card{grid-template-columns:1fr}.trust-card{border-right:0;border-bottom:1px solid var(--line)}.trust-card:last-child{border-bottom:0}.growth-card{grid-column:auto}.growth-features{grid-template-columns:1fr}.privacy-points{grid-template-columns:1fr}.funnel-chart{padding-left:42px}.bars{gap:7px}.bar-col b{font-size:9px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:20px;border-radius:22px}.price{font-size:44px}.plan-sub{padding-right:0}.popular-badge{position:static;width:max-content;margin-bottom:12px}.footer-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form-section{padding:22px}.schedule-shell{grid-template-columns:1fr}.time-grid{grid-template-columns:repeat(2,1fr)}.approved-card{padding:24px}.approval-input-row{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
@@ -33,14 +37,14 @@
         <span class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 416.44"><path d="M783.56 268.45l-2.3-5.73-8.03-4.59h-61.95l-25.24 5.73-29.83 17.21-51.62 48.18-33.27 26.39-42.45 24.09-24.09 8.03-40.15 5.74-29.83-1.15-42.45-8.03-24.09-9.18 17.21 11.48 21.8 10.32 41.3 11.47 19.5 2.3h30.97l28.68-4.59 29.83-10.33 37.86-21.79 28.68-22.95 39.01-36.71 27.53-19.5 22.95-9.18 16.06-3.44h42.44l10.33-6.89zM252.39 243.21l17.21 33.27 25.24 30.98 19.5 10.32h16.06l19.5-10.32 64.25-67.69 12.62-6.88 95.22-3.44 5.73-8.04v-30.97l5.74-5.74h120.46l4.59 5.74v32.12l8.03 8.03h328.11l11.47 8.03h178.97l11.47-6.88 2.29-16.06-14.91-12.62h-176.67l-11.48 6.88-310.9 1.15-8.03-8.03v-30.98l-9.17-8.03H518.55l-10.33 9.18v30.98l-6.88 6.88H279.92l-18.35 10.32-9.18 21.8zM536.9 123.9l-73.42-36.71-8.03-25.24-13.77-22.94-16.06-16.07-25.24-14.91-25.24-6.88L352.2 0l-21.8 3.44-25.24 10.33-28.68 24.09-12.62 18.35-10.32 33.27v47.04l-35.57 43.59-36.71 1.15-52.77 16.06-51.63 32.13-37.85 40.15-16.07 24.09-18.35 42.45L0 365.97l4.59 36.71 16.06 12.62 16.06-4.59 37.86-100.96 25.24-37.86 35.56-35.56 21.8-14.92 36.71-14.91 26.39-1.15 18.35 10.33-4.59-21.8 29.83-35.56h13.77l5.74-5.74v-49.33l8.03-11.47 18.35-3.44 16.06 4.59 92.93 53.92 26.38 10.32 18.36 1.15 24.09-5.74z" fill="currentColor"/></svg></span>
         <span class="brand-name">Target Media</span>
       </a>
-      <div class="nav-links" id="navLinks"><a href="#product">Product</a><a href="#metrics">Metrics</a><a href="#approach">Approach</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
-      <div class="nav-actions"><a class="btn" href="#pricing">View plans</a><button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu" aria-controls="navLinks" aria-expanded="false"><span aria-hidden="true"></span></button></div>
+      <div class="nav-links" id="navLinks"><a href="#product">Product</a><a href="#pricing">Monitor</a><a href="#apply">Apply</a><a href="#approved">Approved?</a><a href="#faq">FAQ</a></div>
+      <div class="nav-actions"><a class="btn" href="#apply">Apply for Monitor</a><button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu" aria-controls="navLinks" aria-expanded="false"><span aria-hidden="true"></span></button></div>
     </nav>
   </header>
 
   <main id="main">
     <section class="hero" id="top"><div class="container hero-grid">
-      <div class="hero-copy"><span class="eyebrow"><i></i> Storefront intelligence</span><h1>See what happens <span class="gradient-text">before the door opens.</span></h1><p>Target Media helps local businesses understand storefront traffic, attention and stopping patterns through aggregated metrics, quarterly reporting and close human support.</p><div class="hero-actions"><a class="btn btn-primary" href="#pricing">Compare quarterly plans</a><a class="btn" href="#product">How it works</a></div><div class="micro-proof"><span class="proof-dot" aria-hidden="true"></span><span><strong>Transparency note:</strong> all interface numbers shown on this page are illustrative sample data, not customer results or performance guarantees.</span></div></div>
+      <div class="hero-copy"><span class="eyebrow"><i></i> Storefront intelligence</span><h1>See what happens <span class="gradient-text">before the door opens.</span></h1><p>Target Media helps local businesses understand storefront traffic, attention and stopping patterns through aggregated metrics, quarterly reporting and close human support.</p><div class="hero-actions"><a class="btn btn-primary" href="#apply">Apply for Monitor</a><a class="btn" href="#product">How it works</a></div><div class="micro-proof"><span class="proof-dot" aria-hidden="true"></span><span><strong>Transparency note:</strong> all interface numbers shown on this page are illustrative sample data, not customer results or performance guarantees.</span></div></div>
       <div class="dashboard" aria-label="Illustrative Target Media dashboard using sample data"><div class="dash-top"><div class="dash-title"><span class="live-dot" aria-hidden="true"></span>Storefront overview</div><span class="demo-label">Sample data</span></div><div class="metric-grid"><div class="metric"><small>Passers-by</small><strong>2,184</strong></div><div class="metric"><small>Look rate</small><strong>31.8% <span class="up">+3.1 pp</span></strong></div><div class="metric"><small>Stop rate</small><strong>8.6% <span class="up">+1.2 pp</span></strong></div></div><div class="chart-card"><div class="chart-head"><b>Attention trend</b><span>Illustrative dashboard</span></div><div class="chart" role="img" aria-label="Sample attention trend rising over time; illustrative only"><svg viewBox="0 0 520 165" preserveAspectRatio="none"><defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#8e78ff" stop-opacity=".3"/><stop offset="100%" stop-color="#8e78ff" stop-opacity="0"/></linearGradient></defs><path d="M0 142 C55 138 74 111 118 118 C161 125 181 72 226 88 C268 103 295 48 337 63 C379 79 404 34 447 49 C480 60 499 30 520 26 L520 165 L0 165Z" fill="url(#g)"/><path d="M0 142 C55 138 74 111 118 118 C161 125 181 72 226 88 C268 103 295 48 337 63 C379 79 404 34 447 49 C480 60 499 30 520 26" fill="none" stroke="#b6a9ff" stroke-width="3"/></svg></div></div><div class="compare-row"><div class="compare"><small>Sample strongest window</small><b>17:00–19:00</b></div><div class="compare"><small>Sample store vs area</small><b>+6.4%</b></div></div></div>
     </div></section>
 
@@ -48,45 +52,362 @@
 
     <section class="section" id="product"><div class="container"><span class="eyebrow reveal"><i></i> How it works</span><h2 class="section-title reveal delay-1">Measure the storefront. <span class="gradient-text">Interpret the signal.</span></h2><p class="section-lead reveal delay-2">The standard offer focuses on aggregated business metrics rather than identifying individuals. Actual deployments must be configured and documented for the specific location.</p><div class="three-grid"><article class="feature-card reveal"><div class="step-no">01</div><h3>Measure</h3><p>Estimate how many people pass, orient toward the storefront and stop, subject to camera placement, occlusion, lighting and model limitations.</p><div class="mini-label">Traffic → attention → stop</div></article><article class="feature-card reveal delay-1"><div class="step-no">02</div><h3>Understand</h3><p>Track changes by hour, day and week, compare periods and add surrounding-area context where a lawful and technically valid benchmark exists.</p><div class="mini-label">Store → period → context</div></article><article class="feature-card reveal delay-2"><div class="step-no">03</div><h3>Act</h3><p>Use quarterly summaries, alerts and data-backed recommendations as decision support. Metrics are estimates, not guaranteed causal explanations.</p><div class="mini-label">Signal → diagnosis → action</div></article></div><p class="compliance-note reveal"><strong>Deployment privacy:</strong> camera analytics can involve personal-data processing even when the final dashboard is aggregated. We do not market facial recognition, identity tracking, emotion recognition or demographic profiling in the standard plans. Before activation, the parties must document roles, lawful basis, necessity, signage, retention and whether a DPIA is required for the location.</p></div></section>
 
-    <section class="section" id="intelligence"><div class="container"><span class="eyebrow reveal"><i></i> Intelligence layer</span><div class="split"><div><h2 class="section-title reveal delay-1">Your store does not operate <span class="gradient-text">in a vacuum.</span></h2><p class="section-lead reveal delay-2">Intelligence adds comparable area context so a change at one location can be interpreted against wider movement. Benchmarks only make sense when the comparison set is sufficiently relevant and aggregated.</p><div class="intel-list"><div class="intel-item reveal"><div class="intel-icon">01</div><div><b>Store vs. area</b><p>Compare the location with relevant surrounding patterns.</p></div></div><div class="intel-item reveal delay-1"><div class="intel-icon">02</div><div><b>Detect meaningful gaps</b><p>Surface unusual shifts where the location diverges from the comparison context.</p></div></div><div class="intel-item reveal delay-2"><div class="intel-icon">03</div><div><b>Investigate possible causes</b><p>Use the data to generate hypotheses about internal versus external factors; validate them before acting.</p></div></div></div></div><div class="network-card reveal delay-2" aria-label="Illustrative local comparison network"><div class="network-head"><b>Local context network</b><span>Illustrative architecture — not live data</span></div><div class="network"><svg viewBox="0 0 500 320" preserveAspectRatio="none" aria-hidden="true"><line class="net-line" x1="250" y1="150" x2="55" y2="48"/><line class="net-line" x1="250" y1="150" x2="445" y2="46"/><line class="net-line" x1="250" y1="150" x2="70" y2="270"/><line class="net-line" x1="250" y1="150" x2="425" y2="270"/><line class="net-line" x1="250" y1="150" x2="492" y2="160"/><line class="net-line" x1="250" y1="150" x2="8" y2="163"/></svg><div class="node main">Your store</div><div class="node n1">Area A</div><div class="node n2">Area B</div><div class="node n3">Area C</div><div class="node n4">Area D</div><div class="node n5">Flow</div><div class="node n6">Flow</div></div></div></div></div></section>
+    <section class="section" id="intelligence"><div class="container"><span class="eyebrow reveal"><i></i> Future intelligence layer · not available yet</span><div class="split"><div><h2 class="section-title reveal delay-1">Your store does not operate <span class="gradient-text">in a vacuum.</span></h2><p class="section-lead reveal delay-2">This is the direction we want to build toward once the network has enough real locations and history. It is shown as product roadmap only and is not currently offered for sale.</p><div class="intel-list"><div class="intel-item reveal"><div class="intel-icon">01</div><div><b>Store vs. area</b><p>Compare the location with relevant surrounding patterns.</p></div></div><div class="intel-item reveal delay-1"><div class="intel-icon">02</div><div><b>Detect meaningful gaps</b><p>Surface unusual shifts where the location diverges from the comparison context.</p></div></div><div class="intel-item reveal delay-2"><div class="intel-icon">03</div><div><b>Investigate possible causes</b><p>Use the data to generate hypotheses about internal versus external factors; validate them before acting.</p></div></div></div></div><div class="network-card reveal delay-2" aria-label="Illustrative local comparison network"><div class="network-head"><b>Future local context network</b><span>Roadmap illustration — not currently available</span></div><div class="network"><svg viewBox="0 0 500 320" preserveAspectRatio="none" aria-hidden="true"><line class="net-line" x1="250" y1="150" x2="55" y2="48"/><line class="net-line" x1="250" y1="150" x2="445" y2="46"/><line class="net-line" x1="250" y1="150" x2="70" y2="270"/><line class="net-line" x1="250" y1="150" x2="425" y2="270"/><line class="net-line" x1="250" y1="150" x2="492" y2="160"/><line class="net-line" x1="250" y1="150" x2="8" y2="163"/></svg><div class="node main">Your store</div><div class="node n1">Area A</div><div class="node n2">Area B</div><div class="node n3">Area C</div><div class="node n4">Area D</div><div class="node n5">Flow</div><div class="node n6">Flow</div></div></div></div></div></section>
 
     <section class="section" id="metrics"><div class="container"><span class="eyebrow reveal"><i></i> What you can see</span><h2 class="section-title reveal delay-1">Turn foot traffic into <span class="gradient-text">a decision system.</span></h2><p class="section-lead reveal delay-2">The chart below is deliberately visible and labelled as a simulation. It demonstrates the type of funnel the dashboard can display; the values are not measured customer data.</p><div class="metrics-grid"><div class="metric-card reveal"><h3>From passer-by to attention</h3><div class="card-muted">Illustrative conversion funnel — sample data</div><div class="funnel-chart" role="img" aria-label="Illustrative conversion funnel: passers-by 100 percent, visible 71 percent, looked 32 percent, stopped 9 percent. Sample data only."><div class="bars"><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:100%"></div></div><b>Passers-by</b><small>100%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:71%"></div></div><b>Visible</b><small>71%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:32%"></div></div><b>Looked</b><small>32%</small></div><div class="bar-col"><div class="bar-shell"><div class="bar-fill" style="height:9%"></div></div><b>Stopped</b><small>9%</small></div></div></div><div class="simulation-note"><strong>Simulation disclosure:</strong> 100%, 71%, 32% and 9% are example values used to demonstrate the interface. They are not testimonials, benchmark claims or evidence of expected performance.</div></div><div class="stack"><div class="statbox reveal delay-1"><small>Timing</small><strong>Hour → week</strong><p>Identify strong and weak hours, daily patterns and weekly changes.</p></div><div class="statbox reveal delay-2"><small>Comparison</small><strong>Now → history</strong><p>Compare periods so movement is visible in context, not as an isolated number.</p></div><div class="statbox reveal delay-2"><small>Privacy</small><strong>Aggregated output</strong><p>Dashboard outputs are designed around counts, rates and trends rather than individual identity profiles.</p></div></div></div></div></section>
 
-    <section class="section" id="approach"><div class="container"><span class="eyebrow reveal"><i></i> The Target Media way</span><h2 class="section-title reveal delay-1">Transparent by design. <span class="gradient-text">Close by choice.</span></h2><p class="section-lead reveal delay-2">Our differentiator is not a promise of perfect data. It is the combination of useful measurement, clear limitations, transparent economics and a close working relationship.</p><div class="trust-wrap reveal delay-2"><div class="trust-top"><h3>Know what you are buying — and what the data cannot prove.</h3><p>Quarterly pricing is visible, installation is quoted separately, interface simulations are labelled, and recommendations are presented as decision support rather than guarantees.</p></div><div class="trust-grid"><div class="trust-card"><div class="trust-icon">✓</div><h4>Clear economics</h4><p>Plan pricing is visible. Installation and initial configuration are separate and agreed before work begins.</p></div><div class="trust-card"><div class="trust-icon">↔</div><h4>No black box</h4><p>We explain assumptions, limitations and measurement logic instead of presenting estimates as ground truth.</p></div><div class="trust-card"><div class="trust-icon">●</div><h4>Human support</h4><p>We aim for direct, context-aware communication with the people responsible for your location.</p></div></div><div class="friend-line"><b>Client on paper. Partner in practice.</b><span>Close support does not mean overselling certainty. If the data is weak, noisy or inconclusive, we should say so.</span></div></div></div></section>
+    <section class="section" id="approach"><div class="container"><span class="eyebrow reveal"><i></i> The Target Media way</span><h2 class="section-title reveal delay-1">Transparent by design. <span class="gradient-text">Close by choice.</span></h2><p class="section-lead reveal delay-2">Our differentiator is not a promise of perfect data. It is the combination of useful measurement, clear limitations, transparent economics and a close working relationship.</p><div class="trust-wrap reveal delay-2"><div class="trust-top"><h3>Know what you are buying — and what the data cannot prove.</h3><p>Quarterly pricing is visible, standard Monitor installation and initial configuration are included, interface simulations are labelled, and recommendations are presented as decision support rather than guarantees.</p></div><div class="trust-grid"><div class="trust-card"><div class="trust-icon">✓</div><h4>Clear economics</h4><p>Monitor is €299 per location per quarter. Standard installation and initial configuration are included — there is no separate installation fee.</p></div><div class="trust-card"><div class="trust-icon">↔</div><h4>No black box</h4><p>We explain assumptions, limitations and measurement logic instead of presenting estimates as ground truth.</p></div><div class="trust-card"><div class="trust-icon">●</div><h4>Human support</h4><p>We aim for direct, context-aware communication with the people responsible for your location.</p></div></div><div class="friend-line"><b>Client on paper. Partner in practice.</b><span>Close support does not mean overselling certainty. If the data is weak, noisy or inconclusive, we should say so.</span></div></div></div></section>
 
-    <section class="section" id="pricing"><div class="container"><div class="pricing-head"><div><span class="eyebrow reveal"><i></i> Quarterly plans</span><h2 class="section-title reveal delay-1">Simple pricing. <span class="gradient-text">Quarterly only.</span></h2></div><div class="pricing-note reveal delay-2"><span class="quarter-pill">3-month plans</span><br>Prices are per location per quarter. Installation and initial setup are quoted separately. VAT treatment, payment timing and any hardware costs are stated in the written quote before you commit.</div></div><div class="pricing-grid"><article class="price-card reveal"><div class="plan-name">Monitor</div><div class="plan-sub">For businesses that want continuous visibility into storefront performance.</div><div class="price"><sup>€</sup>299 <span>/ quarter</span></div><div class="setup">Per location · installation & initial setup separate</div><div class="plan-tagline">Understand what is happening in front of your business.</div><ul class="features"><li><i class="check">✓</i><span>Traffic in front of the location</span></li><li><i class="check">✓</i><span>Passer-by count</span></li><li><i class="check">✓</i><span>Attention / look rate</span></li><li><i class="check">✓</i><span>Stopping behavior</span></li><li><i class="check">✓</i><span>Hourly, daily and weekly trends</span></li><li><i class="check">✓</i><span>Historical comparison</span></li><li><i class="check">✓</i><span>Strong and weak hours</span></li><li><i class="check">✓</i><span>Quarterly performance summary</span></li><li><i class="check">✓</i><span>Aggregated output metrics</span></li><li><i class="check">✓</i><span>Dashboard access</span></li><li><i class="check">✓</i><span>Basic support</span></li></ul><button class="btn plan-btn" type="button" data-plan="Monitor">Create Monitor pilot brief</button></article><article class="price-card popular reveal delay-1"><span class="popular-badge">Advanced context</span><div class="plan-name">Intelligence</div><div class="plan-sub">For businesses that want to understand why performance may be changing and how the location compares with its environment.</div><div class="price"><sup>€</sup>599 <span>/ quarter</span></div><div class="setup">Per location · installation & initial setup separate</div><div class="plan-tagline">Understand why it is happening and how your location compares with its environment.</div><ul class="features"><li><i class="check">✓</i><span>Everything in Monitor</span></li><li><i class="check">✓</i><span>Area traffic context</span></li><li><i class="check">✓</i><span>Aggregated comparable benchmarks</span></li><li><i class="check">✓</i><span>Store vs. area comparison</span></li><li><i class="check">✓</i><span>Performance gap detection</span></li><li><i class="check">✓</i><span>Important change alerts</span></li><li><i class="check">✓</i><span>Abnormal pattern identification</span></li><li><i class="check">✓</i><span>Period-to-period comparison</span></li><li><i class="check">✓</i><span>Deeper performance diagnosis</span></li><li><i class="check">✓</i><span>External vs. internal hypotheses</span></li><li><i class="check">✓</i><span>Quarterly summary with insights</span></li><li><i class="check">✓</i><span>Data-backed recommendations</span></li><li><i class="check">✓</i><span>Advanced dashboard access</span></li><li><i class="check">✓</i><span>Priority support</span></li></ul><button class="btn btn-primary plan-btn" type="button" data-plan="Intelligence">Create Intelligence pilot brief</button></article><article class="price-card growth-card reveal delay-2"><div><div class="plan-name">Growth Partner</div><div class="plan-sub">For locations that want deeper diagnosis and hands-on improvement work.</div><div class="growth-price">Custom <span>Quarterly scope and price defined after an initial assessment.</span></div><div class="growth-actions"><button class="btn plan-btn" type="button" data-plan="Growth Partner">Create Growth Partner brief</button></div></div><ul class="growth-features"><li><i class="check">✓</i><span>Everything in Intelligence</span></li><li><i class="check">✓</i><span>Deeper performance diagnosis</span></li><li><i class="check">✓</i><span>Custom improvement priorities</span></li><li><i class="check">✓</i><span>Hands-on review cadence</span></li><li><i class="check">✓</i><span>Scope tailored to the business</span></li><li><i class="check">✓</i><span>Close partner-style support</span></li></ul></article></div></div></section>
+    <section class="section" id="pricing"><div class="container">
+      <div class="pricing-head">
+        <div><span class="eyebrow reveal"><i></i> Available now</span><h2 class="section-title reveal delay-1">One plan. <span class="gradient-text">Do it properly first.</span></h2></div>
+        <div class="pricing-note reveal delay-2"><span class="quarter-pill">Monitor only</span><br>Monitor is the only plan currently available. It costs €299 per location per quarter. <strong>Standard installation and initial configuration are included.</strong> Intelligence and Growth Partner stay visible as roadmap products, but cannot be purchased yet.</div>
+      </div>
+      <div class="pricing-grid monitor-only-grid">
+        <article class="price-card monitor-card reveal">
+          <span class="popular-badge">Available now</span>
+          <div class="plan-name">Monitor</div>
+          <div class="plan-sub">For businesses that want continuous visibility into storefront performance before we add more advanced intelligence layers.</div>
+          <div class="price"><sup>€</sup>299 <span>/ quarter</span></div>
+          <div class="setup">Per location · installation & initial configuration included</div>
+          <div class="plan-tagline">Understand what is happening in front of your business.</div>
+          <ul class="features">
+            <li><i class="check">✓</i><span>Traffic in front of the location</span></li>
+            <li><i class="check">✓</i><span>Passer-by count</span></li>
+            <li><i class="check">✓</i><span>Attention / look rate</span></li>
+            <li><i class="check">✓</i><span>Stopping behavior</span></li>
+            <li><i class="check">✓</i><span>Hourly, daily and weekly trends</span></li>
+            <li><i class="check">✓</i><span>Historical comparison</span></li>
+            <li><i class="check">✓</i><span>Strong and weak hours</span></li>
+            <li><i class="check">✓</i><span>Quarterly performance summary</span></li>
+            <li><i class="check">✓</i><span>Aggregated output metrics</span></li>
+            <li><i class="check">✓</i><span>Dashboard access</span></li>
+            <li><i class="check">✓</i><span>Basic support</span></li>
+          </ul>
+          <a class="btn btn-primary" href="#apply">Apply for Monitor</a>
+        </article>
+        <div class="future-stack">
+          <article class="price-card disabled-plan reveal delay-1" aria-disabled="true">
+            <span class="coming-badge">Coming later</span>
+            <div class="plan-name">Intelligence</div>
+            <div class="plan-sub">Area context, comparable benchmarks and deeper diagnosis once our network has enough density and real historical data.</div>
+            <div class="locked-copy">Not available for purchase yet.</div>
+            <button class="btn" type="button" disabled>Not available yet</button>
+          </article>
+          <article class="price-card disabled-plan reveal delay-2" aria-disabled="true">
+            <span class="coming-badge">Coming later</span>
+            <div class="plan-name">Growth Partner</div>
+            <div class="plan-sub">Hands-on optimisation work after we have enough operating experience and evidence to support it responsibly.</div>
+            <div class="locked-copy">Not available for purchase yet.</div>
+            <button class="btn" type="button" disabled>Not available yet</button>
+          </article>
+        </div>
+      </div>
+    </div></section>
 
-    <section class="section" id="faq"><div class="container"><div class="privacy-banner reveal"><div><span class="eyebrow"><i></i> Privacy & website hygiene</span><h2 class="section-title" style="font-size:clamp(32px,4vw,54px)">Less tracking on the website. More clarity in the product.</h2><p class="section-lead" style="font-size:15px">This build contains no analytics scripts, ad pixels, external fonts or third-party embeds. It sets no cookies in its own code. The pilot-brief form runs locally in your browser and is not submitted to Target Media.</p></div><div class="privacy-points"><div class="privacy-point"><b>No website analytics</b><span>No Google Analytics, Meta Pixel or equivalent tracking is loaded by this codebase.</span></div><div class="privacy-point"><b>No third-party embeds</b><span>No YouTube, maps, chat widgets, external font files or review widgets load automatically.</span></div><div class="privacy-point"><b>Data minimisation</b><span>The brief asks only for plan, business type, city and number of locations, and keeps them local.</span></div><div class="privacy-point"><b>Legal pages</b><span>Privacy, cookies, terms, refunds and accessibility are linked in the footer.</span></div></div></div><div class="faq reveal"><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Are the plans monthly or quarterly?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Quarterly only. Monitor is €299 per quarter per location and Intelligence is €599 per quarter per location. Installation and initial setup are quoted separately.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Are the dashboard figures real customer results?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>No. All numerical examples on this public landing page are explicitly illustrative sample data used to demonstrate the interface. Actual results depend on the location, setup, environment and measurement quality.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Does “aggregated” mean cameras are automatically outside the GDPR?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>No. Image processing can be personal-data processing before an aggregated output is produced. Each deployment needs a documented privacy assessment, lawful basis, minimisation, signage and appropriate retention; a DPIA may be required in higher-risk monitoring scenarios.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Does this website use tracking cookies?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>The current site code sets no cookies and loads no analytics or advertising trackers. If optional tracking is added later, it must not load before any legally required consent is obtained.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What is different about Intelligence?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Monitor tells you what changed at the location. Intelligence adds comparable area context, alerts, deeper diagnosis and recommendations so you can investigate why performance may have changed.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What do you mean by a close relationship?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Direct communication, context-aware support and honest conversations about what the data does and does not justify. The goal is to work like a trusted partner, not treat you like a ticket number.</p></div></div></div></div></section>
+    <section class="section application-section" id="apply"><div class="container">
+      <span class="eyebrow reveal"><i></i> Monitor application</span>
+      <h2 class="section-title reveal delay-1">Tell us about your location. <span class="gradient-text">Then choose a time.</span></h2>
+      <p class="section-lead reveal delay-2">We review every application before payment so we can confirm that the location is a sensible fit. Monitor is €299 per quarter per location and standard installation is included.</p>
 
-    <section class="section"><div class="container"><div class="final-card reveal"><div><h2>Measure the street. <span class="gradient-text">Understand the business.</span></h2><p>Start with one location, one quarter and a clear baseline. Pricing, setup, sample data and measurement limitations should remain transparent from day one.</p><div class="hero-actions"><button class="btn btn-primary plan-btn" type="button" data-plan="Monitor">Create a Monitor pilot brief</button><a class="btn" href="#pricing">Compare plans</a></div></div></div></div></section>
+      <form id="monitorApplication" class="application-card reveal" autocomplete="on">
+        <div class="form-section">
+          <div class="form-section-head"><span>01</span><div><h3>About you</h3><p>Only the contact details we need to review the application and speak with you.</p></div></div>
+          <div class="form-grid application-grid">
+            <div class="field"><label for="fullName">Your name</label><input id="fullName" name="fullName" autocomplete="name" required placeholder="e.g. Alex de Vries"></div>
+            <div class="field"><label for="businessName">Business name</label><input id="businessName" name="businessName" autocomplete="organization" required placeholder="e.g. Northside Barbers"></div>
+            <div class="field"><label for="workEmail">Work email</label><input id="workEmail" name="workEmail" type="email" autocomplete="email" required placeholder="name@business.nl"></div>
+            <div class="field"><label for="phone">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="+31 ..."></div>
+            <div class="field"><label for="contactMethod">Preferred contact</label><select id="contactMethod" name="contactMethod" required><option value="">Choose one</option><option>Email</option><option>WhatsApp</option><option>Phone call</option></select></div>
+            <div class="field"><label for="businessType">Business type</label><input id="businessType" name="businessType" required placeholder="e.g. Barber shop"></div>
+            <div class="field"><label for="website">Website or Instagram <span class="optional">optional</span></label><input id="website" name="website" inputmode="url" placeholder="https://... or @business"></div>
+            <div class="field"><label for="locations">Number of locations</label><input id="locations" name="locations" type="number" min="1" inputmode="numeric" value="1" required></div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-head"><span>02</span><div><h3>Your location</h3><p>Enough information to judge whether Monitor can be installed and measured sensibly.</p></div></div>
+          <div class="form-grid application-grid">
+            <div class="field full"><label for="streetAddress">Installation address</label><input id="streetAddress" name="streetAddress" autocomplete="street-address" required placeholder="Street and number"></div>
+            <div class="field"><label for="city">City</label><input id="city" name="city" autocomplete="address-level2" required placeholder="e.g. Rotterdam"></div>
+            <div class="field"><label for="postcode">Postcode</label><input id="postcode" name="postcode" autocomplete="postal-code" required placeholder="1234 AB"></div>
+            <div class="field"><label for="storefrontVisible">Storefront or entrance visible from the street?</label><select id="storefrontVisible" name="storefrontVisible" required><option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="field"><label for="footTraffic">Typical foot traffic</label><select id="footTraffic" name="footTraffic" required><option value="">Choose one</option><option>Low</option><option>Medium</option><option>High</option><option>Not sure</option></select></div>
+            <div class="field"><label for="measurePoint">Where would you like us to measure?</label><select id="measurePoint" name="measurePoint" required><option value="">Choose one</option><option>Storefront</option><option>Entrance</option><option>Inside facing the entrance</option><option>Not sure — advise me</option></select></div>
+            <div class="field"><label for="electricity">Power near the installation point?</label><select id="electricity" name="electricity" required><option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="field"><label for="internet">Internet / Wi-Fi available?</label><select id="internet" name="internet" required><option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="field full"><label for="installPermission">Permission to install a small camera/device at the location?</label><select id="installPermission" name="installPermission" required><option value="">Choose one</option><option>Yes</option><option>I need to confirm it</option><option>Not sure</option></select></div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-head"><span>03</span><div><h3>What do you want to understand?</h3><p>This helps us know whether Monitor is solving a real problem for you.</p></div></div>
+          <fieldset class="choice-fieldset">
+            <legend>Select everything that matters</legend>
+            <div class="choice-grid">
+              <label class="choice"><input type="checkbox" name="objectives" value="How many people pass"><span>How many people pass</span></label>
+              <label class="choice"><input type="checkbox" name="objectives" value="How many people look"><span>How many people look</span></label>
+              <label class="choice"><input type="checkbox" name="objectives" value="How many people stop"><span>How many people stop</span></label>
+              <label class="choice"><input type="checkbox" name="objectives" value="Best and weakest hours"><span>Best and weakest hours</span></label>
+              <label class="choice"><input type="checkbox" name="objectives" value="How traffic changes over time"><span>How traffic changes over time</span></label>
+              <label class="choice"><input type="checkbox" name="objectives" value="Other"><span>Other</span></label>
+            </div>
+          </fieldset>
+          <div class="field full textarea-field"><label for="problem">Is there a specific problem you want to investigate? <span class="optional">optional</span></label><textarea id="problem" name="problem" rows="4" maxlength="700" placeholder="A short explanation is enough."></textarea></div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-head"><span>04</span><div><h3>Choose an appointment</h3><p>Current service hours: Monday–Sunday, 09:00–18:00. Select a date and then a preferred time.</p></div></div>
+          <div class="schedule-shell">
+            <div class="calendar-panel">
+              <div class="calendar-top"><button class="calendar-nav" id="prevMonth" type="button" aria-label="Previous month">←</button><strong id="calendarMonth" aria-live="polite"></strong><button class="calendar-nav" id="nextMonth" type="button" aria-label="Next month">→</button></div>
+              <div class="weekday-row" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+              <div class="calendar-grid" id="calendarGrid" role="grid" aria-label="Choose appointment date"></div>
+              <div class="calendar-legend"><span><i class="legend-dot available"></i>Available</span><span><i class="legend-dot unavailable"></i>Unavailable</span><span><i class="legend-dot selected"></i>Selected</span></div>
+            </div>
+            <div class="time-panel">
+              <div class="selected-date-label">Selected date</div>
+              <strong id="selectedDateText">Choose a date</strong>
+              <p class="time-help">Appointments are offered in 30-minute start slots between 09:00 and 18:00.</p>
+              <div class="time-grid" id="timeGrid" aria-label="Choose preferred appointment time"></div>
+              <input type="hidden" id="appointmentDate" name="appointmentDate">
+              <input type="hidden" id="appointmentTime" name="appointmentTime">
+              <div class="schedule-message" id="scheduleMessage" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section final-form-section">
+          <label class="ack"><input id="priceAck" name="priceAck" type="checkbox" required><span>I understand Monitor costs <strong>€299 per quarter per location</strong> and standard installation and initial configuration are included.</span></label>
+          <label class="ack"><input id="privacyAck" name="privacyAck" type="checkbox" required><span>I have read the <a href="privacy-policy.html">Privacy Policy</a> and understand how my application details will be used.</span></label>
+          <div class="submission-note" id="submissionNote">The form design is ready. Secure Google Sheets / Calendar submission is the next connection step, so applications are not sent anywhere yet.</div>
+          <button class="btn btn-primary submit-application" type="submit">Submit Monitor application</button>
+        </div>
+      </form>
+
+      <div class="application-success" id="applicationSuccess" hidden tabindex="-1">
+        <span class="success-mark">✓</span>
+        <h3>Thank you for applying.</h3>
+        <p>We have received your Monitor application and appointment request. We will review the location and get in touch with you as soon as possible.</p>
+      </div>
+    </div></section>
+
+    <section class="section approved-section" id="approved"><div class="container">
+      <div class="approved-card reveal">
+        <div class="approved-copy">
+          <span class="eyebrow"><i></i> Already approved?</span>
+          <h2>Ready to get your intelligent system <span class="gradient-text">into your location?</span></h2>
+          <p>After we approve your application, we send you a unique approval code. Enter it here to unlock the payment step. Once payment is received, we arrange the installation. There is no separate installation fee.</p>
+          <div class="process-row" aria-label="Approved customer process"><span>1. Approved</span><i>→</i><span>2. Pay</span><i>→</i><span>3. Install</span></div>
+        </div>
+        <form class="approval-box" id="approvalForm">
+          <label for="approvalCode">Approval code</label>
+          <div class="approval-input-row"><input id="approvalCode" name="approvalCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="e.g. TM-AB12-CD34" required><button class="btn btn-primary" type="submit">Verify code</button></div>
+          <p class="field-help">Codes are generated only after we approve an application. They will be checked securely before any payment link is shown.</p>
+          <div class="approval-status" id="approvalStatus" role="status" aria-live="polite"></div>
+          <a class="btn btn-primary payment-unlock" id="paymentUnlock" href="#" hidden rel="noopener">Proceed to secure payment</a>
+        </form>
+      </div>
+    </div></section>
+
+    <section class="section" id="faq"><div class="container"><div class="privacy-banner reveal"><div><span class="eyebrow"><i></i> Privacy & website hygiene</span><h2 class="section-title" style="font-size:clamp(32px,4vw,54px)">Less tracking on the website. More clarity in the product.</h2><p class="section-lead" style="font-size:15px">This build contains no analytics scripts, ad pixels, external fonts or third-party embeds. It sets no cookies in its own code. The Monitor application form is prepared for a Google Sheets / Calendar connection, but it does not transmit applications until that connection is activated.</p></div><div class="privacy-points"><div class="privacy-point"><b>No website analytics</b><span>No Google Analytics, Meta Pixel or equivalent tracking is loaded by this codebase.</span></div><div class="privacy-point"><b>No third-party embeds</b><span>No YouTube, maps, chat widgets, external font files or review widgets load automatically.</span></div><div class="privacy-point"><b>Data minimisation</b><span>The application asks only for business contact, location, technical-fit and appointment information needed to review a Monitor deployment.</span></div><div class="privacy-point"><b>Legal pages</b><span>Privacy, cookies, terms, refunds and accessibility are linked in the footer.</span></div></div></div><div class="faq reveal"><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What can I buy right now?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Monitor only. It is €299 per quarter per location, with standard installation and initial configuration included. Intelligence and Growth Partner are roadmap products and are not available for purchase yet.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Are the dashboard figures real customer results?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>No. All numerical examples on this public landing page are explicitly illustrative sample data used to demonstrate the interface. Actual results depend on the location, setup, environment and measurement quality.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Does “aggregated” mean cameras are automatically outside the GDPR?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>No. Image processing can be personal-data processing before an aggregated output is produced. Each deployment needs a documented privacy assessment, lawful basis, minimisation, signage and appropriate retention; a DPIA may be required in higher-risk monitoring scenarios.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Does this website use tracking cookies?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>The current site code sets no cookies and loads no analytics or advertising trackers. If optional tracking is added later, it must not load before any legally required consent is obtained.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Why can’t I buy Intelligence yet?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Because comparable area intelligence only becomes credible when there is enough network density, historical data and operating experience. We would rather disable the plan than sell a capability before we can support it properly.</p></div></div><div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What do you mean by a close relationship?</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-a"><p>Direct communication, context-aware support and honest conversations about what the data does and does not justify. The goal is to work like a trusted partner, not treat you like a ticket number.</p></div></div></div></div></section>
+
+    <section class="section"><div class="container"><div class="final-card reveal"><div><h2>Start with Monitor. <span class="gradient-text">Earn the next layer later.</span></h2><p>Apply first, let us check the location, then pay only after approval. Standard installation is included in the €299 quarterly price.</p><div class="hero-actions"><a class="btn btn-primary" href="#apply">Apply for Monitor</a><a class="btn" href="#approved">Already approved?</a></div></div></div></div></section>
   </main>
 
-  <footer><div class="container footer-grid"><div class="footer-brand">Target Media</div><nav class="footer-links" aria-label="Legal and footer navigation"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="refund-policy.html">Refund Policy</a><a href="accessibility.html">Accessibility</a></nav><div class="legal-status">© 2026 Target Media · B2B information site · No online checkout</div></div></footer>
+  <footer><div class="container footer-grid"><div class="footer-brand">Target Media</div><nav class="footer-links" aria-label="Legal and footer navigation"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="refund-policy.html">Refund Policy</a><a href="accessibility.html">Accessibility</a></nav><div class="legal-status">© 2026 Target Media · B2B · Monitor applications only</div></div></footer>
 
-  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
-    <div class="modal" tabindex="-1" id="pilotModal"><div class="modal-top"><div><h3 id="modalTitle">Create a quarterly pilot brief</h3><p id="modalDescription">This tool runs locally in your browser. It does not send the values you enter to Target Media or any third party.</p></div><button class="close" id="closeModal" type="button" aria-label="Close pilot brief dialog">×</button></div>
-      <div class="form-grid"><div class="field full"><label for="planSelect">Selected plan</label><select id="planSelect"><option>Monitor</option><option>Intelligence</option><option>Growth Partner</option></select></div><div class="field"><label for="businessType">Business type</label><input id="businessType" autocomplete="organization-title" placeholder="e.g. Barber shop" /><span class="field-help">Do not enter a person’s name or sensitive information.</span></div><div class="field"><label for="city">City</label><input id="city" autocomplete="address-level2" placeholder="e.g. Rotterdam" /></div><div class="field full"><label for="locations">Number of locations</label><input id="locations" type="number" min="1" inputmode="numeric" value="1" /></div></div>
-      <label class="ack" for="localAck"><input id="localAck" type="checkbox" required /><span>I understand this brief is generated locally and is not a contact submission. I have read the <a href="privacy-policy.html" style="text-decoration:underline">Privacy Policy</a>.</span></label>
-      <div class="brief" id="brief" aria-live="polite"></div><div class="modal-actions"><button class="btn btn-primary" id="generateBrief" type="button">Generate local brief</button><button class="btn" id="copyBrief" type="button">Copy generated brief</button></div>
-    </div>
-  </div>
-  <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-    if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});$$('.reveal').forEach(el=>observer.observe(el));}else{$$('.reveal').forEach(el=>el.classList.add('visible'));}
+    const $=(s,r=document)=>r.querySelector(s), $=(s,r=document)=>[...r.querySelectorAll(s)];
+
+    if('IntersectionObserver' in window){
+      const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
+      $('.reveal').forEach(el=>observer.observe(el));
+    }else{$('.reveal').forEach(el=>el.classList.add('visible'));}
+
     const menuBtn=$('#menuBtn'),navLinks=$('#navLinks');
     menuBtn.addEventListener('click',()=>{const open=menuBtn.classList.toggle('open');navLinks.classList.toggle('mobile',open);menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');});
-    $$('#navLinks a').forEach(a=>a.addEventListener('click',()=>{menuBtn.classList.remove('open');navLinks.classList.remove('mobile');menuBtn.setAttribute('aria-expanded','false');menuBtn.setAttribute('aria-label','Open navigation menu');}));
-    $$('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.closest('.faq-item'),answer=item.querySelector('.faq-a'),open=btn.getAttribute('aria-expanded')!=='true';btn.setAttribute('aria-expanded',String(open));item.classList.toggle('open',open);answer.style.maxHeight=open?answer.scrollHeight+'px':'0px';}));
-    const modal=$('#modalBackdrop'),pilotModal=$('#pilotModal'),planSelect=$('#planSelect'),brief=$('#brief'),toast=$('#toast'),ack=$('#localAck');let lastFocus=null;
-    function getFocusable(){return $$('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])',pilotModal).filter(el=>el.offsetParent!==null)}
-    function openModal(plan){lastFocus=document.activeElement;planSelect.value=plan;modal.classList.add('open');document.body.classList.add('lock');setTimeout(()=>$('#closeModal').focus(),0)}
-    function closeModal(){modal.classList.remove('open');document.body.classList.remove('lock');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
-    $$('.plan-btn').forEach(btn=>btn.addEventListener('click',()=>openModal(btn.dataset.plan)));$('#closeModal').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
-    document.addEventListener('keydown',e=>{if(!modal.classList.contains('open'))return;if(e.key==='Escape'){closeModal();return}if(e.key==='Tab'){const items=getFocusable();if(!items.length)return;const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
-    $('#generateBrief').addEventListener('click',()=>{if(!ack.checked){ack.focus();ack.reportValidity();return}const plan=planSelect.value,business=$('#businessType').value.trim()||'[business type]',city=$('#city').value.trim()||'[city]',locations=Math.max(1,+$('#locations').value||1);const pricing=plan==='Monitor'?'€299 / quarter / location — installation & initial setup quoted separately':plan==='Intelligence'?'€599 / quarter / location — installation & initial setup quoted separately':'Custom quarterly scope and pricing after initial assessment';brief.textContent=`TARGET MEDIA — QUARTERLY PILOT BRIEF\nPlan: ${plan}\nBusiness: ${business}\nCity: ${city}\nLocations: ${locations}\nPricing: ${pricing}\n\nThis brief was generated locally in the browser and was not submitted. Metrics shown on the public website are illustrative; deployment terms, privacy roles and measurement limitations must be agreed in writing.`;brief.classList.add('show')});
-    $('#copyBrief').addEventListener('click',async()=>{if(!brief.textContent.trim()){$('#generateBrief').click();if(!brief.textContent.trim())return}try{await navigator.clipboard.writeText(brief.textContent);toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}catch(e){toast.textContent='Copy failed — select the brief text manually';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2400)}});
+    $('#navLinks a').forEach(a=>a.addEventListener('click',()=>{menuBtn.classList.remove('open');navLinks.classList.remove('mobile');menuBtn.setAttribute('aria-expanded','false');menuBtn.setAttribute('aria-label','Open navigation menu');}));
+    $('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.closest('.faq-item'),answer=item.querySelector('.faq-a'),open=btn.getAttribute('aria-expanded')!=='true';btn.setAttribute('aria-expanded',String(open));item.classList.toggle('open',open);answer.style.maxHeight=open?answer.scrollHeight+'px':'0px';}));
+
+    /*
+      CONNECTION POINTS FOR THE NEXT STEP.
+      Keep these empty until the Google Apps Script endpoints are connected.
+      Approval codes must NEVER be hard-coded into this public page.
+    */
+    const APPLICATION_ENDPOINT='';
+    const AVAILABILITY_ENDPOINT='';
+    const APPROVAL_ENDPOINT='';
+
+    const schedulingConfig={
+      openHour:9,
+      closeHour:18,
+      slotMinutes:30,
+      blockedDates:[],
+      blockedSlots:{}
+    };
+
+    const pad=n=>String(n).padStart(2,'0');
+    const isoDate=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const todayStart=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
+    let viewDate=new Date();viewDate.setDate(1);viewDate.setHours(0,0,0,0);
+    let selectedDate='',selectedTime='';
+
+    function slotsForDate(dateStr){
+      const slots=[];
+      for(let minutes=schedulingConfig.openHour*60;minutes<schedulingConfig.closeHour*60;minutes+=schedulingConfig.slotMinutes){
+        const h=Math.floor(minutes/60),m=minutes%60;
+        slots.push(`${pad(h)}:${pad(m)}`);
+      }
+      const blocked=new Set(schedulingConfig.blockedSlots[dateStr]||[]);
+      const now=new Date(),isToday=dateStr===isoDate(now);
+      return slots.map(time=>{
+        let disabled=blocked.has(time);
+        if(isToday){
+          const [h,m]=time.split(':').map(Number);
+          const t=new Date(now);t.setHours(h,m,0,0);
+          if(t<=now)disabled=true;
+        }
+        return {time,disabled};
+      });
+    }
+
+    function dateFullyBlocked(dateStr){
+      if(schedulingConfig.blockedDates.includes(dateStr))return true;
+      const slots=slotsForDate(dateStr);
+      return slots.length>0 && slots.every(s=>s.disabled);
+    }
+
+    function renderCalendar(){
+      const grid=$('#calendarGrid'),monthLabel=$('#calendarMonth');
+      if(!grid||!monthLabel)return;
+      grid.innerHTML='';
+      monthLabel.textContent=viewDate.toLocaleDateString(undefined,{month:'long',year:'numeric'});
+      const year=viewDate.getFullYear(),month=viewDate.getMonth();
+      const first=new Date(year,month,1);
+      const offset=(first.getDay()+6)%7;
+      const days=new Date(year,month+1,0).getDate();
+      for(let i=0;i<offset;i++){const blank=document.createElement('span');blank.className='calendar-blank';grid.appendChild(blank);}
+      for(let day=1;day<=days;day++){
+        const d=new Date(year,month,day);d.setHours(0,0,0,0);
+        const dateStr=isoDate(d),past=d<todayStart(),blocked=!past&&dateFullyBlocked(dateStr);
+        const b=document.createElement('button');
+        b.type='button';b.className='calendar-day';b.textContent=String(day);
+        b.dataset.date=dateStr;b.setAttribute('role','gridcell');
+        b.setAttribute('aria-label',d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'}));
+        if(past||blocked){b.disabled=true;b.classList.add('is-unavailable');b.setAttribute('aria-disabled','true');}
+        if(selectedDate===dateStr){b.classList.add('is-selected');b.setAttribute('aria-pressed','true');}
+        else b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',()=>selectDate(dateStr));
+        grid.appendChild(b);
+      }
+      const now=new Date(),isCurrentMonth=year===now.getFullYear()&&month===now.getMonth();
+      $('#prevMonth').disabled=isCurrentMonth;
+    }
+
+    function selectDate(dateStr){
+      selectedDate=dateStr;selectedTime='';
+      $('#appointmentDate').value=dateStr;$('#appointmentTime').value='';
+      const d=new Date(dateStr+'T12:00:00');
+      $('#selectedDateText').textContent=d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+      renderCalendar();renderTimes();
+    }
+
+    function renderTimes(){
+      const grid=$('#timeGrid'),msg=$('#scheduleMessage');grid.innerHTML='';
+      if(!selectedDate){msg.textContent='Choose an available date first.';return;}
+      const slots=slotsForDate(selectedDate);
+      slots.forEach(({time,disabled})=>{
+        const b=document.createElement('button');
+        b.type='button';b.className='time-slot';b.textContent=time;b.disabled=disabled;
+        if(disabled)b.classList.add('is-unavailable');
+        if(selectedTime===time)b.classList.add('is-selected');
+        b.setAttribute('aria-pressed',selectedTime===time?'true':'false');
+        b.addEventListener('click',()=>{selectedTime=time;$('#appointmentTime').value=time;renderTimes();});
+        grid.appendChild(b);
+      });
+      const available=slots.some(s=>!s.disabled);
+      msg.textContent=available?'Choose your preferred start time.':'No appointment times are available on this date.';
+    }
+
+    $('#prevMonth').addEventListener('click',()=>{const now=new Date();const candidate=new Date(viewDate.getFullYear(),viewDate.getMonth()-1,1);const current=new Date(now.getFullYear(),now.getMonth(),1);if(candidate>=current){viewDate=candidate;renderCalendar();}});
+    $('#nextMonth').addEventListener('click',()=>{viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()+1,1);renderCalendar();});
+
+    async function loadAvailability(){
+      if(!AVAILABILITY_ENDPOINT){renderCalendar();renderTimes();return;}
+      try{
+        const response=await fetch(AVAILABILITY_ENDPOINT,{method:'GET',cache:'no-store'});
+        if(!response.ok)throw new Error('availability');
+        const data=await response.json();
+        schedulingConfig.blockedDates=Array.isArray(data.blockedDates)?data.blockedDates:[];
+        schedulingConfig.blockedSlots=data.blockedSlots&&typeof data.blockedSlots==='object'?data.blockedSlots:{};
+      }catch(e){
+        $('#scheduleMessage').textContent='Live calendar availability could not be loaded. Please try again later.';
+      }
+      renderCalendar();renderTimes();
+    }
+    loadAvailability();
+
+    const appForm=$('#monitorApplication'),appSuccess=$('#applicationSuccess'),submissionNote=$('#submissionNote');
+    appForm.addEventListener('submit',async e=>{
+      e.preventDefault();
+      if(!appForm.reportValidity())return;
+      if(!selectedDate||!selectedTime){$('#scheduleMessage').textContent='Please choose both a date and a time.';$('#calendarGrid').focus?.();return;}
+      const objectives=$('input[name="objectives"]:checked',appForm).map(x=>x.value);
+      const fd=new FormData(appForm);
+      const payload=Object.fromEntries(fd.entries());
+      payload.objectives=objectives;
+      payload.appointmentDate=selectedDate;
+      payload.appointmentTime=selectedTime;
+      payload.plan='Monitor';
+      payload.pricePerQuarter=299;
+      payload.installationFee=0;
+
+      if(!APPLICATION_ENDPOINT){
+        submissionNote.textContent='Applications are not being sent yet because the Google Sheets / Calendar connection is the next setup step. Your information has not left this browser.';
+        submissionNote.classList.add('warning');
+        return;
+      }
+
+      const submitBtn=$('.submit-application',appForm);
+      submitBtn.disabled=true;submitBtn.textContent='Submitting…';
+      try{
+        const response=await fetch(APPLICATION_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        if(!response.ok)throw new Error('submit');
+        appForm.hidden=true;appSuccess.hidden=false;appSuccess.focus();
+      }catch(err){
+        submissionNote.textContent='We could not submit the application. Please try again or contact us directly.';
+        submissionNote.classList.add('warning');
+      }finally{
+        submitBtn.disabled=false;submitBtn.textContent='Submit Monitor application';
+      }
+    });
+
+    const approvalForm=$('#approvalForm'),approvalStatus=$('#approvalStatus'),paymentUnlock=$('#paymentUnlock');
+    approvalForm.addEventListener('submit',async e=>{
+      e.preventDefault();
+      const code=$('#approvalCode').value.trim().toUpperCase();
+      paymentUnlock.hidden=true;paymentUnlock.removeAttribute('href');
+      if(!code){approvalStatus.textContent='Enter the approval code we sent you.';return;}
+      if(!APPROVAL_ENDPOINT){
+        approvalStatus.textContent='Secure approval-code verification will be activated when the Google Sheets / Apps Script workflow is connected. No codes are stored in this public page.';
+        return;
+      }
+      approvalStatus.textContent='Checking code…';
+      try{
+        const response=await fetch(APPROVAL_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'verifyApprovalCode',code})});
+        if(!response.ok)throw new Error('verify');
+        const data=await response.json();
+        if(data.valid===true&&data.paymentUrl){
+          approvalStatus.textContent='Code approved. You can continue to secure payment.';
+          paymentUnlock.href=data.paymentUrl;paymentUnlock.hidden=false;
+        }else{
+          approvalStatus.textContent='That code is not valid or is no longer active. Check the code and try again.';
+        }
+      }catch(err){approvalStatus.textContent='We could not verify the code right now. Please try again later.';}
+    });
   </script>
 </body>
 </html>
