@@ -12,7 +12,7 @@ Static animated landing page for Target Media.
 
 ## Current application flow
 
-1. Visitor applies for Monitor.
+1. Visitor clicks **Apply for Monitor** on the landing page and is taken to the dedicated `apply.html` application page.
 2. Visitor provides only the business/contact/location details needed for qualification.
 3. Visitor chooses a preferred appointment date and time.
 4. Service hours are Monday–Sunday, 09:00–18:00.
