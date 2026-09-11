@@ -96,7 +96,7 @@
       <section class="form-section">
         <label class="ack"><input id="priceAck" name="priceAck" type="checkbox" required><span>I understand Monitor costs <strong>€299 per quarter per location</strong> and standard installation and initial configuration are included.</span></label>
         <label class="ack"><input id="privacyAck" name="privacyAck" type="checkbox" required><span>I have read the <a href="privacy-policy.html">Privacy Policy</a> and understand how my application details will be used.</span></label>
-        <div class="submission-note" id="submissionNote">The form is ready. Secure Google Sheets submission is the next connection step, so applications are not sent anywhere yet.</div>
+        <div class="submission-note" id="submissionNote">Your application will be sent securely to Target Media for review.</div>
         <button class="btn btn-primary submit-application" type="submit">Submit Monitor application</button>
       </section>
     </form>
@@ -114,7 +114,8 @@
     const q=(s,r=document)=>r.querySelector(s);
     const qa=(s,r=document)=>Array.from(r.querySelectorAll(s));
 
-    const APPLICATION_ENDPOINT='';
+    const APPLICATION_ENDPOINT='https://target-media.onrender.com/api/applications';
+    const APPLICATION_REQUEST_ID=(globalThis.crypto&&crypto.randomUUID)?crypto.randomUUID():'web-'+Date.now()+'-'+Math.random().toString(36).slice(2);
 
     const appForm=q('#monitorApplication');
     const appSuccess=q('#applicationSuccess');
@@ -131,12 +132,7 @@
       payload.plan='Monitor';
       payload.pricePerQuarter=299;
       payload.installationFee=0;
-
-      if(!APPLICATION_ENDPOINT){
-        submissionNote.textContent='Applications are not being sent yet because the Google Sheets connection is the next setup step. Your information has not left this browser.';
-        submissionNote.classList.add('warning');
-        return;
-      }
+      payload.requestId=APPLICATION_REQUEST_ID;
 
       const submitBtn=q('.submit-application',appForm);
       submitBtn.disabled=true;
@@ -148,7 +144,8 @@
           headers:{'Content-Type':'application/json'},
           body:JSON.stringify(payload)
         });
-        if(!response.ok)throw new Error('submit');
+        const data=await response.json().catch(()=>({}));
+        if(!response.ok||data.ok!==true)throw new Error(data.error||'submit');
         appForm.hidden=true;
         appSuccess.hidden=false;
         appSuccess.focus();
