@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070712">
+  <meta name="description" content="Apply for Target Media Monitor and choose a preferred appointment time.">
+  <title>Apply for Monitor — Target Media</title>
+  <style>
+    :root{--bg:#070712;--card:#111126;--line:rgba(255,255,255,.16);--text:#fafaff;--muted:#c7c7d5;--sub:#a8a8bb;--violet:#8e78ff;--violet2:#b9adff;--good:#8cf5cf;--warn:#ffd27a;--danger:#ff8eaa;--shadow:0 28px 80px rgba(0,0,0,.38)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(900px 520px at 90% 0,rgba(100,74,255,.18),transparent 68%),linear-gradient(180deg,#070712,#0a0a18 50%,#070712);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}
+    a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #d7d0ff;outline-offset:3px}
+    .skip-link{position:fixed;left:16px;top:-80px;z-index:50;background:#fff;color:#090912;padding:12px 16px;border-radius:10px;font-weight:800}.skip-link:focus{top:12px}
+    .wrap{width:min(1040px,calc(100% - 32px));margin:auto}
+    .topbar{padding:18px 0;position:sticky;top:0;z-index:20;background:rgba(7,7,18,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:900;letter-spacing:-.03em}.back{font-size:13px;color:#d3d3df}.back:hover{color:#fff}
+    .hero{padding:74px 0 34px}.eyebrow{display:inline-flex;padding:7px 11px;border:1px solid rgba(142,120,255,.3);border-radius:999px;color:#e4dfff;background:rgba(119,92,255,.08);font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+    h1{font-size:clamp(42px,7vw,72px);line-height:.98;letter-spacing:-.06em;margin:18px 0 16px;max-width:850px}.gradient{background:linear-gradient(100deg,#fff 5%,#c6bdff 45%,#8e78ff 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{color:var(--muted);font-size:17px;line-height:1.72;max-width:770px;margin:0}.price-note{margin-top:18px;display:flex;gap:10px;align-items:flex-start;color:#dad7e8;font-size:13px}.price-dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good);margin-top:6px;flex:0 0 auto}
+    .application-card{margin:34px 0 70px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));overflow:hidden;box-shadow:var(--shadow)}
+    .form-section{padding:30px;border-bottom:1px solid var(--line)}.form-section:last-child{border-bottom:0}
+    .form-section-head{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;margin-bottom:24px}.form-section-head>span{width:42px;height:42px;border-radius:13px;border:1px solid rgba(142,120,255,.34);display:grid;place-items:center;color:#d9d2ff;background:rgba(119,92,255,.09);font-weight:850}.form-section-head h2{font-size:22px;margin:0 0 5px;letter-spacing:-.03em}.form-section-head p{margin:0;color:var(--muted);font-size:13px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label,.choice-fieldset legend,.approval-label{font-size:11px;color:#d0d0dc;text-transform:uppercase;letter-spacing:.07em;font-weight:800}.field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#15152a;color:#fff;padding:12px 13px}.field textarea{resize:vertical;min-height:110px}.field input::placeholder,.field textarea::placeholder{color:#8f8fa2}.optional{color:#9c9cad;font-weight:600;text-transform:none;letter-spacing:0}.textarea-field{margin-top:18px}
+    .choice-fieldset{border:0;padding:0;margin:0}.choice-fieldset legend{margin-bottom:10px}.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.choice{display:flex;align-items:center;gap:10px;min-height:50px;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);cursor:pointer}.choice:has(input:checked){border-color:rgba(142,120,255,.58);background:rgba(119,92,255,.10)}.choice input{width:18px;height:18px;accent-color:#8e78ff}.choice span{font-size:12px;color:#e5e5eb}
+    .schedule-shell{display:grid;grid-template-columns:minmax(360px,.95fr) 1.05fr;gap:18px}.calendar-panel,.time-panel{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.026);padding:20px}.calendar-top{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;gap:8px;margin-bottom:16px}.calendar-top strong{text-align:center;font-size:15px}.calendar-nav{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer}.calendar-nav:disabled{opacity:.3;cursor:not-allowed}.weekday-row,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.weekday-row{margin-bottom:7px}.weekday-row span{text-align:center;color:#aaaabd;font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:800}.calendar-day,.calendar-blank{aspect-ratio:1;min-width:0}.calendar-day{border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04);cursor:pointer;font-weight:750}.calendar-day:hover:not(:disabled){border-color:rgba(142,120,255,.65);background:rgba(119,92,255,.10)}.calendar-day.is-unavailable{opacity:.23;background:rgba(255,255,255,.015);cursor:not-allowed}.calendar-day.is-selected{border-color:#a796ff;background:rgba(119,92,255,.26);box-shadow:0 0 0 1px rgba(167,150,255,.28) inset}.calendar-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;color:#aaaabd;font-size:10px}.calendar-legend span{display:flex;align-items:center;gap:6px}.legend-dot{width:9px;height:9px;border-radius:3px;border:1px solid var(--line);display:inline-block}.legend-dot.available{background:rgba(255,255,255,.08)}.legend-dot.unavailable{opacity:.35;background:#454552}.legend-dot.selected{background:#8e78ff;border-color:#a99aff}
+    .selected-date-label{font-size:10px;color:#aaaabd;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.time-panel>strong{display:block;font-size:20px;margin:5px 0 8px;letter-spacing:-.025em}.time-help{font-size:12px;color:var(--muted);margin:0 0 16px}.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.time-slot{min-height:42px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04);font-weight:750;cursor:pointer}.time-slot:hover:not(:disabled){border-color:rgba(142,120,255,.6);background:rgba(119,92,255,.10)}.time-slot.is-unavailable{opacity:.25;cursor:not-allowed}.time-slot.is-selected{border-color:#a796ff;background:rgba(119,92,255,.26)}.schedule-message{min-height:20px;color:#c5c5d2;font-size:11px;margin-top:13px}
+    .ack{display:flex;gap:10px;align-items:flex-start;margin:10px 0;color:#d5d5df;font-size:12px}.ack input{margin-top:3px;width:18px;height:18px;accent-color:#8e78ff}.ack a{text-decoration:underline;text-underline-offset:3px}
+    .submission-note{margin:16px 0;padding:13px 14px;border:1px solid rgba(255,210,122,.24);border-radius:13px;background:rgba(255,210,122,.06);color:#e7d6b0;font-size:11px;line-height:1.6}.submission-note.warning{border-color:rgba(255,142,170,.3);background:rgba(255,142,170,.06);color:#ffd0dc}
+    .btn{border:1px solid var(--line);border-radius:14px;padding:13px 18px;display:inline-flex;align-items:center;justify-content:center;font-weight:850;cursor:pointer;background:rgba(255,255,255,.06);min-height:48px}.btn-primary{background:linear-gradient(135deg,#765cff,#4c3fd5);border-color:#a190ff;box-shadow:0 14px 40px rgba(100,75,255,.22)}.submit-application{width:100%}.btn:disabled{opacity:.55;cursor:not-allowed}
+    .application-success{margin:34px 0 70px;border:1px solid rgba(140,245,207,.3);border-radius:30px;padding:42px;text-align:center;background:rgba(140,245,207,.055)}.success-mark{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:rgba(140,245,207,.12);border:1px solid rgba(140,245,207,.3);color:var(--good);font-size:24px}.application-success h2{font-size:30px;margin:0 0 8px}.application-success p{max-width:620px;margin:auto;color:var(--muted);line-height:1.7}
+    footer{padding:30px 0 46px;border-top:1px solid rgba(255,255,255,.08);color:#aaaabd;font-size:11px}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer-links a{text-decoration:underline;text-underline-offset:3px}
+    @media(max-width:800px){.schedule-shell{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+    @media(max-width:560px){.hero{padding-top:52px}.form-section{padding:22px}.choice-grid{grid-template-columns:1fr}.time-grid{grid-template-columns:repeat(2,1fr)}.calendar-panel,.time-panel{padding:15px}.topbar-inner{align-items:flex-start}.back{font-size:12px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to application</a>
+  <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="index.html">Target Media</a><a class="back" href="index.html">← Back to website</a></div></header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <span class="eyebrow">Monitor application</span>
+      <h1>Apply for <span class="gradient">Monitor.</span></h1>
+      <p class="lead">Tell us about your business and location, then choose a preferred appointment time. We review every application before payment so we can confirm that the location is a sensible fit.</p>
+      <div class="price-note"><span class="price-dot" aria-hidden="true"></span><span><strong>€299 per quarter per location.</strong> Standard installation and initial configuration are included.</span></div>
+    </section>
+
+    <form id="monitorApplication" class="application-card" autocomplete="on">
+      <section class="form-section">
+        <div class="form-section-head"><span>1</span><div><h2>About you</h2><p>Only the contact details we need to review the application and speak with you.</p></div></div>
+        <div class="form-grid">
+          <div class="field"><label for="fullName">Your name</label><input id="fullName" name="fullName" autocomplete="name" required placeholder="e.g. Alex de Vries"></div>
+          <div class="field"><label for="businessName">Business name</label><input id="businessName" name="businessName" autocomplete="organization" required placeholder="e.g. Northside Barbers"></div>
+          <div class="field"><label for="workEmail">Work email</label><input id="workEmail" name="workEmail" type="email" autocomplete="email" required placeholder="name@business.nl"></div>
+          <div class="field"><label for="phone">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="+31 ..."></div>
+          <div class="field"><label for="contactMethod">Preferred contact</label><select id="contactMethod" name="contactMethod" required><option value="">Choose one</option><option>Email</option><option>WhatsApp</option><option>Phone call</option></select></div>
+          <div class="field"><label for="businessType">Business type</label><input id="businessType" name="businessType" required placeholder="e.g. Barber shop"></div>
+          <div class="field"><label for="website">Website or Instagram <span class="optional">optional</span></label><input id="website" name="website" inputmode="url" placeholder="https://... or @business"></div>
+          <div class="field"><label for="locations">Number of locations</label><input id="locations" name="locations" type="number" min="1" inputmode="numeric" value="1" required></div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="form-section-head"><span>2</span><div><h2>Your location</h2><p>Enough information to judge whether Monitor can be installed and measured sensibly.</p></div></div>
+        <div class="form-grid">
+          <div class="field full"><label for="streetAddress">Installation address</label><input id="streetAddress" name="streetAddress" autocomplete="street-address" required placeholder="Street and number"></div>
+          <div class="field"><label for="city">City</label><input id="city" name="city" autocomplete="address-level2" required placeholder="e.g. Rotterdam"></div>
+          <div class="field"><label for="postcode">Postcode</label><input id="postcode" name="postcode" autocomplete="postal-code" required placeholder="1234 AB"></div>
+          <div class="field"><label for="storefrontVisible">Storefront or entrance visible from the street?</label><select id="storefrontVisible" name="storefrontVisible" required><option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+          <div class="field"><label for="footTraffic">Typical foot traffic</label><select id="footTraffic" name="footTraffic" required><option value="">Choose one</option><option>Low</option><option>Medium</option><option>High</option><option>Not sure</option></select></div>
+          <div class="field"><label for="measurePoint">Where would you like us to measure?</label><select id="measurePoint" name="measurePoint" required><option value="">Choose one</option><option>Storefront</option><option>Entrance</option><option>Inside facing the entrance</option><option>Not sure — advise me</option></select></div>
+          <div class="field"><label for="electricity">Power near the installation point?</label><select id="electricity" name="electricity" required><option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+          <div class="field"><label for="internet">Internet / Wi-Fi available?</label><select id="internet" name="internet" required><option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+          <div class="field full"><label for="installPermission">Permission to install a small camera/device at the location?</label><select id="installPermission" name="installPermission" required><option value="">Choose one</option><option>Yes</option><option>I need to confirm it</option><option>Not sure</option></select></div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="form-section-head"><span>3</span><div><h2>What do you want to understand?</h2><p>This helps us know whether Monitor is solving a real problem for you.</p></div></div>
+        <fieldset class="choice-fieldset">
+          <legend>Select everything that matters</legend>
+          <div class="choice-grid">
+            <label class="choice"><input type="checkbox" name="objectives" value="How many people pass"><span>How many people pass</span></label>
+            <label class="choice"><input type="checkbox" name="objectives" value="How many people look"><span>How many people look</span></label>
+            <label class="choice"><input type="checkbox" name="objectives" value="How many people stop"><span>How many people stop</span></label>
+            <label class="choice"><input type="checkbox" name="objectives" value="Best and weakest hours"><span>Best and weakest hours</span></label>
+            <label class="choice"><input type="checkbox" name="objectives" value="How traffic changes over time"><span>How traffic changes over time</span></label>
+            <label class="choice"><input type="checkbox" name="objectives" value="Other"><span>Other</span></label>
+          </div>
+        </fieldset>
+        <div class="field full textarea-field"><label for="problem">Is there a specific problem you want to investigate? <span class="optional">optional</span></label><textarea id="problem" name="problem" rows="4" maxlength="700" placeholder="A short explanation is enough."></textarea></div>
+      </section>
+
+      <section class="form-section">
+        <div class="form-section-head"><span>4</span><div><h2>Choose an appointment</h2><p>Current service hours: Monday–Sunday, 09:00–18:00. Select a date and then a preferred time.</p></div></div>
+        <div class="schedule-shell">
+          <div class="calendar-panel">
+            <div class="calendar-top"><button class="calendar-nav" id="prevMonth" type="button" aria-label="Previous month">←</button><strong id="calendarMonth" aria-live="polite"></strong><button class="calendar-nav" id="nextMonth" type="button" aria-label="Next month">→</button></div>
+            <div class="weekday-row" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+            <div class="calendar-grid" id="calendarGrid" role="grid" aria-label="Choose appointment date"></div>
+            <div class="calendar-legend"><span><i class="legend-dot available"></i>Available</span><span><i class="legend-dot unavailable"></i>Unavailable</span><span><i class="legend-dot selected"></i>Selected</span></div>
+          </div>
+          <div class="time-panel">
+            <div class="selected-date-label">Selected date</div>
+            <strong id="selectedDateText">Choose a date</strong>
+            <p class="time-help">Appointments are offered in 30-minute start slots between 09:00 and 18:00.</p>
+            <div class="time-grid" id="timeGrid" aria-label="Choose preferred appointment time"></div>
+            <input type="hidden" id="appointmentDate" name="appointmentDate">
+            <input type="hidden" id="appointmentTime" name="appointmentTime">
+            <div class="schedule-message" id="scheduleMessage" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <label class="ack"><input id="priceAck" name="priceAck" type="checkbox" required><span>I understand Monitor costs <strong>€299 per quarter per location</strong> and standard installation and initial configuration are included.</span></label>
+        <label class="ack"><input id="privacyAck" name="privacyAck" type="checkbox" required><span>I have read the <a href="privacy-policy.html">Privacy Policy</a> and understand how my application details will be used.</span></label>
+        <div class="submission-note" id="submissionNote">The form is ready. Secure Google Sheets / Calendar submission is the next connection step, so applications are not sent anywhere yet.</div>
+        <button class="btn btn-primary submit-application" type="submit">Submit Monitor application</button>
+      </section>
+    </form>
+
+    <section class="application-success" id="applicationSuccess" hidden tabindex="-1">
+      <span class="success-mark">✓</span>
+      <h2>Thank you for applying.</h2>
+      <p>We have received your Monitor application and appointment request. We will review the location and get in touch with you as soon as possible.</p>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="refund-policy.html">Refund Policy</a><a href="accessibility.html">Accessibility</a></div></footer>
+
+  <script>
+    const q=(s,r=document)=>r.querySelector(s);
+    const qa=(s,r=document)=>Array.from(r.querySelectorAll(s));
+
+    const APPLICATION_ENDPOINT='';
+    const AVAILABILITY_ENDPOINT='';
+
+    const schedulingConfig={openHour:9,closeHour:18,slotMinutes:30,blockedDates:[],blockedSlots:{}};
+    const pad=n=>String(n).padStart(2,'0');
+    const isoDate=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+    const todayStart=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
+    let viewDate=new Date();viewDate.setDate(1);viewDate.setHours(0,0,0,0);
+    let selectedDate='',selectedTime='';
+
+    function slotsForDate(dateStr){
+      const slots=[];
+      for(let minutes=schedulingConfig.openHour*60;minutes<schedulingConfig.closeHour*60;minutes+=schedulingConfig.slotMinutes){
+        const h=Math.floor(minutes/60),m=minutes%60;
+        slots.push(pad(h)+':'+pad(m));
+      }
+      const blocked=new Set(schedulingConfig.blockedSlots[dateStr]||[]);
+      const now=new Date(),isToday=dateStr===isoDate(now);
+      return slots.map(time=>{
+        let disabled=blocked.has(time);
+        if(isToday){
+          const parts=time.split(':').map(Number);
+          const t=new Date(now);t.setHours(parts[0],parts[1],0,0);
+          if(t<=now)disabled=true;
+        }
+        return {time,disabled};
+      });
+    }
+
+    function dateFullyBlocked(dateStr){
+      if(schedulingConfig.blockedDates.includes(dateStr))return true;
+      const slots=slotsForDate(dateStr);
+      return slots.length>0&&slots.every(s=>s.disabled);
+    }
+
+    function renderCalendar(){
+      const grid=q('#calendarGrid'),monthLabel=q('#calendarMonth');
+      grid.innerHTML='';
+      monthLabel.textContent=viewDate.toLocaleDateString(undefined,{month:'long',year:'numeric'});
+      const year=viewDate.getFullYear(),month=viewDate.getMonth();
+      const first=new Date(year,month,1),offset=(first.getDay()+6)%7,days=new Date(year,month+1,0).getDate();
+      for(let i=0;i<offset;i++){const blank=document.createElement('span');blank.className='calendar-blank';grid.appendChild(blank);}
+      for(let day=1;day<=days;day++){
+        const d=new Date(year,month,day);d.setHours(0,0,0,0);
+        const dateStr=isoDate(d),past=d<todayStart(),blocked=!past&&dateFullyBlocked(dateStr);
+        const b=document.createElement('button');
+        b.type='button';b.className='calendar-day';b.textContent=String(day);b.dataset.date=dateStr;b.setAttribute('role','gridcell');
+        b.setAttribute('aria-label',d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'}));
+        if(past||blocked){b.disabled=true;b.classList.add('is-unavailable');b.setAttribute('aria-disabled','true');}
+        b.setAttribute('aria-pressed',selectedDate===dateStr?'true':'false');
+        if(selectedDate===dateStr)b.classList.add('is-selected');
+        b.addEventListener('click',()=>selectDate(dateStr));
+        grid.appendChild(b);
+      }
+      const now=new Date();q('#prevMonth').disabled=year===now.getFullYear()&&month===now.getMonth();
+    }
+
+    function selectDate(dateStr){
+      selectedDate=dateStr;selectedTime='';
+      q('#appointmentDate').value=dateStr;q('#appointmentTime').value='';
+      const d=new Date(dateStr+'T12:00:00');
+      q('#selectedDateText').textContent=d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+      renderCalendar();renderTimes();
+    }
+
+    function renderTimes(){
+      const grid=q('#timeGrid'),msg=q('#scheduleMessage');grid.innerHTML='';
+      if(!selectedDate){msg.textContent='Choose an available date first.';return;}
+      const slots=slotsForDate(selectedDate);
+      slots.forEach(({time,disabled})=>{
+        const b=document.createElement('button');
+        b.type='button';b.className='time-slot';b.textContent=time;b.disabled=disabled;
+        if(disabled)b.classList.add('is-unavailable');
+        if(selectedTime===time)b.classList.add('is-selected');
+        b.setAttribute('aria-pressed',selectedTime===time?'true':'false');
+        b.addEventListener('click',()=>{selectedTime=time;q('#appointmentTime').value=time;renderTimes();});
+        grid.appendChild(b);
+      });
+      msg.textContent=slots.some(s=>!s.disabled)?'Choose your preferred start time.':'No appointment times are available on this date.';
+    }
+
+    q('#prevMonth').addEventListener('click',()=>{
+      const now=new Date(),candidate=new Date(viewDate.getFullYear(),viewDate.getMonth()-1,1),current=new Date(now.getFullYear(),now.getMonth(),1);
+      if(candidate>=current){viewDate=candidate;renderCalendar();}
+    });
+    q('#nextMonth').addEventListener('click',()=>{viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()+1,1);renderCalendar();});
+
+    async function loadAvailability(){
+      if(!AVAILABILITY_ENDPOINT){renderCalendar();renderTimes();return;}
+      try{
+        const response=await fetch(AVAILABILITY_ENDPOINT,{method:'GET',cache:'no-store'});
+        if(!response.ok)throw new Error('availability');
+        const data=await response.json();
+        schedulingConfig.blockedDates=Array.isArray(data.blockedDates)?data.blockedDates:[];
+        schedulingConfig.blockedSlots=data.blockedSlots&&typeof data.blockedSlots==='object'?data.blockedSlots:{};
+      }catch(e){q('#scheduleMessage').textContent='Live calendar availability could not be loaded. Please try again later.';}
+      renderCalendar();renderTimes();
+    }
+    loadAvailability();
+
+    const appForm=q('#monitorApplication'),appSuccess=q('#applicationSuccess'),submissionNote=q('#submissionNote');
+    appForm.addEventListener('submit',async e=>{
+      e.preventDefault();
+      if(!appForm.reportValidity())return;
+      if(!selectedDate||!selectedTime){q('#scheduleMessage').textContent='Please choose both a date and a time.';q('#calendarGrid').scrollIntoView({behavior:'smooth',block:'center'});return;}
+
+      const objectives=qa('input[name="objectives"]:checked',appForm).map(x=>x.value);
+      const fd=new FormData(appForm),payload=Object.fromEntries(fd.entries());
+      payload.objectives=objectives;payload.appointmentDate=selectedDate;payload.appointmentTime=selectedTime;payload.plan='Monitor';payload.pricePerQuarter=299;payload.installationFee=0;
+
+      if(!APPLICATION_ENDPOINT){
+        submissionNote.textContent='Applications are not being sent yet because the Google Sheets / Calendar connection is the next setup step. Your information has not left this browser.';
+        submissionNote.classList.add('warning');
+        return;
+      }
+
+      const submitBtn=q('.submit-application',appForm);submitBtn.disabled=true;submitBtn.textContent='Submitting…';
+      try{
+        const response=await fetch(APPLICATION_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        if(!response.ok)throw new Error('submit');
+        appForm.hidden=true;appSuccess.hidden=false;appSuccess.focus();
+      }catch(err){
+        submissionNote.textContent='We could not submit the application. Please try again or contact us directly.';
+        submissionNote.classList.add('warning');
+      }finally{submitBtn.disabled=false;submitBtn.textContent='Submit Monitor application';}
+    });
+  </script>
+</body>
+</html>
