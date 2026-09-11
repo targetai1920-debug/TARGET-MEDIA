@@ -164,7 +164,7 @@
       answer.style.maxHeight=open?answer.scrollHeight+'px':'0px';
     }));
 
-    const APPROVAL_ENDPOINT='';
+    const APPROVAL_ENDPOINT='https://target-media.onrender.com/api/approval/verify';
     const approvalForm=q('#approvalForm'),approvalStatus=q('#approvalStatus'),paymentUnlock=q('#paymentUnlock');
 
     approvalForm.addEventListener('submit',async e=>{
@@ -178,11 +178,6 @@
         return;
       }
 
-      if(!APPROVAL_ENDPOINT){
-        approvalStatus.textContent='Secure approval-code verification will be activated when the Google Sheets / Apps Script workflow is connected. No codes are stored in this public page.';
-        return;
-      }
-
       approvalStatus.textContent='Checking code…';
       try{
         const response=await fetch(APPROVAL_ENDPOINT,{
@@ -190,12 +185,14 @@
           headers:{'Content-Type':'application/json'},
           body:JSON.stringify({action:'verifyApprovalCode',code})
         });
-        if(!response.ok)throw new Error('verify');
-        const data=await response.json();
+        const data=await response.json().catch(()=>({}));
+        if(!response.ok||data.ok!==true)throw new Error('verify');
         if(data.valid===true&&data.paymentUrl){
           approvalStatus.textContent='Code approved. You can continue to secure payment.';
           paymentUnlock.href=data.paymentUrl;
           paymentUnlock.hidden=false;
+        }else if(data.valid===true){
+          approvalStatus.textContent='Code approved. Secure payment is being connected and will appear here once activated.';
         }else{
           approvalStatus.textContent='That code is not valid or is no longer active. Check the code and try again.';
         }
