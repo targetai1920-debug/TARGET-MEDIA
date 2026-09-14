@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0d" />
+  <meta name="description" content="Private Target Media client dashboard access for Monitor customers." />
+  <title>Your dashboard — Target Media</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .dashboard-shell{min-height:100vh;padding:148px 0 80px;display:grid;place-items:center}
+    .dashboard-grid{width:min(980px,100%);display:grid;grid-template-columns:1fr .88fr;gap:42px;align-items:center}
+    .dashboard-copy h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.04em;margin:18px 0 22px;max-width:700px}
+    .dashboard-copy p{color:var(--muted);font-size:17px;line-height:1.72;max-width:610px;margin:0}
+    .dashboard-note{margin-top:26px;padding:14px 16px;border-left:2px solid var(--accent-line);color:var(--sub);font-size:12.5px;line-height:1.7}
+    .access-card{border:1px solid var(--line-strong);border-radius:var(--radius-lg);background:var(--surface);padding:28px;box-shadow:var(--shadow)}
+    .access-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+    .access-head b{font-size:15px}
+    .access-fields{display:grid;gap:14px;margin-top:22px}
+    .access-fields label{display:grid;gap:7px;color:var(--muted);font-size:12px;font-weight:700}
+    .access-fields input{width:100%;min-height:48px;border:1px solid var(--line);border-radius:var(--radius-sm);background:rgba(255,255,255,.025);padding:0 14px;color:var(--sub)}
+    .access-fields input:disabled{opacity:.72;cursor:not-allowed}
+    .access-card .btn{width:100%;margin-top:18px}
+    .access-foot{margin:16px 0 0;color:var(--sub);font-size:11.5px;line-height:1.6}
+    @media(max-width:820px){
+      .dashboard-shell{padding-top:126px;place-items:start}
+      .dashboard-grid{grid-template-columns:1fr;gap:32px}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav-wrap">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="index.html" aria-label="Target Media home">
+        <span class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 416.44"><path d="M783.56 268.45l-2.3-5.73-8.03-4.59h-61.95l-25.24 5.73-29.83 17.21-51.62 48.18-33.27 26.39-42.45 24.09-24.09 8.03-40.15 5.74-29.83-1.15-42.45-8.03-24.09-9.18 17.21 11.48 21.8 10.32 41.3 11.47 19.5 2.3h30.97l28.68-4.59 29.83-10.33 37.86-21.79 28.68-22.95 39.01-36.71 27.53-19.5 22.95-9.18 16.06-3.44h42.44l10.33-6.89zM252.39 243.21l17.21 33.27 25.24 30.98 19.5 10.32h16.06l19.5-10.32 64.25-67.69 12.62-6.88 95.22-3.44 5.73-8.04v-30.97l5.74-5.74h120.46l4.59 5.74v32.12l8.03 8.03h328.11l11.47 8.03h178.97l11.47-6.88 2.29-16.06-14.91-12.62h-176.67l-11.48 6.88-310.9 1.15-8.03-8.03v-30.98l-9.17-8.03H518.55l-10.33 9.18v30.98l-6.88 6.88H279.92l-18.35 10.32-9.18 21.8zM536.9 123.9l-73.42-36.71-8.03-25.24-13.77-22.94-16.06-16.07-25.24-14.91-25.24-6.88L352.2 0l-21.8 3.44-25.24 10.33-28.68 24.09-12.62 18.35-10.32 33.27v47.04l-35.57 43.59-36.71 1.15-52.77 16.06-51.63 32.13-37.85 40.15-16.07 24.09-18.35 42.45L0 365.97l4.59 36.71 16.06 12.62 16.06-4.59 37.86-100.96 25.24-37.86 35.56-35.56 21.8-14.92 36.71-14.91 26.39-1.15 18.35 10.33-4.59-21.8 29.83-35.56h13.77l5.74-5.74v-49.33l8.03-11.47 18.35-3.44 16.06 4.59 92.93 53.92 26.38 10.32 18.36 1.15 24.09-5.74z" fill="currentColor"/></svg></span>
+        <span class="brand-name">Target Media</span>
+      </a>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="index.html#faq">FAQ</a>
+        <a class="btn" href="index.html">Back to site</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="dashboard-shell">
+    <div class="container dashboard-grid">
+      <section class="dashboard-copy">
+        <span class="kicker"><i class="proof-dot" aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:var(--accent-2);display:inline-block"></i> Client access</span>
+        <h1>Your business metrics, <span class="gradient-text">in one place.</span></h1>
+        <p>This private dashboard will give Monitor clients access to the metrics and reporting attached to their own business or location.</p>
+        <div class="dashboard-note"><strong>Access layer in progress.</strong> Login credentials and business-level data permissions will be connected in the next implementation phase. No credentials are stored in this public page.</div>
+      </section>
+
+      <section class="access-card" aria-labelledby="access-title">
+        <div class="access-head">
+          <b id="access-title">Your dashboard</b>
+          <span class="status-pill status-pill--roadmap">Private access</span>
+        </div>
+        <div class="access-fields" aria-describedby="access-status">
+          <label>Username or email
+            <input type="text" autocomplete="username" placeholder="Your login" disabled />
+          </label>
+          <label>Password
+            <input type="password" autocomplete="current-password" placeholder="••••••••" disabled />
+          </label>
+        </div>
+        <button class="btn btn-primary" type="button" disabled>Sign in — setup in progress</button>
+        <p class="access-foot" id="access-status">Monitor clients will receive their private access credentials once the dashboard data layer is activated.</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
