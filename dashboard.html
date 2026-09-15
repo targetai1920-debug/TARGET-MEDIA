@@ -232,7 +232,7 @@
         <span class="kicker"><i class="proof-dot" aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:var(--accent-2);display:inline-block"></i> Client access</span>
         <h1>See your storefront metrics, <span class="gradient-text">clearly and confidently.</span></h1>
         <p>Monitor turns storefront activity into a simple view of traffic, attention, stopping behavior and how those patterns change over time.</p>
-        <div class="dashboard-note"><strong>Experimental access.</strong> The dashboard below uses clearly labelled sample data while we validate the client experience. The next phase will connect these exact fields to the Monitor CRM / Google Sheet through Apps Script.</div>
+        <div class="dashboard-note"><strong>Experimental access.</strong> Monitor reads authorized aggregate metrics through the Target Media backend. The temporary test account is not production authentication.</div>
       </section>
 
       <section class="access-card" aria-labelledby="access-title">
@@ -259,12 +259,12 @@
     <section class="client-app" id="clientApp" hidden aria-label="Monitor client dashboard">
       <div class="client-top">
         <div class="client-title">
-          <small><i aria-hidden="true"></i> Monitor dashboard · Sample client view</small>
+          <small><i aria-hidden="true"></i> Monitor dashboard · <span id="monitorViewLabel">Test view</span></small>
           <h1>Your storefront metrics.</h1>
-          <p>Rotterdam · This dashboard shows the key percentage rates first, then the traffic trend, attention behavior, demographic snapshot, historical comparison and quarterly summary for the selected sample period.</p>
+          <p id="monitorLocation">Loading authorized location metrics…</p>
         </div>
         <div class="top-controls">
-          <span class="demo-chip">Illustrative sample data</span>
+          <span class="demo-chip" id="dataStatus" role="status" aria-live="polite">Loading metrics…</span>
           <div class="period-switch" role="group" aria-label="Dashboard period">
             <button type="button" data-period="7d" class="active">7 days</button>
             <button type="button" data-period="30d">30 days</button>
@@ -278,7 +278,7 @@
           <div class="metric-top">
             <div>
               <strong>Passers-by</strong>
-              <span>Total people detected passing in front of the location.</span>
+              <span>Passage events in the measured zone; not unique people across the day.</span>
             </div>
             <span class="metric-badge"><i></i> Traffic</span>
           </div>
@@ -290,7 +290,7 @@
           <div class="metric-top">
             <div>
               <strong>Look rate</strong>
-              <span>Share of passers-by who looked toward the storefront.</span>
+              <span>Looked events divided by passage events; classification rule pending pilot.</span>
             </div>
             <span class="metric-badge"><i></i> Attention</span>
           </div>
@@ -302,7 +302,7 @@
           <div class="metric-top">
             <div>
               <strong>Stop rate</strong>
-              <span>Share of passers-by who stopped near the storefront.</span>
+              <span>Stopped events divided by passage events; classification rule pending pilot.</span>
             </div>
             <span class="metric-badge"><i></i> Behaviour</span>
           </div>
@@ -326,7 +326,7 @@
         <div class="trend-grid">
           <div>
             <div class="chart-wrap">
-              <svg viewBox="0 0 720 270" preserveAspectRatio="none" role="img" aria-label="Illustrative storefront traffic trend">
+              <svg viewBox="0 0 720 270" preserveAspectRatio="none" role="img" aria-label="Storefront traffic trend">
                 <defs>
                   <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stop-color="#a99cff" stop-opacity=".24"/>
@@ -348,17 +348,17 @@
             <div class="side-stat">
               <small>Passers-by</small>
               <b id="sidePassers" data-format="int">18,426</b>
-              <span>Total people passing in front of the location during the selected period.</span>
+              <span>Total passage events in the selected period.</span>
             </div>
             <div class="side-stat">
               <small>Stopped visitors</small>
               <b id="sideStopped" data-format="int">1,732</b>
-              <span>Total people who stopped near the storefront during the same period.</span>
+              <span>Events classified as stopped during the same period.</span>
             </div>
             <div class="side-stat">
               <small>Average look time</small>
               <b id="sideAvgLookTime">2.8s</b>
-              <span>Average time people kept their attention on the storefront.</span>
+              <span>Total valid look seconds divided by valid look events.</span>
             </div>
           </aside>
         </div>
@@ -377,22 +377,22 @@
                     <div class="compact-card">
                       <small>Passers-by</small>
                       <b id="funnelPassersCount" data-format="int">18,426</b>
-                      <span>100% of observed storefront traffic in the selected period.</span>
+                      <span>100% of observed passage events in the selected period.</span>
                     </div>
                     <div class="compact-card">
                       <small>Looked</small>
                       <b id="funnelLookedCount" data-format="int">6,394</b>
-                      <span><strong id="funnelLookPct">34.7%</strong> of passers-by looked toward the storefront.</span>
+                      <span><strong id="funnelLookPct">34.7%</strong> of passage events were classified as looked.</span>
                     </div>
                     <div class="compact-card">
                       <small>Stopped</small>
                       <b id="funnelStoppedCount" data-format="int">1,732</b>
-                      <span><strong id="funnelStopPct">9.4%</strong> of passers-by stopped near the storefront.</span>
+                      <span><strong id="funnelStopPct">9.4%</strong> of passage events were classified as stopped.</span>
                     </div>
                     <div class="compact-card">
                       <small>Avg look time</small>
                       <b id="avgLookTime">2.8s</b>
-                      <span>Average attention duration before people looked away or kept moving.</span>
+                      <span>Average valid attention duration per looked event.</span>
                     </div>
                   </div>
                   <div class="attention-story">
@@ -404,13 +404,13 @@
                   <div class="panel-head">
                     <div>
                       <h2>Strong & weak moments</h2>
-                      <p>Quick interpretation of the windows that stood out in this sample period.</p>
+                      <p>Highest and lowest observed traffic windows in the selected period.</p>
                     </div>
                   </div>
                   <div class="windows-grid">
-                    <div class="window-card"><small><i></i> Strongest window</small><b id="bestWindow">17:00–19:00</b><span>Highest combined passer-by and attention activity.</span></div>
+                    <div class="window-card"><small><i></i> Strongest window</small><b id="bestWindow">—</b><span>Highest average passer-by traffic by observed hour.</span></div>
                     <div class="window-card"><small><i></i> Strongest day</small><b id="bestDay">Friday</b><span>Best traffic volume in this sample period.</span></div>
-                    <div class="window-card weak"><small><i></i> Weakest window</small><b id="weakWindow">10:00–11:00</b><span>Lowest traffic volume in this sample period.</span></div>
+                    <div class="window-card weak"><small><i></i> Weakest window</small><b id="weakWindow">—</b><span>Lowest average passer-by traffic by observed hour.</span></div>
                   </div>
                 </aside>
       </div>
@@ -419,9 +419,9 @@
         <div class="panel-head">
           <div>
             <h2>Demographic snapshot</h2>
-            <p>Anonymous, aggregated sample insight about the audience composition around the storefront.</p>
+            <p>Optional aggregate buckets only; disabled unless a validated methodology is enabled.</p>
           </div>
-          <span class="status-pill status-pill--sample">Estimated</span>
+          <span class="status-pill status-pill--sample" id="demographicStatus">Disabled</span>
         </div>
         <div class="demographic-grid">
           <div class="demo-card">
@@ -433,7 +433,7 @@
             <div class="stack" id="genderMix"></div>
           </div>
         </div>
-        <div class="demo-note">These demographic fields are shown here as a potential Monitor extension using broad anonymous buckets only. Exact production logic and compliance would need to be validated before launch.</div>
+        <div class="demo-note" id="demographicNote">Demographics are not enabled for this location. No demographic estimates are shown.</div>
       </section>
 
       <section class="insight-panel historical-panel">
@@ -461,26 +461,26 @@
         <div class="panel-head">
                     <div>
                       <h2>Quarterly performance summary</h2>
-                      <p>Q3 2026 · sample summary for interface validation.</p>
+                      <p id="quarterPeriod">Quarter-to-date aggregate metrics.</p>
                     </div>
                     <span class="status-pill status-pill--sample">Quarterly</span>
                   </div>
-                  <p class="quarter-lead">A quarterly summary should not feel cramped. This section gives the client a clear narrative view of what changed over the quarter, where the strongest performance came from, how attention evolved and whether stopping behaviour improved.</p>
+                  <p class="quarter-lead" id="quarterLead">Numeric quarter-to-date results; no unsupported interpretation is inferred from incomplete data.</p>
                   <div class="quarter-grid">
                     <article class="quarter-card">
                       <small>Traffic</small>
-                      <b>Higher than Q2</b>
-                      <span>Passer-by volume increased 11.2% in this illustrative quarter, with the most meaningful lift concentrated in late afternoon.</span>
+                      <b id="quarterTraffic">—</b>
+                      <span id="quarterTrafficDetail">Quarter-to-date passer-by events.</span>
                     </article>
                     <article class="quarter-card">
                       <small>Attention</small>
-                      <b>Best on Friday</b>
-                      <span>Look rate was strongest on Fridays, especially between 17:00 and 19:00, suggesting that end-of-week traffic engaged more with the storefront.</span>
+                      <b id="quarterLook">—</b>
+                      <span id="quarterLookDetail">Looked events divided by passer-by events.</span>
                     </article>
                     <article class="quarter-card">
                       <small>Stopping</small>
-                      <b>Improved modestly</b>
-                      <span>Stop rate finished 0.8 percentage points above the prior quarter, indicating more people paused near the storefront than in the previous period.</span>
+                      <b id="quarterStop">—</b>
+                      <span id="quarterStopDetail">Stopped events divided by passer-by events.</span>
                     </article>
                   </div>
       </section>
@@ -494,254 +494,10 @@
         <a class="btn btn-ghost" href="index.html#faq">Open Monitor FAQ</a>
       </aside>
 
-      <div class="dashboard-foot"><span><strong>Monitor metrics represented:</strong> look rate · stop rate · passers-by · stopped visitors · average look time · demographic snapshot · hourly/daily/weekly trends · historical comparison · strong/weak moments · quarterly summary.</span><span>Demo environment · no real customer data</span></div>
+      <div class="dashboard-foot"><span><strong>Monitor metrics represented:</strong> look rate · stop rate · passers-by · stopped visitors · average look time · demographic snapshot · hourly/daily/weekly trends · historical comparison · strong/weak moments · quarterly summary.</span><span id="dataFoot">Test environment · no customer data</span></div>
     </section>
   </main>
 
-  <script>
-    (() => {
-      const TEST_USER_HASH = "8d5f68b212f211adfff2664a88c6d9f1961b980c6ac85aa77affd8de5e153da2";
-      const TEST_PASSWORD_HASH = "80dc9ffa9e74580e47c161d6eda7197e7482322501b703fa8b59aae6141b9a26";
-      const SESSION_KEY = "tm_dashboard_test_session";
-      const DEMO_DATA = {
-        periods: {
-          "7d": {
-            passers:18426, lookRate:34.7, stopRate:9.4, looked:6394, stopped:1732,
-            deltaPassers:8.2, deltaLook:2.4, deltaStop:0.7, avgLookTime:2.8,
-            bestWindow:"17:00–19:00", bestDay:"Friday", weakWindow:"10:00–11:00",
-            demographics:{ age:[['18–24',16],['25–34',31],['35–44',24],['45–54',17],['55+',12]], gender:[['Women',53],['Men',44],['Unknown',3]] }
-          },
-          "30d": {
-            passers:78960, lookRate:33.9, stopRate:9.0, looked:26768, stopped:7106,
-            deltaPassers:6.1, deltaLook:1.8, deltaStop:0.4, avgLookTime:2.6,
-            bestWindow:"17:00–19:00", bestDay:"Saturday", weakWindow:"09:00–10:00",
-            demographics:{ age:[['18–24',15],['25–34',29],['35–44',25],['45–54',18],['55+',13]], gender:[['Women',52],['Men',45],['Unknown',3]] }
-          },
-          "quarter": {
-            passers:218470, lookRate:32.8, stopRate:8.7, looked:71658, stopped:19007,
-            deltaPassers:11.2, deltaLook:2.1, deltaStop:0.8, avgLookTime:2.7,
-            bestWindow:"16:00–19:00", bestDay:"Friday", weakWindow:"10:00–11:00",
-            demographics:{ age:[['18–24',14],['25–34',30],['35–44',24],['45–54',18],['55+',14]], gender:[['Women',51],['Men',46],['Unknown',3]] }
-          }
-        },
-        trends: {
-          hourly: { labels:["09","10","11","12","13","14","15","16","17","18","19","20"], values:[128,102,140,188,222,245,276,314,382,421,389,254], caption:"Average traffic by hour across the selected period.", peak:"Peak 18:00" },
-          daily: { labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], values:[2410,2285,2512,2688,3184,2910,2437], caption:"Passer-by traffic by day for the latest sample week.", peak:"Peak Friday" },
-          weekly: { labels:["W1","W2","W3","W4","W5","W6","W7","W8","W9","W10","W11","W12","W13"], values:[15720,16110,15940,16680,17010,16840,17290,17540,17320,18110,17920,18480,19310], caption:"Weekly traffic across the illustrative quarter.", peak:"Peak W13" }
-        },
-        comparisons: {
-          daily: {
-            lead:"Compare the current daily range against the previous equivalent period.",
-            caption:"Example: latest 24 hours vs the 24 hours before that.",
-            traffic:{current:88,previous:81,delta:"+6.4%"},
-            look:{current:85,previous:79,delta:"+1.9pp"},
-            stop:{current:76,previous:72,delta:"+0.5pp"}
-          },
-          weekly: {
-            lead:"Compare the current weekly range against the previous equivalent period.",
-            caption:"Example: latest 7 days vs the 7 days before that.",
-            traffic:{current:91,previous:84,delta:"+8.2%"},
-            look:{current:87,previous:81,delta:"+2.4pp"},
-            stop:{current:78,previous:72,delta:"+0.7pp"}
-          },
-          monthly: {
-            lead:"Compare the current monthly range against the previous equivalent period.",
-            caption:"Example: latest 30 days vs the 30 days before that.",
-            traffic:{current:93,previous:86,delta:"+9.1%"},
-            look:{current:84,previous:79,delta:"+1.8pp"},
-            stop:{current:77,previous:73,delta:"+0.4pp"}
-          }
-        }
-      };
-
-      const form = document.getElementById("dashboardLogin");
-      const loginView = document.getElementById("loginView");
-      const clientApp = document.getElementById("clientApp");
-      const navLogout = document.getElementById("navLogout");
-      const user = document.getElementById("dashboardUser");
-      const password = document.getElementById("dashboardPassword");
-      const error = document.getElementById("loginError");
-      const fmtInt = new Intl.NumberFormat("en-GB");
-      const animatedValues = new Map();
-      const byId = id => document.getElementById(id);
-
-      async function sha256(value) {
-        const bytes = new TextEncoder().encode(value);
-        const digest = await crypto.subtle.digest("SHA-256", bytes);
-        return Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2, "0")).join("");
-      }
-
-      function formatValue(value, format) {
-        if (format === "pct") return Number(value).toFixed(1) + "%";
-        return fmtInt.format(Math.round(value));
-      }
-
-      function animateNumber(el, to, format) {
-        const start = animatedValues.get(el) ?? 0;
-        const duration = 700;
-        const startTime = performance.now();
-        function tick(now) {
-          const progress = Math.min(1, (now - startTime) / duration);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = start + (to - start) * eased;
-          el.textContent = formatValue(current, format);
-          if (progress < 1) requestAnimationFrame(tick);
-          else animatedValues.set(el, to);
-        }
-        requestAnimationFrame(tick);
-      }
-
-      function signed(value, suffix) {
-        const n = Number(value);
-        return (n >= 0 ? "+" : "") + n.toFixed(1) + suffix;
-      }
-
-      function ratioText(base, divisor) {
-        if (!divisor) return "—";
-        return "1 in " + (base / divisor).toFixed(1);
-      }
-
-      function renderStack(targetId, rows) {
-        const container = byId(targetId);
-        container.innerHTML = rows.map(([label, value]) => `
-          <div class="stack-row">
-            <label>${label}</label>
-            <div class="bar"><i style="width:${value}%"></i></div>
-            <strong>${value}%</strong>
-          </div>`).join("");
-      }
-
-      function renderPeriod(key) {
-        const d = DEMO_DATA.periods[key];
-        if (!d) return;
-
-        animateNumber(byId("kpiPassers"), d.passers, "int");
-        animateNumber(byId("kpiLookRate"), d.lookRate, "pct");
-        animateNumber(byId("kpiStopRate"), d.stopRate, "pct");
-        animateNumber(byId("sidePassers"), d.passers, "int");
-        animateNumber(byId("sideStopped"), d.stopped, "int");
-        animateNumber(byId("funnelPassersCount"), d.passers, "int");
-        animateNumber(byId("funnelLookedCount"), d.looked, "int");
-        animateNumber(byId("funnelStoppedCount"), d.stopped, "int");
-
-        byId("deltaPassers").textContent = signed(d.deltaPassers, "%");
-        byId("deltaLook").textContent = signed(d.deltaLook, " pp");
-        byId("deltaStop").textContent = signed(d.deltaStop, " pp");
-
-        byId("footerPassers").textContent = "Avg " + fmtInt.format(Math.round(d.passers / (key === "7d" ? 7 : key === "30d" ? 30 : 91))) + " / day";
-        byId("footerLook").textContent = ratioText(d.passers, d.looked) + " looked";
-        byId("footerStop").textContent = ratioText(d.passers, d.stopped) + " stopped";
-        byId("funnelLookPct").textContent = d.lookRate.toFixed(1) + "%";
-        byId("funnelStopPct").textContent = d.stopRate.toFixed(1) + "%";
-        byId("avgLookTime").textContent = d.avgLookTime.toFixed(1) + "s";
-        byId("sideAvgLookTime").textContent = d.avgLookTime.toFixed(1) + "s";
-        byId("attentionStoryHeadline").textContent = "Out of every 100 passers-by, around " + Math.round(d.lookRate) + " looked and " + Math.round(d.stopRate) + " stopped.";
-        byId("bestWindow").textContent = d.bestWindow;
-        byId("bestDay").textContent = d.bestDay;
-        byId("weakWindow").textContent = d.weakWindow;
-
-        renderStack("ageMix", d.demographics.age);
-        renderStack("genderMix", d.demographics.gender);
-
-        document.querySelectorAll("[data-period]").forEach(btn => btn.classList.toggle("active", btn.dataset.period === key));
-      }
-
-      function renderTrend(key) {
-        const data = DEMO_DATA.trends[key];
-        if (!data) return;
-        const width = 720, left = 28, right = 704, top = 28, bottom = 215;
-        const min = Math.min(...data.values), max = Math.max(...data.values);
-        const span = Math.max(1, max - min);
-        const points = data.values.map((value, index) => {
-          const x = left + (right - left) * (index / Math.max(1, data.values.length - 1));
-          const y = bottom - ((value - min) / span) * (bottom - top);
-          return { x, y, value, label: data.labels[index] };
-        });
-        const line = points.map((p, i) => (i ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1)).join(" ");
-        byId("chartLine").setAttribute("d", line);
-        byId("chartArea").setAttribute("d", line + " L " + right + " " + bottom + " L " + left + " " + bottom + " Z");
-        byId("chartDots").innerHTML = points.map((p, i) => '<circle class="chart-dot" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3" style="animation-delay:' + (0.07 + i * 0.025).toFixed(2) + 's"></circle>').join("");
-        const labelEvery = data.labels.length > 9 ? 2 : 1;
-        byId("chartLabels").innerHTML = points.map((p, i) => i % labelEvery === 0 ? '<text class="chart-axis" x="' + p.x.toFixed(1) + '" y="252" text-anchor="middle">' + p.label + '</text>' : "").join("");
-        byId("chartCaption").textContent = data.caption;
-        byId("chartPeak").textContent = data.peak;
-        document.querySelectorAll("[data-trend]").forEach(btn => btn.classList.toggle("active", btn.dataset.trend === key));
-      }
-
-      function renderComparison(range) {
-        const c = DEMO_DATA.comparisons[range];
-        if (!c) return;
-        byId("compareLead").textContent = c.lead;
-        byId("compareCaption").textContent = c.caption;
-        byId("compareTrafficCurrent").style.width = c.traffic.current + "%";
-        byId("compareTrafficPrevious").style.width = c.traffic.previous + "%";
-        byId("compareTrafficDelta").textContent = c.traffic.delta;
-        byId("compareLookCurrent").style.width = c.look.current + "%";
-        byId("compareLookPrevious").style.width = c.look.previous + "%";
-        byId("compareLookDelta").textContent = c.look.delta;
-        byId("compareStopCurrent").style.width = c.stop.current + "%";
-        byId("compareStopPrevious").style.width = c.stop.previous + "%";
-        byId("compareStopDelta").textContent = c.stop.delta;
-        document.querySelectorAll("[data-compare-range]").forEach(btn => btn.classList.toggle("active", btn.dataset.compareRange === range));
-      }
-
-      function showDashboard() {
-        loginView.hidden = true;
-        clientApp.hidden = false;
-        navLogout.hidden = false;
-        renderPeriod("7d");
-        renderTrend("hourly");
-        renderComparison("daily");
-        document.querySelectorAll('.reveal').forEach((el, idx) => el.style.animationDelay = (idx * 0.08) + 's');
-        window.scrollTo({ top: 0, behavior: "instant" });
-      }
-
-      function showLogin() {
-        clientApp.hidden = true;
-        navLogout.hidden = true;
-        loginView.hidden = false;
-        password.value = "";
-        error.hidden = true;
-      }
-
-      document.querySelectorAll("[data-period]").forEach(btn => btn.addEventListener("click", () => renderPeriod(btn.dataset.period)));
-      document.querySelectorAll("[data-trend]").forEach(btn => btn.addEventListener("click", () => renderTrend(btn.dataset.trend)));
-      document.querySelectorAll("[data-compare-range]").forEach(btn => btn.addEventListener("click", () => renderComparison(btn.dataset.compareRange)));
-
-      form.addEventListener("submit", async event => {
-        event.preventDefault();
-        error.hidden = true;
-        const enteredUser = user.value.trim().toLowerCase();
-        const enteredPassword = password.value;
-        if (!enteredUser || !enteredPassword) {
-          error.textContent = "Enter both username and password.";
-          error.hidden = false;
-          return;
-        }
-        try {
-          const [userHash, passwordHash] = await Promise.all([sha256(enteredUser), sha256(enteredPassword)]);
-          if (userHash === TEST_USER_HASH && passwordHash === TEST_PASSWORD_HASH) {
-            sessionStorage.setItem(SESSION_KEY, "active");
-            showDashboard();
-            return;
-          }
-          error.textContent = "Incorrect test username or password.";
-          error.hidden = false;
-          password.select();
-        } catch {
-          error.textContent = "This browser could not verify the test login.";
-          error.hidden = false;
-        }
-      });
-
-      navLogout.addEventListener("click", () => {
-        sessionStorage.removeItem(SESSION_KEY);
-        showLogin();
-        user.focus();
-      });
-
-      if (sessionStorage.getItem(SESSION_KEY) === "active") showDashboard();
-    })();
-  </script>
+  <script src="dashboard.js" defer></script>
 </body>
 </html>
