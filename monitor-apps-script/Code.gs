@@ -76,6 +76,7 @@ function monitorDemographicsEnabled_() {
 function monitorIngest_(body) {
   var businessId=monitorSafe_(body.businessId,80),locationId=monitorSafe_(body.locationId,80),deviceId=monitorSafe_(body.deviceId,80);
   monitorBusiness_(businessId,locationId,deviceId);
+  var sampleData=body.sampleData===true && businessId==='TM-TEST-001' && locationId==='TM-LOC-TEST-001';
   var requestId=monitorSafe_(body.requestId,100);
   if(!Array.isArray(body.intervals) || body.intervals.length<1 || body.intervals.length>MONITOR_MAX_BATCH) throw monitorError_('INVALID_BATCH');
   var now=Date.now(), normalized=[],demographics=[];
@@ -95,7 +96,7 @@ function monitorIngest_(body) {
       demographics.push({index:i,row:[start,end,businessId,locationId].concat(age,gender,[true,monitorSafe_(item.methodologyVersion,80),requestId+':'+i])});
     }
     normalized.push([start,end,businessId,locationId,deviceId,passers,looked,stopped,total,valid,valid ? total/valid : '',
-      'EDGE',item.uptimePct==null ? '' : monitorNumber_(item.uptimePct,100,false),requestId+':'+i,new Date(), 'REAL',
+      sampleData ? 'SAMPLE' : 'EDGE',item.uptimePct==null ? '' : monitorNumber_(item.uptimePct,100,false),requestId+':'+i,new Date(), sampleData ? 'SAMPLE/TEST' : 'REAL',
       monitorSafe_(item.metricDefinitionVersion || 'v1-draft',80)]);
   }
   var lock=LockService.getScriptLock();if(!lock.tryLock(20000)) throw monitorError_('BUSY');
@@ -105,7 +106,11 @@ function monitorIngest_(body) {
     var fresh=[];for(var j=0;j<normalized.length;j++){
       var row=normalized[j],prior=keys[row[13]];
       if(prior){
-        if(String(prior[2])!==businessId || String(prior[3])!==locationId || Number(prior[5])!==row[5] || Number(prior[6])!==row[6] || Number(prior[7])!==row[7]) throw monitorError_('REQUEST_ID_CONFLICT');
+        if(String(prior[2])!==businessId || String(prior[3])!==locationId || String(prior[4])!==deviceId ||
+          !monitorDateValue_(prior[0]) || monitorDateValue_(prior[0]).getTime()!==row[0].getTime() ||
+          !monitorDateValue_(prior[1]) || monitorDateValue_(prior[1]).getTime()!==row[1].getTime() ||
+          Number(prior[5])!==row[5] || Number(prior[6])!==row[6] || Number(prior[7])!==row[7] ||
+          Number(prior[8])!==row[8] || Number(prior[9])!==row[9]) throw monitorError_('REQUEST_ID_CONFLICT');
       } else fresh.push(row);
     }
     if(fresh.length) sheet.getRange(sheet.getLastRow()+1,1,fresh.length,17).setValues(fresh);
