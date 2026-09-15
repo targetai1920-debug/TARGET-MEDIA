@@ -10,9 +10,9 @@
   <style>
     [hidden]{display:none!important}
     body{min-height:100vh}
-    .dashboard-shell{min-height:100vh;padding:136px 0 70px}
+    .dashboard-shell{min-height:100vh;padding:136px 0 72px}
     .login-grid{width:min(980px,100%);margin:auto;display:grid;grid-template-columns:1fr .88fr;gap:42px;align-items:center;min-height:calc(100vh - 220px)}
-    .dashboard-copy h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.04em;margin:18px 0 22px;max-width:700px}
+    .dashboard-copy h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.04em;margin:18px 0 22px;max-width:760px}
     .dashboard-copy p{color:var(--muted);font-size:17px;line-height:1.72;max-width:610px;margin:0}
     .dashboard-note{margin-top:26px;padding:14px 16px;border-left:2px solid var(--accent-line);color:var(--sub);font-size:12.5px;line-height:1.7}
     .access-card{border:1px solid var(--line-strong);border-radius:var(--radius-lg);background:var(--surface);padding:28px;box-shadow:var(--shadow)}
@@ -26,114 +26,135 @@
     .access-foot{margin:16px 0 0;color:var(--sub);font-size:11.5px;line-height:1.6}
     .access-error{margin-top:12px;color:#ff9ab0;font-size:12px;line-height:1.5}
 
-    /* client dashboard */
-    .client-app{width:min(1220px,calc(100% - 40px));margin:auto}
-    .client-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:28px}
+    .client-app{width:min(1240px,calc(100% - 40px));margin:auto}
+    .client-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:26px}
     .client-title small{display:flex;align-items:center;gap:8px;color:var(--sub);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
     .client-title small i{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 16px rgba(127,227,189,.55)}
-    .client-title h1{font-size:clamp(30px,4vw,48px);letter-spacing:-.035em;line-height:1;margin:10px 0 8px}
-    .client-title p{margin:0;color:var(--muted);font-size:13px}
+    .client-title h1{font-size:clamp(34px,4.4vw,56px);letter-spacing:-.042em;line-height:.98;margin:12px 0 10px;max-width:780px}
+    .client-title p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;max-width:720px}
     .top-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     .period-switch{display:flex;padding:4px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
     .period-switch button,.trend-switch button{border:0;background:transparent;color:var(--sub);padding:8px 11px;border-radius:8px;font-size:11.5px;font-weight:750;cursor:pointer;transition:.18s ease}
     .period-switch button.active,.trend-switch button.active{background:var(--accent-soft);color:var(--accent-2);box-shadow:inset 0 0 0 1px var(--accent-line)}
     .demo-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;border:1px solid rgba(232,183,104,.28);background:rgba(232,183,104,.06);color:#e8c98f;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 
-    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
-    .kpi-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:20px;min-height:148px}
-    .kpi-card:before{content:"";position:absolute;inset:auto -30px -60px auto;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(124,108,240,.18),transparent 68%);pointer-events:none}
-    .kpi-label{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--sub);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:800}
-    .kpi-label span:last-child{font-family:var(--mono);font-size:9px;color:var(--muted);font-weight:600}
-    .kpi-value{display:block;font-family:var(--mono);font-size:clamp(29px,3vw,38px);line-height:1;margin:18px 0 10px;letter-spacing:-.04em}
-    .kpi-delta{font-size:11.5px;color:var(--good)}
-    .kpi-delta.down{color:#ff9ab0}
-    .kpi-sub{font-size:11px;color:var(--sub);margin-left:6px}
+    .overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+    .metric-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.032),rgba(255,255,255,.018));padding:18px 18px 17px;min-height:158px;transform:translateY(0);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+    .metric-card:hover{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:0 20px 45px rgba(0,0,0,.22)}
+    .metric-card:before{content:"";position:absolute;inset:auto -25px -64px auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(124,108,240,.16),transparent 68%);pointer-events:none}
+    .metric-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px}
+    .metric-top strong{display:block;color:var(--sub);font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+    .metric-top span{display:block;color:var(--muted);font-size:11px;line-height:1.45;margin-top:6px}
+    .metric-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--sub);font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.05em;white-space:nowrap}
+    .metric-badge i{width:5px;height:5px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px rgba(169,156,255,.5)}
+    .metric-value{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
+    .metric-value b{display:block;font-family:var(--mono);font-size:clamp(31px,3vw,40px);line-height:1;letter-spacing:-.05em}
+    .metric-delta{font-size:11px;font-weight:700;color:var(--good);padding-bottom:3px}
+    .metric-delta.down{color:#ff9ab0}
+    .metric-footer{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted)}
+    .metric-footer span:last-child{color:var(--sub);font-family:var(--mono)}
 
-    .main-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(280px,.75fr);gap:14px;margin-bottom:14px}
-    .panel{border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:22px}
+    .trend-panel,.insight-panel,.summary-panel,.support-panel{border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:24px;box-shadow:var(--shadow)}
     .panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:18px}
-    .panel-head h2{font-size:17px;letter-spacing:-.02em;margin:0}
-    .panel-head p{margin:5px 0 0;color:var(--sub);font-size:11.5px}
+    .panel-head h2{font-size:18px;letter-spacing:-.02em;margin:0}
+    .panel-head p{margin:6px 0 0;color:var(--sub);font-size:11.6px;line-height:1.6;max-width:740px}
     .trend-switch{display:flex;padding:3px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02)}
-    .chart-wrap{height:285px;position:relative}
+    .trend-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.75fr);gap:16px;align-items:stretch}
+    .chart-wrap{height:310px;position:relative}
     .chart-wrap svg{width:100%;height:100%;overflow:visible}
     .chart-grid line{stroke:var(--line);stroke-width:1}
     .chart-area{fill:url(#trendGradient)}
-    .chart-line{fill:none;stroke:var(--accent-2);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 7px rgba(169,156,255,.26))}
-    .chart-dot{fill:var(--accent-2)}
+    .chart-line{fill:none;stroke:var(--accent-2);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 7px rgba(169,156,255,.26));stroke-dasharray:1200;stroke-dashoffset:1200;animation:dashIn 1s var(--ease) forwards}
+    .chart-dot{fill:var(--accent-2);opacity:0;animation:dotIn .45s ease forwards}
     .chart-axis{fill:var(--sub);font:9px var(--mono)}
     .chart-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;border-top:1px solid var(--line)}
     .chart-summary span{font-size:11px;color:var(--sub)}
     .chart-summary strong{font-family:var(--mono);font-size:12px}
+    .chart-side{display:grid;gap:12px}
+    .side-stat{padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.015)}
+    .side-stat small{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--sub);font-weight:800}
+    .side-stat b{display:block;margin-top:8px;font-family:var(--mono);font-size:23px;letter-spacing:-.04em}
+    .side-stat span{display:block;margin-top:4px;color:var(--muted);font-size:11px;line-height:1.55}
 
-    .window-list{display:grid;gap:10px}
-    .window-card{padding:15px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.016)}
+    .insight-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:14px;margin:14px 0}
+    .compact-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .compact-card{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.015)}
+    .compact-card small{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--sub);font-weight:800}
+    .compact-card b{display:block;margin-top:10px;font-family:var(--mono);font-size:30px;line-height:1;letter-spacing:-.05em}
+    .compact-card span{display:block;margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.55}
+    .attention-story{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+    .attention-story strong{font-size:13px}
+    .attention-story p{margin:0;color:var(--sub);font-size:11.5px;line-height:1.6;max-width:520px}
+    .windows-grid{display:grid;gap:12px;margin-top:18px}
+    .window-card{padding:16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.015)}
     .window-card small{display:flex;align-items:center;gap:7px;color:var(--sub);font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:800}
     .window-card small i{width:7px;height:7px;border-radius:50%;background:var(--accent-2)}
     .window-card.weak small i{background:#ff9ab0}
-    .window-card b{display:block;font-family:var(--mono);font-size:19px;margin:8px 0 4px}
-    .window-card span{font-size:11px;color:var(--muted)}
-    .mini-note{margin-top:14px;padding:13px;border-left:2px solid var(--accent-line);color:var(--muted);font-size:11px;line-height:1.65}
+    .window-card b{display:block;font-family:var(--mono);font-size:20px;margin:9px 0 5px}
+    .window-card span{font-size:11px;color:var(--muted);line-height:1.55}
 
     .secondary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-    .funnel{display:grid;gap:11px;margin-top:20px}
-    .funnel-row{display:grid;grid-template-columns:120px 1fr 64px;gap:12px;align-items:center}
-    .funnel-row label{font-size:11px;color:var(--muted)}
-    .funnel-track{height:34px;border-radius:9px;background:rgba(255,255,255,.025);border:1px solid var(--line);overflow:hidden}
-    .funnel-fill{height:100%;display:flex;align-items:center;padding-left:10px;background:linear-gradient(90deg,rgba(124,108,240,.48),rgba(169,156,255,.82));border-radius:8px;transition:width .35s var(--ease)}
-    .funnel-fill span{font-family:var(--mono);font-size:10px;color:#fff;font-weight:700}
-    .funnel-row strong{text-align:right;font-family:var(--mono);font-size:12px}
-
     .compare-list{display:grid;gap:13px;margin-top:18px}
-    .compare-item{display:grid;grid-template-columns:126px 1fr 62px;gap:12px;align-items:center}
+    .compare-item{display:grid;grid-template-columns:126px 1fr 68px;gap:12px;align-items:center}
     .compare-item>span{font-size:11px;color:var(--muted)}
     .compare-bars{display:grid;gap:5px}
-    .compare-bar{height:7px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden}
-    .compare-bar i{display:block;height:100%;border-radius:999px;background:var(--accent-2)}
+    .compare-bar{height:8px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden}
+    .compare-bar i{display:block;height:100%;border-radius:999px;background:var(--accent-2);transition:width .35s var(--ease)}
     .compare-bar.previous i{background:rgba(255,255,255,.22)}
     .compare-item strong{text-align:right;font-family:var(--mono);font-size:11px;color:var(--good)}
+    .mini-note{margin-top:14px;padding:13px;border-left:2px solid var(--accent-line);color:var(--muted);font-size:11px;line-height:1.65}
 
-    .summary-panel{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-bottom:14px}
-    .quarter-summary{position:relative;overflow:hidden}
-    .quarter-summary:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-110px;top:-150px;background:radial-gradient(circle,rgba(124,108,240,.16),transparent 67%);pointer-events:none}
-    .summary-points{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
-    .summary-point{padding:14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.015)}
-    .summary-point small{font-size:9.5px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;font-weight:800}
-    .summary-point b{display:block;margin:8px 0 4px;font-size:14px}
-    .summary-point span{display:block;color:var(--muted);font-size:10.5px;line-height:1.5}
-    .support-box{display:flex;flex-direction:column;justify-content:space-between;min-height:100%}
+    .quarterly-section{display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin-bottom:14px}
+    .summary-panel{position:relative;overflow:hidden;padding:28px}
+    .summary-panel:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-130px;top:-160px;background:radial-gradient(circle,rgba(124,108,240,.16),transparent 68%);pointer-events:none}
+    .quarter-lead{max-width:740px;margin:0 0 22px;color:var(--muted);font-size:12px;line-height:1.75;position:relative;z-index:1}
+    .quarter-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .quarter-card{padding:20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.017);min-height:180px}
+    .quarter-card small{display:block;font-size:10px;color:var(--sub);text-transform:uppercase;letter-spacing:.07em;font-weight:800}
+    .quarter-card b{display:block;margin:14px 0 10px;font-size:24px;line-height:1.05;letter-spacing:-.03em}
+    .quarter-card span{display:block;color:var(--muted);font-size:12.5px;line-height:1.7}
+    .support-panel{display:flex;flex-direction:column;justify-content:space-between}
     .support-status{display:inline-flex;align-items:center;gap:8px;color:var(--good);font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:800}
     .support-status i{width:7px;height:7px;border-radius:50%;background:var(--good)}
-    .support-box h3{font-size:21px;line-height:1.1;margin:20px 0 10px}
-    .support-box p{font-size:12px;color:var(--muted);line-height:1.65;margin:0}
-    .support-box .btn{margin-top:20px;width:100%}
+    .support-panel h3{font-size:22px;line-height:1.1;margin:20px 0 10px}
+    .support-panel p{font-size:12px;color:var(--muted);line-height:1.65;margin:0}
+    .support-panel .btn{margin-top:20px;width:100%}
     .dashboard-foot{display:flex;justify-content:space-between;gap:20px;align-items:center;color:var(--sub);font-size:10.5px;padding:5px 2px 0}
     .dashboard-foot strong{color:var(--muted)}
 
-    @media(max-width:1000px){
-      .kpi-grid{grid-template-columns:repeat(2,1fr)}
-      .main-grid,.summary-panel{grid-template-columns:1fr}
+    .reveal{opacity:0;transform:translateY(12px);animation:fadeRise .55s var(--ease) forwards}
+    .reveal:nth-child(2){animation-delay:.08s}
+    .reveal:nth-child(3){animation-delay:.16s}
+    .reveal:nth-child(4){animation-delay:.24s}
+
+    @keyframes fadeRise{to{opacity:1;transform:none}}
+    @keyframes dashIn{to{stroke-dashoffset:0}}
+    @keyframes dotIn{to{opacity:1}}
+
+    @media(max-width:1080px){
+      .overview-grid{grid-template-columns:repeat(2,1fr)}
+      .trend-grid,.quarterly-section{grid-template-columns:1fr}
+      .insight-grid,.secondary-grid{grid-template-columns:1fr}
     }
     @media(max-width:820px){
       .dashboard-shell{padding-top:118px}
       .login-grid{grid-template-columns:1fr;gap:32px}
-      .client-app{width:min(100% - 28px,1220px)}
+      .client-app{width:min(100% - 28px,1240px)}
       .client-top{align-items:flex-start;flex-direction:column}
       .top-controls{justify-content:flex-start}
-      .secondary-grid{grid-template-columns:1fr}
-      .summary-points{grid-template-columns:1fr}
+      .compact-metrics,.quarter-grid{grid-template-columns:1fr}
     }
     @media(max-width:580px){
-      .kpi-grid{grid-template-columns:1fr}
-      .period-switch{width:100%}
-      .period-switch button{flex:1}
-      .panel{padding:18px}
+      .overview-grid{grid-template-columns:1fr}
+      .period-switch,.trend-switch{width:100%}
+      .period-switch button,.trend-switch button{flex:1}
+      .trend-panel,.insight-panel,.summary-panel,.support-panel,.access-card{padding:18px}
       .panel-head{flex-direction:column}
-      .trend-switch{width:100%}
-      .trend-switch button{flex:1}
-      .funnel-row{grid-template-columns:88px 1fr 54px;gap:8px}
-      .compare-item{grid-template-columns:90px 1fr 52px;gap:8px}
+      .compare-item{grid-template-columns:96px 1fr 56px;gap:8px}
+      .compact-metrics{gap:10px}
+      .compact-card b{font-size:26px}
       .dashboard-foot{align-items:flex-start;flex-direction:column}
+      .chart-wrap{height:260px}
     }
   </style>
 </head>
@@ -142,8 +163,23 @@
   <header class="nav-wrap">
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="index.html" aria-label="Target Media home">
-        <span class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 416.44"><path d="M783.56 268.45l-2.3-5.73-8.03-4.59h-61.95l-25.24 5.73-29.83 17.21-51.62 48.18-33.27 26.39-42.45 24.09-24.09 8.03-40.15 5.74-29.83-1.15-42.45-8.03-24.09-9.18 17.21 11.48 21.8 10.32 41.3 11.47 19.5 2.3h30.97l28.68-4.59 29.83-10.33 37.86-21.79 28.68-22.95 39.01-36.71 27.53-19.5 22.95-9.18 16.06-3.44h42.44l10.33-6.89zM252.39 243.21l17.21 33.27 25.24 30.98 19.5 10.32h16.06l19.5-10.32 64.25-67.69 12.62-6.88 95.22-3.44 5.73-8.04v-30.97l5.74-5.74h120.46l4.59 5.74v32.12l8.03 8.03h328.11l11.47 8.03h178.97l11.47-6.88 2.29-16.06-14.91-12.62h-176.67l-11.48 6.88-310.9 1.15-8.03-8.03v-30.98l-9.17-8.03H518.55l-10.33 9.18v30.98l-6.88 6.88H279.92l-18.35 10.32-9.18 21.8zM536.9 123.9l-73.42-36.71-8.03-25.24-13.77-22.94-16.06-16.07-25.24-14.91-25.24-6.88L352.2 0l-21.8 3.44-25.24 10.33-28.68 24.09-12.62 18.35-10.32 33.27v47.04l-35.57 43.59-36.71 1.15-52.77 16.06-51.63 32.13-37.85 40.15-16.07 24.09-18.35 42.45L0 365.97l4.59 36.71 16.06 12.62 16.06-4.59 37.86-100.96 25.24-37.86 35.56-35.56 21.8-14.92 36.71-14.91 26.39-1.15 18.35 10.33-4.59-21.8 29.83-35.56h13.77l5.74-5.74v-49.33l8.03-11.47 18.35-3.44 16.06 4.59 92.93 53.92 26.38 10.32 18.36 1.15 24.09-5.74z" fill="currentColor"/></svg></span>
-        <span class="brand-name">Target Media</span>
+        <svg viewBox="0 0 138 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="brandWing" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#c7bbff"></stop>
+              <stop offset="52%" stop-color="#a092ff"></stop>
+              <stop offset="100%" stop-color="#7467e4"></stop>
+            </linearGradient>
+            <linearGradient id="brandTail" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8af0d1"></stop>
+              <stop offset="100%" stop-color="#6e63f6"></stop>
+            </linearGradient>
+          </defs>
+          <path d="M8 44.5c15-17.8 31.1-27.2 48.5-28.2 9.6-.6 17.4 1.5 23.4 6.1 2.6 2 3.4 5.7 1.7 8.5-1.5 2.4-4.5 3.8-7.4 3.1-5.1-1.1-10.1-1.5-15-.9-9.6 1.2-18.9 5.8-27.8 13.9H8Z" fill="url(#brandWing)"></path>
+          <path d="M46.8 30.4c7.1-9.3 15.6-14.5 25.4-15.6 6.5-.8 12.4.4 17.7 3.6 2.6 1.6 3.6 4.9 2.5 7.7-1.1 2.7-4 4.3-6.9 3.8-3.2-.5-6.3-.5-9.4.1-6.5 1.2-12.9 4.9-19.1 11l-10.2-10.6Z" fill="url(#brandTail)"></path>
+          <path d="M88.5 23.5c8.2 1.8 16.8 5.7 25.7 11.6 2.4 1.6 5.7 1.2 7.6-.9 2-2.3 1.8-5.8-.4-7.8-7.6-6.6-16.6-11.7-27-15.5l-5.9 12.6Z" fill="url(#brandWing)" opacity="0.95"></path>
+        </svg>
+        <span>Target Media</span>
       </a>
       <div class="nav-actions">
         <a class="btn btn-ghost" href="index.html">Back to site</a>
@@ -156,7 +192,7 @@
     <div class="container login-grid" id="loginView">
       <section class="dashboard-copy">
         <span class="kicker"><i class="proof-dot" aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:var(--accent-2);display:inline-block"></i> Client access</span>
-        <h1>Your business metrics, <span class="gradient-text">in one place.</span></h1>
+        <h1>See your storefront metrics, <span class="gradient-text">clearly and confidently.</span></h1>
         <p>Monitor turns storefront activity into a simple view of traffic, attention, stopping behavior and how those patterns change over time.</p>
         <div class="dashboard-note"><strong>Experimental access.</strong> The dashboard below uses clearly labelled sample data while we validate the client experience. The next phase will connect these exact fields to the Monitor CRM / Google Sheet through Apps Script.</div>
       </section>
@@ -185,9 +221,9 @@
     <section class="client-app" id="clientApp" hidden aria-label="Monitor client dashboard">
       <div class="client-top">
         <div class="client-title">
-          <small><i aria-hidden="true"></i> Monitor · Test location</small>
-          <h1>Target Media Demo Store</h1>
-          <p>Rotterdam · Sample client dashboard · Last updated 14 Sep 2026, 18:00</p>
+          <small><i aria-hidden="true"></i> Monitor dashboard · Sample client view</small>
+          <h1>Your storefront metrics, made easy to understand.</h1>
+          <p>Target Media Demo Store · Rotterdam · This dashboard shows how many people passed, looked and stopped, how those patterns changed over time, and which windows performed best in this sample period.</p>
         </div>
         <div class="top-controls">
           <span class="demo-chip">Illustrative sample data</span>
@@ -199,100 +235,218 @@
         </div>
       </div>
 
-      <div class="kpi-grid">
-        <article class="kpi-card">
-          <div class="kpi-label">Passers-by <span>TRAFFIC</span></div>
-          <strong class="kpi-value" id="kpiPassers">18,426</strong>
-          <span class="kpi-delta" id="deltaPassers">+8.2%</span><span class="kpi-sub">vs previous period</span>
+      <div class="overview-grid">
+        <article class="metric-card reveal">
+          <div class="metric-top">
+            <div>
+              <strong>Passers-by</strong>
+              <span>Total people detected passing in front of the location.</span>
+            </div>
+            <span class="metric-badge"><i></i> Traffic</span>
+          </div>
+          <div class="metric-value"><b id="kpiPassers" data-format="int">18,426</b><span class="metric-delta" id="deltaPassers">+8.2%</span></div>
+          <div class="metric-footer"><span>vs previous period</span><span id="footerPassers">Avg 2,632 / day</span></div>
         </article>
-        <article class="kpi-card">
-          <div class="kpi-label">Look rate <span>ATTENTION</span></div>
-          <strong class="kpi-value" id="kpiLookRate">34.7%</strong>
-          <span class="kpi-delta" id="deltaLook">+2.4 pp</span><span class="kpi-sub">vs previous period</span>
+
+        <article class="metric-card reveal">
+          <div class="metric-top">
+            <div>
+              <strong>Look rate</strong>
+              <span>Share of passers-by who looked toward the storefront.</span>
+            </div>
+            <span class="metric-badge"><i></i> Attention</span>
+          </div>
+          <div class="metric-value"><b id="kpiLookRate" data-format="pct">34.7%</b><span class="metric-delta" id="deltaLook">+2.4 pp</span></div>
+          <div class="metric-footer"><span>vs previous period</span><span id="footerLook">1 in 2.9 looked</span></div>
         </article>
-        <article class="kpi-card">
-          <div class="kpi-label">Stop rate <span>BEHAVIOR</span></div>
-          <strong class="kpi-value" id="kpiStopRate">9.4%</strong>
-          <span class="kpi-delta" id="deltaStop">+0.7 pp</span><span class="kpi-sub">vs previous period</span>
+
+        <article class="metric-card reveal">
+          <div class="metric-top">
+            <div>
+              <strong>Stop rate</strong>
+              <span>Share of passers-by who stopped near the storefront.</span>
+            </div>
+            <span class="metric-badge"><i></i> Behaviour</span>
+          </div>
+          <div class="metric-value"><b id="kpiStopRate" data-format="pct">9.4%</b><span class="metric-delta" id="deltaStop">+0.7 pp</span></div>
+          <div class="metric-footer"><span>vs previous period</span><span id="footerStop">1 in 10.6 stopped</span></div>
         </article>
-        <article class="kpi-card">
-          <div class="kpi-label">Stopped visitors <span>AGGREGATED</span></div>
-          <strong class="kpi-value" id="kpiStopped">1,732</strong>
-          <span class="kpi-delta" id="deltaStopped">+16.9%</span><span class="kpi-sub">vs previous period</span>
+
+        <article class="metric-card reveal">
+          <div class="metric-top">
+            <div>
+              <strong>Stopped visitors</strong>
+              <span>Total stopped visitors counted in the selected period.</span>
+            </div>
+            <span class="metric-badge"><i></i> Outcome</span>
+          </div>
+          <div class="metric-value"><b id="kpiStopped" data-format="int">1,732</b><span class="metric-delta" id="deltaStopped">+16.9%</span></div>
+          <div class="metric-footer"><span>vs previous period</span><span id="footerStopped">Avg 247 / day</span></div>
         </article>
       </div>
 
-      <div class="main-grid">
-        <article class="panel">
+      <section class="trend-panel">
+        <div class="panel-head">
+          <div>
+            <h2>Storefront traffic trend</h2>
+            <p>The main chart sits underneath the headline metrics so clients can read the key numbers first, then understand how traffic moved by hour, day or week.</p>
+          </div>
+          <div class="trend-switch" role="group" aria-label="Traffic trend granularity">
+            <button type="button" data-trend="hourly" class="active">Hourly</button>
+            <button type="button" data-trend="daily">Daily</button>
+            <button type="button" data-trend="weekly">Weekly</button>
+          </div>
+        </div>
+        <div class="trend-grid">
+          <div>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 720 270" preserveAspectRatio="none" role="img" aria-label="Illustrative storefront traffic trend">
+                <defs>
+                  <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#a99cff" stop-opacity=".24"/>
+                    <stop offset="100%" stop-color="#a99cff" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <g class="chart-grid">
+                  <line x1="28" y1="42" x2="704" y2="42"/><line x1="28" y1="96" x2="704" y2="96"/><line x1="28" y1="150" x2="704" y2="150"/><line x1="28" y1="204" x2="704" y2="204"/>
+                </g>
+                <path class="chart-area" id="chartArea" d=""></path>
+                <path class="chart-line" id="chartLine" d=""></path>
+                <g id="chartDots"></g>
+                <g id="chartLabels"></g>
+              </svg>
+            </div>
+            <div class="chart-summary"><span id="chartCaption">Average traffic by hour across the selected period.</span><strong id="chartPeak">Peak 18:00</strong></div>
+          </div>
+          <aside class="chart-side">
+            <div class="side-stat">
+              <small>Strongest hour</small>
+              <b id="sidePeakWindow">17:00–19:00</b>
+              <span>Highest combined passer-by and attention activity in the sample period.</span>
+            </div>
+            <div class="side-stat">
+              <small>Strongest day</small>
+              <b id="sidePeakDay">Friday</b>
+              <span>Most active day in the latest sample week.</span>
+            </div>
+            <div class="side-stat">
+              <small>Weakest hour</small>
+              <b id="sideLowWindow">10:00–11:00</b>
+              <span>Lowest storefront traffic window in the sample period.</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <div class="insight-grid">
+        <section class="insight-panel">
           <div class="panel-head">
-            <div><h2>Storefront traffic</h2><p>See the pattern by hour, day or week.</p></div>
-            <div class="trend-switch" role="group" aria-label="Traffic trend granularity">
-              <button type="button" data-trend="hourly" class="active">Hourly</button>
-              <button type="button" data-trend="daily">Daily</button>
-              <button type="button" data-trend="weekly">Weekly</button>
+            <div>
+              <h2>Attention funnel</h2>
+              <p>Kept intentionally simple: just the essential numbers, with no misleading full-width bar charts.</p>
+            </div>
+            <span class="status-pill status-pill--sample">Aggregated</span>
+          </div>
+          <div class="compact-metrics">
+            <div class="compact-card">
+              <small>Passers-by</small>
+              <b id="funnelPassersCount" data-format="int">18,426</b>
+              <span>100% of observed storefront traffic in the selected period.</span>
+            </div>
+            <div class="compact-card">
+              <small>Looked</small>
+              <b id="funnelLookedCount" data-format="int">6,394</b>
+              <span><strong id="funnelLookPct">34.7%</strong> of passers-by looked toward the storefront.</span>
+            </div>
+            <div class="compact-card">
+              <small>Stopped</small>
+              <b id="funnelStoppedCount" data-format="int">1,732</b>
+              <span><strong id="funnelStopPct">9.4%</strong> of passers-by stopped near the storefront.</span>
             </div>
           </div>
-          <div class="chart-wrap">
-            <svg viewBox="0 0 720 270" preserveAspectRatio="none" role="img" aria-label="Illustrative storefront traffic trend">
-              <defs><linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a99cff" stop-opacity=".24"/><stop offset="100%" stop-color="#a99cff" stop-opacity="0"/></linearGradient></defs>
-              <g class="chart-grid">
-                <line x1="28" y1="42" x2="704" y2="42"/><line x1="28" y1="96" x2="704" y2="96"/><line x1="28" y1="150" x2="704" y2="150"/><line x1="28" y1="204" x2="704" y2="204"/>
-              </g>
-              <path class="chart-area" id="chartArea" d=""></path>
-              <path class="chart-line" id="chartLine" d=""></path>
-              <g id="chartDots"></g>
-              <g id="chartLabels"></g>
-            </svg>
+          <div class="attention-story">
+            <strong id="attentionStoryHeadline">Out of every 100 passers-by, around 35 looked and 9 stopped.</strong>
+            <p>This gives the client a quick, intuitive interpretation without forcing them to decode dense visuals.</p>
           </div>
-          <div class="chart-summary"><span id="chartCaption">Average traffic by hour across the selected period.</span><strong id="chartPeak">Peak 18:00</strong></div>
-        </article>
+        </section>
 
-        <aside class="panel">
-          <div class="panel-head"><div><h2>Strong & weak hours</h2><p>Quick view of the storefront windows that stand out.</p></div></div>
-          <div class="window-list">
+        <aside class="insight-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Strong & weak moments</h2>
+              <p>Quick interpretation of the windows that stood out in this sample period.</p>
+            </div>
+          </div>
+          <div class="windows-grid">
             <div class="window-card"><small><i></i> Strongest window</small><b>17:00–19:00</b><span>Highest combined passer-by and attention activity.</span></div>
             <div class="window-card"><small><i></i> Strongest day</small><b>Friday</b><span>Best traffic volume in this sample period.</span></div>
             <div class="window-card weak"><small><i></i> Weakest window</small><b>10:00–11:00</b><span>Lowest traffic volume in this sample period.</span></div>
           </div>
-          <div class="mini-note">Monitor identifies the pattern. More advanced diagnosis and optimisation remain outside the current Monitor plan.</div>
         </aside>
       </div>
 
       <div class="secondary-grid">
-        <article class="panel">
-          <div class="panel-head"><div><h2>Attention funnel</h2><p>A simple view from people passing the location to people stopping.</p></div><span class="status-pill status-pill--sample">Aggregated</span></div>
-          <div class="funnel">
-            <div class="funnel-row"><label>Passers-by</label><div class="funnel-track"><div class="funnel-fill" id="funnelPassers" style="width:100%"><span>100%</span></div></div><strong id="funnelPassersCount">18,426</strong></div>
-            <div class="funnel-row"><label>Looked</label><div class="funnel-track"><div class="funnel-fill" id="funnelLooked" style="width:34.7%"><span id="funnelLookPct">34.7%</span></div></div><strong id="funnelLookedCount">6,394</strong></div>
-            <div class="funnel-row"><label>Stopped</label><div class="funnel-track"><div class="funnel-fill" id="funnelStopped" style="width:9.4%"><span id="funnelStopPct">9.4%</span></div></div><strong id="funnelStoppedCount">1,732</strong></div>
+        <section class="insight-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Historical comparison</h2>
+              <p>Current selected period against the previous equivalent period.</p>
+            </div>
           </div>
-          <div class="mini-note">Rates and counts shown here use sample definitions for interface testing. Before production, we will lock the exact measurement specification and denominator for every metric.</div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-head"><div><h2>Historical comparison</h2><p>Current selected period against the previous equivalent period.</p></div></div>
           <div class="compare-list">
             <div class="compare-item"><span>Passers-by</span><div class="compare-bars"><div class="compare-bar"><i id="compareTrafficCurrent" style="width:91%"></i></div><div class="compare-bar previous"><i id="compareTrafficPrevious" style="width:84%"></i></div></div><strong id="compareTrafficDelta">+8.2%</strong></div>
             <div class="compare-item"><span>Look rate</span><div class="compare-bars"><div class="compare-bar"><i id="compareLookCurrent" style="width:87%"></i></div><div class="compare-bar previous"><i id="compareLookPrevious" style="width:81%"></i></div></div><strong id="compareLookDelta">+2.4pp</strong></div>
             <div class="compare-item"><span>Stop rate</span><div class="compare-bars"><div class="compare-bar"><i id="compareStopCurrent" style="width:78%"></i></div><div class="compare-bar previous"><i id="compareStopPrevious" style="width:72%"></i></div></div><strong id="compareStopDelta">+0.7pp</strong></div>
           </div>
-          <div class="mini-note">Historical comparisons are part of Monitor so clients can see whether the storefront is changing, not just view one isolated number.</div>
-        </article>
+          <div class="mini-note">Historical comparison is part of Monitor so clients can tell whether performance is improving or weakening, not just read isolated numbers.</div>
+        </section>
+
+        <aside class="support-panel">
+          <div>
+            <span class="support-status"><i></i> Basic support included</span>
+            <h3>Questions about your numbers?</h3>
+            <p>Monitor includes basic human support so clients can ask what a metric means or how to read the report. Advanced diagnosis and optimisation remain future products.</p>
+          </div>
+          <a class="btn btn-ghost" href="index.html#faq">Open Monitor FAQ</a>
+        </aside>
       </div>
 
-      <div class="summary-panel">
-        <article class="panel quarter-summary">
-          <div class="panel-head"><div><h2>Quarterly performance summary</h2><p>Q3 2026 · sample summary for interface validation.</p></div><span class="status-pill status-pill--sample">Quarterly</span></div>
-          <div class="summary-points">
-            <div class="summary-point"><small>Traffic</small><b>Higher than Q2</b><span>Passer-by volume increased 11.2% in this illustrative quarter.</span></div>
-            <div class="summary-point"><small>Attention</small><b>Best on Friday</b><span>Look rate was strongest late afternoon in the sample data.</span></div>
-            <div class="summary-point"><small>Stopping</small><b>Improved modestly</b><span>Stop rate finished 0.8 percentage points above the prior quarter.</span></div>
+      <div class="quarterly-section">
+        <section class="summary-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Quarterly performance summary</h2>
+              <p>Q3 2026 · sample summary for interface validation.</p>
+            </div>
+            <span class="status-pill status-pill--sample">Quarterly</span>
           </div>
-        </article>
+          <p class="quarter-lead">A quarterly summary should not feel cramped. This section gives the client a clear narrative view of what changed over the quarter, where the strongest performance came from, and how stopping behaviour evolved.</p>
+          <div class="quarter-grid">
+            <article class="quarter-card">
+              <small>Traffic</small>
+              <b>Higher than Q2</b>
+              <span>Passer-by volume increased 11.2% in this illustrative quarter, with the most meaningful lift concentrated in late afternoon.</span>
+            </article>
+            <article class="quarter-card">
+              <small>Attention</small>
+              <b>Best on Friday</b>
+              <span>Look rate was strongest on Fridays, especially between 17:00 and 19:00, suggesting that end-of-week traffic engaged more with the storefront.</span>
+            </article>
+            <article class="quarter-card">
+              <small>Stopping</small>
+              <b>Improved modestly</b>
+              <span>Stop rate finished 0.8 percentage points above the prior quarter, indicating more people paused near the storefront than in the previous period.</span>
+            </article>
+          </div>
+        </section>
 
-        <aside class="panel support-box">
-          <div><span class="support-status"><i></i> Basic support included</span><h3>Questions about your numbers?</h3><p>Monitor includes basic human support so clients can ask what a metric means or how to read the report. Advanced diagnosis and optimisation remain future products.</p></div>
-          <a class="btn btn-ghost" href="index.html#faq">Open Monitor FAQ</a>
+        <aside class="support-panel">
+          <div>
+            <span class="support-status"><i></i> Monitor scope</span>
+            <h3>What this plan covers</h3>
+            <p>Traffic in front of the store, passers-by count, attention / look rate, stopping behaviour, trends by hour, day and week, historical comparison, strongest and weakest windows, and a clear quarterly summary.</p>
+          </div>
+          <button class="btn" type="button" disabled>CRM connection comes next</button>
         </aside>
       </div>
 
@@ -302,18 +456,14 @@
 
   <script>
     (() => {
-      // Experimental client-side login only. Production auth will move server-side.
       const TEST_USER_HASH = "8d5f68b212f211adfff2664a88c6d9f1961b980c6ac85aa77affd8de5e153da2";
       const TEST_PASSWORD_HASH = "80dc9ffa9e74580e47c161d6eda7197e7482322501b703fa8b59aae6141b9a26";
       const SESSION_KEY = "tm_dashboard_test_session";
-
-      // This object intentionally mirrors the data groups we will later expose
-      // from Google Sheets / Apps Script. All values are illustrative.
       const DEMO_DATA = {
         periods: {
-          "7d": { passers:18426, lookRate:34.7, stopRate:9.4, looked:6394, stopped:1732, deltaPassers:8.2, deltaLook:2.4, deltaStop:.7, deltaStopped:16.9 },
-          "30d": { passers:78960, lookRate:33.9, stopRate:9.0, looked:26768, stopped:7106, deltaPassers:6.1, deltaLook:1.8, deltaStop:.4, deltaStopped:10.9 },
-          "quarter": { passers:218470, lookRate:32.8, stopRate:8.7, looked:71658, stopped:19007, deltaPassers:11.2, deltaLook:2.1, deltaStop:.8, deltaStopped:22.5 }
+          "7d": { passers:18426, lookRate:34.7, stopRate:9.4, looked:6394, stopped:1732, deltaPassers:8.2, deltaLook:2.4, deltaStop:0.7, deltaStopped:16.9 },
+          "30d": { passers:78960, lookRate:33.9, stopRate:9.0, looked:26768, stopped:7106, deltaPassers:6.1, deltaLook:1.8, deltaStop:0.4, deltaStopped:10.9 },
+          "quarter": { passers:218470, lookRate:32.8, stopRate:8.7, looked:71658, stopped:19007, deltaPassers:11.2, deltaLook:2.1, deltaStop:0.8, deltaStopped:22.5 }
         },
         trends: {
           hourly: { labels:["09","10","11","12","13","14","15","16","17","18","19","20"], values:[128,102,140,188,222,245,276,314,382,421,389,254], caption:"Average traffic by hour across the selected period.", peak:"Peak 18:00" },
@@ -329,8 +479,8 @@
       const user = document.getElementById("dashboardUser");
       const password = document.getElementById("dashboardPassword");
       const error = document.getElementById("loginError");
-
       const fmtInt = new Intl.NumberFormat("en-GB");
+      const animatedValues = new Map();
       const byId = id => document.getElementById(id);
 
       async function sha256(value) {
@@ -339,13 +489,105 @@
         return Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2, "0")).join("");
       }
 
+      function formatValue(value, format) {
+        if (format === "pct") return Number(value).toFixed(1) + "%";
+        return fmtInt.format(Math.round(value));
+      }
+
+      function animateNumber(el, to, format) {
+        const start = animatedValues.get(el) ?? 0;
+        const duration = 700;
+        const startTime = performance.now();
+        function tick(now) {
+          const progress = Math.min(1, (now - startTime) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = start + (to - start) * eased;
+          el.textContent = formatValue(current, format);
+          if (progress < 1) requestAnimationFrame(tick);
+          else animatedValues.set(el, to);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function signed(value, suffix) {
+        const n = Number(value);
+        return (n >= 0 ? "+" : "") + n.toFixed(1) + suffix;
+      }
+
+      function ratioText(base, divisor) {
+        if (!divisor) return "—";
+        return "1 in " + (base / divisor).toFixed(1);
+      }
+
+      function renderPeriod(key) {
+        const d = DEMO_DATA.periods[key];
+        if (!d) return;
+
+        animateNumber(byId("kpiPassers"), d.passers, "int");
+        animateNumber(byId("kpiLookRate"), d.lookRate, "pct");
+        animateNumber(byId("kpiStopRate"), d.stopRate, "pct");
+        animateNumber(byId("kpiStopped"), d.stopped, "int");
+        animateNumber(byId("funnelPassersCount"), d.passers, "int");
+        animateNumber(byId("funnelLookedCount"), d.looked, "int");
+        animateNumber(byId("funnelStoppedCount"), d.stopped, "int");
+
+        byId("deltaPassers").textContent = signed(d.deltaPassers, "%");
+        byId("deltaLook").textContent = signed(d.deltaLook, " pp");
+        byId("deltaStop").textContent = signed(d.deltaStop, " pp");
+        byId("deltaStopped").textContent = signed(d.deltaStopped, "%");
+
+        byId("footerPassers").textContent = "Avg " + fmtInt.format(Math.round(d.passers / (key === "7d" ? 7 : key === "30d" ? 30 : 91))) + " / day";
+        byId("footerLook").textContent = ratioText(d.passers, d.looked) + " looked";
+        byId("footerStop").textContent = ratioText(d.passers, d.stopped) + " stopped";
+        byId("footerStopped").textContent = "Avg " + fmtInt.format(Math.round(d.stopped / (key === "7d" ? 7 : key === "30d" ? 30 : 91))) + " / day";
+
+        byId("funnelLookPct").textContent = d.lookRate.toFixed(1) + "%";
+        byId("funnelStopPct").textContent = d.stopRate.toFixed(1) + "%";
+        byId("attentionStoryHeadline").textContent = "Out of every 100 passers-by, around " + Math.round(d.lookRate) + " looked and " + Math.round(d.stopRate) + " stopped.";
+
+        byId("compareTrafficDelta").textContent = signed(d.deltaPassers, "%");
+        byId("compareLookDelta").textContent = signed(d.deltaLook, "pp");
+        byId("compareStopDelta").textContent = signed(d.deltaStop, "pp");
+        byId("compareTrafficCurrent").style.width = Math.min(100, 84 + d.deltaPassers * 0.85) + "%";
+        byId("compareTrafficPrevious").style.width = "84%";
+        byId("compareLookCurrent").style.width = Math.min(100, 81 + d.deltaLook * 2.5) + "%";
+        byId("compareLookPrevious").style.width = "81%";
+        byId("compareStopCurrent").style.width = Math.min(100, 72 + d.deltaStop * 8) + "%";
+        byId("compareStopPrevious").style.width = "72%";
+
+        document.querySelectorAll("[data-period]").forEach(btn => btn.classList.toggle("active", btn.dataset.period === key));
+      }
+
+      function renderTrend(key) {
+        const data = DEMO_DATA.trends[key];
+        if (!data) return;
+        const width = 720, left = 28, right = 704, top = 28, bottom = 215;
+        const min = Math.min(...data.values), max = Math.max(...data.values);
+        const span = Math.max(1, max - min);
+        const points = data.values.map((value, index) => {
+          const x = left + (right - left) * (index / Math.max(1, data.values.length - 1));
+          const y = bottom - ((value - min) / span) * (bottom - top);
+          return { x, y, value, label: data.labels[index] };
+        });
+        const line = points.map((p, i) => (i ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1)).join(" ");
+        byId("chartLine").setAttribute("d", line);
+        byId("chartArea").setAttribute("d", line + " L " + right + " " + bottom + " L " + left + " " + bottom + " Z");
+        byId("chartDots").innerHTML = points.map((p, i) => '<circle class="chart-dot" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3" style="animation-delay:' + (0.07 + i * 0.025).toFixed(2) + 's"></circle>').join("");
+        const labelEvery = data.labels.length > 9 ? 2 : 1;
+        byId("chartLabels").innerHTML = points.map((p, i) => i % labelEvery === 0 ? '<text class="chart-axis" x="' + p.x.toFixed(1) + '" y="252" text-anchor="middle">' + p.label + '</text>' : "").join("");
+        byId("chartCaption").textContent = data.caption;
+        byId("chartPeak").textContent = data.peak;
+        document.querySelectorAll("[data-trend]").forEach(btn => btn.classList.toggle("active", btn.dataset.trend === key));
+      }
+
       function showDashboard() {
         loginView.hidden = true;
         clientApp.hidden = false;
         navLogout.hidden = false;
         renderPeriod("7d");
         renderTrend("hourly");
-        window.scrollTo({top:0,behavior:"instant"});
+        document.querySelectorAll('.reveal').forEach((el, idx) => el.style.animationDelay = (idx * 0.08) + 's');
+        window.scrollTo({ top: 0, behavior: "instant" });
       }
 
       function showLogin() {
@@ -356,59 +598,8 @@
         error.hidden = true;
       }
 
-      function signed(value, suffix) {
-        const n = Number(value);
-        return (n >= 0 ? "+" : "") + n.toFixed(Number.isInteger(n) ? 1 : 1) + suffix;
-      }
-
-      function renderPeriod(key) {
-        const d = DEMO_DATA.periods[key];
-        if (!d) return;
-        byId("kpiPassers").textContent = fmtInt.format(d.passers);
-        byId("kpiLookRate").textContent = d.lookRate.toFixed(1) + "%";
-        byId("kpiStopRate").textContent = d.stopRate.toFixed(1) + "%";
-        byId("kpiStopped").textContent = fmtInt.format(d.stopped);
-        byId("deltaPassers").textContent = signed(d.deltaPassers,"%");
-        byId("deltaLook").textContent = signed(d.deltaLook," pp");
-        byId("deltaStop").textContent = signed(d.deltaStop," pp");
-        byId("deltaStopped").textContent = signed(d.deltaStopped,"%");
-        byId("funnelPassersCount").textContent = fmtInt.format(d.passers);
-        byId("funnelLookedCount").textContent = fmtInt.format(d.looked);
-        byId("funnelStoppedCount").textContent = fmtInt.format(d.stopped);
-        byId("funnelLooked").style.width = d.lookRate + "%";
-        byId("funnelStopped").style.width = d.stopRate + "%";
-        byId("funnelLookPct").textContent = d.lookRate.toFixed(1) + "%";
-        byId("funnelStopPct").textContent = d.stopRate.toFixed(1) + "%";
-        byId("compareTrafficDelta").textContent = signed(d.deltaPassers,"%");
-        byId("compareLookDelta").textContent = signed(d.deltaLook,"pp");
-        byId("compareStopDelta").textContent = signed(d.deltaStop,"pp");
-        document.querySelectorAll("[data-period]").forEach(btn => btn.classList.toggle("active",btn.dataset.period===key));
-      }
-
-      function renderTrend(key) {
-        const data = DEMO_DATA.trends[key];
-        if (!data) return;
-        const width=720, height=235, left=28, right=704, top=28, bottom=215;
-        const min=Math.min(...data.values), max=Math.max(...data.values);
-        const span=Math.max(1,max-min);
-        const points=data.values.map((value,index)=>{
-          const x=left+(right-left)*(index/Math.max(1,data.values.length-1));
-          const y=bottom-(value-min)/span*(bottom-top);
-          return {x,y,value,label:data.labels[index]};
-        });
-        const line=points.map((p,i)=>(i?"L":"M")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ");
-        byId("chartLine").setAttribute("d",line);
-        byId("chartArea").setAttribute("d",line+" L "+right+" "+bottom+" L "+left+" "+bottom+" Z");
-        byId("chartDots").innerHTML=points.map(p=>'<circle class="chart-dot" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="3"/>').join("");
-        const labelEvery=data.labels.length>9?2:1;
-        byId("chartLabels").innerHTML=points.map((p,i)=>i%labelEvery===0?'<text class="chart-axis" x="'+p.x.toFixed(1)+'" y="252" text-anchor="middle">'+p.label+'</text>':"").join("");
-        byId("chartCaption").textContent=data.caption;
-        byId("chartPeak").textContent=data.peak;
-        document.querySelectorAll("[data-trend]").forEach(btn=>btn.classList.toggle("active",btn.dataset.trend===key));
-      }
-
-      document.querySelectorAll("[data-period]").forEach(btn=>btn.addEventListener("click",()=>renderPeriod(btn.dataset.period)));
-      document.querySelectorAll("[data-trend]").forEach(btn=>btn.addEventListener("click",()=>renderTrend(btn.dataset.trend)));
+      document.querySelectorAll("[data-period]").forEach(btn => btn.addEventListener("click", () => renderPeriod(btn.dataset.period)));
+      document.querySelectorAll("[data-trend]").forEach(btn => btn.addEventListener("click", () => renderTrend(btn.dataset.trend)));
 
       form.addEventListener("submit", async event => {
         event.preventDefault();
@@ -421,9 +612,9 @@
           return;
         }
         try {
-          const [userHash,passwordHash] = await Promise.all([sha256(enteredUser),sha256(enteredPassword)]);
+          const [userHash, passwordHash] = await Promise.all([sha256(enteredUser), sha256(enteredPassword)]);
           if (userHash === TEST_USER_HASH && passwordHash === TEST_PASSWORD_HASH) {
-            sessionStorage.setItem(SESSION_KEY,"active");
+            sessionStorage.setItem(SESSION_KEY, "active");
             showDashboard();
             return;
           }
@@ -436,13 +627,13 @@
         }
       });
 
-      navLogout.addEventListener("click",()=>{
+      navLogout.addEventListener("click", () => {
         sessionStorage.removeItem(SESSION_KEY);
         showLogin();
         user.focus();
       });
 
-      if (sessionStorage.getItem(SESSION_KEY)==="active") showDashboard();
+      if (sessionStorage.getItem(SESSION_KEY) === "active") showDashboard();
     })();
   </script>
 </body>
