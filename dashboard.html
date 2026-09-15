@@ -79,7 +79,7 @@
     .side-stat b{display:block;margin-top:8px;font-family:var(--mono);font-size:23px;letter-spacing:-.04em}
     .side-stat span{display:block;margin-top:4px;color:var(--muted);font-size:11px;line-height:1.55}
 
-    .insight-grid{display:grid;grid-template-columns:.92fr 1.36fr .92fr;gap:14px;margin:14px 0}
+    
     .compact-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
     .compact-card{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.015)}
     .compact-card small{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--sub);font-weight:800}
@@ -107,7 +107,7 @@
     .stack-row .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(124,108,240,.55),rgba(169,156,255,.95))}
     .stack-row strong{font-family:var(--mono);font-size:12px;color:var(--text);text-align:right}
 
-    .secondary-grid{display:grid;grid-template-columns:1.24fr .76fr;gap:14px;margin-bottom:14px}
+    
     .compare-list{display:grid;gap:13px;margin-top:18px}
     .compare-item{display:grid;grid-template-columns:126px 1fr 68px;gap:12px;align-items:center}
     .compare-item>span{font-size:11px;color:var(--muted)}
@@ -119,7 +119,7 @@
     .mini-note{margin-top:14px;padding:13px;border-left:2px solid var(--accent-line);color:var(--muted);font-size:11px;line-height:1.65}
     .compare-caption{font-size:11px;color:var(--sub);margin-top:10px}
 
-    .quarterly-section{display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin-bottom:14px}
+    
     .summary-panel{position:relative;overflow:hidden;padding:28px}
     .summary-panel:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-130px;top:-160px;background:radial-gradient(circle,rgba(124,108,240,.16),transparent 68%);pointer-events:none}
     .quarter-lead{max-width:740px;margin:0 0 22px;color:var(--muted);font-size:12px;line-height:1.75;position:relative;z-index:1}
@@ -177,6 +177,38 @@
       .chart-wrap{height:260px}
       .metric-value b{font-size:34px}
     }
+  
+    /* dashboard hierarchy refinement */
+    .behavior-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);gap:14px;margin:14px 0}
+    .demographic-panel{margin-bottom:14px;padding:28px}
+    .demographic-panel .panel-head{margin-bottom:22px}
+    .demographic-panel .demographic-grid{grid-template-columns:minmax(0,1.25fr) minmax(340px,.75fr);gap:18px;margin-top:0}
+    .demographic-panel .demo-card{padding:24px;min-height:0}
+    .demographic-panel .demo-card small{font-size:11px}
+    .demographic-panel .stack{gap:16px;margin-top:18px}
+    .demographic-panel .stack-row{grid-template-columns:78px minmax(140px,1fr) 44px;gap:14px}
+    .demographic-panel .stack-row label{font-size:13px}
+    .demographic-panel .stack-row .bar{height:12px}
+    .demographic-panel .stack-row strong{font-size:12.5px}
+    .demographic-panel .demo-note{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);max-width:980px}
+    .historical-panel{margin-bottom:14px;padding:26px 28px}
+    .historical-panel .compare-list{max-width:980px}
+    .quarterly-wide{margin-bottom:14px;padding:30px}
+    .quarterly-wide .quarter-lead{max-width:900px}
+    .support-strip{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.015);padding:18px 20px;margin-bottom:14px}
+    .support-strip>div{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .support-strip strong{font-size:13px}
+    .support-strip>div>span:last-child{color:var(--muted);font-size:11.5px}
+    .support-strip .btn{margin:0;white-space:nowrap}
+    @media(max-width:1000px){
+      .behavior-grid,.demographic-panel .demographic-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:700px){
+      .demographic-panel,.historical-panel,.quarterly-wide{padding:20px}
+      .support-strip{grid-template-columns:1fr}
+      .support-strip .btn{width:100%}
+    }
+
   </style>
 </head>
 <body>
@@ -332,149 +364,135 @@
         </div>
       </section>
 
-      <div class="insight-grid">
-        <section class="insight-panel">
-          <div class="panel-head">
-            <div>
-              <h2>Attention snapshot</h2>
-              <p>Simple, readable and not overloaded: the essential flow numbers, plus average look time.</p>
-            </div>
-            <span class="status-pill status-pill--sample">Aggregated</span>
-          </div>
-          <div class="compact-metrics">
-            <div class="compact-card">
-              <small>Passers-by</small>
-              <b id="funnelPassersCount" data-format="int">18,426</b>
-              <span>100% of observed storefront traffic in the selected period.</span>
-            </div>
-            <div class="compact-card">
-              <small>Looked</small>
-              <b id="funnelLookedCount" data-format="int">6,394</b>
-              <span><strong id="funnelLookPct">34.7%</strong> of passers-by looked toward the storefront.</span>
-            </div>
-            <div class="compact-card">
-              <small>Stopped</small>
-              <b id="funnelStoppedCount" data-format="int">1,732</b>
-              <span><strong id="funnelStopPct">9.4%</strong> of passers-by stopped near the storefront.</span>
-            </div>
-            <div class="compact-card">
-              <small>Avg look time</small>
-              <b id="avgLookTime">2.8s</b>
-              <span>Average attention duration before people looked away or kept moving.</span>
-            </div>
-          </div>
-          <div class="attention-story">
-            <strong id="attentionStoryHeadline">Out of every 100 passers-by, around 35 looked and 9 stopped.</strong>
-            <p>This gives the client an intuitive interpretation without forcing them to decode dense visuals.</p>
-          </div>
-        </section>
-
-        <section class="insight-panel">
-          <div class="panel-head">
-            <div>
-              <h2>Demographic snapshot</h2>
-              <p>Anonymous, aggregated sample insight about the audience composition around the storefront.</p>
-            </div>
-            <span class="status-pill status-pill--sample">Estimated</span>
-          </div>
-          <div class="demographic-grid">
-            <div class="demo-card">
-              <small>Age mix</small>
-              <div class="stack" id="ageMix"></div>
-            </div>
-            <div class="demo-card">
-              <small>Gender mix</small>
-              <div class="stack" id="genderMix"></div>
-            </div>
-          </div>
-          <div class="demo-note">These demographic fields are shown here as a potential Monitor extension using broad anonymous buckets only. Exact production logic and compliance would need to be validated before launch.</div>
-        </section>
-
-        <aside class="insight-panel">
-          <div class="panel-head">
-            <div>
-              <h2>Strong & weak moments</h2>
-              <p>Quick interpretation of the windows that stood out in this sample period.</p>
-            </div>
-          </div>
-          <div class="windows-grid">
-            <div class="window-card"><small><i></i> Strongest window</small><b id="bestWindow">17:00–19:00</b><span>Highest combined passer-by and attention activity.</span></div>
-            <div class="window-card"><small><i></i> Strongest day</small><b id="bestDay">Friday</b><span>Best traffic volume in this sample period.</span></div>
-            <div class="window-card weak"><small><i></i> Weakest window</small><b id="weakWindow">10:00–11:00</b><span>Lowest traffic volume in this sample period.</span></div>
-          </div>
-        </aside>
+      <div class="behavior-grid">
+<section class="insight-panel">
+                  <div class="panel-head">
+                    <div>
+                      <h2>Attention snapshot</h2>
+                      <p>Simple, readable and not overloaded: the essential flow numbers, plus average look time.</p>
+                    </div>
+                    <span class="status-pill status-pill--sample">Aggregated</span>
+                  </div>
+                  <div class="compact-metrics">
+                    <div class="compact-card">
+                      <small>Passers-by</small>
+                      <b id="funnelPassersCount" data-format="int">18,426</b>
+                      <span>100% of observed storefront traffic in the selected period.</span>
+                    </div>
+                    <div class="compact-card">
+                      <small>Looked</small>
+                      <b id="funnelLookedCount" data-format="int">6,394</b>
+                      <span><strong id="funnelLookPct">34.7%</strong> of passers-by looked toward the storefront.</span>
+                    </div>
+                    <div class="compact-card">
+                      <small>Stopped</small>
+                      <b id="funnelStoppedCount" data-format="int">1,732</b>
+                      <span><strong id="funnelStopPct">9.4%</strong> of passers-by stopped near the storefront.</span>
+                    </div>
+                    <div class="compact-card">
+                      <small>Avg look time</small>
+                      <b id="avgLookTime">2.8s</b>
+                      <span>Average attention duration before people looked away or kept moving.</span>
+                    </div>
+                  </div>
+                  <div class="attention-story">
+                    <strong id="attentionStoryHeadline">Out of every 100 passers-by, around 35 looked and 9 stopped.</strong>
+                    <p>This gives the client an intuitive interpretation without forcing them to decode dense visuals.</p>
+                  </div>
+                </section>
+<aside class="insight-panel">
+                  <div class="panel-head">
+                    <div>
+                      <h2>Strong & weak moments</h2>
+                      <p>Quick interpretation of the windows that stood out in this sample period.</p>
+                    </div>
+                  </div>
+                  <div class="windows-grid">
+                    <div class="window-card"><small><i></i> Strongest window</small><b id="bestWindow">17:00–19:00</b><span>Highest combined passer-by and attention activity.</span></div>
+                    <div class="window-card"><small><i></i> Strongest day</small><b id="bestDay">Friday</b><span>Best traffic volume in this sample period.</span></div>
+                    <div class="window-card weak"><small><i></i> Weakest window</small><b id="weakWindow">10:00–11:00</b><span>Lowest traffic volume in this sample period.</span></div>
+                  </div>
+                </aside>
       </div>
 
-      <div class="secondary-grid">
-        <section class="insight-panel">
-          <div class="panel-head">
-            <div>
-              <h2>Historical comparison</h2>
-              <p id="compareLead">Compare the current daily range against the previous equivalent period.</p>
-            </div>
-            <div class="compare-switch" role="group" aria-label="Historical comparison range">
-              <button type="button" data-compare-range="daily" class="active">Daily</button>
-              <button type="button" data-compare-range="weekly">Weekly</button>
-              <button type="button" data-compare-range="monthly">Monthly</button>
-            </div>
-          </div>
-          <div class="compare-list">
-            <div class="compare-item"><span>Passers-by</span><div class="compare-bars"><div class="compare-bar"><i id="compareTrafficCurrent" style="width:91%"></i></div><div class="compare-bar previous"><i id="compareTrafficPrevious" style="width:84%"></i></div></div><strong id="compareTrafficDelta">+8.2%</strong></div>
-            <div class="compare-item"><span>Look rate</span><div class="compare-bars"><div class="compare-bar"><i id="compareLookCurrent" style="width:87%"></i></div><div class="compare-bar previous"><i id="compareLookPrevious" style="width:81%"></i></div></div><strong id="compareLookDelta">+2.4pp</strong></div>
-            <div class="compare-item"><span>Stop rate</span><div class="compare-bars"><div class="compare-bar"><i id="compareStopCurrent" style="width:78%"></i></div><div class="compare-bar previous"><i id="compareStopPrevious" style="width:72%"></i></div></div><strong id="compareStopDelta">+0.7pp</strong></div>
-          </div>
-          <div class="compare-caption" id="compareCaption">Example: latest 24 hours vs the 24 hours before that.</div>
-          <div class="mini-note">Historical comparison helps the client see whether performance is improving or weakening across different analysis windows, not just read isolated numbers.</div>
-        </section>
-
-        <aside class="support-panel">
+      <section class="insight-panel demographic-panel">
+        <div class="panel-head">
           <div>
-            <span class="support-status"><i></i> Basic support included</span>
-            <h3>Questions about your numbers?</h3>
-            <p>Monitor includes basic human support so clients can ask what a metric means or how to read the report. Advanced diagnosis and optimisation remain future products.</p>
+            <h2>Demographic snapshot</h2>
+            <p>Anonymous, aggregated sample insight about the audience composition around the storefront.</p>
           </div>
-          <a class="btn btn-ghost" href="index.html#faq">Open Monitor FAQ</a>
-        </aside>
-      </div>
+          <span class="status-pill status-pill--sample">Estimated</span>
+        </div>
+        <div class="demographic-grid">
+          <div class="demo-card">
+            <small>Age mix</small>
+            <div class="stack" id="ageMix"></div>
+          </div>
+          <div class="demo-card">
+            <small>Gender mix</small>
+            <div class="stack" id="genderMix"></div>
+          </div>
+        </div>
+        <div class="demo-note">These demographic fields are shown here as a potential Monitor extension using broad anonymous buckets only. Exact production logic and compliance would need to be validated before launch.</div>
+      </section>
 
-      <div class="quarterly-section">
-        <section class="summary-panel">
-          <div class="panel-head">
-            <div>
-              <h2>Quarterly performance summary</h2>
-              <p>Q3 2026 · sample summary for interface validation.</p>
-            </div>
-            <span class="status-pill status-pill--sample">Quarterly</span>
-          </div>
-          <p class="quarter-lead">A quarterly summary should not feel cramped. This section gives the client a clear narrative view of what changed over the quarter, where the strongest performance came from, how attention evolved and whether stopping behaviour improved.</p>
-          <div class="quarter-grid">
-            <article class="quarter-card">
-              <small>Traffic</small>
-              <b>Higher than Q2</b>
-              <span>Passer-by volume increased 11.2% in this illustrative quarter, with the most meaningful lift concentrated in late afternoon.</span>
-            </article>
-            <article class="quarter-card">
-              <small>Attention</small>
-              <b>Best on Friday</b>
-              <span>Look rate was strongest on Fridays, especially between 17:00 and 19:00, suggesting that end-of-week traffic engaged more with the storefront.</span>
-            </article>
-            <article class="quarter-card">
-              <small>Stopping</small>
-              <b>Improved modestly</b>
-              <span>Stop rate finished 0.8 percentage points above the prior quarter, indicating more people paused near the storefront than in the previous period.</span>
-            </article>
-          </div>
-        </section>
+      <section class="insight-panel historical-panel">
+        <div class="panel-head">
+                    <div>
+                      <h2>Historical comparison</h2>
+                      <p id="compareLead">Compare the current daily range against the previous equivalent period.</p>
+                    </div>
+                    <div class="compare-switch" role="group" aria-label="Historical comparison range">
+                      <button type="button" data-compare-range="daily" class="active">Daily</button>
+                      <button type="button" data-compare-range="weekly">Weekly</button>
+                      <button type="button" data-compare-range="monthly">Monthly</button>
+                    </div>
+                  </div>
+                  <div class="compare-list">
+                    <div class="compare-item"><span>Passers-by</span><div class="compare-bars"><div class="compare-bar"><i id="compareTrafficCurrent" style="width:91%"></i></div><div class="compare-bar previous"><i id="compareTrafficPrevious" style="width:84%"></i></div></div><strong id="compareTrafficDelta">+8.2%</strong></div>
+                    <div class="compare-item"><span>Look rate</span><div class="compare-bars"><div class="compare-bar"><i id="compareLookCurrent" style="width:87%"></i></div><div class="compare-bar previous"><i id="compareLookPrevious" style="width:81%"></i></div></div><strong id="compareLookDelta">+2.4pp</strong></div>
+                    <div class="compare-item"><span>Stop rate</span><div class="compare-bars"><div class="compare-bar"><i id="compareStopCurrent" style="width:78%"></i></div><div class="compare-bar previous"><i id="compareStopPrevious" style="width:72%"></i></div></div><strong id="compareStopDelta">+0.7pp</strong></div>
+                  </div>
+                  <div class="compare-caption" id="compareCaption">Example: latest 24 hours vs the 24 hours before that.</div>
+                  <div class="mini-note">Historical comparison helps the client see whether performance is improving or weakening across different analysis windows, not just read isolated numbers.</div>
+      </section>
 
-        <aside class="support-panel">
-          <div>
-            <span class="support-status"><i></i> Monitor scope</span>
-            <h3>What this plan covers</h3>
-            <p>Traffic in front of the store, passers-by count, attention / look rate, stopping behaviour, average look time, trends by hour, day and week, historical comparison, strongest and weakest windows, and a clear quarterly summary.</p>
-          </div>
-          <button class="btn" type="button" disabled>CRM connection comes next</button>
-        </aside>
-      </div>
+      <section class="summary-panel quarterly-wide">
+        <div class="panel-head">
+                    <div>
+                      <h2>Quarterly performance summary</h2>
+                      <p>Q3 2026 · sample summary for interface validation.</p>
+                    </div>
+                    <span class="status-pill status-pill--sample">Quarterly</span>
+                  </div>
+                  <p class="quarter-lead">A quarterly summary should not feel cramped. This section gives the client a clear narrative view of what changed over the quarter, where the strongest performance came from, how attention evolved and whether stopping behaviour improved.</p>
+                  <div class="quarter-grid">
+                    <article class="quarter-card">
+                      <small>Traffic</small>
+                      <b>Higher than Q2</b>
+                      <span>Passer-by volume increased 11.2% in this illustrative quarter, with the most meaningful lift concentrated in late afternoon.</span>
+                    </article>
+                    <article class="quarter-card">
+                      <small>Attention</small>
+                      <b>Best on Friday</b>
+                      <span>Look rate was strongest on Fridays, especially between 17:00 and 19:00, suggesting that end-of-week traffic engaged more with the storefront.</span>
+                    </article>
+                    <article class="quarter-card">
+                      <small>Stopping</small>
+                      <b>Improved modestly</b>
+                      <span>Stop rate finished 0.8 percentage points above the prior quarter, indicating more people paused near the storefront than in the previous period.</span>
+                    </article>
+                  </div>
+      </section>
+
+      <aside class="support-strip">
+        <div>
+          <span class="support-status"><i></i> Basic support included</span>
+          <strong>Questions about your numbers?</strong>
+          <span>Monitor includes basic human support to help clients understand what the metrics mean.</span>
+        </div>
+        <a class="btn btn-ghost" href="index.html#faq">Open Monitor FAQ</a>
+      </aside>
 
       <div class="dashboard-foot"><span><strong>Monitor metrics represented:</strong> look rate · stop rate · passers-by · stopped visitors · average look time · demographic snapshot · hourly/daily/weekly trends · historical comparison · strong/weak moments · quarterly summary.</span><span>Demo environment · no real customer data</span></div>
     </section>
