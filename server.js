@@ -7,6 +7,19 @@ const PORT = Number(process.env.PORT || 10000);
 const APPS_SCRIPT_URL = String(process.env.APPS_SCRIPT_URL || '').trim();
 const SERVER_TOKEN = String(process.env.SERVER_TOKEN || '').trim();
 const MAX_BODY_BYTES = 32 * 1024;
+const MONITOR_APPS_SCRIPT_URL = String(process.env.MONITOR_APPS_SCRIPT_URL || '').trim();
+const MONITOR_SERVER_TOKEN = String(process.env.MONITOR_SERVER_TOKEN || '').trim();
+const MONITOR_TEST_USER_HASH = String(process.env.MONITOR_TEST_USER_HASH || '').trim().toLowerCase();
+const MONITOR_TEST_PASSWORD_HASH = String(process.env.MONITOR_TEST_PASSWORD_HASH || '').trim().toLowerCase();
+const MONITOR_TEST_BUSINESS_ID = String(process.env.MONITOR_TEST_BUSINESS_ID || '').trim();
+const MONITOR_TEST_LOCATION_ID = String(process.env.MONITOR_TEST_LOCATION_ID || '').trim();
+const monitorSessions = new Map();
+const MONITOR_SESSION_MS = 2 * 60 * 60 * 1000;
+let monitorDeviceMap = {};
+try {
+  monitorDeviceMap = JSON.parse(process.env.MONITOR_DEVICE_MAP_JSON || '{}');
+  if (!monitorDeviceMap || typeof monitorDeviceMap !== 'object' || Array.isArray(monitorDeviceMap)) throw new Error('invalid map');
+} catch { throw new Error('Invalid MONITOR_DEVICE_MAP_JSON'); }
 
 if (!APPS_SCRIPT_URL || !SERVER_TOKEN) {
   throw new Error('Missing required environment variables: APPS_SCRIPT_URL and/or SERVER_TOKEN');
@@ -44,6 +57,9 @@ const cleanupTimer = setInterval(() => {
   const now = Date.now();
   for (const [key, value] of rateBuckets.entries()) {
     if (value.resetAt <= now) rateBuckets.delete(key);
+  }
+  for (const [key, value] of monitorSessions.entries()) {
+    if (value.expiresAt <= now) monitorSessions.delete(key);
   }
 }, 10 * 60 * 1000);
 cleanupTimer.unref();
@@ -129,13 +145,18 @@ function readJson(req) {
   });
 }
 
-async function callAppsScript(action, payload = {}) {
-  const response = await fetch(APPS_SCRIPT_URL, {
+async function callScript(url, token, action, payload = {}) {
+  if (!url || !token) {
+    const error = new Error('script_not_configured');
+    error.code = 'NOT_CONFIGURED';
+    throw error;
+  }
+  const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       action,
-      serverToken: SERVER_TOKEN,
+      serverToken: token,
       ...payload
     }),
     redirect: 'follow',
@@ -159,6 +180,85 @@ async function callAppsScript(action, payload = {}) {
   }
 
   return data.data || {};
+}
+
+async function callAppsScript(action, payload = {}) {
+  return callScript(APPS_SCRIPT_URL, SERVER_TOKEN, action, payload);
+}
+
+function validHash(value) { return /^[a-f0-9]{64}$/.test(value); }
+function hash(value) { return crypto.createHash('sha256').update(value).digest('hex'); }
+function equalHash(a, b) {
+  if (!validHash(a) || !validHash(b)) return false;
+  return crypto.timingSafeEqual(Buffer.from(a, 'hex'), Buffer.from(b, 'hex'));
+}
+function monitorConfigured() {
+  return !!(MONITOR_APPS_SCRIPT_URL && MONITOR_SERVER_TOKEN && validHash(MONITOR_TEST_USER_HASH) &&
+    validHash(MONITOR_TEST_PASSWORD_HASH) && MONITOR_TEST_BUSINESS_ID && MONITOR_TEST_LOCATION_ID);
+}
+function monitorSession(req) {
+  const match = /^Bearer ([a-f0-9]{64})$/.exec(String(req.headers.authorization || ''));
+  if (!match) return null;
+  const session = monitorSessions.get(hash(match[1]));
+  if (!session || session.expiresAt <= Date.now()) return null;
+  return session;
+}
+async function handleMonitorLogin(req, res) {
+  if (!rateAllowed(req, 'monitor-login', 8, 15 * 60 * 1000)) return sendJson(req, res, 429, { ok: false, error: 'too_many_requests' });
+  if (!monitorConfigured()) return sendJson(req, res, 503, { ok: false, error: 'monitor_not_configured' });
+  const body = await readJson(req);
+  const username = cleanString(body.username, 120).toLowerCase();
+  const password = typeof body.password === 'string' ? body.password : '';
+  if (!username || !password || password.length > 256 || !equalHash(hash(username), MONITOR_TEST_USER_HASH) ||
+    !equalHash(hash(password), MONITOR_TEST_PASSWORD_HASH)) {
+    return sendJson(req, res, 401, { ok: false, error: 'invalid_credentials' });
+  }
+  const token = crypto.randomBytes(32).toString('hex');
+  monitorSessions.set(hash(token), {
+    businessId: MONITOR_TEST_BUSINESS_ID,
+    locationId: MONITOR_TEST_LOCATION_ID,
+    expiresAt: Date.now() + MONITOR_SESSION_MS
+  });
+  return sendJson(req, res, 200, { ok: true, token, expiresInSeconds: MONITOR_SESSION_MS / 1000 });
+}
+async function handleMonitorMetrics(req, res, url) {
+  const session = monitorSession(req);
+  if (!session) return sendJson(req, res, 401, { ok: false, error: 'session_required' });
+  const period = url.searchParams.get('period') || '7d';
+  if (!['7d', '30d', 'quarter'].includes(period)) return sendJson(req, res, 400, { ok: false, error: 'invalid_period' });
+  const data = await callScript(MONITOR_APPS_SCRIPT_URL, MONITOR_SERVER_TOKEN, 'getDashboardMetrics', {
+    authorizedBusinessId: session.businessId,
+    authorizedLocationId: session.locationId,
+    period
+  });
+  return sendJson(req, res, 200, { ok: true, data });
+}
+async function handleMonitorLogout(req, res) {
+  const match = /^Bearer ([a-f0-9]{64})$/.exec(String(req.headers.authorization || ''));
+  if (match) monitorSessions.delete(hash(match[1]));
+  return sendJson(req, res, 200, { ok: true });
+}
+async function handleMonitorIngest(req, res) {
+  if (!rateAllowed(req, 'monitor-ingest', 120, 15 * 60 * 1000)) return sendJson(req, res, 429, { ok: false, error: 'too_many_requests' });
+  const body = await readJson(req);
+  const deviceId = cleanString(body.deviceId, 80);
+  const device = Object.hasOwn(monitorDeviceMap, deviceId) ? monitorDeviceMap[deviceId] : null;
+  const match = /^Bearer ([a-f0-9]{64})$/.exec(String(req.headers.authorization || ''));
+  if (!device || !match || !validHash(device.tokenHash) || !equalHash(hash(match[1]), device.tokenHash)) {
+    return sendJson(req, res, 401, { ok: false, error: 'device_not_authorized' });
+  }
+  const { requestId, intervals } = body;
+  if (!Array.isArray(intervals) || intervals.length > 48 || !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,99}$/.test(String(requestId || ''))) {
+    return sendJson(req, res, 400, { ok: false, error: 'invalid_batch' });
+  }
+  const data = await callScript(MONITOR_APPS_SCRIPT_URL, MONITOR_SERVER_TOKEN, 'ingestMetrics', {
+    businessId: device.businessId,
+    locationId: device.locationId,
+    deviceId,
+    requestId,
+    intervals
+  });
+  return sendJson(req, res, 200, { ok: true, data });
 }
 
 function applicationPayload(body) {
@@ -233,7 +333,7 @@ async function requestHandler(req, res) {
       if (!originAllowed(req)) return sendJson(req, res, 403, { ok: false, error: 'origin_not_allowed' });
       setCommonHeaders(res, req);
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
       res.setHeader('Access-Control-Max-Age', '86400');
       res.statusCode = 204;
       return res.end();
@@ -259,6 +359,12 @@ async function requestHandler(req, res) {
       return await handleApprovalVerification(req, res);
     }
 
+    const url = new URL(req.url, 'http://localhost');
+    if (req.method === 'POST' && url.pathname === '/api/dashboard/login') return await handleMonitorLogin(req, res);
+    if (req.method === 'GET' && url.pathname === '/api/dashboard/metrics') return await handleMonitorMetrics(req, res, url);
+    if (req.method === 'POST' && url.pathname === '/api/dashboard/logout') return await handleMonitorLogout(req, res);
+    if (req.method === 'POST' && url.pathname === '/api/monitor/ingest') return await handleMonitorIngest(req, res);
+
     return sendJson(req, res, 404, { ok: false, error: 'not_found' });
   } catch (error) {
     const code = error && error.code ? error.code : 'INTERNAL_ERROR';
@@ -266,6 +372,7 @@ async function requestHandler(req, res) {
 
     if (code === 'INVALID_JSON') return sendJson(req, res, 400, { ok: false, error: 'invalid_json' });
     if (code === 'BODY_TOO_LARGE') return sendJson(req, res, 413, { ok: false, error: 'request_too_large' });
+    if (code === 'NOT_CONFIGURED') return sendJson(req, res, 503, { ok: false, error: 'monitor_not_configured' });
     return sendJson(req, res, 502, { ok: false, error: 'upstream_unavailable' });
   }
 }
