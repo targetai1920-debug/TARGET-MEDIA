@@ -33,16 +33,16 @@
     .client-title h1{font-size:clamp(34px,4.4vw,56px);letter-spacing:-.042em;line-height:.98;margin:12px 0 10px;max-width:780px}
     .client-title p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;max-width:720px}
     .top-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .period-switch{display:flex;padding:4px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
-    .period-switch button,.trend-switch button{border:0;background:transparent;color:var(--sub);padding:8px 11px;border-radius:8px;font-size:11.5px;font-weight:750;cursor:pointer;transition:transform .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease,border-color .18s ease}
-    .period-switch button.active{background:var(--accent-soft);color:var(--accent-2);box-shadow:inset 0 0 0 1px var(--accent-line)}
+    .period-switch,.compare-switch,.trend-switch{display:flex;padding:4px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+    .period-switch button,.compare-switch button,.trend-switch button{border:0;background:transparent;color:var(--sub);padding:8px 11px;border-radius:8px;font-size:11.5px;font-weight:750;cursor:pointer;transition:transform .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease,border-color .18s ease}
+    .period-switch button.active,.compare-switch button.active{background:var(--accent-soft);color:var(--accent-2);box-shadow:inset 0 0 0 1px var(--accent-line)}
     .trend-switch{padding:5px;border-color:rgba(169,156,255,.28);background:linear-gradient(180deg,rgba(124,108,240,.08),rgba(255,255,255,.02));box-shadow:0 10px 28px rgba(0,0,0,.18)}
     .trend-switch button{min-width:86px;padding:11px 16px;border:1px solid transparent;border-radius:10px;font-size:12.5px;font-weight:800;letter-spacing:.01em;color:#b7b4c6}
     .trend-switch button:hover{color:#fff;background:rgba(124,108,240,.12);border-color:rgba(169,156,255,.18);transform:translateY(-1px)}
     .trend-switch button.active{color:#fff;background:linear-gradient(135deg,rgba(124,108,240,.54),rgba(93,75,217,.72));border-color:rgba(169,156,255,.78);box-shadow:0 0 0 1px rgba(169,156,255,.18),0 0 24px rgba(124,108,240,.34),inset 0 1px 0 rgba(255,255,255,.14);text-shadow:0 0 12px rgba(255,255,255,.18)}
     .demo-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;border:1px solid rgba(232,183,104,.28);background:rgba(232,183,104,.06);color:#e8c98f;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 
-    .overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+    .overview-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px}
     .metric-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.032),rgba(255,255,255,.018));padding:18px 18px 17px;min-height:158px;transform:translateY(0);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
     .metric-card:hover{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:0 20px 45px rgba(0,0,0,.22)}
     .metric-card:before{content:"";position:absolute;inset:auto -25px -64px auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(124,108,240,.16),transparent 68%);pointer-events:none}
@@ -52,7 +52,7 @@
     .metric-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--sub);font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.05em;white-space:nowrap}
     .metric-badge i{width:5px;height:5px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px rgba(169,156,255,.5)}
     .metric-value{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
-    .metric-value b{display:block;font-family:var(--mono);font-size:clamp(31px,3vw,40px);line-height:1;letter-spacing:-.05em}
+    .metric-value b{display:block;font-family:var(--mono);font-size:clamp(36px,3.3vw,44px);line-height:1;letter-spacing:-.05em}
     .metric-delta{font-size:11px;font-weight:700;color:var(--good);padding-bottom:3px}
     .metric-delta.down{color:#ff9ab0}
     .metric-footer{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted)}
@@ -62,7 +62,6 @@
     .panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:18px}
     .panel-head h2{font-size:18px;letter-spacing:-.02em;margin:0}
     .panel-head p{margin:6px 0 0;color:var(--sub);font-size:11.6px;line-height:1.6;max-width:740px}
-    .trend-switch{display:flex;padding:3px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02)}
     .trend-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.75fr);gap:16px;align-items:stretch}
     .chart-wrap{height:310px;position:relative}
     .chart-wrap svg{width:100%;height:100%;overflow:visible}
@@ -80,11 +79,11 @@
     .side-stat b{display:block;margin-top:8px;font-family:var(--mono);font-size:23px;letter-spacing:-.04em}
     .side-stat span{display:block;margin-top:4px;color:var(--muted);font-size:11px;line-height:1.55}
 
-    .insight-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:14px;margin:14px 0}
-    .compact-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .insight-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:14px 0}
+    .compact-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
     .compact-card{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.015)}
     .compact-card small{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--sub);font-weight:800}
-    .compact-card b{display:block;margin-top:10px;font-family:var(--mono);font-size:30px;line-height:1;letter-spacing:-.05em}
+    .compact-card b{display:block;margin-top:10px;font-family:var(--mono);font-size:29px;line-height:1;letter-spacing:-.05em}
     .compact-card span{display:block;margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.55}
     .attention-story{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
     .attention-story strong{font-size:13px}
@@ -96,8 +95,19 @@
     .window-card.weak small i{background:#ff9ab0}
     .window-card b{display:block;font-family:var(--mono);font-size:20px;margin:9px 0 5px}
     .window-card span{font-size:11px;color:var(--muted);line-height:1.55}
+    .demo-note{margin-top:14px;color:var(--sub);font-size:10.8px;line-height:1.6}
 
-    .secondary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+    .demographic-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+    .demo-card{padding:16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.015)}
+    .demo-card small{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--sub);font-weight:800}
+    .stack{display:grid;gap:8px;margin-top:12px}
+    .stack-row{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:10px}
+    .stack-row label{font-size:11px;color:var(--muted)}
+    .stack-row .bar{height:8px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden}
+    .stack-row .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(124,108,240,.55),rgba(169,156,255,.95))}
+    .stack-row strong{font-family:var(--mono);font-size:10.5px;color:var(--text)}
+
+    .secondary-grid{display:grid;grid-template-columns:1.24fr .76fr;gap:14px;margin-bottom:14px}
     .compare-list{display:grid;gap:13px;margin-top:18px}
     .compare-item{display:grid;grid-template-columns:126px 1fr 68px;gap:12px;align-items:center}
     .compare-item>span{font-size:11px;color:var(--muted)}
@@ -107,13 +117,14 @@
     .compare-bar.previous i{background:rgba(255,255,255,.22)}
     .compare-item strong{text-align:right;font-family:var(--mono);font-size:11px;color:var(--good)}
     .mini-note{margin-top:14px;padding:13px;border-left:2px solid var(--accent-line);color:var(--muted);font-size:11px;line-height:1.65}
+    .compare-caption{font-size:11px;color:var(--sub);margin-top:10px}
 
     .quarterly-section{display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin-bottom:14px}
     .summary-panel{position:relative;overflow:hidden;padding:28px}
     .summary-panel:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-130px;top:-160px;background:radial-gradient(circle,rgba(124,108,240,.16),transparent 68%);pointer-events:none}
     .quarter-lead{max-width:740px;margin:0 0 22px;color:var(--muted);font-size:12px;line-height:1.75;position:relative;z-index:1}
     .quarter-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .quarter-card{padding:20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.017);min-height:180px}
+    .quarter-card{padding:20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.017);min-height:190px}
     .quarter-card small{display:block;font-size:10px;color:var(--sub);text-transform:uppercase;letter-spacing:.07em;font-weight:800}
     .quarter-card b{display:block;margin:14px 0 10px;font-size:24px;line-height:1.05;letter-spacing:-.03em}
     .quarter-card span{display:block;color:var(--muted);font-size:12.5px;line-height:1.7}
@@ -135,10 +146,14 @@
     @keyframes dashIn{to{stroke-dashoffset:0}}
     @keyframes dotIn{to{opacity:1}}
 
-    @media(max-width:1080px){
-      .overview-grid{grid-template-columns:repeat(2,1fr)}
-      .trend-grid,.quarterly-section{grid-template-columns:1fr}
-      .insight-grid,.secondary-grid{grid-template-columns:1fr}
+    @media(max-width:1180px){
+      .insight-grid{grid-template-columns:1fr 1fr}
+      .insight-grid > :last-child{grid-column:1 / -1}
+      .secondary-grid,.quarterly-section,.trend-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:900px){
+      .overview-grid,.quarter-grid{grid-template-columns:1fr}
+      .compact-metrics,.demographic-grid{grid-template-columns:1fr 1fr}
     }
     @media(max-width:820px){
       .dashboard-shell{padding-top:118px}
@@ -146,19 +161,17 @@
       .client-app{width:min(100% - 28px,1240px)}
       .client-top{align-items:flex-start;flex-direction:column}
       .top-controls{justify-content:flex-start}
-      .compact-metrics,.quarter-grid{grid-template-columns:1fr}
+      .insight-grid,.compact-metrics,.demographic-grid{grid-template-columns:1fr}
     }
     @media(max-width:580px){
-      .overview-grid{grid-template-columns:1fr}
-      .period-switch,.trend-switch{width:100%}
-      .period-switch button,.trend-switch button{flex:1}
+      .period-switch,.compare-switch,.trend-switch{width:100%}
+      .period-switch button,.compare-switch button,.trend-switch button{flex:1}
       .trend-panel,.insight-panel,.summary-panel,.support-panel,.access-card{padding:18px}
       .panel-head{flex-direction:column}
       .compare-item{grid-template-columns:96px 1fr 56px;gap:8px}
-      .compact-metrics{gap:10px}
-      .compact-card b{font-size:26px}
       .dashboard-foot{align-items:flex-start;flex-direction:column}
       .chart-wrap{height:260px}
+      .metric-value b{font-size:34px}
     }
   </style>
 </head>
@@ -212,7 +225,7 @@
         <div class="client-title">
           <small><i aria-hidden="true"></i> Monitor dashboard · Sample client view</small>
           <h1>Your storefront metrics.</h1>
-          <p>Target Media Demo Store · Rotterdam · This dashboard shows how many people passed, looked and stopped, how those patterns changed over time, and which windows performed best in this sample period.</p>
+          <p>Rotterdam · This dashboard shows the key percentage rates first, then the traffic trend, attention behavior, demographic snapshot, historical comparison and quarterly summary for the selected sample period.</p>
         </div>
         <div class="top-controls">
           <span class="demo-chip">Illustrative sample data</span>
@@ -225,18 +238,6 @@
       </div>
 
       <div class="overview-grid">
-        <article class="metric-card reveal">
-          <div class="metric-top">
-            <div>
-              <strong>Passers-by</strong>
-              <span>Total people detected passing in front of the location.</span>
-            </div>
-            <span class="metric-badge"><i></i> Traffic</span>
-          </div>
-          <div class="metric-value"><b id="kpiPassers" data-format="int">18,426</b><span class="metric-delta" id="deltaPassers">+8.2%</span></div>
-          <div class="metric-footer"><span>vs previous period</span><span id="footerPassers">Avg 2,632 / day</span></div>
-        </article>
-
         <article class="metric-card reveal">
           <div class="metric-top">
             <div>
@@ -260,25 +261,13 @@
           <div class="metric-value"><b id="kpiStopRate" data-format="pct">9.4%</b><span class="metric-delta" id="deltaStop">+0.7 pp</span></div>
           <div class="metric-footer"><span>vs previous period</span><span id="footerStop">1 in 10.6 stopped</span></div>
         </article>
-
-        <article class="metric-card reveal">
-          <div class="metric-top">
-            <div>
-              <strong>Stopped visitors</strong>
-              <span>Total stopped visitors counted in the selected period.</span>
-            </div>
-            <span class="metric-badge"><i></i> Outcome</span>
-          </div>
-          <div class="metric-value"><b id="kpiStopped" data-format="int">1,732</b><span class="metric-delta" id="deltaStopped">+16.9%</span></div>
-          <div class="metric-footer"><span>vs previous period</span><span id="footerStopped">Avg 247 / day</span></div>
-        </article>
       </div>
 
       <section class="trend-panel">
         <div class="panel-head">
           <div>
             <h2>Storefront traffic trend</h2>
-            <p>The main chart sits underneath the headline metrics so clients can read the key numbers first, then understand how traffic moved by hour, day or week.</p>
+            <p>The main chart sits underneath the headline rates so clients can read the core percentages first, then understand how traffic moved by hour, day or week.</p>
           </div>
           <div class="trend-switch" role="group" aria-label="Traffic trend granularity">
             <button type="button" data-trend="hourly" class="active">Hourly</button>
@@ -309,19 +298,19 @@
           </div>
           <aside class="chart-side">
             <div class="side-stat">
-              <small>Strongest hour</small>
-              <b id="sidePeakWindow">17:00–19:00</b>
-              <span>Highest combined passer-by and attention activity in the sample period.</span>
+              <small>Passers-by</small>
+              <b id="sidePassers" data-format="int">18,426</b>
+              <span>Total people passing in front of the location during the selected period.</span>
             </div>
             <div class="side-stat">
-              <small>Strongest day</small>
-              <b id="sidePeakDay">Friday</b>
-              <span>Most active day in the latest sample week.</span>
+              <small>Stopped visitors</small>
+              <b id="sideStopped" data-format="int">1,732</b>
+              <span>Total people who stopped near the storefront during the same period.</span>
             </div>
             <div class="side-stat">
-              <small>Weakest hour</small>
-              <b id="sideLowWindow">10:00–11:00</b>
-              <span>Lowest storefront traffic window in the sample period.</span>
+              <small>Average look time</small>
+              <b id="sideAvgLookTime">2.8s</b>
+              <span>Average time people kept their attention on the storefront.</span>
             </div>
           </aside>
         </div>
@@ -331,8 +320,8 @@
         <section class="insight-panel">
           <div class="panel-head">
             <div>
-              <h2>Attention funnel</h2>
-              <p>Kept intentionally simple: just the essential numbers, with no misleading full-width bar charts.</p>
+              <h2>Attention snapshot</h2>
+              <p>Simple, readable and not overloaded: the essential flow numbers, plus average look time.</p>
             </div>
             <span class="status-pill status-pill--sample">Aggregated</span>
           </div>
@@ -352,11 +341,37 @@
               <b id="funnelStoppedCount" data-format="int">1,732</b>
               <span><strong id="funnelStopPct">9.4%</strong> of passers-by stopped near the storefront.</span>
             </div>
+            <div class="compact-card">
+              <small>Avg look time</small>
+              <b id="avgLookTime">2.8s</b>
+              <span>Average attention duration before people looked away or kept moving.</span>
+            </div>
           </div>
           <div class="attention-story">
             <strong id="attentionStoryHeadline">Out of every 100 passers-by, around 35 looked and 9 stopped.</strong>
-            <p>This gives the client a quick, intuitive interpretation without forcing them to decode dense visuals.</p>
+            <p>This gives the client an intuitive interpretation without forcing them to decode dense visuals.</p>
           </div>
+        </section>
+
+        <section class="insight-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Demographic snapshot</h2>
+              <p>Anonymous, aggregated sample insight about the audience composition around the storefront.</p>
+            </div>
+            <span class="status-pill status-pill--sample">Estimated</span>
+          </div>
+          <div class="demographic-grid">
+            <div class="demo-card">
+              <small>Age mix</small>
+              <div class="stack" id="ageMix"></div>
+            </div>
+            <div class="demo-card">
+              <small>Gender mix</small>
+              <div class="stack" id="genderMix"></div>
+            </div>
+          </div>
+          <div class="demo-note">These demographic fields are shown here as a potential Monitor extension using broad anonymous buckets only. Exact production logic and compliance would need to be validated before launch.</div>
         </section>
 
         <aside class="insight-panel">
@@ -367,9 +382,9 @@
             </div>
           </div>
           <div class="windows-grid">
-            <div class="window-card"><small><i></i> Strongest window</small><b>17:00–19:00</b><span>Highest combined passer-by and attention activity.</span></div>
-            <div class="window-card"><small><i></i> Strongest day</small><b>Friday</b><span>Best traffic volume in this sample period.</span></div>
-            <div class="window-card weak"><small><i></i> Weakest window</small><b>10:00–11:00</b><span>Lowest traffic volume in this sample period.</span></div>
+            <div class="window-card"><small><i></i> Strongest window</small><b id="bestWindow">17:00–19:00</b><span>Highest combined passer-by and attention activity.</span></div>
+            <div class="window-card"><small><i></i> Strongest day</small><b id="bestDay">Friday</b><span>Best traffic volume in this sample period.</span></div>
+            <div class="window-card weak"><small><i></i> Weakest window</small><b id="weakWindow">10:00–11:00</b><span>Lowest traffic volume in this sample period.</span></div>
           </div>
         </aside>
       </div>
@@ -379,7 +394,12 @@
           <div class="panel-head">
             <div>
               <h2>Historical comparison</h2>
-              <p>Current selected period against the previous equivalent period.</p>
+              <p id="compareLead">Compare the current daily range against the previous equivalent period.</p>
+            </div>
+            <div class="compare-switch" role="group" aria-label="Historical comparison range">
+              <button type="button" data-compare-range="daily" class="active">Daily</button>
+              <button type="button" data-compare-range="weekly">Weekly</button>
+              <button type="button" data-compare-range="monthly">Monthly</button>
             </div>
           </div>
           <div class="compare-list">
@@ -387,7 +407,8 @@
             <div class="compare-item"><span>Look rate</span><div class="compare-bars"><div class="compare-bar"><i id="compareLookCurrent" style="width:87%"></i></div><div class="compare-bar previous"><i id="compareLookPrevious" style="width:81%"></i></div></div><strong id="compareLookDelta">+2.4pp</strong></div>
             <div class="compare-item"><span>Stop rate</span><div class="compare-bars"><div class="compare-bar"><i id="compareStopCurrent" style="width:78%"></i></div><div class="compare-bar previous"><i id="compareStopPrevious" style="width:72%"></i></div></div><strong id="compareStopDelta">+0.7pp</strong></div>
           </div>
-          <div class="mini-note">Historical comparison is part of Monitor so clients can tell whether performance is improving or weakening, not just read isolated numbers.</div>
+          <div class="compare-caption" id="compareCaption">Example: latest 24 hours vs the 24 hours before that.</div>
+          <div class="mini-note">Historical comparison helps the client see whether performance is improving or weakening across different analysis windows, not just read isolated numbers.</div>
         </section>
 
         <aside class="support-panel">
@@ -409,7 +430,7 @@
             </div>
             <span class="status-pill status-pill--sample">Quarterly</span>
           </div>
-          <p class="quarter-lead">A quarterly summary should not feel cramped. This section gives the client a clear narrative view of what changed over the quarter, where the strongest performance came from, and how stopping behaviour evolved.</p>
+          <p class="quarter-lead">A quarterly summary should not feel cramped. This section gives the client a clear narrative view of what changed over the quarter, where the strongest performance came from, how attention evolved and whether stopping behaviour improved.</p>
           <div class="quarter-grid">
             <article class="quarter-card">
               <small>Traffic</small>
@@ -433,13 +454,13 @@
           <div>
             <span class="support-status"><i></i> Monitor scope</span>
             <h3>What this plan covers</h3>
-            <p>Traffic in front of the store, passers-by count, attention / look rate, stopping behaviour, trends by hour, day and week, historical comparison, strongest and weakest windows, and a clear quarterly summary.</p>
+            <p>Traffic in front of the store, passers-by count, attention / look rate, stopping behaviour, average look time, trends by hour, day and week, historical comparison, strongest and weakest windows, and a clear quarterly summary.</p>
           </div>
           <button class="btn" type="button" disabled>CRM connection comes next</button>
         </aside>
       </div>
 
-      <div class="dashboard-foot"><span><strong>Monitor metrics represented:</strong> traffic · passer-by count · look rate · stopping behavior · hourly/daily/weekly trends · historical comparison · strong/weak hours · quarterly summary.</span><span>Demo environment · no real customer data</span></div>
+      <div class="dashboard-foot"><span><strong>Monitor metrics represented:</strong> look rate · stop rate · passers-by · stopped visitors · average look time · demographic snapshot · hourly/daily/weekly trends · historical comparison · strong/weak moments · quarterly summary.</span><span>Demo environment · no real customer data</span></div>
     </section>
   </main>
 
@@ -450,14 +471,52 @@
       const SESSION_KEY = "tm_dashboard_test_session";
       const DEMO_DATA = {
         periods: {
-          "7d": { passers:18426, lookRate:34.7, stopRate:9.4, looked:6394, stopped:1732, deltaPassers:8.2, deltaLook:2.4, deltaStop:0.7, deltaStopped:16.9 },
-          "30d": { passers:78960, lookRate:33.9, stopRate:9.0, looked:26768, stopped:7106, deltaPassers:6.1, deltaLook:1.8, deltaStop:0.4, deltaStopped:10.9 },
-          "quarter": { passers:218470, lookRate:32.8, stopRate:8.7, looked:71658, stopped:19007, deltaPassers:11.2, deltaLook:2.1, deltaStop:0.8, deltaStopped:22.5 }
+          "7d": {
+            passers:18426, lookRate:34.7, stopRate:9.4, looked:6394, stopped:1732,
+            deltaLook:2.4, deltaStop:0.7, avgLookTime:2.8,
+            bestWindow:"17:00–19:00", bestDay:"Friday", weakWindow:"10:00–11:00",
+            demographics:{ age:[['18–24',16],['25–34',31],['35–44',24],['45–54',17],['55+',12]], gender:[['Women',53],['Men',44],['Unknown',3]] }
+          },
+          "30d": {
+            passers:78960, lookRate:33.9, stopRate:9.0, looked:26768, stopped:7106,
+            deltaLook:1.8, deltaStop:0.4, avgLookTime:2.6,
+            bestWindow:"17:00–19:00", bestDay:"Saturday", weakWindow:"09:00–10:00",
+            demographics:{ age:[['18–24',15],['25–34',29],['35–44',25],['45–54',18],['55+',13]], gender:[['Women',52],['Men',45],['Unknown',3]] }
+          },
+          "quarter": {
+            passers:218470, lookRate:32.8, stopRate:8.7, looked:71658, stopped:19007,
+            deltaLook:2.1, deltaStop:0.8, avgLookTime:2.7,
+            bestWindow:"16:00–19:00", bestDay:"Friday", weakWindow:"10:00–11:00",
+            demographics:{ age:[['18–24',14],['25–34',30],['35–44',24],['45–54',18],['55+',14]], gender:[['Women',51],['Men',46],['Unknown',3]] }
+          }
         },
         trends: {
           hourly: { labels:["09","10","11","12","13","14","15","16","17","18","19","20"], values:[128,102,140,188,222,245,276,314,382,421,389,254], caption:"Average traffic by hour across the selected period.", peak:"Peak 18:00" },
           daily: { labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], values:[2410,2285,2512,2688,3184,2910,2437], caption:"Passer-by traffic by day for the latest sample week.", peak:"Peak Friday" },
           weekly: { labels:["W1","W2","W3","W4","W5","W6","W7","W8","W9","W10","W11","W12","W13"], values:[15720,16110,15940,16680,17010,16840,17290,17540,17320,18110,17920,18480,19310], caption:"Weekly traffic across the illustrative quarter.", peak:"Peak W13" }
+        },
+        comparisons: {
+          daily: {
+            lead:"Compare the current daily range against the previous equivalent period.",
+            caption:"Example: latest 24 hours vs the 24 hours before that.",
+            traffic:{current:88,previous:81,delta:"+6.4%"},
+            look:{current:85,previous:79,delta:"+1.9pp"},
+            stop:{current:76,previous:72,delta:"+0.5pp"}
+          },
+          weekly: {
+            lead:"Compare the current weekly range against the previous equivalent period.",
+            caption:"Example: latest 7 days vs the 7 days before that.",
+            traffic:{current:91,previous:84,delta:"+8.2%"},
+            look:{current:87,previous:81,delta:"+2.4pp"},
+            stop:{current:78,previous:72,delta:"+0.7pp"}
+          },
+          monthly: {
+            lead:"Compare the current monthly range against the previous equivalent period.",
+            caption:"Example: latest 30 days vs the 30 days before that.",
+            traffic:{current:93,previous:86,delta:"+9.1%"},
+            look:{current:84,previous:79,delta:"+1.8pp"},
+            stop:{current:77,previous:73,delta:"+0.4pp"}
+          }
         }
       };
 
@@ -508,41 +567,44 @@
         return "1 in " + (base / divisor).toFixed(1);
       }
 
+      function renderStack(targetId, rows) {
+        const container = byId(targetId);
+        container.innerHTML = rows.map(([label, value]) => `
+          <div class="stack-row">
+            <label>${label}</label>
+            <div class="bar"><i style="width:${value}%"></i></div>
+            <strong>${value}%</strong>
+          </div>`).join("");
+      }
+
       function renderPeriod(key) {
         const d = DEMO_DATA.periods[key];
         if (!d) return;
 
-        animateNumber(byId("kpiPassers"), d.passers, "int");
         animateNumber(byId("kpiLookRate"), d.lookRate, "pct");
         animateNumber(byId("kpiStopRate"), d.stopRate, "pct");
-        animateNumber(byId("kpiStopped"), d.stopped, "int");
+        animateNumber(byId("sidePassers"), d.passers, "int");
+        animateNumber(byId("sideStopped"), d.stopped, "int");
         animateNumber(byId("funnelPassersCount"), d.passers, "int");
         animateNumber(byId("funnelLookedCount"), d.looked, "int");
         animateNumber(byId("funnelStoppedCount"), d.stopped, "int");
 
-        byId("deltaPassers").textContent = signed(d.deltaPassers, "%");
         byId("deltaLook").textContent = signed(d.deltaLook, " pp");
         byId("deltaStop").textContent = signed(d.deltaStop, " pp");
-        byId("deltaStopped").textContent = signed(d.deltaStopped, "%");
 
-        byId("footerPassers").textContent = "Avg " + fmtInt.format(Math.round(d.passers / (key === "7d" ? 7 : key === "30d" ? 30 : 91))) + " / day";
         byId("footerLook").textContent = ratioText(d.passers, d.looked) + " looked";
         byId("footerStop").textContent = ratioText(d.passers, d.stopped) + " stopped";
-        byId("footerStopped").textContent = "Avg " + fmtInt.format(Math.round(d.stopped / (key === "7d" ? 7 : key === "30d" ? 30 : 91))) + " / day";
-
         byId("funnelLookPct").textContent = d.lookRate.toFixed(1) + "%";
         byId("funnelStopPct").textContent = d.stopRate.toFixed(1) + "%";
+        byId("avgLookTime").textContent = d.avgLookTime.toFixed(1) + "s";
+        byId("sideAvgLookTime").textContent = d.avgLookTime.toFixed(1) + "s";
         byId("attentionStoryHeadline").textContent = "Out of every 100 passers-by, around " + Math.round(d.lookRate) + " looked and " + Math.round(d.stopRate) + " stopped.";
+        byId("bestWindow").textContent = d.bestWindow;
+        byId("bestDay").textContent = d.bestDay;
+        byId("weakWindow").textContent = d.weakWindow;
 
-        byId("compareTrafficDelta").textContent = signed(d.deltaPassers, "%");
-        byId("compareLookDelta").textContent = signed(d.deltaLook, "pp");
-        byId("compareStopDelta").textContent = signed(d.deltaStop, "pp");
-        byId("compareTrafficCurrent").style.width = Math.min(100, 84 + d.deltaPassers * 0.85) + "%";
-        byId("compareTrafficPrevious").style.width = "84%";
-        byId("compareLookCurrent").style.width = Math.min(100, 81 + d.deltaLook * 2.5) + "%";
-        byId("compareLookPrevious").style.width = "81%";
-        byId("compareStopCurrent").style.width = Math.min(100, 72 + d.deltaStop * 8) + "%";
-        byId("compareStopPrevious").style.width = "72%";
+        renderStack("ageMix", d.demographics.age);
+        renderStack("genderMix", d.demographics.gender);
 
         document.querySelectorAll("[data-period]").forEach(btn => btn.classList.toggle("active", btn.dataset.period === key));
       }
@@ -569,12 +631,30 @@
         document.querySelectorAll("[data-trend]").forEach(btn => btn.classList.toggle("active", btn.dataset.trend === key));
       }
 
+      function renderComparison(range) {
+        const c = DEMO_DATA.comparisons[range];
+        if (!c) return;
+        byId("compareLead").textContent = c.lead;
+        byId("compareCaption").textContent = c.caption;
+        byId("compareTrafficCurrent").style.width = c.traffic.current + "%";
+        byId("compareTrafficPrevious").style.width = c.traffic.previous + "%";
+        byId("compareTrafficDelta").textContent = c.traffic.delta;
+        byId("compareLookCurrent").style.width = c.look.current + "%";
+        byId("compareLookPrevious").style.width = c.look.previous + "%";
+        byId("compareLookDelta").textContent = c.look.delta;
+        byId("compareStopCurrent").style.width = c.stop.current + "%";
+        byId("compareStopPrevious").style.width = c.stop.previous + "%";
+        byId("compareStopDelta").textContent = c.stop.delta;
+        document.querySelectorAll("[data-compare-range]").forEach(btn => btn.classList.toggle("active", btn.dataset.compareRange === range));
+      }
+
       function showDashboard() {
         loginView.hidden = true;
         clientApp.hidden = false;
         navLogout.hidden = false;
         renderPeriod("7d");
         renderTrend("hourly");
+        renderComparison("daily");
         document.querySelectorAll('.reveal').forEach((el, idx) => el.style.animationDelay = (idx * 0.08) + 's');
         window.scrollTo({ top: 0, behavior: "instant" });
       }
@@ -589,6 +669,7 @@
 
       document.querySelectorAll("[data-period]").forEach(btn => btn.addEventListener("click", () => renderPeriod(btn.dataset.period)));
       document.querySelectorAll("[data-trend]").forEach(btn => btn.addEventListener("click", () => renderTrend(btn.dataset.trend)));
+      document.querySelectorAll("[data-compare-range]").forEach(btn => btn.addEventListener("click", () => renderComparison(btn.dataset.compareRange)));
 
       form.addEventListener("submit", async event => {
         event.preventDefault();
