@@ -145,7 +145,7 @@ function readJson(req) {
   });
 }
 
-async function callScript(url, token, action, payload = {}) {
+async function callScript(url, token, action, payload = {}, timeoutMs = 15000) {
   if (!url || !token) {
     const error = new Error('script_not_configured');
     error.code = 'NOT_CONFIGURED';
@@ -160,7 +160,7 @@ async function callScript(url, token, action, payload = {}) {
       ...payload
     }),
     redirect: 'follow',
-    signal: AbortSignal.timeout(15000)
+    signal: AbortSignal.timeout(timeoutMs)
   });
 
   const raw = await response.text();
@@ -230,7 +230,7 @@ async function handleMonitorMetrics(req, res, url) {
     authorizedBusinessId: session.businessId,
     authorizedLocationId: session.locationId,
     period
-  });
+  }, 30000);
   return sendJson(req, res, 200, { ok: true, data });
 }
 async function handleMonitorLogout(req, res) {
@@ -257,7 +257,7 @@ async function handleMonitorIngest(req, res) {
     deviceId,
     requestId,
     intervals
-  });
+  }, 30000);
   return sendJson(req, res, 200, { ok: true, data });
 }
 
