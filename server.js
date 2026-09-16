@@ -230,7 +230,7 @@ async function handleMonitorMetrics(req, res, url) {
     authorizedBusinessId: session.businessId,
     authorizedLocationId: session.locationId,
     period
-  }, 30000);
+  }, 60000);
   return sendJson(req, res, 200, { ok: true, data });
 }
 async function handleMonitorLogout(req, res) {
@@ -257,7 +257,7 @@ async function handleMonitorIngest(req, res) {
     deviceId,
     requestId,
     intervals
-  }, 30000);
+  }, 60000);
   return sendJson(req, res, 200, { ok: true, data });
 }
 
