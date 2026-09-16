@@ -97,7 +97,7 @@ test('Render test login maps session to server-side business/location and leaves
   assert.equal(scriptCall.body.authorizedBusinessId,'TM-TEST-001');
   assert.equal(scriptCall.body.authorizedLocationId,'TM-LOC-TEST-001');
   assert.equal(scriptCall.body.serverToken,'script-secret');
-  assert.equal(scriptCall.timeoutMs,30000);
+  assert.equal(scriptCall.timeoutMs,60000);
   const application=await invoke('POST','/api/applications',{fullName:'Test',businessName:'Shop',workEmail:'test@example.com'});
   assert.equal(application.status,201);
   assert.equal(scriptCall.url,'https://old.example/exec');
