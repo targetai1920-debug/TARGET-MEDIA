@@ -28,10 +28,108 @@
     @media(max-width:480px){.brand-name{display:none}.brand-mark{width:40px}.nav{padding-left:12px;padding-right:9px}.nav-actions .btn{padding:8px 9px}.nav-validation{font-size:10px}.nav-apply{font-size:10px}.menu-btn{width:40px;height:40px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.nav-apply{box-shadow:0 0 0 1px rgba(190,179,255,.28) inset,0 12px 34px rgba(103,78,255,.42)}.nav-apply:before{display:none}}
   </style>
+  <style>
+    /* Light theme override — visual redesign only, no markup/behaviour changes */
+    :root{--bg:#ffffff;--bg2:#f6f4fc;--card:#ffffff;--line:rgba(45,28,110,.16);--text:#18142f;--muted:#56506f;--sub:#716c8a;--violet:#6a4fe8;--violet2:#5439d6;--good:#0e9668;--shadow:0 24px 60px rgba(90,66,210,.12);--glass:rgba(255,255,255,.9);--glass-soft:rgba(255,255,255,.82);--glass-blur:blur(38px) saturate(170%);--glass-dark:rgba(18,13,42,.72);--glass-dark-blur:blur(36px) saturate(180%)}
+    body{background:var(--bg)}
+    .skip-link{border:1px solid rgba(45,28,110,.25);box-shadow:0 10px 30px rgba(90,66,210,.18)}
+    a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline-color:#6a4fe8}
+    .ambient{background:radial-gradient(1100px 650px at 85% -5%,rgba(122,96,255,.10),transparent 65%),radial-gradient(900px 600px at 5% 30%,rgba(90,70,230,.08),transparent 70%),#ffffff}
+    .exploded-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+    .exploded-bg svg{width:100%;height:100%;display:block}
+    .exploded-3d{position:fixed;inset:0;z-index:-1;pointer-events:none;display:none;width:100%;height:100%}
+    .exploded-3d.active{display:block}
+    .ex-piece{transition:transform .35s cubic-bezier(.2,.7,.3,1)}
+    .ex-piece rect,.ex-piece circle{fill:#efe9ff;fill-opacity:.5;stroke:#6a4fe8;stroke-opacity:.32;stroke-width:2}
+    @media(prefers-reduced-motion:reduce){.ex-piece{transition:none}}
+    .gradient-text{background:linear-gradient(100deg,#241a5e 4%,#5a3fe0 48%,#8f78ff 88%);-webkit-background-clip:text;background-clip:text}
+    .eyebrow{color:#4a37c4;background:rgba(106,79,232,.06)}
+    .btn{background:rgba(45,28,110,.045)}
+    .btn:hover{border-color:rgba(90,66,210,.35)}
+    .nav{border-color:rgba(45,28,110,.10);background:var(--glass);backdrop-filter:var(--glass-blur);box-shadow:0 12px 34px rgba(90,66,210,.10)}
+    .brand-mark{color:#6a4fe8}
+    .nav-links a{color:#3c3656}
+    .nav-links a:hover{background:rgba(90,66,210,.07);color:#16122b}
+    .nav-validation{background:rgba(90,66,210,.05);border-color:rgba(45,28,110,.14);color:#3c3656}
+    .nav-validation:hover{background:rgba(90,66,210,.09);border-color:rgba(45,28,110,.22)}
+    .menu-btn{background:rgba(90,66,210,.06)}
+    .menu-btn span,.menu-btn span:before,.menu-btn span:after{background:#18142f}
+    .nav-links.mobile{background:#ffffff;border-color:var(--line);box-shadow:var(--shadow)}
+    .dashboard{--text:#f5f2ff;--muted:#cbc3ef;--sub:#b7addd;--line:rgba(255,255,255,.18);background:var(--glass-dark);backdrop-filter:var(--glass-dark-blur);border-color:rgba(255,255,255,.16)}
+    .network-card{--text:#f5f2ff;--line:rgba(255,255,255,.18);background:var(--glass-dark);backdrop-filter:var(--glass-dark-blur);border-color:rgba(255,255,255,.16)}
+    .modal{--text:#f5f2ff;--muted:#cbc3ef;--line:rgba(255,255,255,.18);background:var(--glass-dark);backdrop-filter:var(--glass-dark-blur);color:var(--text)}
+    .ticker{background:rgba(90,66,210,.035)}
+    .ticker-track span{color:#5c5678}
+    .feature-card{background:var(--glass-soft);backdrop-filter:var(--glass-blur)}
+    .feature-card:hover{border-color:rgba(90,66,210,.4)}
+    .step-no{color:#4a37c4;background:rgba(90,66,210,.09);border-color:rgba(90,66,210,.3)}
+    .mini-label{color:#726c8f}
+    .intel-icon{color:#4a37c4;background:rgba(90,66,210,.08)}
+    .metric-card,.statbox{background:var(--glass-soft);backdrop-filter:var(--glass-blur)}
+    .card-muted,.statbox small,.bar-col small{color:#726c8f}
+    .funnel-chart{background:linear-gradient(to top,rgba(45,28,110,.08) 1px,transparent 1px)}
+    .funnel-chart:before{color:#726c8f}
+    .bar-shell{background:rgba(45,28,110,.04);border-color:rgba(45,28,110,.10)}
+    .bar-fill{background:linear-gradient(180deg,#8f78ff,#5a3fe0);border-top-color:rgba(255,255,255,.45)}
+    .simulation-note{background:rgba(255,183,77,.12);border-color:rgba(255,183,77,.4);color:#7a5410}
+    .trust-wrap{background:linear-gradient(135deg,rgba(90,66,210,.10),var(--glass-soft));backdrop-filter:var(--glass-blur)}
+    .trust-icon{color:#4a37c4;background:rgba(90,66,210,.08);border-color:rgba(90,66,210,.3)}
+    .friend-line{background:rgba(90,66,210,.03)}
+    .compliance-note{color:#48435f;border-left-color:#6a4fe8}
+    .quarter-pill{color:#0e7a54;background:rgba(14,150,104,.08);border-color:rgba(14,150,104,.3)}
+    .price-card{background:var(--glass-soft);backdrop-filter:var(--glass-blur)}
+    .price-card.popular{background:linear-gradient(180deg,rgba(106,79,232,.16),var(--glass-soft));backdrop-filter:var(--glass-blur);border-color:rgba(90,66,210,.45)}
+    .popular-badge{color:#3d2f9e;background:rgba(90,66,210,.12);border-color:rgba(90,66,210,.32)}
+    .price span,.setup{color:#726c8f}
+    .plan-tagline{color:#2c2650;background:rgba(90,66,210,.06);border-color:rgba(90,66,210,.22)}
+    .features li,.growth-features li{color:#39344f}
+    .check{background:rgba(14,150,104,.10);border-color:rgba(14,150,104,.32)}
+    .monitor-card{background:linear-gradient(180deg,rgba(106,79,232,.16),var(--glass-soft));backdrop-filter:var(--glass-blur)}
+    .disabled-plan{background:var(--glass-soft);backdrop-filter:var(--glass-blur)}
+    .coming-badge{color:#4a4468;background:rgba(45,28,110,.05)}
+    .locked-copy{color:#48435f;border-color:rgba(45,28,110,.22)}
+    .approved-card{background:linear-gradient(145deg,rgba(106,79,232,.14),var(--glass-soft));backdrop-filter:var(--glass-blur);border-color:rgba(90,66,210,.32)}
+    .process-row{color:#39344f}
+    .process-row span{background:rgba(45,28,110,.06)}
+    .process-row i{color:#5a3fe0}
+    .approval-box{background:var(--glass-dark);backdrop-filter:var(--glass-dark-blur)}
+    .privacy-banner{background:linear-gradient(120deg,rgba(90,66,210,.10),var(--glass-soft));backdrop-filter:var(--glass-blur)}
+    .privacy-point{background:var(--glass-soft);backdrop-filter:var(--glass-blur)}
+    .final-card{border-color:rgba(90,66,210,.32);background:linear-gradient(150deg,rgba(106,79,232,.16),var(--glass-soft) 60%);backdrop-filter:var(--glass-blur)}
+    footer,.legal-status{color:#726c8f}
+    .footer-brand{color:#2c2650}
+    .footer-links a{text-decoration-color:rgba(45,28,110,.3)}
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <div class="ambient" aria-hidden="true"></div>
+  <div class="exploded-bg" aria-hidden="true">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+      <g class="ex-piece" data-ex="0" data-ey="-30" data-er="-2"><rect x="520" y="260" width="560" height="340" rx="28"/></g>
+      <g class="ex-piece" data-ex="10" data-ey="-180" data-er="10"><rect x="740" y="380" width="120" height="120" rx="14"/></g>
+      <g class="ex-piece" data-ex="30" data-ey="-230" data-er="18"><rect x="770" y="410" width="60" height="60" rx="6"/></g>
+      <g class="ex-piece" data-ex="-230" data-ey="-60" data-er="-16"><rect x="590" y="390" width="80" height="100" rx="8"/></g>
+      <g class="ex-piece" data-ex="-160" data-ey="-260" data-er="22"><rect x="545" y="290" width="60" height="60" rx="12"/></g>
+      <g class="ex-piece" data-ex="-210" data-ey="-330" data-er="45"><circle cx="575" cy="320" r="22"/></g>
+      <g class="ex-piece" data-ex="-280" data-ey="-230" data-er="70"><circle cx="505" cy="310" r="9"/></g>
+      <g class="ex-piece" data-ex="270" data-ey="-160" data-er="-12"><rect x="1000" y="300" width="76" height="50" rx="7"/></g>
+      <g class="ex-piece" data-ex="310" data-ey="-50" data-er="-7"><rect x="1000" y="372" width="76" height="50" rx="7"/></g>
+      <g class="ex-piece" data-ex="330" data-ey="150" data-er="14"><rect x="1000" y="444" width="96" height="86" rx="8"/></g>
+      <g class="ex-piece" data-ex="-170" data-ey="230" data-er="-18"><rect x="590" y="630" width="96" height="42" rx="6"/></g>
+      <g class="ex-piece" data-ex="-40" data-ey="270" data-er="-9"><rect x="712" y="630" width="96" height="42" rx="6"/></g>
+      <g class="ex-piece" data-ex="70" data-ey="290" data-er="35"><circle cx="880" cy="650" r="15"/></g>
+      <g class="ex-piece" data-ex="-320" data-ey="120" data-er="-22"><rect x="545" y="480" width="54" height="96" rx="5"/></g>
+      <g class="ex-piece" data-ex="-190" data-ey="-190" data-er="0"><circle cx="545" cy="285" r="7"/></g>
+      <g class="ex-piece" data-ex="190" data-ey="-190" data-er="0"><circle cx="1055" cy="285" r="7"/></g>
+      <g class="ex-piece" data-ex="-190" data-ey="190" data-er="0"><circle cx="545" cy="575" r="7"/></g>
+      <g class="ex-piece" data-ex="190" data-ey="190" data-er="0"><circle cx="1055" cy="575" r="7"/></g>
+      <g class="ex-piece" data-ex="140" data-ey="-260" data-er="90"><rect x="850" y="395" width="14" height="8" rx="2"/></g>
+      <g class="ex-piece" data-ex="180" data-ey="-210" data-er="-60"><rect x="850" y="415" width="14" height="8" rx="2"/></g>
+      <g class="ex-piece" data-ex="-90" data-ey="-300" data-er="50"><circle cx="700" cy="360" r="6"/></g>
+    </svg>
+  </div>
+  <canvas class="exploded-3d" aria-hidden="true"></canvas>
   <header class="nav-wrap">
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Target Media home">
@@ -200,6 +298,166 @@
         approvalStatus.textContent='We could not verify the code right now. Please try again later.';
       }
     });
+  </script>
+
+  <script>
+    (function(){
+      var wrap=document.querySelector('.exploded-bg');
+      if(!wrap)return;
+      var pieces=Array.prototype.slice.call(wrap.querySelectorAll('.ex-piece'));
+      var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var cycles=3;
+
+      function apply(t){
+        pieces.forEach(function(el,i){
+          var ex=parseFloat(el.getAttribute('data-ex'))||0;
+          var ey=parseFloat(el.getAttribute('data-ey'))||0;
+          var er=parseFloat(el.getAttribute('data-er'))||0;
+          var local=Math.min(1,Math.max(0,t*1.2-i*0.01));
+          el.style.transform='translate('+(local*ex)+'px,'+(local*ey)+'px) rotate('+(local*er)+'deg)';
+        });
+      }
+
+      if(reduceMotion){apply(0.35);return;}
+
+      var ticking=false;
+      function onScroll(){
+        if(ticking)return;
+        ticking=true;
+        requestAnimationFrame(function(){
+          var max=document.documentElement.scrollHeight-window.innerHeight;
+          var progress=max>0?window.scrollY/max:0;
+          var wave=Math.abs(((progress*cycles*2)%2)-1);
+          window.__explodeFactor=wave;
+          apply(wave);
+          ticking=false;
+        });
+      }
+      window.addEventListener('scroll',onScroll,{passive:true});
+      window.__explodeFactor=0;
+      onScroll();
+    })();
+  </script>
+
+  <script src="vendor/three.min.js"></script>
+  <script>
+    (function(){
+      function init3D(){
+        if(!window.THREE)return false;
+        var canvas=document.querySelector('.exploded-3d');
+        if(!canvas)return false;
+
+        var renderer;
+        try{
+          renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+        }catch(e){return false;}
+        if(!renderer)return false;
+
+        var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        renderer.setClearColor(0x000000,0);
+        if('outputEncoding' in renderer)renderer.outputEncoding=THREE.sRGBEncoding;
+
+        var scene=new THREE.Scene();
+        var camera=new THREE.PerspectiveCamera(36,window.innerWidth/window.innerHeight,0.1,100);
+        camera.position.set(1.4,0.6,13.5);
+        camera.lookAt(0,0,0);
+
+        scene.add(new THREE.AmbientLight(0xffffff,0.55));
+        var key=new THREE.DirectionalLight(0xffffff,0.9);
+        key.position.set(5,8,10);
+        scene.add(key);
+        var violet1=new THREE.PointLight(0x8f6dff,1.6,40);
+        violet1.position.set(-6,-3,6);
+        scene.add(violet1);
+        var violet2=new THREE.PointLight(0x6a4fe8,1.1,40);
+        violet2.position.set(6,4,-4);
+        scene.add(violet2);
+
+        var group=new THREE.Group();
+        scene.add(group);
+
+        var faceMat=new THREE.MeshStandardMaterial({color:0x8f6dff,transparent:true,opacity:0.32,roughness:0.35,metalness:0.05,emissive:0x2a1a70,emissiveIntensity:0.12,depthWrite:false});
+        var edgeMat=new THREE.LineBasicMaterial({color:0x6a4fe8,transparent:true,opacity:0.55});
+
+        var pieces=[];
+        function addPiece(geo,home,explode,rot){
+          var mesh=new THREE.Mesh(geo,faceMat);
+          mesh.position.set(home[0],home[1],home[2]);
+          var edges=new THREE.LineSegments(new THREE.EdgesGeometry(geo),edgeMat);
+          mesh.add(edges);
+          group.add(mesh);
+          pieces.push({
+            mesh:mesh,
+            home:new THREE.Vector3(home[0],home[1],home[2]),
+            explode:new THREE.Vector3(explode[0],explode[1],explode[2]),
+            rot:rot||[0,0,0]
+          });
+        }
+        function box(w,h,d,home,explode,rot){addPiece(new THREE.BoxGeometry(w,h,d),home,explode,rot);}
+        function cyl(r,h,home,explode,rot){addPiece(new THREE.CylinderGeometry(r,r,h,20),home,explode,rot);}
+
+        box(6.2,3.6,0.3, [0,-0.2,0], [0,-0.3,-0.3], [0,0,0]);
+        box(1.3,1.3,0.5, [0.9,0.1,0.5], [1.1,1.9,2.6], [0.3,0.4,0]);
+        box(0.6,0.6,0.2, [0.9,0.1,0.85], [1.6,2.6,3.6], [0.6,0.2,0.4]);
+        box(0.85,1.05,0.5, [-0.55,0.15,0.5], [-2.4,0.6,2.2], [0,0.5,-0.2]);
+        box(0.65,0.65,0.5, [-0.85,0.85,0.5], [-1.7,2.7,2.9], [0.3,0.7,0.2]);
+        cyl(0.24,0.3, [-0.72,0.85,0.85], [-2.2,3.4,3.7], [1.2,0,0]);
+        cyl(0.1,0.12, [-1.15,0.68,0.65], [-2.9,2.4,3.1], [0,0,0]);
+        box(0.8,0.55,0.55, [1.65,0.85,0.55], [2.8,1.7,2.3], [0,-0.3,0.2]);
+        box(0.8,0.55,0.55, [1.65,0.35,0.55], [3.2,0.5,2.1], [0,0.2,-0.1]);
+        box(1.0,0.9,0.6, [1.7,-0.15,0.6], [3.4,-1.6,2.6], [0.2,0.3,0]);
+        box(1.0,0.45,0.5, [-0.5,-1.0,0.5], [-1.8,-2.4,2.4], [-0.2,0,0.3]);
+        box(1.0,0.45,0.5, [0.65,-1.0,0.5], [-0.4,-2.8,2.7], [0.15,0.2,-0.2]);
+        cyl(0.16,0.35, [1.55,-1.05,0.55], [0.7,-3.0,3.0], [1.4,0,0]);
+        box(0.55,1.0,0.35, [-0.85,-0.3,0.4], [-3.4,-1.3,2.0], [0,0,0.4]);
+        cyl(0.08,0.1, [-2.6,1.2,0.35], [-2.0,-2.0,3.6], [0,0,0]);
+        cyl(0.08,0.1, [2.6,1.2,0.35], [2.0,-2.0,3.6], [0,0,0]);
+        cyl(0.08,0.1, [-2.6,-1.5,0.35], [-2.0,2.0,3.6], [0,0,0]);
+        cyl(0.08,0.1, [2.6,-1.5,0.35], [2.0,2.0,3.6], [0,0,0]);
+        box(0.16,0.09,0.1, [1.2,0.55,0.65], [1.5,-2.7,3.3], [0.9,0,0]);
+        box(0.16,0.09,0.1, [1.2,0.35,0.65], [1.9,-2.2,3.5], [-0.6,0.5,0]);
+        cyl(0.07,0.12, [0.4,0.45,0.65], [-1.0,-3.1,3.4], [0,0,0]);
+
+        function resize(){
+          renderer.setSize(window.innerWidth,window.innerHeight);
+          camera.aspect=window.innerWidth/window.innerHeight;
+          camera.updateProjectionMatrix();
+        }
+        window.addEventListener('resize',resize);
+
+        var current=0;
+        var v=new THREE.Vector3();
+        function frame(){
+          var target=typeof window.__explodeFactor==='number'?window.__explodeFactor:0;
+          if(reduceMotion){
+            current=0.32;
+          }else{
+            current+=(target-current)*0.06;
+            group.rotation.y+=0.0009;
+          }
+          pieces.forEach(function(p){
+            v.copy(p.home).addScaledVector(p.explode,current);
+            p.mesh.position.copy(v);
+            p.mesh.rotation.set(p.rot[0]*current,p.rot[1]*current,p.rot[2]*current);
+          });
+          renderer.render(scene,camera);
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+
+        canvas.classList.add('active');
+        var fallback=document.querySelector('.exploded-bg');
+        if(fallback)fallback.style.display='none';
+        return true;
+      }
+
+      if(!init3D()){
+        window.addEventListener('load',function(){init3D();});
+      }
+    })();
   </script>
 </body>
 </html>

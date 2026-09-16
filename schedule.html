@@ -30,8 +30,57 @@
     @media(max-width:560px){.time-grid{grid-template-columns:repeat(2,1fr)}.calendar-panel,.time-panel,.status-card{padding:18px}.hero{padding-top:52px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
+  <style>
+    /* Light theme override — visual redesign only, no markup/behaviour changes */
+    :root{--bg:#ffffff;--card:#ffffff;--line:rgba(45,28,110,.16);--text:#18142f;--muted:#56506f;--violet:#6a4fe8;--good:#0e9668;--shadow:0 24px 60px rgba(90,66,210,.12);--glass:rgba(255,255,255,.9);--glass-soft:rgba(255,255,255,.82);--glass-blur:blur(38px) saturate(170%)}
+    body{background:radial-gradient(1100px 650px at 85% -5%,rgba(122,96,255,.10),transparent 65%),radial-gradient(900px 600px at 5% 30%,rgba(90,70,230,.08),transparent 70%),#ffffff}
+    a:focus-visible,button:focus-visible{outline-color:#6a4fe8}
+    .exploded-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+    .exploded-bg svg{width:100%;height:100%;display:block}
+    .ex-piece{transition:transform .35s cubic-bezier(.2,.7,.3,1)}
+    .ex-piece rect,.ex-piece circle{fill:#efe9ff;fill-opacity:.5;stroke:#6a4fe8;stroke-opacity:.32;stroke-width:2}
+    @media(prefers-reduced-motion:reduce){.ex-piece{transition:none}}
+    .topbar{background:var(--glass);backdrop-filter:var(--glass-blur);border-color:rgba(45,28,110,.10)}
+    .back{color:#3c3656}
+    .gradient{background:linear-gradient(100deg,#241a5e 4%,#5a3fe0 48%,#8f78ff 88%);-webkit-background-clip:text;background-clip:text}
+    .eyebrow{color:#4a37c4;background:rgba(106,79,232,.06)}
+    .status-card{background:var(--glass-soft);backdrop-filter:var(--glass-blur)}
+    .lock-icon{color:#4a37c4;background:rgba(90,66,210,.09);border-color:rgba(90,66,210,.3)}
+    .calendar-panel,.time-panel{background:rgba(45,28,110,.03)}
+    .calendar-nav{background:rgba(45,28,110,.05)}
+    .weekday-row span,.calendar-legend,.schedule-message,.booking-note{color:#56506f}
+    .calendar-day,.time-slot{background:rgba(45,28,110,.045);color:#18142f}
+    .btn{background:rgba(45,28,110,.045)}
+    footer{color:#726c8f;border-color:rgba(45,28,110,.10)}
+    .footer-links a{text-decoration-color:rgba(45,28,110,.3)}
+  </style>
 </head>
 <body>
+  <div class="exploded-bg" aria-hidden="true">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+      <g class="ex-piece" data-ex="0" data-ey="-30" data-er="-2"><rect x="520" y="260" width="560" height="340" rx="28"/></g>
+      <g class="ex-piece" data-ex="10" data-ey="-180" data-er="10"><rect x="740" y="380" width="120" height="120" rx="14"/></g>
+      <g class="ex-piece" data-ex="30" data-ey="-230" data-er="18"><rect x="770" y="410" width="60" height="60" rx="6"/></g>
+      <g class="ex-piece" data-ex="-230" data-ey="-60" data-er="-16"><rect x="590" y="390" width="80" height="100" rx="8"/></g>
+      <g class="ex-piece" data-ex="-160" data-ey="-260" data-er="22"><rect x="545" y="290" width="60" height="60" rx="12"/></g>
+      <g class="ex-piece" data-ex="-210" data-ey="-330" data-er="45"><circle cx="575" cy="320" r="22"/></g>
+      <g class="ex-piece" data-ex="-280" data-ey="-230" data-er="70"><circle cx="505" cy="310" r="9"/></g>
+      <g class="ex-piece" data-ex="270" data-ey="-160" data-er="-12"><rect x="1000" y="300" width="76" height="50" rx="7"/></g>
+      <g class="ex-piece" data-ex="310" data-ey="-50" data-er="-7"><rect x="1000" y="372" width="76" height="50" rx="7"/></g>
+      <g class="ex-piece" data-ex="330" data-ey="150" data-er="14"><rect x="1000" y="444" width="96" height="86" rx="8"/></g>
+      <g class="ex-piece" data-ex="-170" data-ey="230" data-er="-18"><rect x="590" y="630" width="96" height="42" rx="6"/></g>
+      <g class="ex-piece" data-ex="-40" data-ey="270" data-er="-9"><rect x="712" y="630" width="96" height="42" rx="6"/></g>
+      <g class="ex-piece" data-ex="70" data-ey="290" data-er="35"><circle cx="880" cy="650" r="15"/></g>
+      <g class="ex-piece" data-ex="-320" data-ey="120" data-er="-22"><rect x="545" y="480" width="54" height="96" rx="5"/></g>
+      <g class="ex-piece" data-ex="-190" data-ey="-190" data-er="0"><circle cx="545" cy="285" r="7"/></g>
+      <g class="ex-piece" data-ex="190" data-ey="-190" data-er="0"><circle cx="1055" cy="285" r="7"/></g>
+      <g class="ex-piece" data-ex="-190" data-ey="190" data-er="0"><circle cx="545" cy="575" r="7"/></g>
+      <g class="ex-piece" data-ex="190" data-ey="190" data-er="0"><circle cx="1055" cy="575" r="7"/></g>
+      <g class="ex-piece" data-ex="140" data-ey="-260" data-er="90"><rect x="850" y="395" width="14" height="8" rx="2"/></g>
+      <g class="ex-piece" data-ex="180" data-ey="-210" data-er="-60"><rect x="850" y="415" width="14" height="8" rx="2"/></g>
+      <g class="ex-piece" data-ex="-90" data-ey="-300" data-er="50"><circle cx="700" cy="360" r="6"/></g>
+    </svg>
+  </div>
   <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="index.html">Target Media</a><a class="back" href="index.html">← Back to website</a></div></header>
 
   <main class="wrap">
@@ -233,6 +282,43 @@
     });
 
     verifyPayment();
+  </script>
+
+  <script>
+    (function(){
+      var wrap=document.querySelector('.exploded-bg');
+      if(!wrap)return;
+      var pieces=Array.prototype.slice.call(wrap.querySelectorAll('.ex-piece'));
+      var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var cycles=3;
+
+      function apply(t){
+        pieces.forEach(function(el,i){
+          var ex=parseFloat(el.getAttribute('data-ex'))||0;
+          var ey=parseFloat(el.getAttribute('data-ey'))||0;
+          var er=parseFloat(el.getAttribute('data-er'))||0;
+          var local=Math.min(1,Math.max(0,t*1.2-i*0.01));
+          el.style.transform='translate('+(local*ex)+'px,'+(local*ey)+'px) rotate('+(local*er)+'deg)';
+        });
+      }
+
+      if(reduceMotion){apply(0.35);return;}
+
+      var ticking=false;
+      function onScroll(){
+        if(ticking)return;
+        ticking=true;
+        requestAnimationFrame(function(){
+          var max=document.documentElement.scrollHeight-window.innerHeight;
+          var progress=max>0?window.scrollY/max:0;
+          var wave=Math.abs(((progress*cycles*2)%2)-1);
+          apply(wave);
+          ticking=false;
+        });
+      }
+      window.addEventListener('scroll',onScroll,{passive:true});
+      onScroll();
+    })();
   </script>
 </body>
 </html>
