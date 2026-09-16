@@ -73,8 +73,8 @@ const fakeHttp={createServer:handler=>{requestHandler=handler;return {listen:(_p
 const serverContext=vm.createContext({
   require:name=>name==='node:http'?fakeHttp:require(name),process:{env},console:{log(){},error(){}},
   Buffer,URL,Map,Set,Number,String,Date,JSON,Object,Promise,
-  setInterval:()=>({unref(){}}),fetch:async (url,opts)=>{scriptCall={url,body:JSON.parse(opts.body)};return {ok:true,text:async()=>JSON.stringify({ok:true,data:{dataStatus:'EMPTY'}})};},
-  AbortSignal
+  setInterval:()=>({unref(){}}),fetch:async (url,opts)=>{scriptCall={url,body:JSON.parse(opts.body),timeoutMs:opts.signal.ms};return {ok:true,text:async()=>JSON.stringify({ok:true,data:{dataStatus:'EMPTY'}})};},
+  AbortSignal:{timeout:ms=>({ms})}
 });
 vm.runInContext(serverCode,serverContext);
 async function invoke(method,url,body,token) {
@@ -97,10 +97,12 @@ test('Render test login maps session to server-side business/location and leaves
   assert.equal(scriptCall.body.authorizedBusinessId,'TM-TEST-001');
   assert.equal(scriptCall.body.authorizedLocationId,'TM-LOC-TEST-001');
   assert.equal(scriptCall.body.serverToken,'script-secret');
+  assert.equal(scriptCall.timeoutMs,30000);
   const application=await invoke('POST','/api/applications',{fullName:'Test',businessName:'Shop',workEmail:'test@example.com'});
   assert.equal(application.status,201);
   assert.equal(scriptCall.url,'https://old.example/exec');
   assert.equal(scriptCall.body.serverToken,'old-secret');
+  assert.equal(scriptCall.timeoutMs,15000);
 });
 
 test('dashboard consumes authorized aggregate response without browser-supplied business ID',async()=>{
