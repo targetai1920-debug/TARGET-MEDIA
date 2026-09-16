@@ -308,12 +308,22 @@
       var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var cycles=3;
 
+      function smoothstep(t){t=Math.min(1,Math.max(0,t));return t*t*(3-2*t);}
+      function trapWave(x){
+        x=x-Math.floor(x);
+        if(x<0.14)return 0;
+        if(x<0.5)return smoothstep((x-0.14)/0.36);
+        if(x<0.64)return 1;
+        return 1-smoothstep((x-0.64)/0.36);
+      }
+      window.__trapWave=trapWave;
+
       function apply(t){
         pieces.forEach(function(el,i){
           var ex=parseFloat(el.getAttribute('data-ex'))||0;
           var ey=parseFloat(el.getAttribute('data-ey'))||0;
           var er=parseFloat(el.getAttribute('data-er'))||0;
-          var local=Math.min(1,Math.max(0,t*1.2-i*0.01));
+          var local=Math.min(1,Math.max(0,t*1.08-i*0.006));
           el.style.transform='translate('+(local*ex)+'px,'+(local*ey)+'px) rotate('+(local*er)+'deg)';
         });
       }
@@ -327,7 +337,7 @@
         requestAnimationFrame(function(){
           var max=document.documentElement.scrollHeight-window.innerHeight;
           var progress=max>0?window.scrollY/max:0;
-          var wave=Math.abs(((progress*cycles*2)%2)-1);
+          var wave=trapWave(progress*cycles);
           window.__explodeFactor=wave;
           apply(wave);
           ticking=false;
@@ -379,12 +389,24 @@
         var group=new THREE.Group();
         scene.add(group);
 
-        var faceMat=new THREE.MeshStandardMaterial({color:0x8f6dff,transparent:true,opacity:0.32,roughness:0.35,metalness:0.05,emissive:0x2a1a70,emissiveIntensity:0.12,depthWrite:false});
-        var edgeMat=new THREE.LineBasicMaterial({color:0x6a4fe8,transparent:true,opacity:0.55});
+        var texLoader=new THREE.TextureLoader();
+        var pcbTexture=texLoader.load('assets/pcb-texture.png');
+        if('colorSpace' in pcbTexture)pcbTexture.colorSpace=THREE.SRGBColorSpace;
+        else if('encoding' in pcbTexture)pcbTexture.encoding=THREE.sRGBEncoding;
+
+        var boardMat=new THREE.MeshStandardMaterial({map:pcbTexture,color:0xffffff,roughness:0.6,metalness:0.12});
+        var plasticMat=new THREE.MeshStandardMaterial({color:0x0e0c18,roughness:0.7,metalness:0.08});
+        var lightPlasticMat=new THREE.MeshStandardMaterial({color:0x1c1830,roughness:0.55,metalness:0.1});
+        var silverMat=new THREE.MeshStandardMaterial({color:0xcfd0da,roughness:0.28,metalness:0.88});
+        var darkMetalMat=new THREE.MeshStandardMaterial({color:0x54535f,roughness:0.32,metalness:0.75});
+        var lensMat=new THREE.MeshPhysicalMaterial({color:0x050507,roughness:0.08,metalness:0.2,clearcoat:1,clearcoatRoughness:0.05});
+        var ledMat=new THREE.MeshStandardMaterial({color:0xffe9b0,emissive:0xffcf70,emissiveIntensity:1.3,roughness:0.4});
+        var componentMat=new THREE.MeshStandardMaterial({color:0xd99a4e,roughness:0.5,metalness:0.1});
+        var edgeMat=new THREE.LineBasicMaterial({color:0x1a1730,transparent:true,opacity:0.35});
 
         var pieces=[];
-        function addPiece(geo,home,explode,rot){
-          var mesh=new THREE.Mesh(geo,faceMat);
+        function addPiece(geo,mat,home,explode,rot){
+          var mesh=new THREE.Mesh(geo,mat);
           mesh.position.set(home[0],home[1],home[2]);
           var edges=new THREE.LineSegments(new THREE.EdgesGeometry(geo),edgeMat);
           mesh.add(edges);
@@ -395,31 +417,37 @@
             explode:new THREE.Vector3(explode[0],explode[1],explode[2]),
             rot:rot||[0,0,0]
           });
+          return mesh;
         }
-        function box(w,h,d,home,explode,rot){addPiece(new THREE.BoxGeometry(w,h,d),home,explode,rot);}
-        function cyl(r,h,home,explode,rot){addPiece(new THREE.CylinderGeometry(r,r,h,20),home,explode,rot);}
+        function box(w,h,d,mat,home,explode,rot){return addPiece(new THREE.BoxGeometry(w,h,d),mat,home,explode,rot);}
+        function cyl(r,h,mat,home,explode,rot){return addPiece(new THREE.CylinderGeometry(r,r,h,24),mat,home,explode,rot);}
 
-        box(6.2,3.6,0.3, [0,-0.2,0], [0,-0.3,-0.3], [0,0,0]);
-        box(1.3,1.3,0.5, [0.9,0.1,0.5], [1.1,1.9,2.6], [0.3,0.4,0]);
-        box(0.6,0.6,0.2, [0.9,0.1,0.85], [1.6,2.6,3.6], [0.6,0.2,0.4]);
-        box(0.85,1.05,0.5, [-0.55,0.15,0.5], [-2.4,0.6,2.2], [0,0.5,-0.2]);
-        box(0.65,0.65,0.5, [-0.85,0.85,0.5], [-1.7,2.7,2.9], [0.3,0.7,0.2]);
-        cyl(0.24,0.3, [-0.72,0.85,0.85], [-2.2,3.4,3.7], [1.2,0,0]);
-        cyl(0.1,0.12, [-1.15,0.68,0.65], [-2.9,2.4,3.1], [0,0,0]);
-        box(0.8,0.55,0.55, [1.65,0.85,0.55], [2.8,1.7,2.3], [0,-0.3,0.2]);
-        box(0.8,0.55,0.55, [1.65,0.35,0.55], [3.2,0.5,2.1], [0,0.2,-0.1]);
-        box(1.0,0.9,0.6, [1.7,-0.15,0.6], [3.4,-1.6,2.6], [0.2,0.3,0]);
-        box(1.0,0.45,0.5, [-0.5,-1.0,0.5], [-1.8,-2.4,2.4], [-0.2,0,0.3]);
-        box(1.0,0.45,0.5, [0.65,-1.0,0.5], [-0.4,-2.8,2.7], [0.15,0.2,-0.2]);
-        cyl(0.16,0.35, [1.55,-1.05,0.55], [0.7,-3.0,3.0], [1.4,0,0]);
-        box(0.55,1.0,0.35, [-0.85,-0.3,0.4], [-3.4,-1.3,2.0], [0,0,0.4]);
-        cyl(0.08,0.1, [-2.6,1.2,0.35], [-2.0,-2.0,3.6], [0,0,0]);
-        cyl(0.08,0.1, [2.6,1.2,0.35], [2.0,-2.0,3.6], [0,0,0]);
-        cyl(0.08,0.1, [-2.6,-1.5,0.35], [-2.0,2.0,3.6], [0,0,0]);
-        cyl(0.08,0.1, [2.6,-1.5,0.35], [2.0,2.0,3.6], [0,0,0]);
-        box(0.16,0.09,0.1, [1.2,0.55,0.65], [1.5,-2.7,3.3], [0.9,0,0]);
-        box(0.16,0.09,0.1, [1.2,0.35,0.65], [1.9,-2.2,3.5], [-0.6,0.5,0]);
-        cyl(0.07,0.12, [0.4,0.45,0.65], [-1.0,-3.1,3.4], [0,0,0]);
+        box(6.2,3.6,0.3, boardMat, [0,-0.2,0], [0,-0.3,-0.3], [0,0,0]);
+        box(1.3,1.3,0.5, plasticMat, [0.9,0.1,0.5], [1.1,1.9,2.6], [0.3,0.4,0]);
+        box(0.6,0.6,0.2, plasticMat, [0.9,0.1,0.85], [1.6,2.6,3.6], [0.6,0.2,0.4]);
+        box(0.85,1.05,0.5, plasticMat, [-0.55,0.15,0.5], [-2.4,0.6,2.2], [0,0.5,-0.2]);
+        box(0.65,0.65,0.5, lightPlasticMat, [-0.85,0.85,0.5], [-1.7,2.7,2.9], [0.3,0.7,0.2]);
+        cyl(0.24,0.3, lensMat, [-0.72,0.85,0.85], [-2.2,3.4,3.7], [1.2,0,0]);
+        cyl(0.1,0.12, ledMat, [-1.15,0.68,0.65], [-2.9,2.4,3.1], [0,0,0]);
+        box(0.8,0.55,0.55, silverMat, [1.65,0.85,0.55], [2.8,1.7,2.3], [0,-0.3,0.2]);
+        box(0.8,0.55,0.55, silverMat, [1.65,0.35,0.55], [3.2,0.5,2.1], [0,0.2,-0.1]);
+        box(1.0,0.9,0.6, silverMat, [1.7,-0.15,0.6], [3.4,-1.6,2.6], [0.2,0.3,0]);
+        box(1.0,0.45,0.5, darkMetalMat, [-0.5,-1.0,0.5], [-1.8,-2.4,2.4], [-0.2,0,0.3]);
+        box(1.0,0.45,0.5, darkMetalMat, [0.65,-1.0,0.5], [-0.4,-2.8,2.7], [0.15,0.2,-0.2]);
+        cyl(0.16,0.35, silverMat, [1.55,-1.05,0.55], [0.7,-3.0,3.0], [1.4,0,0]);
+        var gpio=box(0.55,1.0,0.35, plasticMat, [-0.85,-0.3,0.4], [-3.4,-1.3,2.0], [0,0,0.4]);
+        for(var gp=0;gp<6;gp++){
+          cyl(0.02,0.16, silverMat,
+            [-0.85+((gp%2)-0.5)*0.28, -0.3+(Math.floor(gp/2)-1)*0.28, 0.66],
+            [-3.4,-1.3,2.0], [0,0,0.4]);
+        }
+        cyl(0.08,0.05, silverMat, [-2.6,1.2,0.35], [-2.0,-2.0,3.6], [0,0,0]);
+        cyl(0.08,0.05, silverMat, [2.6,1.2,0.35], [2.0,-2.0,3.6], [0,0,0]);
+        cyl(0.08,0.05, silverMat, [-2.6,-1.5,0.35], [-2.0,2.0,3.6], [0,0,0]);
+        cyl(0.08,0.05, silverMat, [2.6,-1.5,0.35], [2.0,2.0,3.6], [0,0,0]);
+        box(0.16,0.09,0.1, componentMat, [1.2,0.55,0.65], [1.5,-2.7,3.3], [0.9,0,0]);
+        box(0.16,0.09,0.1, componentMat, [1.2,0.35,0.65], [1.9,-2.2,3.5], [-0.6,0.5,0]);
+        cyl(0.07,0.12, componentMat, [0.4,0.45,0.65], [-1.0,-3.1,3.4], [0,0,0]);
 
         function resize(){
           renderer.setSize(window.innerWidth,window.innerHeight);
@@ -435,7 +463,8 @@
           if(reduceMotion){
             current=0.32;
           }else{
-            current+=(target-current)*0.06;
+            current+=(target-current)*0.11;
+            if(Math.abs(target-current)<0.002)current=target;
             group.rotation.y+=0.0009;
           }
           pieces.forEach(function(p){
