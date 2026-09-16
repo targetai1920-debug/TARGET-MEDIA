@@ -211,3 +211,20 @@ function monitorSelfTest() {
   console.log(JSON.stringify({ok:true,tests:['weighted rates','average duration','token compare']}));
   return true;
 }
+function monitorLiveSmokeTest() {
+  // Re-running on the same UTC day exercises idempotency without adding another row.
+  var now=new Date(),start=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()-1,10));
+  var requestId='monitor-live-smoke-v1-'+start.toISOString().slice(0,10).replace(/-/g,'');
+  var batch={businessId:'TM-TEST-001',locationId:'TM-LOC-TEST-001',deviceId:'ORANGEPI-TEST-001',
+    requestId:requestId,sampleData:true,intervals:[{start:start.toISOString(),end:new Date(start.getTime()+300000).toISOString(),
+      passersBy:12,looked:4,stopped:1,totalLookTimeSeconds:11.2,validLookEvents:4,ageBuckets:null,genderBuckets:null}]};
+  var first=monitorIngest_(batch),second=monitorIngest_(batch);
+  var dashboard=monitorDashboard_({authorizedBusinessId:batch.businessId,authorizedLocationId:batch.locationId,period:'7d'});
+  var diagnostics=monitorDiagnostics_();
+  if(first.accepted+first.duplicates!==1 || second.duplicates!==1 ||
+     dashboard.dataStatus!=='SAMPLE/TEST' || dashboard.totals.passers<12 || diagnostics.metricRows<1)
+    throw monitorError_('LIVE_SMOKE_FAILED');
+  console.log(JSON.stringify({ok:true,requestId:requestId,first:first,second:second,
+    metricRows:diagnostics.metricRows,sevenDayPassers:dashboard.totals.passers,dataStatus:dashboard.dataStatus}));
+  return true;
+}
