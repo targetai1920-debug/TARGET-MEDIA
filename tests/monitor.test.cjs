@@ -62,7 +62,7 @@ test('Apps Script ingests aggregate batch once, computes weighted metrics, keeps
 });
 
 const userHash=crypto.createHash('sha256').update('target.test').digest('hex');
-const passwordHash=crypto.createHash('sha256').update('MonitorTest#2026').digest('hex');
+const passwordHash=crypto.createHash('sha256').update('UnitTestOnly-NotARealCredential!').digest('hex');
 const serverCode=fs.readFileSync(path.join(__dirname,'..','server.js'),'utf8');
 let requestHandler,scriptCall;
 const env={APPS_SCRIPT_URL:'https://old.example/exec',SERVER_TOKEN:'old-secret',MONITOR_APPS_SCRIPT_URL:'https://monitor.example/exec',
@@ -85,7 +85,7 @@ async function invoke(method,url,body,token) {
   return {status:res.statusCode,data:res.body?JSON.parse(res.body):null};
 }
 test('Render test login maps session to server-side business/location and leaves Applications token isolated',async()=>{
-  const login=await invoke('POST','/api/dashboard/login',{username:'target.test',password:'MonitorTest#2026'});
+  const login=await invoke('POST','/api/dashboard/login',{username:'target.test',password:'UnitTestOnly-NotARealCredential!'});
   assert.equal(login.status,200);
   assert.match(login.data.token,/^[a-f0-9]{64}$/);
   const noSession=await invoke('GET','/api/dashboard/metrics?period=7d');
@@ -125,7 +125,7 @@ test('dashboard consumes authorized aggregate response without browser-supplied 
     Intl,Number,Math,Map,Set,Date,JSON,String,Array,performance:{now:()=>0},requestAnimationFrame:cb=>cb(1000),
     AbortSignal,encodeURIComponent});
   vm.runInContext(fs.readFileSync(path.join(__dirname,'..','dashboard.js'),'utf8'),ui);
-  element('dashboardUser').value='target.test';element('dashboardPassword').value='MonitorTest#2026';
+  element('dashboardUser').value='target.test';element('dashboardPassword').value='UnitTestOnly-NotARealCredential!';
   await element('dashboardLogin').submit({preventDefault(){}});
   assert.equal(element('kpiLookRate').textContent,'35.0%');
   assert.equal(element('kpiPassers').textContent,'120');
