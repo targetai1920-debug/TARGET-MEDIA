@@ -263,7 +263,7 @@
     const response = await fetch(API + path, {
       ...options,
       headers: { "Content-Type": "application/json", ...(token ? { Authorization: "Bearer " + token } : {}), ...options.headers },
-      signal: AbortSignal.timeout(20000)
+      signal: AbortSignal.timeout(35000)
     });
     const data = await response.json();
     if (!response.ok || data.ok !== true) throw new Error(data.error || "connection_error");
