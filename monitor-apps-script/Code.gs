@@ -149,19 +149,28 @@ function monitorTotals_(rows) {
   sums.avgLookTimeSeconds=sums.validLookEvents ? sums.totalLookTimeSeconds/sums.validLookEvents : null;
   return sums;
 }
-function monitorTrend_(rows,granularity) {
-  var tz=monitorTz_(),buckets={},daysByHour={};
-  rows.forEach(function(r){var d=monitorDateValue_(r[0]);if(!d)return;
-    var day=Utilities.formatDate(d,tz,'yyyy-MM-dd'),hour=Utilities.formatDate(d,tz,'HH');
-    var key=granularity==='hourly' ? hour : granularity==='daily' ? day : Utilities.formatDate(d,tz,'yyyy')+'-W'+Utilities.formatDate(d,tz,'w');
+function monitorLocal_(value,tz,cache) {
+  var d=monitorDateValue_(value);if(!d)return null;
+  var key=d.getTime();
+  if(!cache[key]) {
+    var fields=Utilities.formatDate(d,tz,'yyyy-MM-dd|HH|EEEE|w').split('|');
+    cache[key]={day:fields[0],hour:fields[1],weekday:fields[2],week:fields[0].slice(0,4)+'-W'+fields[3]};
+  }
+  return cache[key];
+}
+function monitorTrend_(rows,granularity,local) {
+  var buckets={},daysByHour={};
+  rows.forEach(function(r){var parts=local(r[0]);if(!parts)return;
+    var day=parts.day,hour=parts.hour;
+    var key=granularity==='hourly' ? hour : granularity==='daily' ? day : parts.week;
     buckets[key]=(buckets[key]||0)+(Number(r[5])||0);
     if(granularity==='hourly'){daysByHour[key]=daysByHour[key]||{};daysByHour[key][day]=true;}
   });
   return Object.keys(buckets).sort().map(function(k){return {label:k,value:granularity==='hourly' ? Math.round(buckets[k]/Object.keys(daysByHour[k]).length) : buckets[k]};});
 }
-function monitorMoments_(rows) {
-  var hourly=monitorTrend_(rows,'hourly').filter(function(x){return x.value>0;}),tz=monitorTz_(),week={};
-  rows.forEach(function(r){var d=monitorDateValue_(r[0]);if(!d)return;var name=Utilities.formatDate(d,tz,'EEEE'),day=Utilities.formatDate(d,tz,'yyyy-MM-dd');
+function monitorMoments_(rows,local,hourlyTrend) {
+  var hourly=hourlyTrend.filter(function(x){return x.value>0;}),week={};
+  rows.forEach(function(r){var parts=local(r[0]);if(!parts)return;var name=parts.weekday,day=parts.day;
     week[name]=week[name]||{total:0,days:{}};week[name].total+=Number(r[5])||0;week[name].days[day]=true;
   });
   var best=hourly.slice().sort(function(a,b){return b.value-a.value;})[0],weak=hourly.slice().sort(function(a,b){return a.value-b.value;})[0];
@@ -186,13 +195,16 @@ function monitorDashboard_(body) {
   var business=monitorBusiness_(businessId,locationId,null),now=new Date(),period=monitorPeriod_(body.period || '7d',now);
   var source=monitorReadIntervals_(businessId,locationId),current=monitorSlice_(source.rows,period.start,period.end),totals=monitorTotals_(current);
   var previous=monitorTotals_(monitorSlice_(source.rows,new Date(period.start.getTime()-(period.end-period.start)),period.start));
-  var currentDays={};current.forEach(function(r){var d=monitorDateValue_(r[0]);if(d)currentDays[Utilities.formatDate(d,monitorTz_(),'yyyy-MM-dd')]=true;});
+  var tz=monitorTz_(),localCache={};
+  function local(value){return monitorLocal_(value,tz,localCache);}
+  var currentDays={};current.forEach(function(r){var parts=local(r[0]);if(parts)currentDays[parts.day]=true;});
+  var hourly=monitorTrend_(current,'hourly',local);
   var quarter=monitorPeriod_('quarter',now),quarterRows=monitorSlice_(source.rows,quarter.start,quarter.end);
   return {businessName:String(business[2]),city:String(business[5]),timezone:String(business[7]||monitorTz_()),period:body.period||'7d',
     dataStatus:current.length ? (source.sample ? 'SAMPLE/TEST' : 'REAL') : 'EMPTY',sample:source.sample,
     from:period.start.toISOString(),to:period.end.toISOString(),observedDays:Object.keys(currentDays).length,periodDays:period.days,
-    totals:totals,previous:previous,moments:monitorMoments_(current),
-    trends:{hourly:monitorTrend_(current,'hourly'),daily:monitorTrend_(current,'daily'),weekly:monitorTrend_(current,'weekly')},
+    totals:totals,previous:previous,moments:monitorMoments_(current,local,hourly),
+    trends:{hourly:hourly,daily:monitorTrend_(current,'daily',local),weekly:monitorTrend_(current,'weekly',local)},
     comparisons:{daily:monitorComparison_(source.rows,now,1),weekly:monitorComparison_(source.rows,now,7),monthly:monitorComparison_(source.rows,now,30)},
     demographics:monitorDemographics_(businessId,locationId,period.start,period.end),
     quarterly:{from:quarter.start.toISOString(),to:quarter.end.toISOString(),totals:monitorTotals_(quarterRows),previous:monitorComparison_(source.rows,quarter.end,Math.ceil((quarter.end-quarter.start)/86400000)).previous,
