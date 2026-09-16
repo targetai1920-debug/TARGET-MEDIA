@@ -34,7 +34,8 @@ const context = vm.createContext({
   PropertiesService:{getScriptProperties:()=>({getProperty:key=>props[key]})},
   SpreadsheetApp:{openById:id=>{assert.equal(id,'test-book');return {getSheetByName:sheet};}},
   LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock(){}})},
-  Utilities:{formatDate:(date,_tz,pattern)=>{const p=zoneParts(date);return pattern==='yyyy-MM-dd'?`${p.year}-${p.month}-${p.day}`:
+  Utilities:{formatDate:(date,_tz,pattern)=>{const p=zoneParts(date);return pattern==='yyyy-MM-dd|HH|EEEE|w'?`${p.year}-${p.month}-${p.day}|${p.hour}|${p.weekday}|37`:
+    pattern==='yyyy-MM-dd'?`${p.year}-${p.month}-${p.day}`:
     pattern==='yyyy'?p.year:pattern==='HH'?p.hour:pattern==='EEEE'?p.weekday:pattern==='w'?'37':pattern==='Z'?'+0200':`${p.year}-${p.month}-${p.day}`;}}
 });
 vm.runInContext(code,context);
