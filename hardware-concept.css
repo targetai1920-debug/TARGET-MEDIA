@@ -1,0 +1,128 @@
+/* Prototype-only enhancement. The approved home and shared stylesheet are untouched. */
+
+/* ================================================================
+   Hardware field — the Orange Pi board and camera module as a
+   centred, atmospheric presence living BEHIND the entire page. It is
+   fixed to the viewport and never adds height to the document.
+   hardware-concept.js drives the scroll choreography via GSAP; this
+   file only supplies the static "established" resting shot, which
+   doubles as the prefers-reduced-motion fallback (JS bails out
+   before touching these elements when reduced motion is on).
+   ================================================================ */
+.hw-scroll-region{position:relative}
+.hw-field{position:fixed;inset:0;width:100%;height:100vh;z-index:-1;pointer-events:none;overflow:hidden;perspective:1100px;perspective-origin:50% 48%}
+.hw-glow{position:absolute;left:50%;top:50%;width:min(66vw,860px);height:min(66vw,860px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 37% 44%,rgba(244,155,197,.27),transparent 40%),radial-gradient(circle at 64% 59%,rgba(255,193,143,.16),transparent 35%),radial-gradient(circle,rgba(124,108,240,.16),transparent 65%);opacity:.94}
+.hw-axis{position:absolute;left:50%;top:39%;width:min(830px,78vw);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(169,156,255,.2) 24%,rgba(169,156,255,.28) 50%,rgba(169,156,255,.2) 76%,transparent);opacity:0}
+/* Restrained optical accents: tiny highlights and partial orbit lines,
+   behind both the photographs and all page content. */
+.hw-arc{position:absolute;left:50%;top:50%;width:min(64vw,760px);height:min(30vw,340px);border:1px solid rgba(173,164,255,.3);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;opacity:0;pointer-events:none;box-shadow:0 0 14px rgba(133,112,255,.035)}
+.hw-arc--a{transform:translate(-50%,-50%) rotate(-18deg)}
+.hw-arc--b{width:min(54vw,620px);height:min(23vw,260px);border-color:rgba(246,183,212,.23);border-right-color:transparent;border-top-color:transparent;transform:translate(-50%,-50%) rotate(22deg)}
+.hw-sparks{position:absolute;left:50%;top:50%;width:min(74vw,860px);height:min(56vw,630px);transform:translate(-50%,-50%);opacity:0;pointer-events:none}
+.hw-spark{position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--size);border-radius:50%;background:#ffeef8;box-shadow:0 0 5px 1px rgba(236,187,224,.65),0 0 15px 3px rgba(165,119,202,.2);animation:hw-twinkle var(--duration) ease-in-out infinite;animation-delay:var(--delay)}
+.hw-spark:nth-child(3n){background:#ffe2ba;box-shadow:0 0 6px 1px rgba(255,202,145,.66),0 0 16px 3px rgba(237,151,115,.2)}
+.hw-sparks.is-paused .hw-spark{animation-play-state:paused}
+.hw-spark--flare::before,.hw-spark--flare::after{content:"";position:absolute;left:50%;top:50%;background:linear-gradient(90deg,transparent,rgba(255,224,236,.82),transparent);transform:translate(-50%,-50%);pointer-events:none}
+.hw-spark--flare::before{width:36px;height:1px}
+.hw-spark--flare::after{width:1px;height:36px;background:linear-gradient(180deg,transparent,rgba(255,224,236,.76),transparent)}
+@keyframes hw-twinkle{0%,100%{opacity:.06;transform:translate(-50%,-50%) translateY(3px) scale(.58)}42%{opacity:.72;transform:translate(-50%,-50%) translateY(-4px) scale(1.18)}65%{opacity:.25;transform:translate(-50%,-50%) translateY(-1px) scale(.8)}}
+.hw-plane{position:absolute;left:50%;top:50%;pointer-events:none;transform-origin:center center;will-change:transform,opacity;--hw-depth:7px;--hw-ink:#252434;--hw-trace:rgba(157,143,222,.35)}
+.hw-plane--board,.hw-plane--camera{filter:drop-shadow(0 16px 24px rgba(0,0,0,.32))}
+.hw-plane img{display:block;width:100%;height:auto;pointer-events:none}
+.hw-solid{position:relative;width:100%;transform-style:preserve-3d}
+.hw-solid img{position:relative;z-index:3;backface-visibility:hidden;transform:translateZ(var(--hw-depth))}
+.hw-core,.hw-back{position:absolute;inset:0;display:block;pointer-events:none;-webkit-mask-image:var(--hw-shape);mask-image:var(--hw-shape);-webkit-mask-size:100% 100%;mask-size:100% 100%}
+.hw-core{z-index:2;transform:translateZ(0);background:var(--hw-ink);filter:brightness(.75)}
+.hw-back{z-index:1;backface-visibility:hidden;transform:rotateY(180deg) translateZ(var(--hw-depth));background:repeating-linear-gradient(27deg,transparent 0 13px,var(--hw-trace) 13px 14px,transparent 14px 28px),repeating-linear-gradient(117deg,transparent 0 26px,var(--hw-trace) 26px 27px,transparent 27px 47px),radial-gradient(circle at 48% 52%,rgba(209,196,255,.23) 0 5%,transparent 6%),var(--hw-ink);box-shadow:inset 0 0 24px rgba(0,0,0,.48)}
+.hw-plane--board{--hw-depth:6px;--hw-ink:#203c67;--hw-trace:rgba(149,202,248,.33)}
+.hw-plane--camera{--hw-depth:8px;--hw-ink:#242529;--hw-trace:rgba(168,169,181,.27)}
+.hw-plane--lens{--hw-depth:11px;--hw-ink:#595962;--hw-trace:rgba(216,216,227,.34)}
+.hw-plane--led,.hw-plane--chip{--hw-depth:5px;--hw-ink:#1f2431}
+.hw-plane--connector,.hw-plane--ports,.hw-plane--hdmi{--hw-depth:9px;--hw-ink:#4d5059;--hw-trace:rgba(214,220,232,.28)}
+.hw-plane--pins{--hw-depth:5px;--hw-ink:#2d3549}
+.hw-plane--lens::before{content:"";position:absolute;left:50%;top:50%;width:64%;aspect-ratio:1;transform:translate(-50%,-50%);border:1px solid rgba(230,181,222,.29);border-radius:50%;box-shadow:0 0 18px rgba(207,143,204,.13),inset 0 0 16px rgba(207,143,204,.1);pointer-events:none}
+/* One symbolic lens-to-readout pulse. These are light overlays, never
+   substitute imagery or a representation of a physical cable — the mote's
+   start/end points are measured live from the lens and instrument boxes
+   in hardware-concept.js, so this is purely visual dressing on top of
+   real element positions. */
+.hw-emitter{position:absolute;left:47%;top:42%;width:25px;height:25px;border-radius:50%;transform:translate(-50%,-50%) scale(.5);opacity:0;pointer-events:none;background:radial-gradient(circle,rgba(255,244,222,.84) 0 7%,rgba(255,198,171,.42) 13%,rgba(236,169,217,.21) 36%,transparent 72%);box-shadow:0 0 20px rgba(251,191,164,.24)}
+.hw-photon{position:absolute;left:50%;top:50%;z-index:2;width:6px;height:6px;border-radius:50%;background:#fff2dd;box-shadow:0 0 9px 3px rgba(255,198,165,.64),0 0 24px 10px rgba(221,150,215,.2);opacity:0;pointer-events:none;will-change:transform,opacity}
+.hw-photon::before{content:"";position:absolute;right:2px;top:2px;width:76px;height:2px;transform-origin:right center;transform:rotate(38deg);background:linear-gradient(90deg,transparent,rgba(255,209,190,.7));filter:blur(.6px)}
+.hero-stage .instrument{--hw-response:0}
+.hero-stage .instrument::before{content:"";position:absolute;inset:-1px;border:1px solid rgba(255,204,216,.48);border-radius:inherit;box-shadow:0 0 32px rgba(239,164,211,.27),inset 0 0 30px rgba(193,145,239,.08);opacity:var(--hw-response);pointer-events:none}
+
+/* resting composition ("phase 1 / establish") — both photographs
+   overlapping softly near centre, real crops parked invisible until
+   the scroll timeline calls on them */
+.hw-plane--board{width:min(38%,360px);transform:translate(-32%,-34%) scale(.86);opacity:.44}
+.hw-plane--camera{width:min(42%,390px);transform:translate(-66%,-62%) scale(.82);opacity:.49}
+.hw-plane--lens{width:min(23%,210px);transform:translate(-50%,-50%) scale(.72);opacity:0}
+.hw-plane--led{width:min(16%,125px);transform:translate(-50%,-50%) scale(.72);opacity:0}
+.hw-plane--connector{width:min(16%,125px);transform:translate(-50%,-50%) scale(.72);opacity:0}
+.hw-plane--chip{width:min(26%,240px);transform:translate(-50%,-50%) scale(.72);opacity:0}
+.hw-plane--pins{width:min(26%,235px);transform:translate(-50%,-50%) scale(.72);opacity:0}
+.hw-plane--ports{width:min(24%,220px);transform:translate(-50%,-50%) scale(.72);opacity:0}
+.hw-plane--hdmi{width:min(25%,225px);transform:translate(-50%,-50%) scale(.72);opacity:0}
+#product h2,#product .section-lead{position:relative;text-shadow:0 2px 20px rgba(10,10,13,.9)}
+
+@media(max-width:980px){
+  .hw-plane--board{width:min(46%,300px)}
+  .hw-plane--camera{width:min(50%,320px)}
+  .hw-plane--lens{width:min(29%,180px)}
+  .hw-plane--led{width:min(20%,110px)}
+  .hw-plane--connector{width:min(20%,110px)}
+  .hw-plane--chip{width:min(32%,200px)}
+  .hw-plane--pins{width:min(32%,195px)}
+  .hw-plane--ports{width:min(30%,185px)}
+  .hw-plane--hdmi{width:min(31%,190px)}
+}
+@media(max-width:680px){
+  .hw-glow{width:82vw;height:82vw}
+  .hw-axis{top:48%;width:86vw}
+  .hw-arc{width:78vw;height:40vw}
+  .hw-arc--b{width:65vw;height:32vw}
+  .hw-sparks{width:90vw;height:74vw}
+  .hw-spark:nth-child(n+9){display:none}
+  .hw-plane--board{width:50%;transform:translate(-34%,-36%) scale(.82);opacity:.21}
+  .hw-plane--camera{width:54%;transform:translate(-64%,-60%) scale(.78);opacity:.25}
+  .hw-plane--lens{width:34%}
+  .hw-plane--led{width:26%}
+  .hw-plane--connector{width:24%}
+  .hw-plane--chip{width:38%}
+  .hw-plane--pins{width:37%}
+  .hw-plane--ports{width:36%}
+  .hw-plane--hdmi{width:38%}
+}
+@media(prefers-reduced-motion:reduce){
+  .hw-plane,.hw-glow{transition:none}
+  .hw-arc,.hw-sparks,.hw-photon,.hw-emitter{display:none}
+}
+
+/* Frosted, not milky: a dark neutral tint retains the approved palette and
+   keeps white/violet text readable while ambient light and shapes pass through. */
+.hero-stage .instrument,
+.story-step,
+.metric-card,.statbox,.network-card,.trust-wrap,.monitor-panel,
+.approved-card,.privacy-banner,.final-card{
+  -webkit-backdrop-filter:blur(12px) saturate(115%);
+  backdrop-filter:blur(12px) saturate(115%);
+  border-color:rgba(200,190,255,.16);
+  box-shadow:0 16px 38px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.085);
+}
+.hero-stage .instrument{background:linear-gradient(145deg,rgba(30,27,43,.67),rgba(12,12,19,.57));border-color:rgba(169,156,255,.23)}
+.story-step{border:1px solid rgba(200,190,255,.12);border-left-color:rgba(169,156,255,.24);border-radius:18px;background:linear-gradient(135deg,rgba(37,33,55,.60),rgba(14,14,21,.52))}
+.story-step.is-active{border-color:rgba(169,156,255,.34);background:linear-gradient(135deg,rgba(57,48,86,.61),rgba(17,16,26,.60));transform:translateX(4px)}
+.metric-card,.statbox,.network-card,.trust-wrap,.approved-card,.privacy-banner,.final-card{background:linear-gradient(145deg,rgba(35,32,49,.62),rgba(16,16,23,.58))}
+.monitor-panel{background:linear-gradient(145deg,rgba(69,53,112,.31),rgba(23,21,34,.69) 55%,rgba(15,15,22,.64))}
+/* story-visual (the pinned diagram card) is also frosted so the hardware
+   field reads as light/shapes passing through it, not just around it */
+.story-visual{-webkit-backdrop-filter:blur(12px) saturate(115%);backdrop-filter:blur(12px) saturate(115%);border-color:rgba(200,190,255,.16);background:linear-gradient(145deg,rgba(30,27,43,.62),rgba(12,12,19,.56));box-shadow:0 16px 38px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.07)}
+
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .hero-stage .instrument,.story-step,.metric-card,.statbox,.network-card,.trust-wrap,.monitor-panel,.approved-card,.privacy-banner,.final-card,.story-visual{background-color:#20202a}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .story-step,.story-step.is-active{transition:none;transform:none}
+}

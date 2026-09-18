@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0a0a0d" />
   <meta name="description" content="Target Media provides aggregated storefront traffic and attention analytics for business operators, with transparent quarterly pricing and close human support." />
   <title>Target Media — Physical storefront analytics</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home-styles.css?v=1" />
   <style>
     /* ---------- page-specific styles: index.html only ---------- */
 
@@ -305,6 +305,7 @@
       .signal-lab{min-height:560px}.signal-lab-copy--raw{left:18px;top:18px}.signal-lab-copy--insight{left:18px;right:18px;top:auto;bottom:54px;transform:none;width:auto;max-width:none}.signal-compressor{left:50%;top:46%;width:110px}.signal-lab-status{left:18px;right:18px;bottom:18px}
     }
 </style>
+  <link rel="stylesheet" href="hardware-concept.css?v=18" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -313,7 +314,6 @@
     <div class="glow-wrap" data-parallax="-26"><i class="glow-b"></i></div>
     <div class="glow-wrap" data-parallax="34"><i class="glow-c"></i></div>
   </div>
-  <div class="grain" aria-hidden="true"></div>
   <div class="signal-rail" id="signalRail" aria-hidden="true"><span class="signal-rail-track"></span><span class="signal-rail-progress"></span><span class="signal-rail-dot"></span><span class="signal-rail-label">01</span></div>
 
   <header class="nav-wrap">
@@ -328,6 +328,23 @@
   </header>
 
   <main id="main">
+    <div class="hw-scroll-region">
+    <div class="hw-field" id="hwField" aria-hidden="true">
+      <div class="hw-glow" aria-hidden="true"></div>
+      <div class="hw-axis" id="hwAxis" aria-hidden="true"></div>
+      <div class="hw-arc hw-arc--a" id="hwArcA" aria-hidden="true"></div>
+      <div class="hw-arc hw-arc--b" id="hwArcB" aria-hidden="true"></div>
+      <div class="hw-sparks" id="hwSparks" aria-hidden="true"></div>
+      <div class="hw-plane hw-plane--board" id="hwBoard"><img src="assets/hardware/hw-board-full.webp" width="680" height="338" loading="eager" decoding="async" alt="" /></div>
+      <div class="hw-plane hw-plane--camera" id="hwCamera"><img src="assets/hardware/hw-camera-full.webp" width="680" height="337" loading="eager" decoding="async" alt="" /></div>
+      <div class="hw-plane hw-plane--lens" id="hwLens"><img src="assets/hardware/hw-lens-detail.webp?v=4" width="142" height="143" loading="eager" decoding="async" alt="" /></div>
+      <div class="hw-plane hw-plane--led" id="hwLed"><img src="assets/hardware/hw-led-detail.webp?v=4" width="85" height="79" loading="eager" decoding="async" alt="" /></div>
+      <div class="hw-plane hw-plane--connector" id="hwConnector"><img src="assets/hardware/hw-camera-connector.webp?v=4" width="87" height="108" loading="eager" decoding="async" alt="" /></div>
+      <div class="hw-plane hw-plane--chip" id="hwChip"><img src="assets/hardware/hw-board-detail.webp?v=4" width="181" height="126" loading="eager" decoding="async" alt="" /></div>
+      <div class="hw-plane hw-plane--pins" id="hwPins"><img src="assets/hardware/hw-pins-detail.webp?v=4" width="395" height="76" loading="eager" decoding="async" alt="" /></div>
+      <div class="hw-plane hw-plane--ports" id="hwPorts"><img src="assets/hardware/hw-ports-detail.webp?v=4" width="144" height="133" loading="eager" decoding="async" alt="" /></div>
+      <div class="hw-plane hw-plane--hdmi" id="hwHdmi"><img src="assets/hardware/hw-hdmi-detail.webp?v=4" width="331" height="104" loading="eager" decoding="async" alt="" /></div>
+    </div>
     <section class="hero" id="top"><div class="container hero-grid">
       <div class="hero-copy"><span class="kicker" data-reveal="up"><i class="proof-dot" aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:var(--accent-2);display:inline-block"></i> Storefront intelligence</span><h1 data-reveal="up" style="transition-delay:.06s">See what happens <span class="gradient-text wipe-text" id="heroWipe">before the door opens.</span></h1><p data-reveal="up" style="transition-delay:.12s">Target Media helps local businesses understand storefront traffic, attention and stopping patterns through aggregated metrics, quarterly reporting and close human support.</p><div class="hero-actions" data-reveal="up" style="transition-delay:.18s"><a class="btn btn-primary" href="apply.html" data-magnetic>Apply for Monitor</a><a class="btn" href="#product">How it works</a></div><div class="micro-proof" data-reveal="up" style="transition-delay:.24s"><span class="proof-dot" aria-hidden="true"></span><span><strong>Transparency note:</strong> all interface numbers shown on this page are illustrative sample data, not customer results or performance guarantees.</span></div></div>
 
@@ -450,6 +467,7 @@
 
       <p class="compliance-note" data-reveal="up"><strong>Deployment privacy:</strong> camera analytics can involve personal-data processing even when the final dashboard is aggregated. We do not market facial recognition, identity tracking, emotion recognition or demographic profiling in the standard plans. Before activation, the parties must document roles, lawful basis, necessity, signage, retention and whether a DPIA is required for the location.</p>
     </div></section>
+    </div><!-- /.hw-scroll-region -->
 
     <section class="section" id="clarity"><div class="container">
       <h2 class="plain-title" data-reveal="up">Raw movement. Turned into an answer.</h2>
@@ -580,11 +598,6 @@
     const q=(s,r=document)=>r.querySelector(s);
     const qa=(s,r=document)=>Array.from(r.querySelectorAll(s));
 
-    if('IntersectionObserver' in window){
-      const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
-      qa('.reveal').forEach(el=>observer.observe(el));
-    }else{qa('.reveal').forEach(el=>el.classList.add('visible'));}
-
     const menuBtn=q('#menuBtn'),navLinks=q('#navLinks');
     menuBtn.addEventListener('click',()=>{
       const open=menuBtn.classList.toggle('open');
@@ -600,11 +613,10 @@
     }));
 
     qa('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{
-      const item=btn.closest('.faq-item'),answer=item.querySelector('.faq-a');
+      const item=btn.closest('.faq-item');
       const open=btn.getAttribute('aria-expanded')!=='true';
       btn.setAttribute('aria-expanded',String(open));
       item.classList.toggle('open',open);
-      answer.style.maxHeight=open?answer.scrollHeight+'px':'0px';
     }));
 
     const APPROVAL_ENDPOINT='https://target-media.onrender.com/api/approval/verify';
@@ -653,6 +665,7 @@
        touches endpoints, form fields, or verification logic. -->
   <script src="vendor/gsap/gsap.min.js"></script>
   <script src="vendor/gsap/ScrollTrigger.min.js"></script>
-  <script src="motion.js"></script>
+  <script src="home-motion.js?v=1"></script>
+  <script src="hardware-concept.js?v=17"></script>
 </body>
 </html>
