@@ -335,6 +335,7 @@
   if (heroStage && heroCanvas && heroCanvas.getContext) {
     const hctx = heroCanvas.getContext('2d');
     let hw = 1, hh = 1, hdpr = 1, hraf = null, heroVisible = false, heroLastFrame = 0;
+    let heroGridPath = null;
     let px = 0, py = 0, tx = 0, ty = 0;
     const trails = Array.from({ length: 34 }, (_, i) => ({
       t: Math.random(), lane: Math.random(),
@@ -353,6 +354,18 @@
       heroCanvas.width = Math.round(hw * hdpr);
       heroCanvas.height = Math.round(hh * hdpr);
       hctx.setTransform(hdpr,0,0,hdpr,0,0);
+      heroGridPath = new Path2D();
+      const horizon = hh * .54;
+      for (let i=-6;i<=8;i++) {
+        heroGridPath.moveTo(hw*.48,horizon);
+        heroGridPath.lineTo(hw*.48+i*hw*.075,hh*.92);
+      }
+      for (let i=0;i<7;i++) {
+        const k=i/6;
+        const y=horizon+Math.pow(k,1.65)*(hh*.38);
+        heroGridPath.moveTo(hw*.05,y);
+        heroGridPath.lineTo(hw*.96,y);
+      }
     }
     function drawHeroField(now = 0){
       if (!reduced && now && now - heroLastFrame < 1000 / 60 - 1) {
@@ -369,15 +382,7 @@
       hctx.translate(px * 12, py * 8);
       hctx.strokeStyle = 'rgba(169,156,255,.075)';
       hctx.lineWidth = 1;
-      const horizon = hh * 0.54;
-      for (let i=-6;i<=8;i++){
-        const x = hw * .48 + i * hw * .075;
-        hctx.beginPath(); hctx.moveTo(hw*.48, horizon); hctx.lineTo(x, hh*.92); hctx.stroke();
-      }
-      for (let i=0;i<7;i++){
-        const k=i/6; const y=horizon + Math.pow(k,1.65)*(hh*.38);
-        hctx.beginPath(); hctx.moveTo(hw*.05,y); hctx.lineTo(hw*.96,y); hctx.stroke();
-      }
+      hctx.stroke(heroGridPath);
       hctx.restore();
 
       // moving signal paths
@@ -393,7 +398,7 @@
         const alpha = Math.max(.06, d.a * (0.55 + 0.45*Math.sin((d.t+idx)*Math.PI)));
         hctx.beginPath();
         hctx.fillStyle = accent ? `rgba(169,156,255,${alpha})` : `rgba(205,205,222,${alpha*.55})`;
-        hctx.shadowBlur = accent ? 10 : 0;
+        hctx.shadowBlur = accent ? 15 : 0;
         hctx.shadowColor = accent ? 'rgba(124,108,240,.75)' : 'transparent';
         hctx.arc(x + px*8, y + py*5, d.r, 0, Math.PI*2); hctx.fill();
         hctx.shadowBlur = 0;
@@ -409,19 +414,16 @@
     resizeHeroField();
     if ('ResizeObserver' in window) new ResizeObserver(resizeHeroField).observe(heroCanvas);
     if (canHover && !reduced) {
+      const floatLayers = qa('[data-hero-float]',heroStage);
       heroStage.addEventListener('mousemove', e => {
         const r=heroStage.getBoundingClientRect();
         tx=((e.clientX-r.left)/r.width-.5); ty=((e.clientY-r.top)/r.height-.5);
-      });
-      heroStage.addEventListener('mouseleave',()=>{tx=0;ty=0});
-      qa('[data-hero-float]',heroStage).forEach((el,i)=>{
-        const depth=(i+1)*5;
-        heroStage.addEventListener('mousemove',e=>{
-          const r=heroStage.getBoundingClientRect();
-          const nx=(e.clientX-r.left)/r.width-.5, ny=(e.clientY-r.top)/r.height-.5;
-          if(hasGSAP) gsap.to(el,{x:nx*depth,y:ny*depth,duration:.8,ease:'power3.out',overwrite:true});
+        floatLayers.forEach((el,i)=>{
+          const depth=(i+1)*5;
+          if(hasGSAP) gsap.to(el,{x:tx*depth,y:ty*depth,duration:.8,ease:'power3.out',overwrite:true});
         });
       });
+      heroStage.addEventListener('mouseleave',()=>{tx=0;ty=0});
     }
     const scanBeam = q('.hero-beam', heroStage);
     const scanTween = (scanBeam && hasGSAP && !reduced)
@@ -513,6 +515,7 @@
     // particles only increased shadow and canvas work.
     const N = 64;
     let W=1,H=1,dpr=1,raf=null,progress=.62,signalVisible=false,signalLastFrame=0;
+    let beamGradient;
     const dots=Array.from({length:N},(_,i)=>({
       t:Math.random(),
       y:.18+Math.random()*.64,
@@ -526,6 +529,10 @@
       dpr=Math.min(window.devicePixelRatio||1,1.5);
       scatterCanvas.width=Math.round(W*dpr); scatterCanvas.height=Math.round(H*dpr);
       ctx.setTransform(dpr,0,0,dpr,0,0);
+      beamGradient=ctx.createLinearGradient(W*.38,0,W*.82,0);
+      beamGradient.addColorStop(0,'rgba(124,108,240,0)');
+      beamGradient.addColorStop(.5,'rgba(169,156,255,.20)');
+      beamGradient.addColorStop(1,'rgba(169,156,255,0)');
     }
     function drawSignalLab(now=0){
       if(!reduced && now && now-signalLastFrame<1000/60-1){raf=requestAnimationFrame(drawSignalLab);return;}
@@ -534,9 +541,7 @@
       ctx.clearRect(0,0,W,H);
       const funnelX=W*.56, targetY=H*.5;
       // luminous compression beam
-      const grad=ctx.createLinearGradient(W*.38,0,W*.82,0);
-      grad.addColorStop(0,'rgba(124,108,240,0)'); grad.addColorStop(.5,'rgba(169,156,255,.20)'); grad.addColorStop(1,'rgba(169,156,255,0)');
-      ctx.fillStyle=grad; ctx.fillRect(W*.36,targetY-1.5,W*.46,3);
+      ctx.fillStyle=beamGradient; ctx.fillRect(W*.36,targetY-1.5,W*.46,3);
       dots.forEach((d,i)=>{
         if(!reduced) d.t=(d.t+d.speed*step)%1;
         const x=W*(.04+d.t*.88);

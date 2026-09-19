@@ -41,21 +41,231 @@
 
   var details = [lens, led, connector, chip, pins, ports, hdmi];
   var allPlanes = [board, camera, ...details];
-  var solids = allPlanes.map(function (plane) {
-    var image = plane.querySelector('img');
+  // ---- Physical solids ------------------------------------------------
+  // Every object is a small real solid with true perspective: the untouched
+  // photographic FRONT, a constructed mirrored REAR and, for the two main
+  // objects, side WALLS that follow the real outline (the camera also carries
+  // its real lens module as a raised block). Nothing photographed is replaced:
+  // the camera front is that same photo split into a base and the lens-module
+  // crop, which reproduce it exactly when the solid is flat.
+  //
+  // Each face is a plain flat layer that receives its OWN matrix3d, computed
+  // here with the very same perspective(1100px) * rotateY * rotateX GSAP used
+  // before (checked numerically). No preserve-3d contexts, masks or filters:
+  // the compositor draws one quad per visible face instead of an offscreen
+  // pass per face, and back faces are culled by backface-visibility.
+  //
+  // A solid's extras (rear, walls, raised lens) are only attached once all of
+  // its face images are decoded, and depth then grows from 0 to 1 (m.g). At g = 0 the
+  // solid is exactly the flat photo, so entering 3D never pops or jumps, even
+  // mid-scroll; until then, or for any solid whose assets fail to load, its flat photo stays.
+  var ASSET = 'assets/hardware/', VER = '?v=7', PERSP = 1100, RAD = Math.PI / 180;
+  // Outlines are in texture pixels. The board outline is traced from the
+  // photo's own alpha (closed silhouette without the thin header pins), the
+  // camera outline excludes the protruding lens block.
+  var SPEC = {
+    hwBoard:  { rear: 'hw-board-rear',  k: .022, poly: [[9,288],[16,279],[25,276],[15,273],[14,261],[16,257],[27,256],[65,78],[74,74],[129,74],[130,66],[145,65],[279,68],[428,65],[433,74],[470,74],[471,63],[477,62],[477,49],[486,49],[487,62],[492,62],[492,57],[502,57],[504,74],[507,74],[508,62],[513,62],[515,58],[514,9],[539,9],[539,17],[549,21],[555,29],[557,50],[628,53],[632,62],[630,79],[638,82],[646,115],[643,132],[647,134],[647,143],[643,163],[650,163],[652,167],[653,184],[667,229],[671,232],[659,301],[640,302],[639,320],[625,325],[451,325],[447,329],[433,329],[428,325],[259,325],[247,330],[235,330],[225,325],[27,325],[20,323],[10,309]], tw: 680, th: 338, wall: ['#7b869c', '#41506b', '#232d42'] },
+    hwCamera: { rear: 'hw-camera-rear', k: .028, poly: [[10,247],[593,12],[670,77],[649,92],[58,327]], tw: 680, th: 337, wall: ['#9a9c9a', '#4a4b4d', '#252628'],
+                lens: { top: 'hw-camera-lens', base: 'hw-camera-base', ox: 295, oy: 73, w: 142, ar: 143 / 142, k: .064, poly: [[80,5],[135,79],[120,106],[46,137],[10,96],[6,35]] } },
+    hwLens:   { rear: 'hw-lens-rear',      k: .05 },
+    hwLed:    { rear: 'hw-led-rear',       k: .07 },
+    hwConnector: { rear: 'hw-connector-rear', k: .09 },
+    hwChip:   { rear: 'hw-chip-rear',      k: .05 },
+    hwPins:   { rear: 'hw-pins-rear',      k: .03 },
+    hwPorts:  { rear: 'hw-ports-rear',     k: .06 },
+    hwHdmi:   { rear: 'hw-hdmi-rear',      k: .06 }
+  };
+  // 4x4 column-major helpers (same layout as CSS matrix3d)
+  function mul(a, b) {
+    var o = new Array(16), c, r;
+    for (c = 0; c < 4; c++) for (r = 0; r < 4; r++)
+      o[c * 4 + r] = a[r] * b[c * 4] + a[4 + r] * b[c * 4 + 1] + a[8 + r] * b[c * 4 + 2] + a[12 + r] * b[c * 4 + 3];
+    return o;
+  }
+  function T(x, y, z) { return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1]; }
+  function Rx(a) { var c = Math.cos(a * RAD), s = Math.sin(a * RAD); return [1, 0, 0, 0, 0, c, s, 0, 0, -s, c, 0, 0, 0, 0, 1]; }
+  function Ry(a) { var c = Math.cos(a * RAD), s = Math.sin(a * RAD); return [c, 0, -s, 0, 0, 1, 0, 0, s, 0, c, 0, 0, 0, 0, 1]; }
+  function Rz(a) { var c = Math.cos(a * RAD), s = Math.sin(a * RAD); return [c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]; }
+  function Sy(k) { return [1, 0, 0, 0, 0, k, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]; }
+  var PM = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1 / PERSP, 0, 0, 0, 1];
+  // Allocation-free o = a * b for the per-frame path (o must not alias a or b)
+  function mulTo(o, a, b) {
+    var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5], a6 = a[6], a7 = a[7],
+        a8 = a[8], a9 = a[9], a10 = a[10], a11 = a[11], a12 = a[12], a13 = a[13], a14 = a[14], a15 = a[15];
+    for (var c = 0; c < 16; c += 4) {
+      var b0 = b[c], b1 = b[c + 1], b2 = b[c + 2], b3 = b[c + 3];
+      o[c]     = a0 * b0 + a4 * b1 + a8 * b2 + a12 * b3;
+      o[c + 1] = a1 * b0 + a5 * b1 + a9 * b2 + a13 * b3;
+      o[c + 2] = a2 * b0 + a6 * b1 + a10 * b2 + a14 * b3;
+      o[c + 3] = a3 * b0 + a7 * b1 + a11 * b2 + a15 * b3;
+    }
+    return o;
+  }
+  function r6(v) { return Math.round(v * 1e6) / 1e6; }
+  function fmt(m) {
+    return 'matrix3d(' + r6(m[0]) + ',' + r6(m[1]) + ',' + r6(m[2]) + ',' + r6(m[3]) + ',' + r6(m[4]) + ',' + r6(m[5]) + ',' + r6(m[6]) + ',' + r6(m[7]) + ',' +
+      r6(m[8]) + ',' + r6(m[9]) + ',' + r6(m[10]) + ',' + r6(m[11]) + ',' + r6(m[12]) + ',' + r6(m[13]) + ',' + r6(m[14]) + ',' + r6(m[15]) + ')';
+  }
+  var FIN = new Float64Array(16);
+
+  // Face images start fetching immediately but only join the DOM once all are decoded.
+  var jobs = [];
+  function need(name, cls) {
+    var im = new Image(), job = { im: im, ok: false };
+    im.className = 'hw-face ' + cls; im.alt = ''; im.decoding = 'async'; im.draggable = false;
+    im.setAttribute('aria-hidden', 'true');
+    im.src = ASSET + name + '.webp' + VER;
+    job.done = (im.decode ? im.decode() : new Promise(function (res, rej) { im.onload = res; im.onerror = rej; }))
+      .then(function () { job.ok = true; }, function () { job.ok = false; });
+    jobs.push(job);
+    return job;
+  }
+  // geo(m, s): static box in solid pixels; F(m): face-local placement using the current depth m.g
+  function addFace(m, el, kind, flow, fade, geo, F) { var f = { el: el, kind: kind, flow: flow, fade: fade, geo: geo, F: F, vis: true, bw: 0, bh: 0 }; m.faces.push(f); return f; }
+  // One wall per outline edge, standing on the mid-plane and facing outward.
+  function addWalls(m, cfg, kind, thick, zc) {
+    var poly = cfg.poly, n = poly.length, i, area = 0;
+    for (i = 0; i < n; i++) area += poly[i][0] * poly[(i + 1) % n][1] - poly[(i + 1) % n][0] * poly[i][1];
+    var sign = area > 0 ? 1 : -1;   // winding decides "outward", so concave outlines work too
+    var ox = cfg.ox || 0, oy = cfg.oy || 0;
+    for (i = 0; i < n; i++) (function (p, q) {
+      var dx = q[0] - p[0], dy = q[1] - p[1], len = Math.hypot(dx, dy);
+      if (len < 1.5) return;
+      var mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
+      // rotateX(90deg) after rotateZ(a) turns the visible face toward (dy,-dx)/len
+      var outward = sign > 0;
+      var w = document.createElement('span');
+      w.className = 'hw-wall'; w.setAttribute('aria-hidden', 'true');
+      w.style.setProperty('--wd', outward ? 'to top' : 'to bottom');
+      if (kind === 'lens') w.classList.add('hw-wall--lens');
+      m.solid.appendChild(w);
+      var ang = Math.atan2(dy, dx) * 180 / Math.PI;
+      addFace(m, w, kind, false, true, function (mm, s) {
+        var t = thick(mm);
+        return { x: (mx + ox) * s - len * s / 2, y: (my + oy) * s - t / 2, w: len * s, h: t };
+      }, function (mm) {
+        return mul(T(0, 0, zc(mm)), mul(Rz(ang), mul(Rx(outward ? 90 : -90), Sy(Math.max(mm.g, .001)))));
+      });
+    })(poly[i], poly[(i + 1) % n]);
+  }
+  // Non-flow faces are laid out as integer TEXTURE-pixel boxes at left/top 0 and
+  // placed + scaled entirely by their matrix: fractional CSS boxes get pixel-snapped
+  // by the browser, which drifted the raised lens block up to ~1 texture pixel off
+  // the photo it must line up with.
+  function faceLocal(m, f) {
+    var g = f.g0, k = f.flow ? 1 : m.s, o = T(g.w / 2, g.h / 2, 0), oi = T(-g.w / 2, -g.h / 2, 0);
+    f.Lf = mul(T(g.x, g.y, 0), mul(o, mul(f.F(m), mul(oi, [k, 0, 0, 0, 0, k, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]))));
+  }
+  function layoutModel(m) {
+    // Fractional layout size (offsetWidth rounds, which would drift the lens block off the photo by up to a pixel)
+    var cs = getComputedStyle(m.solid);
+    var w = /px$/.test(cs.width) ? parseFloat(cs.width) : 0, h = /px$/.test(cs.height) ? parseFloat(cs.height) : 0;
+    if (!(w > 0 && h > 0)) { m.w = 0; return; }   // not laid out yet (or display:none): keep the flat photo
+    m.w = w; m.h = h;
+    var spec = m.spec, s = m.s = spec.tw ? m.w / spec.tw : 1;
+    m.d = m.w * (spec.k || .05); m.lh = spec.lens ? m.w * spec.lens.k : 0;
+    m.faces.forEach(function (f) {
+      var g = f.g0 = f.geo(m, s);
+      f.bw = f.flow ? g.w : g.w / s; f.bh = f.flow ? g.h : g.h / s;
+      if (!f.flow) { var st = f.el.style; st.left = '0'; st.top = '0'; st.width = f.bw + 'px'; st.height = f.bh + 'px'; }
+      f.vis = true; f.el.style.visibility = '';
+    });
+    m.key = ''; m.gDone = -1; renderModel(m);
+  }
+  function renderModel(m) {
+    if (!m.w) return;
+    var key = m.rx.toFixed(3) + ',' + m.ry.toFixed(3);
+    if (key === m.key && m.g === m.gDone) return;
+    m.key = key;
+    var cx = m.w / 2, cy = m.h / 2, i, f;
+    if (m.g !== m.gDone) {   // depth changed: refresh face placement (and fade the extras in while it grows)
+      m.gDone = m.g;
+      for (i = 0; i < m.faces.length; i++) { f = m.faces[i]; faceLocal(m, f); if (f.fade) f.el.style.opacity = m.g < 1 ? m.g.toFixed(3) : ''; }
+    }
+    var W = mul(T(cx, cy, 0), mul(mul(PM, mul(Ry(m.ry), Rx(m.rx))), T(-cx, -cy, 0)));
+    for (i = 0; i < m.faces.length; i++) {
+      f = m.faces[i];
+      mulTo(FIN, W, f.Lf);
+      // Orientation of the projected box (origin, +x, +y corners): a back-facing face is culled by the
+      // browser anyway, so skip formatting/writing its matrix and just keep it hidden until it turns.
+      var w0 = FIN[15], w1 = FIN[3] * f.bw + FIN[15], w2 = FIN[7] * f.bh + FIN[15], front = true;
+      if (w0 > .05 && w1 > .05 && w2 > .05) {
+        var x0 = FIN[12] / w0, y0 = FIN[13] / w0;
+        front = ((FIN[0] * f.bw + FIN[12]) / w1 - x0) * ((FIN[5] * f.bh + FIN[13]) / w2 - y0) -
+                ((FIN[1] * f.bw + FIN[13]) / w1 - y0) * ((FIN[4] * f.bh + FIN[12]) / w2 - x0) > 0;
+      }
+      if (front) { f.el.style.transform = fmt(FIN); if (!f.vis) { f.vis = true; f.el.style.visibility = ''; } }
+      else if (f.vis) { f.vis = false; f.el.style.visibility = 'hidden'; }
+    }
+    if (m.hasBlock) {
+      // painter's order between the base, the raised lens block and the rear
+      var facing = Math.cos(m.rx * RAD) * Math.cos(m.ry * RAD) > 0;
+      if (facing !== m.facing) {
+        m.facing = facing;
+        for (i = 0; i < m.faces.length; i++) { f = m.faces[i]; f.el.style.zIndex = f.kind === 'lensTop' ? (facing ? 3 : 0) : f.kind === 'lens' ? (facing ? 2 : 1) : f.kind === 'front' ? (facing ? 1 : 0) : f.kind === 'rear' ? (facing ? 0 : 2) : ''; }
+      }
+    }
+  }
+  var models = allPlanes.map(function (plane) {
+    var spec = SPEC[plane.id] || {};
+    var front = plane.querySelector('img');
     var solid = document.createElement('div');
-    var core = document.createElement('span');
-    var back = document.createElement('span');
     solid.className = 'hw-solid';
-    core.className = 'hw-core';
-    back.className = 'hw-back';
-    solid.style.setProperty('--hw-shape', 'url("' + image.getAttribute('src') + '")');
     plane.appendChild(solid);
-    solid.appendChild(back);
-    solid.appendChild(core);
-    solid.appendChild(image);
-    return solid;
+    solid.appendChild(front);
+    front.classList.add('hw-face', 'hw-face--front');
+    var m = { plane: plane, solid: solid, spec: spec, faces: [], rx: 0, ry: 0, g: 0, gDone: -1, key: '', w: 0, h: 0, d: 0, lh: 0, hasBlock: false, facing: null, rearJob: null };
+    addFace(m, front, 'front', true, false, function (mm) { return { x: 0, y: 0, w: mm.w, h: mm.h }; },
+      function (mm) { return T(0, 0, mm.d * mm.g / 2); });
+    if (spec.wall) { plane.style.setProperty('--wh', spec.wall[0]); plane.style.setProperty('--wm', spec.wall[1]); plane.style.setProperty('--wl', spec.wall[2]); }
+    if (spec.rear) m.rearJob = need(spec.rear, 'hw-face--rear');
+    return m;
   });
+  var camModel = models[1], camLens = SPEC.hwCamera.lens;
+  var baseJob = need(camLens.base, 'hw-face--front'), topJob = need(camLens.top, 'hw-face--lens');
+  // A solid only becomes 3D if EVERY asset it needs decoded (its rear; for the
+  // camera also the base and lens crops). Otherwise that solid keeps its original
+  // flat photo: no walls, no rear, no depth animation.
+  function solidReady(m) {
+    return (!m.rearJob || m.rearJob.ok) && (m !== camModel || (baseJob.ok && topJob.ok));
+  }
+  function assemble() {
+    var live = models.filter(solidReady);
+    live.forEach(function (m) {
+      var spec = m.spec;
+      if (m.rearJob) {
+        m.solid.appendChild(m.rearJob.im);
+        addFace(m, m.rearJob.im, 'rear', false, true, function (mm) { return { x: 0, y: 0, w: mm.w, h: mm.h }; },
+          function (mm) { return mul(Ry(180), T(0, 0, mm.d * mm.g / 2)); });
+      }
+      if (spec.poly) addWalls(m, spec, 'slab', function (mm) { return mm.d; }, function () { return 0; });
+      if (m === camModel) {
+        // The real lens module as a raised block: the SAME photograph split into a
+        // base (module region cut out) and the module crop, over-composited exact.
+        var L = camLens;
+        m.faces[0].el.replaceWith(baseJob.im); m.faces[0].el = baseJob.im; m.faces[0].vis = true;
+        m.solid.appendChild(topJob.im);
+        addFace(m, topJob.im, 'lensTop', false, false, function (mm, s) { return { x: L.ox * s, y: L.oy * s, w: L.w * s, h: L.w * s * L.ar }; },
+          function (mm) { return T(0, 0, mm.g * (mm.d / 2 + mm.lh)); });
+        addWalls(m, L, 'lens', function (mm) { return mm.lh; }, function (mm) { return mm.g * (mm.d / 2 + mm.lh / 2); });
+        m.hasBlock = true; m.facing = null;
+      }
+    });
+    // Everything is attached at depth 0 (identical to the flat photos), then depth eases in.
+    live.forEach(layoutModel);
+    live.forEach(function (m, i) {
+      gsap.to(m, { g: 1, duration: .9, delay: i * .05, ease: 'power2.out', onUpdate: function () { renderModel(m); } });
+    });
+  }
+  Promise.all(jobs.map(function (j) { return j.done; })).then(assemble);
+  var layoutAll = function () { models.forEach(layoutModel); };
+  layoutAll();
+  models.forEach(function (m) {   // the front photo defines each solid's box: re-layout when it decodes
+    var f = m.faces[0].el;
+    if (!f.complete) f.addEventListener('load', function () { layoutModel(m); }, { once: true });
+  });
+  if ('ResizeObserver' in window) { var ro = new ResizeObserver(layoutAll); ro.observe(field); }
+  else addEventListener('resize', layoutAll);
   var emitter = document.createElement('span');
   var photon = document.createElement('span');
   emitter.className = 'hw-emitter';
@@ -103,7 +313,9 @@
   gsap.set(axis, { opacity: 0 });
   gsap.set(sparks, { opacity: .55 });
   gsap.set([arcA, arcB], { opacity: .1 });
-  gsap.set(solids, { rotationX: 0, rotationY: 0, transformPerspective: 1100 });
+  gsap.set(models, { rx: 0, ry: 0 });
+  gsap.set(models[1], { rx: 6, ry: -12 });
+  models.forEach(renderModel);
 
   var tl = gsap.timeline({
     defaults: { ease: 'none' },
@@ -274,10 +486,11 @@
         end: 'bottom bottom', scrub: 0.8, invalidateOnRefresh: true
       }
     });
-    orbit.to(solids, {
-      rotationY: function (index) { return [720, -900, 1080, -720, 840, -900, 720, -840, 960][index]; },
-      rotationX: function (index) { return [-65, 85, -45, 70, -55, 80, -60, 65, -70][index]; },
-      duration: 1
+    orbit.to(models, {
+      ry: function (index) { return [720, -900, 1080, -720, 840, -900, 720, -840, 960][index]; },
+      rx: function (index) { return [-65, 85, -45, 70, -55, 80, -60, 65, -70][index]; },
+      duration: 1,
+      onUpdate: function () { models.forEach(renderModel); }
     }, 0);
   }
 

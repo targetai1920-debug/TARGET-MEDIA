@@ -298,7 +298,7 @@ footer{padding:30px 0 46px;color:var(--sub);font-size:11px}
 .js-ready [data-reveal="up"]{transform:translateY(28px)}
 .js-ready [data-reveal="scale"]{transform:scale(.94);filter:blur(6px)}
 .js-ready [data-reveal="side"]{transform:translateX(-24px)}
-.js-ready [data-reveal].is-revealed{opacity:1;transform:none;filter:blur(0)}
+.js-ready [data-reveal].is-revealed{opacity:1;transform:none;filter:none}
 
 /* gradient-text wipe: the accent phrase in the hero draws in from the
    left after the rest of the line has already appeared — typography

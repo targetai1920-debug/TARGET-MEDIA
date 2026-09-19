@@ -26,20 +26,16 @@
 .hw-spark--flare::before{width:36px;height:1px}
 .hw-spark--flare::after{width:1px;height:36px;background:linear-gradient(180deg,transparent,rgba(255,224,236,.76),transparent)}
 @keyframes hw-twinkle{0%,100%{opacity:.06;transform:translate(-50%,-50%) translateY(3px) scale(.58)}42%{opacity:.72;transform:translate(-50%,-50%) translateY(-4px) scale(1.18)}65%{opacity:.25;transform:translate(-50%,-50%) translateY(-1px) scale(.8)}}
-.hw-plane{position:absolute;left:50%;top:50%;pointer-events:none;transform-origin:center center;will-change:transform,opacity;--hw-depth:7px;--hw-ink:#252434;--hw-trace:rgba(157,143,222,.35)}
-.hw-plane--board,.hw-plane--camera{filter:drop-shadow(0 16px 24px rgba(0,0,0,.32))}
+.hw-plane{position:absolute;left:50%;top:50%;pointer-events:none;transform-origin:center center;will-change:transform,opacity;--wh:#9a9c9a;--wm:#4a4b4d;--wl:#252628}
 .hw-plane img{display:block;width:100%;height:auto;pointer-events:none}
-.hw-solid{position:relative;width:100%;transform-style:preserve-3d}
-.hw-solid img{position:relative;z-index:3;backface-visibility:hidden;transform:translateZ(var(--hw-depth))}
-.hw-core,.hw-back{position:absolute;inset:0;display:block;pointer-events:none;-webkit-mask-image:var(--hw-shape);mask-image:var(--hw-shape);-webkit-mask-size:100% 100%;mask-size:100% 100%}
-.hw-core{z-index:2;transform:translateZ(0);background:var(--hw-ink);filter:brightness(.75)}
-.hw-back{z-index:1;backface-visibility:hidden;transform:rotateY(180deg) translateZ(var(--hw-depth));background:repeating-linear-gradient(27deg,transparent 0 13px,var(--hw-trace) 13px 14px,transparent 14px 28px),repeating-linear-gradient(117deg,transparent 0 26px,var(--hw-trace) 26px 27px,transparent 27px 47px),radial-gradient(circle at 48% 52%,rgba(209,196,255,.23) 0 5%,transparent 6%),var(--hw-ink);box-shadow:inset 0 0 24px rgba(0,0,0,.48)}
-.hw-plane--board{--hw-depth:6px;--hw-ink:#203c67;--hw-trace:rgba(149,202,248,.33)}
-.hw-plane--camera{--hw-depth:8px;--hw-ink:#242529;--hw-trace:rgba(168,169,181,.27)}
-.hw-plane--lens{--hw-depth:11px;--hw-ink:#595962;--hw-trace:rgba(216,216,227,.34)}
-.hw-plane--led,.hw-plane--chip{--hw-depth:5px;--hw-ink:#1f2431}
-.hw-plane--connector,.hw-plane--ports,.hw-plane--hdmi{--hw-depth:9px;--hw-ink:#4d5059;--hw-trace:rgba(214,220,232,.28)}
-.hw-plane--pins{--hw-depth:5px;--hw-ink:#2d3549}
+/* Physical solids: leaf quads only (no mask-image, no filter, no group effect inside the 3D context).
+   front = the untouched real photograph, rear = constructed mirrored face, walls = real outline extruded. */
+.hw-solid{position:relative;width:100%}
+.hw-solid .hw-face{display:block;pointer-events:none;-webkit-user-drag:none;user-select:none;transform-origin:0 0;backface-visibility:hidden}
+.hw-solid .hw-face--front{position:relative;width:100%;height:auto}
+.hw-solid .hw-face--rear,.hw-solid .hw-face--lens{position:absolute;left:0;top:0}
+.hw-wall{position:absolute;left:0;top:0;display:block;transform-origin:0 0;backface-visibility:hidden;pointer-events:none;background:linear-gradient(var(--wd,to top),var(--wh) 0,var(--wm) 34%,var(--wl) 100%)}
+.hw-wall--lens{--wh:#858790;--wm:#4c4e57;--wl:#2a2b32}
 .hw-plane--lens::before{content:"";position:absolute;left:50%;top:50%;width:64%;aspect-ratio:1;transform:translate(-50%,-50%);border:1px solid rgba(230,181,222,.29);border-radius:50%;box-shadow:0 0 18px rgba(207,143,204,.13),inset 0 0 16px rgba(207,143,204,.1);pointer-events:none}
 /* One symbolic lens-to-readout pulse. These are light overlays, never
    substitute imagery or a representation of a physical cable — the mote's
