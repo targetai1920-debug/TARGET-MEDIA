@@ -59,21 +59,26 @@
   // its face images are decoded, and depth then grows from 0 to 1 (m.g). At g = 0 the
   // solid is exactly the flat photo, so entering 3D never pops or jumps, even
   // mid-scroll; until then, or for any solid whose assets fail to load, its flat photo stays.
-  var ASSET = 'assets/hardware/', VER = '?v=7', PERSP = 1100, RAD = Math.PI / 180;
+  var ASSET = 'assets/hardware/', VER = '?v=15', PERSP = 1100, RAD = Math.PI / 180;
   // Outlines are in texture pixels. The board outline is traced from the
   // photo's own alpha (closed silhouette without the thin header pins), the
   // camera outline excludes the protruding lens block.
   var SPEC = {
-    hwBoard:  { rear: 'hw-board-rear',  k: .022, poly: [[9,288],[16,279],[25,276],[15,273],[14,261],[16,257],[27,256],[65,78],[74,74],[129,74],[130,66],[145,65],[279,68],[428,65],[433,74],[470,74],[471,63],[477,62],[477,49],[486,49],[487,62],[492,62],[492,57],[502,57],[504,74],[507,74],[508,62],[513,62],[515,58],[514,9],[539,9],[539,17],[549,21],[555,29],[557,50],[628,53],[632,62],[630,79],[638,82],[646,115],[643,132],[647,134],[647,143],[643,163],[650,163],[652,167],[653,184],[667,229],[671,232],[659,301],[640,302],[639,320],[625,325],[451,325],[447,329],[433,329],[428,325],[259,325],[247,330],[235,330],[225,325],[27,325],[20,323],[10,309]], tw: 680, th: 338, wall: ['#7b869c', '#41506b', '#232d42'] },
-    hwCamera: { rear: 'hw-camera-rear', k: .028, poly: [[10,247],[593,12],[670,77],[649,92],[58,327]], tw: 680, th: 337, wall: ['#9a9c9a', '#4a4b4d', '#252628'],
-                lens: { top: 'hw-camera-lens', base: 'hw-camera-base', ox: 295, oy: 73, w: 142, ar: 143 / 142, k: .064, poly: [[80,5],[135,79],[120,106],[46,137],[10,96],[6,35]] } },
-    hwLens:   { rear: 'hw-lens-rear',      k: .05 },
-    hwLed:    { rear: 'hw-led-rear',       k: .07 },
-    hwConnector: { rear: 'hw-connector-rear', k: .09 },
-    hwChip:   { rear: 'hw-chip-rear',      k: .05 },
-    hwPins:   { rear: 'hw-pins-rear',      k: .03 },
-    hwPorts:  { rear: 'hw-ports-rear',     k: .06 },
-    hwHdmi:   { rear: 'hw-hdmi-rear',      k: .06 }
+    // k = solid depth as a fraction of its width. edge = texture of the side walls.
+    hwBoard:  { rear: 'hw-board-rear',  k: .04, edge: 'pcbblue',  poly: [[9,288],[25,276],[15,273],[14,261],[27,256],[65,78],[129,74],[130,66],[145,65],[428,65],[433,74],[470,74],[477,49],[486,49],[487,62],[502,57],[507,74],[515,58],[514,9],[539,9],[555,29],[557,50],[628,53],[630,79],[638,82],[646,115],[643,163],[652,167],[671,232],[659,301],[640,302],[639,320],[625,325],[27,325],[10,309]], tw: 680, th: 338 },
+    hwCamera: { rear: 'hw-camera-rear', k: .05, edge: 'pcbblack', poly: [[10,247],[593,12],[670,77],[649,92],[58,327]], tw: 680, th: 337,
+                // the lens module: the SAME photo split into the raised top face (its true square footprint), the flat
+                // painted side bands (they fade out) and side walls textured with those bands rectified, all over a PCB base
+                lens: { base: 'hw-camera-base', top: 'hw-lensmod-top', bands: 'hw-lensmod-bands', walls: 'lensmod', ox: 295, oy: 73, w: 142, ar: 143 / 142, k: .07, quad: [[5,35],[80,5],[133,76],[48,100]],
+                        // the real lens barrel: the same pixels, raised again on a knurled elliptic cylinder
+                        barrel: { top: 'hw-camera-barrel', ox: 16, oy: 14, w: 98, h: 81, k: .025, edge: 'knurl', poly: [[20.2,68.8],[19.3,54.4],[25.4,40.1],[37.5,28.0],[53.8,19.9],[71.8,17.0],[88.7,19.8],[102.0,27.9],[109.6,40.0],[110.5,54.4],[104.4,68.7],[92.3,80.8],[76.0,88.9],[58.0,91.8],[41.1,89.0],[27.8,80.9]] } } },
+    hwLens:      { rear: 'hw-lens-rear',      k: .33, tw: 142, module: { top: 'hw-lensdet-top', bands: 'hw-lensdet-bands', walls: 'lensdet', quad: [[5,35],[80,5],[133,76],[48,100]] } },
+    hwLed:       { rear: 'hw-led-rear',       k: .12, edge: 'pcbblue', tw: 85,  poly: [[4,54],[11,44],[11,23],[62,4],[64,13],[22,29],[42,75]] },
+    hwConnector: { rear: 'hw-connector-rear', k: .18, edge: 'plastic',   tw: 87,  poly: [[4,20],[22,13],[54,68],[74,62],[73,78],[82,80],[46,104],[25,92]] },
+    hwChip:      { rear: 'hw-chip-rear',      k: .06, edge: 'pcbblack', tw: 181, poly: [[5,45],[90,5],[175,50],[176,54],[102,118],[94,120],[8,51]] },
+    hwPins:      { rear: 'hw-pins-rear',      k: .07, edge: 'plastic',   tw: 395, poly: [[6,48],[21,31],[358,40],[377,27],[389,71],[6,70]] },
+    hwPorts:     { rear: 'hw-ports-rear',     k: .20, edge: 'steel',   tw: 144, poly: [[0,23],[9,0],[58,12],[101,0],[122,11],[144,105],[12,127]] },
+    hwHdmi:      { rear: 'hw-hdmi-rear',      k: .12, edge: 'steel',   tw: 331, poly: [[4,89],[11,4],[321,9],[326,96],[157,101],[28,98],[7,96]] }
   };
   // 4x4 column-major helpers (same layout as CSS matrix3d)
   function mul(a, b) {
@@ -106,7 +111,7 @@
     return 'matrix3d(' + r6(m[0]) + ',' + r6(m[1]) + ',' + r6(m[2]) + ',' + r6(m[3]) + ',' + r6(m[4]) + ',' + r6(m[5]) + ',' + r6(m[6]) + ',' + r6(m[7]) + ',' +
       r6(m[8]) + ',' + r6(m[9]) + ',' + r6(m[10]) + ',' + r6(m[11]) + ',' + r6(m[12]) + ',' + r6(m[13]) + ',' + r6(m[14]) + ',' + r6(m[15]) + ')';
   }
-  var FIN = new Float64Array(16);
+  var FIN = new Float64Array(16), LIGHT = [-.55, -.83], I4 = T(0, 0, 0), RZ180 = Rz(180);
 
   // Face images start fetching immediately but only join the DOM once all are decoded.
   var jobs = [];
@@ -122,13 +127,32 @@
   }
   // geo(m, s): static box in solid pixels; F(m): face-local placement using the current depth m.g
   function addFace(m, el, kind, flow, fade, geo, F) { var f = { el: el, kind: kind, flow: flow, fade: fade, geo: geo, F: F, vis: true, bw: 0, bh: 0 }; m.faces.push(f); return f; }
+  // Wall textures. Backgrounds are written as LITERAL inline values, never through var()/calc(): a wall's transform
+  // changes every scroll tick, and var()-based or two-layer backgrounds made Blink repaint every wall on every tick
+  // (measured: ~50 paints per frame; a single literal layer does not). Geometry is exactly what the stylesheet had.
+  var STRIP = { pcbblue: 'hw-edge-pcb-blue', pcbblack: 'hw-edge-pcb-black', steel: 'hw-edge-steel', plastic: 'hw-edge-plastic', knurl: 'hw-edge-knurl' };
+  var QUAD = { f: '0 0', l: '100% 0', b: '0 100%', r: '100% 100%' };   // lens-module atlas: front, left / back, right
+  function wallTex(name) {
+    var a = /^(lensmod|lensdet)-([fblr])$/.exec(name);
+    return a ? { file: 'hw-' + a[1] + '-walls', quad: QUAD[a[2]] } : { file: STRIP[name] };
+  }
+  function wallBackground(f) {
+    var t = f.tex, st = f.el.style, url = 'url(' + ASSET + t.file + '.webp' + VER + ')';
+    if (t.quad) {   // photographic side: the atlas quadrant, with a contact shadow toward the base (needs a gradient layer)
+      st.backgroundImage = 'linear-gradient(rgba(6,7,14,0),rgba(6,7,14,.3)),' + url;
+      st.backgroundSize = '100% 100%,200% 200%'; st.backgroundPosition = '0 0,' + t.quad; st.backgroundRepeat = 'no-repeat,repeat-x'; st.boxShadow = '';
+    } else {        // tiled edge strip scaled to the wall height, darkened by a uniform cast
+      st.backgroundImage = url; st.backgroundSize = 'auto 100%'; st.backgroundPosition = '0 0'; st.backgroundRepeat = 'repeat-x';
+      st.boxShadow = f.shade > 0 ? 'inset 0 0 0 999px rgba(6,7,14,' + f.shade + ')' : '';
+    }
+  }
   // One wall per outline edge, standing on the mid-plane and facing outward.
-  function addWalls(m, cfg, kind, thick, zc) {
+  function addWalls(m, cfg, kind, thick, zc, edge) {   // edge: one class, or one per outline edge
     var poly = cfg.poly, n = poly.length, i, area = 0;
     for (i = 0; i < n; i++) area += poly[i][0] * poly[(i + 1) % n][1] - poly[(i + 1) % n][0] * poly[i][1];
     var sign = area > 0 ? 1 : -1;   // winding decides "outward", so concave outlines work too
     var ox = cfg.ox || 0, oy = cfg.oy || 0;
-    for (i = 0; i < n; i++) (function (p, q) {
+    for (i = 0; i < n; i++) (function (p, q, ei) {
       var dx = q[0] - p[0], dy = q[1] - p[1], len = Math.hypot(dx, dy);
       if (len < 1.5) return;
       var mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
@@ -136,17 +160,21 @@
       var outward = sign > 0;
       var w = document.createElement('span');
       w.className = 'hw-wall'; w.setAttribute('aria-hidden', 'true');
-      w.style.setProperty('--wd', outward ? 'to top' : 'to bottom');
-      if (kind === 'lens') w.classList.add('hw-wall--lens');
+      // Static model-space lighting (light from the upper left): walls facing away from it get a darker cast,
+      // so neighbouring walls read as separate planes instead of one flat ribbon.
+      var lit = Math.max(0, (dy * LIGHT[0] - dx * LIGHT[1]) / len * sign);
+      var shade = cfg.flat ? 0 : +(.5 * Math.pow(1 - lit, 1.3)).toFixed(2);   // photographic walls carry their own baked light
       m.solid.appendChild(w);
       var ang = Math.atan2(dy, dx) * 180 / Math.PI;
-      addFace(m, w, kind, false, true, function (mm, s) {
+      var wf = addFace(m, w, kind, false, true, function (mm, s) {
         var t = thick(mm);
         return { x: (mx + ox) * s - len * s / 2, y: (my + oy) * s - t / 2, w: len * s, h: t };
       }, function (mm) {
-        return mul(T(0, 0, zc(mm)), mul(Rz(ang), mul(Rx(outward ? 90 : -90), Sy(Math.max(mm.g, .001)))));
+        // Rz(180) on the outward-turning walls keeps every wall texture upright (top = world up) and reading left-to-right seen from outside
+        return mul(T(0, 0, zc(mm)), mul(Rz(ang), mul(Rx(outward ? 90 : -90), mul(outward ? RZ180 : I4, Sy(Math.max(mm.g, .001))))));
       });
-    })(poly[i], poly[(i + 1) % n]);
+      wf.tex = wallTex(typeof edge === 'string' ? edge : edge[ei]); wf.shade = shade;
+    })(poly[i], poly[(i + 1) % n], i);
   }
   // Non-flow faces are laid out as integer TEXTURE-pixel boxes at left/top 0 and
   // placed + scaled entirely by their matrix: fractional CSS boxes get pixel-snapped
@@ -163,28 +191,32 @@
     if (!(w > 0 && h > 0)) { m.w = 0; return; }   // not laid out yet (or display:none): keep the flat photo
     m.w = w; m.h = h;
     var spec = m.spec, s = m.s = spec.tw ? m.w / spec.tw : 1;
-    m.d = m.w * (spec.k || .05); m.lh = spec.lens ? m.w * spec.lens.k : 0;
+    m.d = m.w * (spec.k || .05); m.lh = spec.lens ? m.w * spec.lens.k : 0; m.lb = spec.lens ? m.w * spec.lens.barrel.k : 0;
     m.faces.forEach(function (f) {
       var g = f.g0 = f.geo(m, s);
       f.bw = f.flow ? g.w : g.w / s; f.bh = f.flow ? g.h : g.h / s;
-      if (!f.flow) { var st = f.el.style; st.left = '0'; st.top = '0'; st.width = f.bw + 'px'; st.height = f.bh + 'px'; }
+      if (!f.flow) { var st = f.el.style; st.left = '0'; st.top = '0'; st.width = f.bw + 'px'; st.height = f.bh + 'px'; if (f.tex) wallBackground(f); }
       f.vis = true; f.el.style.visibility = '';
     });
     m.key = ''; m.gDone = -1; renderModel(m);
   }
   function renderModel(m) {
     if (!m.w) return;
+    // A plane that is fully transparent is not drawn: don't pay for ~10-60 matrix writes per scroll tick on it.
+    // It is marked stale and caught up by catchUp() (below) the moment its opacity leaves 0.
+    if (m.plane.style.opacity === '0') { m.key = ''; m.stale = true; return; }
     var key = m.rx.toFixed(3) + ',' + m.ry.toFixed(3);
     if (key === m.key && m.g === m.gDone) return;
     m.key = key;
     var cx = m.w / 2, cy = m.h / 2, i, f;
     if (m.g !== m.gDone) {   // depth changed: refresh face placement (and fade the extras in while it grows)
       m.gDone = m.g;
-      for (i = 0; i < m.faces.length; i++) { f = m.faces[i]; faceLocal(m, f); if (f.fade) f.el.style.opacity = m.g < 1 ? m.g.toFixed(3) : ''; }
+      for (i = 0; i < m.faces.length; i++) { f = m.faces[i]; faceLocal(m, f); if (f.fade) f.el.style.opacity = f.fade > 0 ? (m.g < 1 ? m.g.toFixed(3) : '') : (m.g < 1 ? (1 - m.g).toFixed(3) : '0'); }
     }
     var W = mul(T(cx, cy, 0), mul(mul(PM, mul(Ry(m.ry), Rx(m.rx))), T(-cx, -cy, 0)));
     for (i = 0; i < m.faces.length; i++) {
       f = m.faces[i];
+      if (f.fade < 0 && m.g >= 1) continue;   // painted side bands are fully faded out: nothing to move
       mulTo(FIN, W, f.Lf);
       // Orientation of the projected box (origin, +x, +y corners): a back-facing face is culled by the
       // browser anyway, so skip formatting/writing its matrix and just keep it hidden until it turns.
@@ -202,10 +234,12 @@
       var facing = Math.cos(m.rx * RAD) * Math.cos(m.ry * RAD) > 0;
       if (facing !== m.facing) {
         m.facing = facing;
-        for (i = 0; i < m.faces.length; i++) { f = m.faces[i]; f.el.style.zIndex = f.kind === 'lensTop' ? (facing ? 3 : 0) : f.kind === 'lens' ? (facing ? 2 : 1) : f.kind === 'front' ? (facing ? 1 : 0) : f.kind === 'rear' ? (facing ? 0 : 2) : ''; }
+        for (i = 0; i < m.faces.length; i++) { f = m.faces[i]; var z = ZORDER[f.kind]; f.el.style.zIndex = z ? z[facing ? 0 : 1] : ''; }
       }
     }
   }
+  // painter's order [front-facing, back-facing] for the faces stacked on the camera board
+  var ZORDER = { front: [1, 0], bands: [2, 0], rear: [0, 7], lens: [3, 1], lensTop: [4, 0], barrel: [5, 1], barrelTop: [6, 0] };
   var models = allPlanes.map(function (plane) {
     var spec = SPEC[plane.id] || {};
     var front = plane.querySelector('img');
@@ -214,21 +248,29 @@
     plane.appendChild(solid);
     solid.appendChild(front);
     front.classList.add('hw-face', 'hw-face--front');
-    var m = { plane: plane, solid: solid, spec: spec, faces: [], rx: 0, ry: 0, g: 0, gDone: -1, key: '', w: 0, h: 0, d: 0, lh: 0, hasBlock: false, facing: null, rearJob: null };
+    var m = { plane: plane, solid: solid, spec: spec, faces: [], rx: 0, ry: 0, g: 0, gDone: -1, key: '', w: 0, h: 0, d: 0, lh: 0, hasBlock: false, facing: null, rearJob: null, lb: 0, stale: false };
     addFace(m, front, 'front', true, false, function (mm) { return { x: 0, y: 0, w: mm.w, h: mm.h }; },
       function (mm) { return T(0, 0, mm.d * mm.g / 2); });
-    if (spec.wall) { plane.style.setProperty('--wh', spec.wall[0]); plane.style.setProperty('--wm', spec.wall[1]); plane.style.setProperty('--wl', spec.wall[2]); }
     if (spec.rear) m.rearJob = need(spec.rear, 'hw-face--rear');
+    if (spec.module) { m.modTop = need(spec.module.top, 'hw-face--lens'); m.modBands = need(spec.module.bands, 'hw-face--front'); }
     return m;
   });
+  var EDGE_FILE = { pcbblue: 'hw-edge-pcb-blue', pcbblack: 'hw-edge-pcb-black', steel: 'hw-edge-steel', plastic: 'hw-edge-plastic', knurl: 'hw-edge-knurl' }, edgeJobs = {};
+  Object.keys(EDGE_FILE).forEach(function (k) { edgeJobs[k] = need(EDGE_FILE[k], 'hw-edge'); });
+  var atlasJobs = { lensmod: need('hw-lensmod-walls', 'hw-edge'), lensdet: need('hw-lensdet-walls', 'hw-edge') };
   var camModel = models[1], camLens = SPEC.hwCamera.lens;
-  var baseJob = need(camLens.base, 'hw-face--front'), topJob = need(camLens.top, 'hw-face--lens');
+  var baseJob = need(camLens.base, 'hw-face--front'), topJob = need(camLens.top, 'hw-face--lens'), bandsJob = need(camLens.bands, 'hw-face--lens'), barrelJob = need(camLens.barrel.top, 'hw-face--lens');
   // A solid only becomes 3D if EVERY asset it needs decoded (its rear; for the
-  // camera also the base and lens crops). Otherwise that solid keeps its original
+  // camera also the base, lens and barrel crops; every solid its wall texture). Otherwise that solid keeps its original
   // flat photo: no walls, no rear, no depth animation.
   function solidReady(m) {
-    return (!m.rearJob || m.rearJob.ok) && (m !== camModel || (baseJob.ok && topJob.ok));
+    var ok = (!m.rearJob || m.rearJob.ok) && (!m.spec.edge || edgeJobs[m.spec.edge].ok);
+    if (m === camModel) ok = ok && baseJob.ok && topJob.ok && bandsJob.ok && barrelJob.ok && atlasJobs[camLens.walls].ok && edgeJobs[camLens.barrel.edge].ok;
+    if (m.spec.module) ok = ok && m.modTop.ok && m.modBands.ok && atlasJobs[m.spec.module.walls].ok;
+    return ok;
   }
+  // quad A,B,C,D = the module top face; edges AB back, BC right, CD front, DA left (front/left carry the photographed sides)
+  function wallClasses(prefix) { return [prefix + '-b', prefix + '-r', prefix + '-f', prefix + '-l']; }
   function assemble() {
     var live = models.filter(solidReady);
     live.forEach(function (m) {
@@ -238,16 +280,32 @@
         addFace(m, m.rearJob.im, 'rear', false, true, function (mm) { return { x: 0, y: 0, w: mm.w, h: mm.h }; },
           function (mm) { return mul(Ry(180), T(0, 0, mm.d * mm.g / 2)); });
       }
-      if (spec.poly) addWalls(m, spec, 'slab', function (mm) { return mm.d; }, function () { return 0; });
+      if (spec.module) {
+        // The lens module as a solid of its own: bands (flat painted sides) replace the photo in flow and fade out,
+        // the top face stays at the front plane, the four walls carry the rectified photo of the sides.
+        var M = spec.module;
+        m.faces[0].el.replaceWith(m.modBands.im); m.faces[0].el = m.modBands.im; m.faces[0].kind = 'bands'; m.faces[0].fade = -1;
+        m.solid.appendChild(m.modTop.im);
+        addFace(m, m.modTop.im, 'lensTop', false, 0, function (mm) { return { x: 0, y: 0, w: mm.w, h: mm.h }; }, function (mm) { return T(0, 0, mm.g * mm.d / 2); });
+        addWalls(m, { poly: M.quad, flat: true }, 'lens', function (mm) { return mm.d; }, function () { return 0; }, wallClasses(M.walls));
+        m.hasBlock = true; m.facing = null;
+      } else if (spec.poly) addWalls(m, spec, 'slab', function (mm) { return mm.d; }, function () { return 0; }, spec.edge);
       if (m === camModel) {
-        // The real lens module as a raised block: the SAME photograph split into a
-        // base (module region cut out) and the module crop, over-composited exact.
-        var L = camLens;
+        // The real lens module as a raised block: the SAME photograph split into the base (PCB, module region cut out),
+        // the painted side bands (flat, they fade out), the raised top face and walls textured with the rectified sides.
+        var L = camLens, geoL = function (mm, s) { return { x: L.ox * s, y: L.oy * s, w: L.w * s, h: L.w * s * L.ar }; };
         m.faces[0].el.replaceWith(baseJob.im); m.faces[0].el = baseJob.im; m.faces[0].vis = true;
+        m.solid.appendChild(bandsJob.im);
+        addFace(m, bandsJob.im, 'bands', false, -1, geoL, function (mm) { return T(0, 0, mm.g * mm.d / 2); });
         m.solid.appendChild(topJob.im);
-        addFace(m, topJob.im, 'lensTop', false, false, function (mm, s) { return { x: L.ox * s, y: L.oy * s, w: L.w * s, h: L.w * s * L.ar }; },
-          function (mm) { return T(0, 0, mm.g * (mm.d / 2 + mm.lh)); });
-        addWalls(m, L, 'lens', function (mm) { return mm.lh; }, function (mm) { return mm.g * (mm.d / 2 + mm.lh / 2); });
+        addFace(m, topJob.im, 'lensTop', false, 0, geoL, function (mm) { return T(0, 0, mm.g * (mm.d / 2 + mm.lh)); });
+        addWalls(m, { poly: L.quad, ox: L.ox, oy: L.oy, flat: true }, 'lens', function (mm) { return mm.lh; }, function (mm) { return mm.g * (mm.d / 2 + mm.lh / 2); }, wallClasses(L.walls));
+        // ...and the lens barrel: the same pixels again, on a knurled cylinder standing on the module top
+        var B = L.barrel;
+        m.solid.appendChild(barrelJob.im);
+        addFace(m, barrelJob.im, 'barrelTop', false, 0, function (mm, s) { return { x: (L.ox + B.ox) * s, y: (L.oy + B.oy) * s, w: B.w * s, h: B.h * s }; },
+          function (mm) { return T(0, 0, mm.g * (mm.d / 2 + mm.lh + mm.lb)); });
+        addWalls(m, { poly: B.poly, ox: L.ox, oy: L.oy }, 'barrel', function (mm) { return mm.lb; }, function (mm) { return mm.g * (mm.d / 2 + mm.lh + mm.lb / 2); }, B.edge);
         m.hasBlock = true; m.facing = null;
       }
     });
@@ -258,6 +316,12 @@
     });
   }
   Promise.all(jobs.map(function (j) { return j.done; })).then(assemble);
+  // A fully transparent plane skips its matrix work (see renderModel). The timelines that fade planes in call this on
+  // every update, so a plane is caught up in the very tick its opacity leaves 0. No always-on ticker: nothing runs
+  // while the page is not scrolling.
+  function catchUp() {
+    for (var i = 0; i < models.length; i++) if (models[i].stale && models[i].plane.style.opacity !== '0') { models[i].stale = false; renderModel(models[i]); }
+  }
   var layoutAll = function () { models.forEach(layoutModel); };
   layoutAll();
   models.forEach(function (m) {   // the front photo defines each solid's box: re-layout when it decodes
@@ -314,11 +378,12 @@
   gsap.set(sparks, { opacity: .55 });
   gsap.set([arcA, arcB], { opacity: .1 });
   gsap.set(models, { rx: 0, ry: 0 });
-  gsap.set(models[1], { rx: 6, ry: -12 });
+  gsap.set(models[1], { rx: 10, ry: -24 });
   models.forEach(renderModel);
 
   var tl = gsap.timeline({
     defaults: { ease: 'none' },
+    onUpdate: catchUp,
     scrollTrigger: {
       trigger: topEl,
       start: 'top top',
@@ -414,6 +479,7 @@
 
   var ignition = gsap.timeline({
     defaults: { ease: 'none' },
+    onUpdate: catchUp,
     scrollTrigger: {
       // Plain absolute numbers, like the readout trigger below, rather
       // than 'top top' + a relative '+=' offset: the latter combination
@@ -499,6 +565,7 @@
   if (clarityEl && footerEl) {
     var continuation = gsap.timeline({
       defaults: { ease: 'none' },
+      onUpdate: catchUp,
       scrollTrigger: {
         trigger: clarityEl, start: 'top bottom', endTrigger: footerEl,
         end: 'bottom bottom', scrub: 0.75, invalidateOnRefresh: true
